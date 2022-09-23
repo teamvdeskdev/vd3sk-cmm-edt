@@ -166,7 +166,7 @@ I moduli PHP necessari sono i seguenti:
 ## Istruzioni per l'installazione 
 
 ### _FrontEnd_
-Andare nella cartrella in cui è stata clonata la repository GIT e compilare il codice con i comandi sotto:
+Andare nella cartella in cui è stata clonata la repository GIT e compilare il codice con i comandi sotto:
 ```sh
 npm ci
 node --max-old-space-size=4096 ./node_modules/@angular/cli/bin/ng build --prod
