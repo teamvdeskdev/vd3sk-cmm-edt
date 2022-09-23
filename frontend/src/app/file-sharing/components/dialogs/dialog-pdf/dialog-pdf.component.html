@@ -1,0 +1,29 @@
+<ng-container *ngIf="!data.data.isChat">
+    <div class="closedialog">
+        <mat-icon><span class="material-icons" mat-dialog-close>close</span></mat-icon>
+    </div>
+    <div class="file-name">
+        <span *ngIf="fileName">{{fileName}}</span>
+    </div>
+    <div class="pdfcontainer">
+        <pdf-viewer  [src]="src" [original-size]="false"></pdf-viewer>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="data.data.isChat">
+    <div class="row">
+        <div class="col-1">
+            <mat-icon><span class="material-icons fileIcon" mat-dialog-close>picture_as_pdf</span></mat-icon>
+        </div>
+        <div class=" col-10 fileName">
+            <span *ngIf="fileName">{{fileName}}</span>
+        </div>
+        <div class="col-1">
+            <mat-icon><span class="material-icons" mat-dialog-close>close</span></mat-icon>
+        </div>
+    </div>
+    <div class="pdfcontainer">
+        <pdf-viewer  [src]="src" [original-size]="false"></pdf-viewer>
+    </div>
+</ng-container>
+

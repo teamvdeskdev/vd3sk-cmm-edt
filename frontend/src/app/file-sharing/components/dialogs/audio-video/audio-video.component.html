@@ -1,0 +1,18 @@
+<div id="audiovideo">
+    
+    <div class="close">
+        <mat-icon (click)="onNoClick()"><i class="material-icons"> close </i></mat-icon>
+    </div>
+
+    <img id="image" [src]="url" *ngIf="control==='image' && url">
+
+    <video id="video" [src]="url" *ngIf="control==='video' && url" controls></video>
+    
+    <div class="audiocontainer" *ngIf="control==='audio' && url">
+        <mat-icon><i class="material-icons">music_note</i></mat-icon>
+        <audio id="audio" preload="auto" controls>
+            <source [src]="url">
+        </audio>
+    </div>
+
+</div>

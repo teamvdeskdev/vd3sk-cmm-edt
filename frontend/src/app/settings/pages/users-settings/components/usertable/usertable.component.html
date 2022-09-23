@@ -1,0 +1,204 @@
+<div class="PageUserList">
+
+  <div class="tableDiv">
+
+      <ngx-spinner *ngIf="!isdata"
+        bdColor = "rgba(0,0,0,0)"
+        size = "default"
+        color = "#00B9B3"
+        type = "triangle-skew-spin"
+        [fullScreen] = "false" >
+      </ngx-spinner>
+        
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" id="table">
+
+        <!-- ID Column -->
+        <!-- Usually this column is always hidden -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="usertableId"></th>
+          <td mat-cell *matCellDef="let element" class="usertableId"> {{element.id}} </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+    
+        <!-- IMAGE Column -->
+        <ng-container matColumnDef="image">
+          <th mat-header-cell *matHeaderCellDef class="usertableImage head"></th>
+          <td class="fileSharing-icon usertableImage" mat-cell *matCellDef="let element">
+            <img *ngIf="!element.create"  src="{{element.image}}" class="profile_pic"/>
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+        
+        <!-- USERNAME Column -->
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="usertableUsername head"></th>
+          <td mat-cell *matCellDef="let element" class="usertableUsername">
+            <div class="NewUser" *ngIf="element.create">
+              <div class="accountName">
+                <span> {{ langService.dictionary.account_name }} :</span>
+                <mat-form-field class="input"appearance="none">
+                  <input matInput placeholder="__________" autocomplete="nope" [value]="element.accountname" [(ngModel)]="element.accountname">
+                </mat-form-field>
+              </div>
+              <div class="userName">
+                <span>{{ langService.dictionary.user_name }}: </span>
+                <mat-form-field class="input" appearance="none">
+                  <input matInput placeholder="____________________" autocomplete="nope" class="userName" [value]="element.username" [(ngModel)]="element.username" (click)="userUpdateUser(element, '' , 'newusername')" readonly>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="TextUser" *ngIf="!element.create">
+              <div class="accountName">
+                <mat-form-field class="input" *ngIf="!element.create" appearance="none">
+                  <input matInput placeholder="" autocomplete="nope" [(value)]="element.accountname" #accountname readonly
+                  matSuffix (click)="userUpdateUser(element, accountname.value, 'displayname')">
+                </mat-form-field>
+              </div>
+              <div class="userName">
+                <span>{{ langService.dictionary.user_name }}: </span>
+                <div *ngIf="!element.create" appearance="none" class="userName">{{ element.username }}</div>
+              </div>
+            </div>
+
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container> 
+
+        <!-- PASSWORD Column -->
+        <ng-container matColumnDef="password">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="usertablePassword head"></th>
+          <td mat-cell *matCellDef="let element" class="usertablePassword">
+            <div class="Text"><span> {{ langService.dictionary.password }} : </span>
+              <mat-form-field class="input" *ngIf="element.create"  appearance="none">
+                <input matInput placeholder="___________" autocomplete="nope" type="password" [(value)]="element.password" 
+                [(ngModel)]="element.password" (click)="userUpdateUser(element, '' , 'newpassword')" readonly>
+              </mat-form-field>
+              <mat-form-field class="input" *ngIf="!element.create && !element.external" appearance="none">
+                <input matInput placeholder="**********" autocomplete="nope" type="password" #password [(value)]="element.password" readonly
+                matSuffix (click)="userUpdateUser(element, password.value, 'password')">
+              </mat-form-field>
+              <mat-form-field class="inputBLock" *ngIf="!element.create && element.external" appearance="none">
+                <input matInput placeholder="**********" autocomplete="nope" type="password" #password [(value)]="element.password" readonly
+                matSuffix>
+              </mat-form-field>
+            </div>
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container> 
+
+        <!-- EMAIL Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="usertableEmail head"></th>
+          <td mat-cell *matCellDef="let element" class="usertableEmail">
+            <div class="Text"><span> {{ langService.dictionary.email }} : </span>
+              <mat-form-field class="input" *ngIf="element.create"  appearance="none">
+                <input matInput placeholder="______________" autocomplete="nope" [(value)]="element.email" [(ngModel)]="element.email">
+              </mat-form-field>
+                <mat-form-field class="input" *ngIf="!element.create" appearance="none">
+                  <input matInput placeholder="" autocomplete="nope" #email [(value)]="element.email" readonly
+                  matSuffix (click)="userUpdateUser(element, email.value, 'email')">
+                </mat-form-field>
+              </div>
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
+        <!--ACCOUNT ROLE Column -->
+        <ng-container matColumnDef="role">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="usertableRole head"></th>
+          <td mat-cell *matCellDef="let element" class="usertableRole">
+            <div class="Text"><span> {{ langService.dictionary.role }}: </span>
+              <mat-form-field class="select" appearance="none">
+                <mat-select *ngIf="!element.isGuest" [(ngModel)]="element.role">
+                  <mat-option *ngFor="let valueRole of roleList" [value]="valueRole.name" (click)="userUpdateUser(element, valueRole.name, 'role')">
+                      {{ valueRole.name }} 
+                  </mat-option>
+                </mat-select>
+
+                <input *ngIf="element.isGuest" class="guest-role" matInput placeholder="" autocomplete="nope" #role [(ngModel)]="element.role" readonly matSuffix>
+              </mat-form-field>
+            </div>
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
+        <!-- GROUPS Column -->
+        <ng-container matColumnDef="groups">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="usertableGroups head"></th>
+          <td mat-cell *matCellDef="let element" class="usertableGroups">
+            <div class="Text">
+              <span> {{ langService.dictionary.groups }} : </span>
+              <mat-form-field class="select" appearance="none">
+                  <mat-select [(ngModel)]="element.groups" multiple>
+                    <mat-option class="Select" *ngFor="let group of groups" [value]="group" (click)="addRemoveGroup(group, element)"> {{group}} </mat-option>
+                  </mat-select>
+              </mat-form-field>
+            <!-- <button *ngIf="!element.create" color="primary" mat-icon-button (click)="addNewGroup()">
+                <mat-icon>add</mat-icon>
+              </button> -->
+            </div>
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container> 
+
+        <!-- MODULES Column -->
+        <ng-container matColumnDef="modules">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="usertableModules head"></th>
+          <td mat-cell *matCellDef="let element" class="usertableModules">
+              {{ element.modules }}
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
+        <!-- QUOTA Column -->
+        <ng-container matColumnDef="quota">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="usertableQuota head"></th>
+          <td mat-cell *matCellDef="let element" class="usertableQuota">
+            <div class="Text"><span> {{ langService.dictionary.quota }} : </span>
+              <mat-form-field class="select" appearance="none">
+                <mat-select [(ngModel)]="element.quota">
+                  <mat-option *ngFor="let mechanism of quotaList" [value]="mechanism.name" (click)="userUpdateUser(element, mechanism.name, 'quota')">
+                      {{ mechanism.name }} 
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
+        <!-- OTHERS Column -->
+        <ng-container matColumnDef="others">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="usertableOthers head"></th>
+          <td mat-cell *matCellDef="let element" class="usertableOthers">
+            <div class="divmenu" *ngIf="element.create">
+                <i class="material-icons" (click)="userAddUser(element)">person_add</i>
+            </div> 
+            <div class="divmenu" *ngIf="!element.create">
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                  <i class="material-icons">more_vert</i>
+                </button>            
+                <mat-menu #menu="matMenu">
+                 <!-- <button mat-menu-item class="buttons" (click)="DisableFolderManager(element)"*ngIf="element.folderManager">{{langService.dictionary.disbale_folder_manager}}</button>
+                  <button mat-menu-item class="buttons" (click)="EnableFolderManager(element)"*ngIf="!element.folderManager">{{langService.dictionary.enable_folder_manager}}</button>
+                  <button mat-menu-item class="buttons" (click)="DisableuserManager(element)"*ngIf="element.userManager">{{langService.dictionary.disbale_user_manager}}</button>
+                  <button mat-menu-item class="buttons" (click)="EnableuserManager(element)"*ngIf="!element.userManager">{{langService.dictionary.enable_user_manager}}</button> -->
+                  <button mat-menu-item class="buttons" *ngIf="!globalsVar.disableDelete" (click)="userDelete(element.id)">{{langService.dictionary.user_delete}}</button>
+                  <button mat-menu-item class="buttons" (click)="userRemoveDevices(element.id)">{{langService.dictionary.user_deletedevices}}</button>
+                  <button mat-menu-item class="buttons" *ngIf="pageUser" (click)="enabledisableUser(element.id)">{{langService.dictionary.user_disable}}</button>
+                  <button mat-menu-item class="buttons" *ngIf="!pageUser" (click)="enabledisableUser(element.id)">{{langService.dictionary.user_enable}}</button>
+                  <button mat-menu-item class="buttons" (click)="resendMail(element.id)">{{langService.dictionary.user_sendmail}}</button>
+                </mat-menu>
+            </div>          
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [hidden]="row.hide"></tr>
+        <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+      </table>
+      <div *ngIf="noUser">{{langService.dictionary.user_notfound}}</div>
+  </div> 
+</div>

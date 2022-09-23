@@ -1,0 +1,295 @@
+<div id="dashboard" [ngClass]="{'splash-container' : inProgress && !cacheModel && globalsVar.custom_FE === 'NONE', 'splash-container-cobranding': inProgress && !cacheModel && globalsVar.custom_FE !== 'NONE'}">
+    <ng-container *ngIf="!inProgress">
+        <div class="inner-header container-fluid">
+            <div class="row w-100 m-0">
+                <div class="col-3">
+                    <div class="valign-icon-text" [ngClass]="{'inactive-element': isEditDashboard}" [matMenuTriggerFor]="dashboardBtnMenu">
+                        <i class="material-icons settings-dashboard-icon">more_vert</i>
+                        <span type="button">{{langService.dictionary.dashboardMenuBtn}}</span>
+                    </div>
+                    <mat-menu #dashboardBtnMenu="matMenu" class="dashboard-menu-btn">
+                        <button mat-menu-item (click)="editDashboardBtn()">
+                            <span class="material-icons icon-option">dashboard_customize</span>
+                            {{langService.dictionary.titleEditDashboard}}
+                        </button>
+                        <button mat-menu-item (click)="openRemindersHistoryPage()">
+                            <span class="material-icons icon-option">post_add</span>
+                            {{langService.dictionary.remindersMenuOption}}
+                        </button>
+                    </mat-menu>
+                </div>
+                <div class="col-6 text-center">
+                    <app-time-weather></app-time-weather>
+                </div>
+                <div class="col-3 text-right" [ngClass]="{'inactive-element': isEditDashboard }">
+                    <div class="valign-icon-text">
+                        <i class="material-icons settings-dashboard-icon">settings</i>
+                        <span class="pointer" (click)="goToSettings()">{{langService.dictionary.label_settings}}</span>
+                    </div>            
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <div *ngIf="!isLoadingApp" class="dashboard-container" 
+            [ngStyle]="{'background-color': !inProgress && !isEditDashboard && isBackgroundColorSelected && backgroundColor ? backgroundColor : '',
+                        'background-image': !inProgress && !isEditDashboard && backgroundImageUrl && !isBackgroundColorSelected ? 'url(' + backgroundImageUrl + ')' : 'unset'}" 
+            [ngClass]="{'edit-dashboard-background': isEditDashboard}">
+        <div *ngIf="inProgress && !cacheModel" class="dash-progress-container">
+            <div class="dash-progress-col">
+                <!-- Main Custom Logo Whitelabel -->
+                <img *ngIf="globalsVar.custom_FE === 'WHITELABEL'" class="splash-main-logo img-fluid" src="{{globalsVar.custom_logo}}">
+
+                <!-- vDesk Logo -->
+                <img *ngIf="globalsVar.custom_FE === 'NONE' || globalsVar.custom_FE === 'COBRANDING' && !globalsVar.custom_fontColor" class="splash-normal-logo" src="/assets/img/splash_page/main_logo.png">
+                <img *ngIf="globalsVar.custom_FE === 'COBRANDING' && globalsVar.custom_fontColor" class="splash-normal-logo" src="/assets/img/splash_page/main_logo_blue.svg">
+                <img *ngIf="globalsVar.custom_FE === 'WHITELABEL' && !globalsVar.custom_fontColor" class="splash-sub-logo" src="/assets/img/splash_page/desk-principal-white.png">
+                <img *ngIf="globalsVar.custom_FE === 'WHITELABEL' && globalsVar.custom_fontColor" class="splash-sub-logo" src="/assets/img/splash_page/desk-principal-blue.svg">
+
+                <!-- Sub Custom Logo Cobranding -->
+                <img *ngIf="globalsVar.custom_FE === 'COBRANDING'" class="splash-sub-logo img-fluid" src="{{globalsVar.custom_logo}}">
+                <mat-progress-bar class="dash-progress" [mode]="'determinate'" [value]="barValue">
+                </mat-progress-bar>
+                <div class="dash-progress-text">{{langService.dictionary.dashboard_loading}}</div>
+
+            </div>
+            
+            <!-- Bottom Livebox Logo -->
+            <div *ngIf="!isLoadingApp && inProgress && !cacheModel" class="splash-bottom-logo">
+                <img *ngIf="globalsVar.custom_FE === 'NONE' || globalsVar.custom_FE !== 'NONE' && !globalsVar.custom_fontColor" src="/assets/img/splash_page/bottom_logo.svg">
+                <img *ngIf="globalsVar.custom_FE !== 'NONE' && globalsVar.custom_fontColor" src="/assets/img/splash_page/bottom_logo_blue.svg">
+            </div>
+        </div>
+        <!-- Edit dashboard panel -->
+        <div *ngIf="isEditDashboard">
+            <div class="container-fluid p-0">
+                <!-- Set background color/image -->
+                <div id="editBackgroundRow" class="row white-drag-row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="title-edit-dashboard">{{langService.dictionary.titleEditDashboard}}</div>
+                                <div class="subtitle-edit-dashboard">{{langService.dictionary.subtitleEditDashboard}}</div>
+                                <div class="title-section">{{langService.dictionary.titleMainSection}}</div>
+                            </div>
+                            <div class="col-6 edit-buttons-container">
+                                <div type="button" class="default-cancel-btn" (click)="cancelEditButton()">{{langService.dictionary.cancel}}</div>
+                                <div type="button" 
+                                    [ngClass]="{'default-save-btn-inactive': !isBackgroundColorSelected && !backgroundImageUrl, 
+                                                'default-save-btn-active': isBackgroundColorSelected || !isBackgroundColorSelected && backgroundImageUrl}" 
+                                    (click)="saveEditButton()">
+                                    {{langService.dictionary.save}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-6 text-center border-right-separator pointer" (click)="setBackgroundType('color')">
+                                <!-- Change background color -->
+                                <i class="material-icons" 
+                                    [ngClass]="{'icon-change-color-inactive': !isBackgroundColorSelected, 
+                                                'icon-change-color-active': isBackgroundColorSelected}">
+                                    color_lens
+                                </i>
+                                <div 
+                                    [ngClass]="{'title-change-color-inactive': !isBackgroundColorSelected, 
+                                                'title-change-color-active': isBackgroundColorSelected}">
+                                    {{langService.dictionary.titleChangeColor}}
+                                </div>
+                                <div 
+                                    [ngClass]="{'subtitle-change-color-inactive': !isBackgroundColorSelected, 
+                                                'subtitle-change-color-active': isBackgroundColorSelected}">
+                                {{langService.dictionary.subtitleChangeColor}}
+                                </div>
+                                <div 
+                                    [ngClass]="{'color-picker-container-inactive': !isBackgroundColorSelected, 
+                                                'color-picker-container-active': isBackgroundColorSelected}">
+                                    <div class="dashboard-color-picker" 
+                                         [style.background]="backgroundColor"
+                                         [(colorPicker)]="backgroundColor"
+                                         (colorPickerClose)="changeDashboardColor($event)"></div>
+                                    <input #backgroudColorInput class="dashboard-color-input" [value]="backgroundColor" (input)="changeColorInput(backgroudColorInput.value)"/>
+                                </div>                                
+                            </div>
+                            <div class="col-6 text-center pointer" (click)="setBackgroundType('image')">
+                                <!-- Change background image -->
+                                <i class="material-icons" 
+                                    [ngClass]="{'icon-change-image-active': !isBackgroundColorSelected, 
+                                                'icon-change-image-inactive': isBackgroundColorSelected}">
+                                    image
+                                </i>
+                                <div 
+                                    [ngClass]="{'title-change-image-active': !isBackgroundColorSelected, 
+                                                'title-change-image-inactive': isBackgroundColorSelected}">
+                                    {{langService.dictionary.titleChangeImage}}
+                                </div>
+                                <input id="inputBackgroundImage" type="file" style="display: none;" (change)="uploadBackgroundImage($event.target.files)" accept="image/*">
+                                <ng-container *ngIf="!backgroundImageUrl">
+                                    <div 
+                                        [ngClass]="{'subtitle-change-image-active': !isBackgroundColorSelected, 
+                                                    'subtitle-change-image-inactive': isBackgroundColorSelected}">
+                                        {{langService.dictionary.subtitleChangeImage}}
+                                    </div>
+                                    <div 
+                                        [ngClass]="{'set-image-text-active': !isBackgroundColorSelected, 
+                                                    'set-image-text-inactive': isBackgroundColorSelected}" 
+                                        (click)="openUploadImage()">
+                                        {{langService.dictionary.setImageText}}
+                                    </div>
+                                </ng-container>
+                                <div *ngIf="backgroundImageUrl"
+                                    [ngClass]="{'container-icon-on-img-active': !isBackgroundColorSelected,
+                                                'container-icon-on-img-inactive': isBackgroundColorSelected}">
+                                    <span (click)="openUploadImage()">
+                                        <img class="background-image-preview" [src]="backgroundImageUrl">
+                                        <i class="material-icons icon-on-img">create</i>
+                                    </span>
+                                    <i class="material-icons icon-delete-image" (click)="deleteBackgroundImage()">delete</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Draggable card in edit section -->
+                <div cdkDropListGroup>
+                    <div *ngIf="cloneUserdashboardModel && cloneUserdashboardModel.rows" class="section-container">
+                        <ng-container *ngFor="let row of cloneUserdashboardModel.rows; let i = index">
+                            <ng-container *ngIf="row.columns.length !== 0">
+                                <div class="section" [ngClass]="{'white-drag-row': i%2 != 0}">
+                                    <div class="title-section">{{langService.dictionary.titleSection}} {{i+1}}</div>
+                                    <div class="row edit-section-row">
+                                        <ng-container *ngFor="let column of row.columns">
+                                            <div class="col-sm">
+                                                <div cdkDropList
+                                                    [ngClass]="{'drag-card-w100': row.isNewsSection}"
+                                                    class="drag-dash-list" 
+                                                    cdkDropListOrientation="horizontal" 
+                                                    [cdkDropListData]="column.components"
+                                                    (cdkDropListDropped)="drop($event)">
+                                                    <div *ngFor="let item of column.components" class="drag-dash-item" 
+                                                        [ngClass]="{'drag-style' : isInDrag, 'drag-dash-item-h100': row.isNewsSection}"
+                                                        (cdkDragStarted)="start($event)"
+                                                        (cdkDragEnded)="end($event)"
+                                                        (cdkDragEntered)="enter($event)"
+                                                        (cdkDragExited)="exit($event)"
+                                                        cdkDrag>
+                                                        <div class="drag-dash-placeholder" *cdkDragPlaceholder></div>
+                                                        <app-draggable-card [name]="item.name" [userDashboardModel]="cloneUserdashboardModel"></app-draggable-card>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-container-inner" *ngIf="!inProgress && !isEditDashboard">
+            <!-- Banner -->
+            <div class="welcome-banner-container">
+                <img class="banner-img" src="{{getBannerSrc()}}">
+                <div class="banner-msg" [innerHTML]="bannerMsg"></div>
+            </div>
+            <!-- Cards in dashboard -->
+            <ng-container *ngIf="!isTar && !isAuslBo">
+                <div *ngIf="userDashboardModel && userDashboardModel.rows && (!isGuest || (isGuest && authService.isUserSaml))" class="cards-container container-fluid">
+                    <ng-container *ngFor="let row of userDashboardModel.rows">
+                        <ng-container *ngIf="row && row.columns">
+                            <ng-container *ngFor="let column of row.columns; let isFirst = first; let isLast = last">
+                                <app-card-selector [ngClass]="{'margin-top-20': row.index === 0 && !row.isNewsSection}"
+                                    *ngIf="(!inProgress && column && column.components && isCardEnabled(column.components[0].name) && !row.isNewsSection) && ((column.components[0].name != 'VPec') || ((column.components[0].name == 'VPec') && (!notCustom || (notCustom && notPec))))"
+                                    [cardName]="column.components[0].name" 
+                                    [dataModel]="cardsDataModel" 
+                                    [userApps]="userApps"
+                                    [spinner]="spinner"
+                                    [isFirstCol]="isFirst"
+                                    [isLastCol]="isLast">
+                                </app-card-selector>
+                                <app-news-and-reminders *ngIf="row.isNewsSection && showNewsArea" [newsRow]="row" [orderModule]="orderModule" [dataFeeds]="feedsData" [dataPostIt]="postItsData"></app-news-and-reminders>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="isAuslBo">
+                <div class="separatorTar"></div>
+                <div *ngIf="userDashboardModel && userDashboardModel.rows && (!isGuest || (isGuest && authService.isUserSaml))" class="cards-container container-fluid">
+                    <ng-container *ngFor="let row of userDashboardModel.rows">
+                        <ng-container *ngIf="row && row.columns">
+                            <ng-container *ngFor="let column of row.columns; let isFirst = first; let isLast = last">
+                                <app-card-selector [ngClass]="{'margin-top-20': row.index === 0 && !row.isNewsSection, 'flow': isAuslBo && column.components[0].name == 'VFlow'}"
+                                    *ngIf="(!inProgress && column && column.components && isCardEnabled(column.components[0].name) && !row.isNewsSection) && ((column.components[0].name != 'VPec') || ((column.components[0].name == 'VPec') && (!notCustom || (notCustom && notPec))))"
+                                    [cardName]="column.components[0].name" 
+                                    [dataModel]="cardsDataModel" 
+                                    [userApps]="userApps"
+                                    [spinner]="spinner"
+                                    [isFirstCol]="isFirst"
+                                    [isLastCol]="isLast">
+                                </app-card-selector>
+                                <app-news-and-reminders *ngIf="row.isNewsSection && showNewsArea" class="istar" [newsRow]="row" [orderModule]="orderModule" [dataFeeds]="feedsData" [dataPostIt]="postItsData"></app-news-and-reminders>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="isTar">
+                <div class="separatorTar"></div>
+                <div *ngIf="userDashboardModel && userDashboardModel.rows && (!isGuest || (isGuest && authService.isUserSaml))" class="cards-container container-fluid">
+                    <ng-container *ngFor="let row of userDashboardModel.rows">
+                        <ng-container *ngIf="row && row.columns">
+                            <ng-container *ngFor="let column of row.columns; let isFirst = first; let isLast = last">
+                                <app-card-selector [ngClass]="{'margin-top-20': row.index === 0 && !row.isNewsSection, 'flow': isTar && column.components[0].name == 'VFlow'}"
+                                    *ngIf="(!inProgress && column && column.components && isCardEnabled(column.components[0].name) && !row.isNewsSection) && ((column.components[0].name != 'VPec') || ((column.components[0].name == 'VPec') && (!notCustom || (notCustom && notPec))))"
+                                    [cardName]="column.components[0].name" 
+                                    [dataModel]="cardsDataModel" 
+                                    [userApps]="userApps"
+                                    [spinner]="spinner"
+                                    [isFirstCol]="isFirst"
+                                    [isLastCol]="isLast">
+                                </app-card-selector>
+                                <app-news-and-reminders *ngIf="row.isNewsSection && showNewsArea" class="istar" [newsRow]="row" [orderModule]="orderModule" [dataFeeds]="feedsData" [dataPostIt]="postItsData"></app-news-and-reminders>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </ng-container>
+            
+
+            <div class="dashboard-container-inner-guest" *ngIf="!inProgress && !isEditDashboard && (isGuest && !authService.isUserSaml)">
+                <div class="guestFirst">
+                    <span>Raggiungi e gestisci da qui i tuoi moduli </span>
+                    <img src="assets/loghi_apps_main/png/vdesk-principale.png">
+                </div>
+                <div class="guestSecond">
+                    <div class="single" *ngFor="let element of userAppsEnable" [ngClass]="{'disabled': element.disabled}">
+                        <div class="list" (click)="navigateTo(element)" *ngIf="element.name!='vMeet'">
+                            <img class="app-type" alt="" src="{{element.src}}">
+                            <span class="name span"> {{element.name}} </span>
+                        </div>
+
+                        <div class="list" *ngIf="element.name=='vMeet'">
+                            <a href="{{vmeetUrl}}" target="_blank" rel='noopener noreferrer'>
+                                <img class="app-type" alt="" src="{{element.src}}">
+                                <span class="name span"> {{element.name}} </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <ngx-spinner bdColor="rgba(0,0,0,0)" size="default" color="#00B9B3"
+        type="triangle-skew-spin" [fullScreen]="false">
+    </ngx-spinner>
+    
+    <!-- <div *ngIf="!isLoadingApp && inProgress && !cacheModel" class="splash-bottom-logo">
+        <img *ngIf="globalsVar.custom_FE === 'NONE' || globalsVar.custom_FE !== 'NONE' && !globalsVar.custom_fontColor" src="/assets/img/splash_page/bottom_logo.svg">
+        <img *ngIf="globalsVar.custom_FE !== 'NONE' && globalsVar.custom_fontColor" src="/assets/img/splash_page/bottom_logo_blue.svg">
+    </div> -->
+</div>

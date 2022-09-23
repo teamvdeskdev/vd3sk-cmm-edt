@@ -1,0 +1,59 @@
+#audiovideo{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    .close{
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        justify-content: flex-end;
+        width: 100%;
+        height: 4%;
+        margin-bottom: 1%;
+
+        i{
+            cursor: pointer;
+        }
+    }
+
+    #video, #image{
+        height: 95%;
+        width: 100%;
+        outline: none;
+        object-fit: scale-down;
+    }
+
+    .audiocontainer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 95%;
+        width: 100%;
+        
+        mat-icon{
+            height: 80%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            i{
+                font-size: 200px;
+                color: #9669D2;
+            }
+        }
+
+        #audio{
+            height: 20%;
+            width: 100%;
+            outline: none;
+            object-fit: scale-down;
+        }
+        
+    }
+}

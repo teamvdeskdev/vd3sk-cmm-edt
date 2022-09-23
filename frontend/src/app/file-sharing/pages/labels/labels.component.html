@@ -1,0 +1,17 @@
+<div id="labels">
+    <ng-container *ngIf="!noData">
+        <div class="selectlabels" *ngIf="dataValue && !(dataValue.length>0) && !notFound">
+            <div>{{ selectlabels }}</div>
+        </div>
+        <app-table *ngIf="dataValue && dataValue.length>0 && !notFound" [dataValue]="dataValue" [getpage]="getpage" [pageFavorite]="pageFavorite"></app-table>
+        <div class="not-found" *ngIf="notFound">
+            <div> {{dictNotFoundForTags}} </div>
+        </div>
+        
+        <app-sidebar [dataSidebar]="dataSidebar" [page]="getpage"></app-sidebar>
+    </ng-container>
+
+    <ng-container *ngIf="noData">
+        <app-no-data *ngIf="!dataValue || dataValue.length==0" [page]="getpage"></app-no-data>
+    </ng-container>
+</div>

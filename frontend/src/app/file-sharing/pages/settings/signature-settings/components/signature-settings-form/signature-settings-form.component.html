@@ -1,0 +1,173 @@
+<div *ngIf="!isLoading" id="signatureSettingsFormId" class="container">
+    <form [formGroup]="credentialForm">
+        <div class="row">
+            <div class="title">
+                <span>{{dictCredentials}}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-7 nopadding normal-input">
+                <mat-form-field>
+                    <mat-label>{{dictSelectService}} *</mat-label>
+                    <mat-select formControlName="signatureService">
+                        <mat-option *ngFor="let dto of signatureSeviceList" [value]="dto.Id">
+                            {{dto.ServiceName}}
+                        </mat-option>
+                    </mat-select> 
+                </mat-form-field>
+                <div *ngIf="submitted && credentialForm.controls['signatureService'].errors">
+                    <div *ngIf="credentialForm.controls['signatureService'].errors.required" class="required-label">
+                        {{dictRequiredLabel}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 nopadding"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-7 nopadding normal-input">
+                <mat-form-field>
+                    <mat-label>{{dictProfileLabel}} *</mat-label>
+                    <input #nomeUtente formControlName="identifier" matInput (change)="null">
+                </mat-form-field>
+                <div *ngIf="submitted && credentialForm.controls['identifier'].errors">
+                    <div *ngIf="credentialForm.controls['identifier'].errors.required" class="required-label">
+                        {{dictRequiredLabel}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 nopadding"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-7 nopadding normal-input">
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input #email formControlName="email" matInput (change)="null" required>
+                </mat-form-field>
+                <div *ngIf="submitted && credentialForm.controls['email'].errors">
+                    <div *ngIf="credentialForm.controls['email'].errors.required" class="required-label">
+                        {{dictRequiredLabel}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 nopadding"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-7 nopadding normal-input">
+                <mat-form-field>
+                    <mat-label *ngIf="isNota">{{notaUsernameLabel}}</mat-label>
+                    <mat-label *ngIf="!isNota">{{dictUsernameLabel}}</mat-label>
+                    <input #nomeUtente formControlName="nomeUtente" matInput (change)="null">
+                </mat-form-field>
+            </div>
+            <div class="col-md-3 nopadding"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-7 nopadding normal-input">
+                <mat-form-field>
+                    <mat-label *ngIf="isNota">Password IAM</mat-label>
+                    <mat-label *ngIf="!isNota">Password</mat-label>
+                    <input #password formControlName="password" matInput (change)="null">
+                </mat-form-field>
+            </div>
+            <div class="col-md-3 nopadding"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-7 nopadding normal-input">
+                <mat-form-field>
+                    <mat-label *ngIf="isNota">Pin</mat-label>
+                    <mat-label *ngIf="!isNota">Pin/Token</mat-label>
+                    <input #pinToken formControlName="pinToken" matInput (change)="null">
+                </mat-form-field>
+            </div>
+            <div class="col-md-3 nopadding"></div>
+        </div>
+
+        <div class="row" *ngIf="isPers">
+            <div class="col-md-7 nopadding normal-input">
+                <mat-form-field>
+                    <mat-label>{{ dictMarkName }}</mat-label>
+                    <input #markName formControlName="markName" matInput (change)="null">
+                </mat-form-field>
+            </div>
+            <div class="col-md-3 nopadding"></div>
+        </div>
+        <div class="row" *ngIf="isPers">
+            <div class="col-md-7 nopadding normal-input">
+                <mat-form-field>
+                    <mat-label>{{ dictMarkPass }}</mat-label>
+                    <input #markPass formControlName="markPass" type="password" matInput (change)="null">
+                </mat-form-field>
+            </div>
+            <div class="col-md-3 nopadding"></div>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="title">
+                <span>{{dictGraphicSignature}}</span>
+            </div>
+        </div>
+        <div class="row">
+            <mat-form-field style="display: none;">
+                <input #graphicSignature formControlName="graphicSignature" matInput>
+            </mat-form-field>
+            <!-- Signature pad -->
+            <div class="signature-pad-box" [style.border]="!croppedImage ? '1px solid black' : ''" [style.width]="width+'px'" [style.height]="height+'px'">
+                <ngx-signaturepad *ngIf="!croppedImage && !isLoading" #signaturePad [options]="options" [width]="width" [height]="height"></ngx-signaturepad>
+                
+                <image-cropper *ngIf="imageChangedEvent"
+                    [imageChangedEvent]="imageChangedEvent"
+                    [maintainAspectRatio]="false"
+                    [aspectRatio]="4 / 3"
+                    [resizeToWidth]="256"
+                    [cropperMinWidth]="128"
+                    [onlyScaleDown]="true"
+                    [roundCropper]="false"
+                    [alignImage]="'left'"
+                    [style.display]="showCropper ? null : 'none'"
+                    format="png"
+                    (imageCropped)="imageCropped($event)"
+                    (imageLoaded)="imageLoaded()"
+                    (cropperReady)="cropperReady($event)"
+                    (loadImageFailed)="loadImageFailed()"
+                ></image-cropper>
+                
+                <div class="row" style="margin-top: 20px;">
+                    <div class="button-reset" (click)="clear()">{{dictClearButton}}</div>
+                    <input #uploadSignature name="uploadImage" id="uploadImage" type="file" accept=".png" (change)="uploadExternalSignature($event)" style="display: none;">
+                    <label class="button-upload" for="uploadImage">{{dictUploadButton}}</label>
+                </div>
+            </div>
+            <div *ngIf="submitted && isPadEmpty() && !croppedImage" [style.width]="width+'px'" style="text-align: right;">
+                <div class="required-label">
+                    {{dictRequiredLabel}}
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <img [src]="croppedImage" [style.border]="croppedImage ? '1px solid black' : 'none'" />
+        </div> -->
+        <div class="row" style="margin-top: 60px">
+            <div>
+                
+            </div>
+        </div>
+        
+        <br>
+        <br>
+        <div class="row buttons-row">
+            <div class="button-back label text-nowrap" (click)="backBtn()">{{dictBack}}</div>
+            <button class="button-confirm label text-nowrap" (click)="onSubmit()">{{dictSave}}</button>
+        </div>
+        <br>
+        <br>
+    </form>
+</div>
+
+<ngx-spinner *ngIf="isLoading"
+    bdColor = "rgba(0,0,0,0)"
+    size = "default"
+    color = "#00B9B3"
+    type = "triangle-skew-spin"
+    [fullScreen] = "false" >
+</ngx-spinner>

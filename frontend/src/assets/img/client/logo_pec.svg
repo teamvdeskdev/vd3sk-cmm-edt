@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="250px" height="200px" viewBox="0 0 250 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>logo_pec</title>
+    <defs>
+        <polygon id="path-1" points="0 0 250 0 250 200 0 200"></polygon>
+    </defs>
+    <g id="logo_pec" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-3-Copy" transform="translate(0.000000, 0.000000)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="Clip-2"></g>
+            <path d="M224.975425,50.0312695 L125.00025,112.445278 L25.0250751,50.0312695 L25.0250751,25.0156348 L125.00025,87.4296435 L224.975425,25.0156348 L224.975425,50.0312695 Z M224.975425,0 L25.0250751,0 C11.2612838,0 0.125125376,11.2570356 0.125125376,25.0156348 L0,174.984365 C0,188.742964 11.2612838,200 25.0250751,200 L224.975425,200 C238.739217,200 250.000501,188.742964 250.000501,174.984365 L250.000501,25.0156348 C250.000501,11.2570356 238.739217,0 224.975425,0 L224.975425,0 Z" id="Fill-1" fill="#000000" mask="url(#mask-2)"></path>
+        </g>
+    </g>
+</svg>

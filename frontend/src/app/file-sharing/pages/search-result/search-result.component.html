@@ -1,0 +1,20 @@
+<div id="search-result">
+    <ngx-spinner *ngIf="!done"
+        bdColor = "rgba(0,0,0,0)"
+        size = "default"
+        color = "#00B9B3"
+        type = "triangle-skew-spin"
+        [fullScreen] = "false" >
+    </ngx-spinner>
+
+    <ng-container *ngIf="!noData">
+        <div id="allfilesmain">
+            <app-search-result-table *ngIf="dataValue.length>0" [pageFavorite]="pageFavorite" [dataValue]="dataValue"></app-search-result-table>
+        </div>
+        <app-sidebar></app-sidebar>
+    </ng-container>
+    
+    <ng-container *ngIf="noData">
+        <app-no-data [page]="getpage"></app-no-data>
+    </ng-container>
+</div>

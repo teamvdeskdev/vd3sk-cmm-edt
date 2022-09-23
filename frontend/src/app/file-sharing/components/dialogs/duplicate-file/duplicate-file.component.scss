@@ -1,0 +1,199 @@
+.title{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 10%;
+    align-items: center;
+    justify-content: space-between;
+
+    span{
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    i{
+        cursor: pointer;
+    }
+}
+
+.subtitle{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 12%;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 14px;
+
+    div{
+        width: 100%;
+
+        &.second{
+            font-size: 12px;
+        }
+    }
+}
+
+.body{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 66%;
+
+    .header{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 15%;
+        font-size: 14px;
+
+        .half{
+            display: flex;
+            flex-direction: row;
+            width: 50%;
+            align-items: center;
+            justify-content: flex-start;
+
+            .checkbox{
+                margin-right: 5px;
+
+                mat-checkbox{
+                    label{
+                        padding-left: 0px !important;
+                    }
+                }
+            }
+
+            .text{}
+        }
+    }
+
+    .inner{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 85%;
+        overflow: auto;
+        scrollbar-width: none; // Firefox
+        -ms-overflow-style: none; // IE and Edge
+        &::-webkit-scrollbar { // Chrome, Safari and Opera
+            display: none;
+        }
+
+        .element{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            font-size: 14px;
+    
+            .name{
+                display: flex;
+                width: 100%;
+                padding: 0 0.5rem;
+            }
+    
+            .body{
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                margin-bottom: 10px;
+                align-items: center;
+    
+                .half{
+                    display: flex;
+                    flex-direction: row;
+                    width: 50%;
+                    padding: 0 0.1rem;
+    
+                    .image{
+                        display: flex;
+
+                        i{
+                            font-size: 50px;
+                            
+                            &.folder{
+                                color:#00396A;
+                            }
+                            &.text{
+                                color:#5FBEEC;
+                            }
+                            &.image, &.svg,
+                            &.video, &.audio{
+                                color:#9669D2;
+                            }
+                            &.xlxs{
+                                color:#66BA6C;
+                            }
+                            &.pptx{
+                                color:#D98753;
+                            }
+                            &.pdf{
+                                color:#B54F4F;
+                            }
+                            &.generic{
+                                color:#ADB4B8;
+                            }
+                            &.zip{
+                                color: #F7C408;
+                            }
+                        }
+                    }
+    
+                    .info{
+                        display: flex;
+                        flex-direction: column;
+
+                        .checkbox{}
+    
+                        .info1{
+                            font-size: 12px;
+                            padding-left: 0.5rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 12%;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+        padding: 8px 16px;
+        border-radius: 6px;
+        margin: 0px;
+        outline: none;
+        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: bold;
+        letter-spacing: 0.58px;
+        font-family: Roboto;
+        cursor: pointer;
+
+        &.return{
+            border: 1px solid #007789;
+            background-color: white;
+            color: #007789;
+            margin-right: 15px;
+        }
+
+        &.confirm{
+            background: linear-gradient(145deg, #009ea3 0%, #007cb8 100%);
+            color: white;
+
+            &:hover{
+                background: #00B9B3;
+            }
+        }
+    }
+}

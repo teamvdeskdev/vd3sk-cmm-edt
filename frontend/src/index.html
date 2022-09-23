@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" translate="no">
+
+<head>
+  <meta charset="utf-8">
+  <title>Vdesk</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+  <link rel="stylesheet" href="assets/styles/roboto.css">
+  <link rel="stylesheet" href="assets/styles/material-icon.css">
+  <link rel="stylesheet" href="assets/styles/jquery-ui.min.css">
+
+  <link type="text/css" rel="stylesheet" media="screen" href="assets/scripts/chat-dist/converse.min.css" />
+  <script src="assets/scripts/chat-dist/converse.js" charset="utf-8"></script>
+  <script src="assets/scripts/chat-dist/icons.js"></script>
+  <script src="assets/scripts/chat-dist/locales/it-LC_MESSAGES-converse-po.js"></script>
+  <script src="assets/scripts/chat-dist/locales/dayjs/it.js"></script>
+  <script src="assets/scripts/chat-dist/emojis.js"></script>
+
+  <script type="text/javascript">
+    var bridge_endpoint = 'https://{{ .Env.BRIDGEFQDN | default "none" }}/';
+    var vdesk_endpoint = 'https://{{ .Env.VDESKFQDN | default "none" }}/';
+    var vmeet_fe_endpoint = 'https://{{ .Env.VMEETFQDN | default "none" }}';
+    var vmeet_be_endpoint = 'https://{{ .Env.VMEETFQDN_BACKEND | default "none" }}';
+  </script>
+</head>
+
+<body>
+  <app-root></app-root>
+</body>
+<script>
+  const conv = converse
+  conv.load();
+
+  function initializeChat(settings) {
+    conv.initialize(settings);
+  }
+</script>
+
+</html>

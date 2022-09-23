@@ -1,0 +1,102 @@
+//importo solamente la parte relativa le breakpoint grid
+@import "~bootstrap/scss/bootstrap-grid.scss";
+
+td.mat-cell {
+  border-bottom-color: white;
+}
+
+.columnTableID {
+    display: none;
+}
+
+.fileSharing-icon {
+  cursor: pointer;
+    @include media-breakpoint-down(sm) {
+      padding-right: 1rem;
+    }
+}
+
+//table width every column
+.tableimage{
+  width: 3%;
+
+  i{
+    &.folder{
+      color:#00396A;
+    }
+    &.text{
+      color:#5FBEEC;
+    }
+    &.image, &.svg,
+    &.video, &.audio{
+      color:#9669D2;
+    }
+    &.xlxs{
+      color:#66BA6C;
+    }
+    &.pptx{
+      color:#D98753;
+    }
+    &.pdf{
+      color:#B54F4F;
+    }
+    &.generic{
+      color:#ADB4B8;
+    }
+    &.zip{
+      color: #F7C408;
+    }
+  } 
+}
+
+.tablename{
+  width: 57%;
+  font-size: 13px;
+  letter-spacing: 0;
+  color: #2B2B2B;
+
+  .tableiconname{
+    width: fit-content;
+    height: auto;
+    display: flex;
+    i.star{
+      padding-left: 10px;
+      color: #FDCA0B;
+      font-size: 13px;
+    }
+    i.lock{
+      padding-left: 10px;
+      color: #46ABDB;
+      font-size: 13px;
+    }
+  }
+}
+
+.nameSingleFile{
+  cursor: pointer;
+
+  .divNameSingleFile{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .spanNameFile{}
+    .spanExtensionFile{
+      color: #8e8d8d;
+    }
+  }
+}
+
+.selected-row:hover {
+  background-color: #D6E7FF !important;
+}
+
+td.fav-arrow {
+  color: #007789;
+  text-align: right;
+  padding-right: 0;
+
+  .arrow-icon {
+      cursor: pointer;
+  }
+}

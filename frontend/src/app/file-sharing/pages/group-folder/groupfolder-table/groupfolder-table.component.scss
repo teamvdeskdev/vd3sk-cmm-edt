@@ -1,0 +1,251 @@
+//importo solamente la parte relativa le breakpoint grid
+@import "~bootstrap/scss/bootstrap-grid.scss";
+.fileSharing-checkbox {
+  @include media-breakpoint-down(sm) {
+    padding: 0 1rem;
+  }
+}
+
+.fileSharing-icon {
+  cursor: pointer;
+    @include media-breakpoint-down(sm) {
+      padding-right: 1rem;
+    }
+}
+
+//table width every column
+.tableimage{
+  width: 3%;
+
+  &.addmargin{
+    padding-left: 24px;
+  }
+
+  i{
+    &.folder{
+      color:#00396A;
+    }
+    &.p7m{
+      color: #007cb8;
+    }
+    &.text{
+      color:#5FBEEC;
+    }
+    &.image, &.svg,
+    &.video, &.audio{
+      color:#9669D2;
+    }
+    &.xlxs{
+      color:#66BA6C;
+    }
+    &.pptx{
+      color:#D98753;
+    }
+    &.pdf{
+      color:#B54F4F;
+    }
+    &.generic{
+      color:#ADB4B8;
+    }
+    &.zip{
+      color: #F7C408;
+    }
+  }
+  
+}
+.tablecheckbox{
+  width: 5%;
+}
+.tablename{
+  width: 57%;
+  font-size: 13px;
+  letter-spacing: 0;
+  color: #2B2B2B;
+  &.head{
+    color: #848484;
+    font-size: 11px;
+    cursor: pointer;
+  }
+  .tableiconname{
+    width: fit-content;
+    height: auto;
+    display: flex;
+    i.star{
+      padding-left: 10px;
+      color: #FDCA0B;
+      font-size: 13px;
+    }
+    i.lock{
+      padding-left: 10px;
+      color: #46ABDB;
+      font-size: 13px;
+    }
+  }
+}
+.tableshare{
+  width: 10%;
+  vertical-align: middle;
+  //padding-left: 1%;
+  &.head{
+    color: #848484;
+    font-size: 11px;
+    letter-spacing: 0;
+  }
+
+  .insideDivShare{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+
+    div{
+      display: flex;
+      align-items: center;
+      
+      mat-icon.mat-icon{
+        display: flex;
+        align-items: center;
+      }
+    }
+    mat-icon.mat-icon{
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+.tableweight,
+.tableupdate{
+  width: 10%;
+  font-size: 11px;
+  letter-spacing: 0;
+  color: #2B2B2B;
+  &.head{
+    color: #848484;
+    cursor: pointer;
+  }
+}
+.tableaction{
+  width: 5%;
+  
+  i{
+    color: #007789;
+  }
+
+  &:hover{
+    i{
+      color: #00B9B3;
+    }
+  }
+}
+.tablefoot{
+  color: #848484;
+  font-size: 11px;
+  letter-spacing: 0;
+}
+
+
+
+.favoritesStar{
+  position: absolute;
+  top: -6px;
+  left: 20px;
+  i{
+    font-size: 13px !important;
+  }
+}
+
+.iconSettingFile{
+  cursor: pointer;
+}
+
+.nameSingleFile{
+  cursor: pointer;
+
+  .divNameSingleFile{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .spanExtensionFile{
+      color: #8e8d8d;
+    }
+  }
+}
+
+::ng-deep .datetooltip{
+  background-color: #00396A;
+  color: white !important;
+  border-radius: 3px;
+}
+
+.columnTableID {
+  display: none;
+}
+
+.table-col-share {
+  .share {
+    cursor: pointer;
+    color: #007789;
+    font-size: 16px;
+
+    &.inactive {
+      color: #0077894D;
+    }
+  }
+  img.profile_pic {
+    border-radius: 50%;
+  }
+}
+
+.mat-icon {
+  .material-icons.lens {
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+::ng-deep .sharetooltip{
+  height: 26px;
+  background-color: #00396A;
+  color: white !important;
+  border-radius: 3px;
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 10px;
+  width: auto;
+}
+
+div.tableDiv{
+  position :relative;
+
+  .uploading{
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    height: 20px;
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+
+    span{
+      width: 30%;
+      font-size: 10px;
+      color: gray;
+    }
+    
+    mat-progress-bar{
+      border-radius: 10px;
+      width: 70%;
+      height: 90%;
+    }
+
+    .close{
+      font-size: 16px;
+      color: black;
+      width: 4%;
+      height: 90%;
+      cursor: pointer;
+      margin-top: 2%;
+    }
+  }
+}

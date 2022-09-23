@@ -1,0 +1,54 @@
+<div class="firstBody" (click)="lockCreate()" *ngIf="firstBody">
+    <div class="header">
+        <div class="divHead">
+            <span class="title"> {{ stringTitle }} </span>
+            <span class="subtitle"> {{ stringSubtitle }} </span>
+        </div>
+        <mat-icon (click)="onNoClick($event)"><i class="material-icons"> close </i></mat-icon>
+    </div>
+    
+    <div class="body">
+
+        <div class="single" *ngFor="let element of arrayElement">
+            <button class="list" (click)="unlockCreate($event, element)">
+                <mat-icon> {{element.icon}} </mat-icon>
+            </button>
+            <span> {{element.name}} </span>
+        </div>
+    
+        <div class="single">
+            <button class="list" (click)="uploader.click()">
+                <mat-icon>arrow_upward</mat-icon>
+            </button>
+            <span> {{ stringLoad }} </span>
+            <input #uploader hidden multiple type="file" (change)="uploadFile($event)"/>
+        </div>
+        
+    </div>
+    
+    <div class="buttons">
+        <button class="remove" (click)="onNoClick($event)" mat-flat-button> {{ stringCancel }} </button>
+        <button class="save" [ngClass]="{'disabled' : !confirmCreate}" [disabled]="!confirmCreate" (click)="gotoSecond($event)" mat-flat-button> {{ stringSave }} </button>
+    </div>
+</div>
+
+<div class="secondBody" *ngIf="secondBody">
+    <div class="header">
+        <div class="divHead">
+            <span class="title"> {{ stringSecondTitle }} </span>
+            <span class="subtitle"> {{ stringSecondSubtitle }} </span>
+        </div>
+        <mat-icon (click)="onNoClick($event)"><i class="material-icons"> close </i></mat-icon>
+    </div>
+    
+    <div class="body">
+        <mat-form-field class="input">
+            <input class="input" matInput placeholder="{{dictInsertName}}" autocomplete="none" [(ngModel)]="nameNewElement">
+        </mat-form-field>
+    </div>
+    
+    <div class="buttons">
+        <button class="remove" (click)="gotoFirst($event)" mat-flat-button> {{ stringCancel }} </button>
+        <button class="save" [ngClass]="{'disabled' : !confirmCreate}" [disabled]="!confirmCreate" (click)="checkTypeNew($event)" mat-flat-button> {{ stringSecondSave }} </button>
+    </div>
+</div>

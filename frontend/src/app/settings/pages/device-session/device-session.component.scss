@@ -1,0 +1,81 @@
+#devicesession {
+    height: 90%;
+    width: 100%;
+    background-color: #F0F0F0;
+    overflow-y: auto;
+    scrollbar-width: none; // Firefox
+    -ms-overflow-style: none; // IE and Edge
+    &::-webkit-scrollbar { // Chrome, Safari and Opera
+        display: none;
+    }
+
+    .devicesession-header {
+        padding: 20px;
+
+        .devicesession-header-title {
+            color: #2B2B2B;
+            font-family: Roboto;
+            font-size: 18px;
+            letter-spacing: 0;
+            line-height: 21px;
+            margin-bottom: 10px;
+        }
+
+        .devicesession-header-subtitle {
+            color: #808080;
+            font-family: Roboto;
+            font-size: 14px;
+            letter-spacing: 0;
+            line-height: 16px;
+        }
+    }
+
+    .devicesession-body {
+        margin-top: 30px;
+        
+        table {
+            width: 100%;
+
+           .hidden {
+               display: none;
+           }
+           .icon {
+               padding-left: 20px;
+           }
+           .more {
+               color: #007789;
+           }
+        }
+        .device-col-header {
+            padding-left: 20px;
+        }
+        .device-col {
+            padding-left: 20px;
+            width: 40%;
+        }
+        .time-col {
+            width: 15%;
+        }
+
+        .remote-wipe {
+            font-weight: 500;
+            color: #00396A;
+        }
+    }
+
+    .pointer {
+        cursor: pointer;
+    }
+
+    .mat-header-cell {
+        color: #848484;
+    }
+
+    tr.mat-header-row {
+        height: 49px;
+    }
+
+    .table-header {
+        background-color: rgba(178, 214, 219, 0.4);
+    }
+}

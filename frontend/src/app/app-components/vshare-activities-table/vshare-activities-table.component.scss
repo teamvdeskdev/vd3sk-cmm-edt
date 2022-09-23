@@ -1,0 +1,60 @@
+$Roboto: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+.columnTableID {
+    display: none;
+}
+td.mat-cell {
+    border-bottom-color: white;
+    &.col-profile-pic {
+        text-align: center;
+    }
+}
+td.mat-cell.col-profile-pic{
+    width: 5%;
+    text-align: left !important;
+}
+img.profile_pic {
+    border-radius: 50%;
+}
+td.col-image {
+    width: 4%;
+    .mat-icon{
+        color: #808080;
+        font-size: 20px;
+        height: 20px;
+        width: 20px;
+    }
+}
+td.col-description {
+    color: #2B2B2B;
+    font-family: $Roboto;
+    font-size: 13px;
+    letter-spacing: 0;
+    line-height: 16px;
+}
+td.col-icons {
+    width: 15%;
+    text-align: right;
+}
+td.col-time, td.col-date {
+    width: 10%;
+    color: #2B2B2B;
+    font-family: $Roboto;
+    font-size: 11px;
+    letter-spacing: 0;
+    line-height: 13px;
+    text-align: right;
+}
+.material-icons.icon {
+    color: #007CB8;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: 24px;
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+.cursor-pointer:hover {
+    background-color: #D6E7FF;
+}
+

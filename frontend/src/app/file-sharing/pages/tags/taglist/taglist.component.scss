@@ -1,0 +1,115 @@
+.columnId{
+    display: none;
+}
+
+table{
+    width: 100%;
+
+    .tableimage{
+        width: 4%;
+        padding-left: 7px;
+      
+        i{
+          &.folder{
+            color:#00396A;
+          }
+          &.text{
+            color:#5FBEEC;
+          }
+          &.image, &.svg,
+          &.video, &.audio{
+            color:#9669D2;
+          }
+          &.xlxs{
+            color:#66BA6C;
+          }
+          &.pptx{
+            color:#D98753;
+          }
+          &.pdf{
+            color:#B54F4F;
+          }
+          &.generic{
+            color:#ADB4B8;
+          }
+          &.zip{
+            color: #F7C408;
+          }
+        }    
+    }
+
+    .tablename{
+        width: 50%;
+
+        &.nameSingleFile{
+          cursor: pointer;
+        
+          .divNameSingleFile{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            .spanNameFile{}
+            .spanExtensionFile{
+              color: #8e8d8d;
+            }
+          }
+        
+          .changeNameFileDiv{
+            display: flex;
+            position: relative;
+            align-items: center;
+        
+            .changeNameFileInput{
+              width: 90%;
+              outline: none;
+              border-radius: 6px;
+              border: none;
+              border-bottom: 1px solid darkcyan;
+            }
+            .changeNameFileI{
+              position: absolute;
+              left: 84%;
+              color: rgb(0, 139, 139);
+              cursor: pointer;
+              font-size: 22px;
+            }
+          }
+        }
+
+        .tableiconname{
+          width: fit-content;
+          height: auto;
+          display: flex;
+          i.star{
+            padding-left: 10px;
+            color: #FDCA0B;
+            font-size: 13px;
+          }
+          i.lock{
+            padding-left: 10px;
+            color: #46ABDB;
+            font-size: 13px;
+          }
+        }
+    }    
+
+    .tableshare{
+        width: 12%;
+    }
+
+    .tableweight{
+        width: 12%;
+    }
+
+    .tableupdate{
+        width: 16%;
+    }
+
+    .tableaction{
+        width: 6%;
+        i{
+          cursor: pointer;
+        }
+    }
+}

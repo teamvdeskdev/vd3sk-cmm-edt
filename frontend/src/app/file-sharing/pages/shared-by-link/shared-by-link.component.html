@@ -1,0 +1,22 @@
+<div id="shared-by-link">
+    <ngx-spinner *ngIf="!done"
+        bdColor = "rgba(0,0,0,0)"
+        size = "default"
+        color = "#00B9B3"
+        type = "triangle-skew-spin"
+        [fullScreen] = "false" >
+    </ngx-spinner>
+
+    <ng-container>
+        <div id="shared-by-link-main">
+            <app-shares-table *ngIf="(!noData && done) && dataValue.length>0" [pageFavorite]="pageFavorite" [getpage]="getpage" [dataValue]="dataValue"></app-shares-table>
+
+            <div class="noData" *ngIf="noData && done"> 
+                <mat-icon> insert_link </mat-icon>
+                <h3> {{dictNoSharedLinkH3}} </h3>
+                <p> {{dictNoSharedLinkP}} </p>
+            </div>
+        </div>
+        <app-sidebar [page]="getpage"></app-sidebar>
+    </ng-container>
+</div>

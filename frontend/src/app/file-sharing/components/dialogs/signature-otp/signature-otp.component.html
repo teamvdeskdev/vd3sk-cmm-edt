@@ -1,0 +1,18 @@
+<div class="header">
+    <div class="divHead">
+        <span class="title"> {{ title }} </span>
+        <span class="subtitle"> {{ subtitle }} </span>
+    </div>
+    <mat-icon (click)="onNoClick()"><i class="material-icons"> close </i></mat-icon>
+</div>
+
+<div class="body">
+    <mat-form-field class="input">
+        <input class="input" type="password" matInput placeholder="OTP" autocomplete="none" [(ngModel)]="otp">
+    </mat-form-field>
+</div>
+
+<div class="buttons">
+    <button class="remove" (click)="onNoClick()" mat-flat-button> {{ cancel }} </button>
+    <button class="save" (click)="onConfirmClick()" mat-flat-button> {{ confirm }} </button>
+</div>

@@ -1,0 +1,127 @@
+#sidebarSignatureVerify{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 600px;
+    padding: 5% 5%;
+    min-height: 150px;
+    overflow-y: auto;
+    -ms-overflow-style: none; /* IE 11 */
+    scrollbar-width: none; /* Firefox */
+
+    .signTitle{
+        display: flex;
+        flex-direction: row;
+        height: 6%;
+        width: 100%;
+        font-family: 'Roboto';
+        font-size: 12px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #2b2b2b;
+        text-transform: uppercase;
+    }
+
+    .signDataElement {
+        font-family: 'Roboto';
+        font-size: 15px;
+
+        .element-title {
+            // font-weight: bold;
+            // font-size: 13px;
+            margin: 1px 11px 9px 0px;
+            font-family: 'Roboto';
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #2b2b2b;
+        }
+    }
+
+    &.nodata{
+        align-items: center;
+        justify-content: center;
+
+        mat-icon{
+            width: fit-content;
+            height: fit-content;
+            
+            i{
+                font-size: 40px;
+                color: #808080;
+            }
+        }
+
+        span{
+            width: fit-content;
+            color: #7D7D7D;
+            font-family: Roboto;
+            font-size: 13px;
+            letter-spacing: 0;
+            text-transform: capitalize;
+        }
+    }
+}
+#sidebarSettings::-webkit-scrollbar { /* Chrome, opera,safari */
+    display: none;
+}
+
+#sidebarSignatureVerify::-webkit-scrollbar {
+    display: none;
+  }
+  
+/* Hide scrollbar for IE, Edge and Firefox */
+#sidebarSignatureVerify {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.element-text {
+    margin: 10px 10px 13px 0;
+    font-family: 'Roboto';
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #808080;
+}
+
+.element-text-date {
+    font-family: 'Roboto';
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #808080;
+}
+
+.title-icon {
+    font-size: 22px;
+    margin: 0 10px 0px 0;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
+.verified-icon {
+    font-size: 17px;
+    color: #46abdb;
+    margin-left: 13px;
+    vertical-align: middle;
+}
+
+.separator {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 2px solid rgba(0,0,0,.1);
+}

@@ -1,0 +1,20 @@
+<div id="deleted">
+    <ngx-spinner *ngIf="!done"
+        bdColor = "rgba(0,0,0,0)"
+        size = "default"
+        color = "#00B9B3"
+        type = "triangle-skew-spin"
+        [fullScreen] = "false" >
+    </ngx-spinner>
+
+    <ng-container>
+        <div id="deletedmain">
+            <app-delete-table *ngIf="(!noData && done) && dataValue.length>0" 
+                [dataValue]="dataValue" 
+                [pageFavorite]="pageFavorite"
+                (nodata)="isEmpty()"></app-delete-table>
+            <app-no-data *ngIf="noData && done" [page]="getpage"></app-no-data>
+        </div>        
+        <app-sidebar [page]="getpage"></app-sidebar>
+    </ng-container>
+</div>

@@ -1,0 +1,52 @@
+<div id="user-search-result">
+    <ng-container *ngIf="!noData">
+        <div class="infinite-scroll-container tiny-scrollbar"
+        infiniteScroll
+        [scrollWindow]="false"
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50"
+        (scrolled)="onScroll()">
+
+            <div id="settingsUser">
+
+                <ngx-spinner *ngIf="!isdata"
+                    bdColor = "rgba(0,0,0,0)"
+                    size = "default"
+                    color = "#00B9B3"
+                    type = "triangle-skew-spin"
+                    [fullScreen] = "false" >
+                </ngx-spinner>
+
+                <div class="usersHeader">
+                  <div class="title"> {{ langService.dictionary.users_settings }} </div>
+                  <div class="info">
+                    <span> {{ langService.dictionary.users_subtitle }} </span>
+                    <button mat-flat-button color="primary" (click)="goToDisabledUsers()"> {{ langService.dictionary.disabled_users }} </button>
+                  </div>
+                </div>
+
+                <app-usertable *ngIf="data && dataDone" 
+                    [data]="data"
+                    [groups]="groups"
+                    [pageUser]="pageUser"
+                    (create)="createUser($event)"
+                    (delete)="deleteUser($event)"
+                    (devices)="removeUserDevices($event)"
+                    (update)="updateUser($event)"
+                    (group)="addRemoveGroup($event)"
+                    (enabledisable)="disableUser($event)"
+                    (resend)="resendMail($event)"
+                    (newgroup)="addNewGroup($event)">
+                </app-usertable>
+
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="noData">
+        <div id="nodata">
+            <mat-icon><i class="material-icons"> search </i></mat-icon>
+            <span class="nodatadescription"> {{ langService.dictionary.nodata_user_search }} </span>
+        </div>
+    </ng-container>
+</div>

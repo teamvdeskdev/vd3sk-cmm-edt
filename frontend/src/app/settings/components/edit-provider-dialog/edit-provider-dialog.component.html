@@ -1,0 +1,100 @@
+<div id="editProviderDialog">
+    <div class="pb-3 p-0"> <!-- col-12 -->
+        <span *ngIf="data.mode == 'edit'" class="editProviderTitle">{{langService.dictionary.edit_provider}}</span>
+    </div>
+
+    <div class="spin d-flex justify-content-center" *ngIf="wait">
+        <ngx-spinner
+            bdColor = "rgba(0,0,0,0)"
+            size = "default"
+            color = "#00B9B3"
+            type = "triangle-skew-spin"
+            [fullScreen] = "false" >
+        </ngx-spinner>
+    </div>
+
+    <div class="dialogContent tiny-scrollbar">
+
+        <div class="editProvider form-box p-0">
+
+            <div *ngIf="showError" class="error mb-2">
+                <div *ngIf="data.mode == 'new'">{{langService.dictionary.provider_update_failed}}</div>
+                <div>{{langService.dictionary.check_config_param}}</div>
+            </div>
+
+            
+            <mat-form-field class="w-100">
+                <input [(ngModel)]="providerUpdated.ServiceName" type="text" autocomplete="providerNameNoAutocomplete"
+                    name="providerNameNoAutocomplete" matInput placeholder="{{langService.dictionary.provider_service_name}}" (focus)="hideError()" disabled>
+            </mat-form-field>
+
+            <mat-form-field class="w-100">
+                <textarea [(ngModel)]="providerUpdated.Description" type="text" autocomplete="descriptionNoAutocomplete"
+                       name="descriptionNoAutocomplete" matInput placeholder="{{langService.dictionary.description}}" (focus)="hideError()">
+                </textarea>
+            </mat-form-field>
+
+            <mat-form-field class="w-100" *ngIf="extraParams != '' ">
+              <input [value]="extraParams" type="text" autocomplete="extraParamsNoAutocomplete"
+                     name="extraParamsNoAutocomplete" matInput placeholder="{{langService.dictionary.extra_params}}" (focus)="hideError()" disabled>
+            </mat-form-field>
+
+            <div class="serverBox col-12 mt-3 px-0 d-flex">
+                <div class="col-6 pl-0">
+
+                    <mat-form-field class="w-100">
+                      <input [(ngModel)]="providerUpdated.ServiceUrl" type="text"
+                             autocomplete="serviceUrlNoAutocomplete" name="serviceUrlNoAutocomplete" matInput
+                             placeholder="{{langService.dictionary.provider_service_url}}" (focus)="hideError()">
+                    </mat-form-field>
+
+                    <mat-form-field class="w-100">
+                      <input [value]="this.serviceVerify ? 'Yes' : 'No'" type="text"
+                              autocomplete="serviceHasVerifyNoAutocomplete" name="serviceHasVerifyNoAutocomplete" matInput
+                              placeholder="{{langService.dictionary.provider_has_verify}}" (focus)="hideError()" disabled>
+                    </mat-form-field>
+                    
+
+                </div>
+                <div class="col-6">
+
+                    <mat-form-field class="w-100">
+                      <input [value]="serviceSupportedSignatures" type="text"
+                              autocomplete="serviceSupportedSignaturesNoAutocomplete" name="serviceSupportedSignaturesNoAutocomplete" matInput
+                              placeholder="{{langService.dictionary.supported_signatures}}" (focus)="hideError()" disabled>
+                    </mat-form-field>
+                     
+                    <mat-form-field class="w-100">
+                      <input [(ngModel)]="providerUpdated.ServiceVerifyUrl" type="text"
+                             autocomplete="serviceVerifyUrlNoAutocomplete" name="serviceVerifyUrlNoAutocomplete" matInput
+                             placeholder="{{langService.dictionary.provider_verify_url}}" (focus)="hideError()" disabled>
+                    </mat-form-field>
+                    
+                </div>
+            </div>
+
+            <!-- CHECKBOX SECTION START -->
+            <div class="col-12 mt-3 px-0 d-flex checkboxes" *ngIf="data.mode == 'edit'">
+                <div class="mr-4 d-flex align-items-center">
+                    <input [(ngModel)]="providerUpdated.ServiceActive" type="checkbox" class="activeCheckbox" id="activeCheckbox">
+                    <label class="form-check-label ml-2 checkboxLabel text-capitalize" for="activeCheckbox">
+                      {{langService.dictionary.active}}
+                    </label>
+                </div>
+            </div>
+            <!--  CHECKBOX SECTION END -->
+
+        </div>
+    </div>
+
+    <div class="col-12 actions-box p-0">
+        <div (click)="saveProvider(providerUpdated)" 
+                class="primary-btn dialogButton float-right">
+            {{langService.dictionary.save}}
+        </div>
+        <div class="secondary-btn dialogButton float-left" mat-dialog-close>
+            {{langService.dictionary.undo}}
+        </div>
+    </div>
+</div>
+

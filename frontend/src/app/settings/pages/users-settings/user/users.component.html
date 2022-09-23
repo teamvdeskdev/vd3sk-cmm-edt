@@ -1,0 +1,76 @@
+<div class="infinite-scroll-container tiny-scrollbar"
+      infiniteScroll
+      [scrollWindow]="false"
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      (scrolled)="onScroll()">
+ 
+    <div id="settingsUser">
+
+        <ngx-spinner *ngIf="!isdata"
+            bdColor = "rgba(0,0,0,0)"
+            size = "default"
+            color = "#00B9B3"
+            type = "triangle-skew-spin"
+            [fullScreen] = "false" >
+        </ngx-spinner>
+
+        <div class="usersHeader">
+            <div class="rowSetting">
+                <span class="SettingsPage"> {{ langService.dictionary.settings_title }} </span>
+            </div>
+            <div class="TitleRow">
+                <div class="title">
+                    <mat-icon><i class="material-icons icon">how_to_reg</i></mat-icon><span class="titleText"> {{ langService.dictionary.users_settings }} </span>
+                </div>
+                <div class="newUser">
+                    <button *ngIf="!this.isTim" mat-flat-button (click)="newUser()"><mat-icon><i class="material-icons icon">add</i></mat-icon><span> {{ langService.dictionary.add_user }} </span></button>
+                    <button *ngIf="this.isTim" mat-flat-button class="tim_button" (click)="newUser()"><mat-icon><i class="material-icons icon">add</i></mat-icon><span> {{ langService.dictionary.add_user_Tim }} </span></button>
+                    <button mat-flat-button *ngIf="!this.isTim" (click)="newUserFile()"><mat-icon><i class="material-icons icon">add</i></mat-icon><span> {{ langService.dictionary.add_user_file }} </span></button>
+                    <button mat-flat-button *ngIf="this.isTim" class="tim_button" (click)="newUserFile()"><mat-icon><i class="material-icons icon">add</i></mat-icon><span> {{ langService.dictionary.add_user_file }} </span></button>
+                </div>
+            </div>
+            <div class="info">
+                <div class="users">
+                    <span class="button">
+                        <button mat-flat-button class="Enabled"> {{ langService.dictionary.enabled_users }} </button>
+                        <button mat-flat-button (click)="goToDisabledUsers()" class="Disabled"> {{ langService.dictionary.disabled_users }} </button>
+                    </span>
+                </div>
+               <!-- <div class="bar"></div> -->
+            </div>
+            <div class="searchUser">
+                <div class="searchText">{{ langService.dictionary.user_search }} </div>
+                <div class="search_filter">
+
+                        <mat-form-field class="MatField" id="input">
+                            <input matInput placeholder="{{ langService.dictionary.user_search }}" autocomplete="nope" 
+                            #inputSearch  (keyup.enter)="searchUser(inputSearch.value)">
+                            <mat-icon matSuffix class="mat-search-icon pointer" (click)="searchUser(inputSearch.value)">
+                                search
+                            </mat-icon>
+                        </mat-form-field>
+  
+                    <!-- <div class="filter" (click)="filterUserList()">Filtra <mat-icon><i class="material-icons icon" [matBadge]="badgeCounter" matBadgeColor="warn">filter_list</i></mat-icon></div>
+                    -->
+                </div>
+            </div>
+        </div>
+
+        <app-usertable *ngIf="data && dataDone" 
+            [data]="data"
+            [groups]="groups"
+            [pageUser]="pageUser"
+            (create)="createUser($event)"
+            (delete)="deleteUser($event)"
+            (devices)="removeUserDevices($event)"
+            (update)="updateUser($event)"
+            (group)="addRemoveGroup($event)"
+            (enabledisable)="disableUser($event)"
+            (resend)="resendMail($event)"
+            (newgroup)="addNewGroup($event)">
+        </app-usertable>
+
+    </div>
+
+</div>

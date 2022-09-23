@@ -1,0 +1,32 @@
+<div id="pathFolder" [ngClass]="{'dialog': class}">
+    <div id="drawPathFolder" *ngIf="!(router.url.includes('search-result'))" class="">
+        <div class="drawPathFolderHome" (click)="navigateHome()"> {{ getTitleHome }} </div>
+        <div class="insidefolder" *ngIf="name">
+            <mat-icon><i class="material-icons arrowright"> keyboard_arrow_right </i></mat-icon>
+            <span> {{ name }} </span>
+        </div>
+        <div class="insidefolder" *ngIf="!name">
+            <table mdbTable>
+                <thead></thead>
+                <tbody>
+                  <tr mdbTableCol *ngFor="let el of array; let i = index">
+                    <td>
+                        <mat-icon><i class="material-icons arrowright"> keyboard_arrow_right </i></mat-icon>
+                        <span (click)="returnToPath(el, i)">{{ el | toCleanString }} </span>                        
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="searchPath" *ngIf="router.url.includes('search-result')">
+        <div>
+            <span> {{ searchResult }} </span>
+            <span> {{ searchValue }} </span>
+        </div>
+        <mat-icon matTooltip="{{searchClose}}" matTooltipClass="headericonstooltip" (click)="goToHome()">
+            <span> close </span>
+        </mat-icon>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<div mat-dialog-title>
+    <span class="title">{{langService.dictionary.security}}</span>
+    <mat-icon class="right" mat-dialog-close> close </mat-icon>
+</div>
+<div mat-dialog-content>
+  <div class="text">{{langService.dictionary.enter_pwd}}</div>
+
+  <form [formGroup]="passwordForm">
+    <mat-form-field>
+      <input matInput type="password" #ref formControlName="password" name="password" placeholder="Password" required>
+    </mat-form-field>
+
+    <div *ngIf="isSubmitted && password.invalid" class="error-help">
+      <div *ngIf="password.errors.required">{{langService.dictionary.error_empty_pwd}}</div>
+  </div>
+  </form>
+
+  <div class="mt-7 error-help" *ngIf="showInvalidPassword">
+    {{langService.dictionary.error_invalid_pwd}}
+  </div>
+
+</div>
+<div mat-dialog-actions>
+  <div class="secondary-btn" mat-dialog-close>{{langService.dictionary.cancel}}</div>
+  <div *ngIf="data.op === 'enableTOTP'" class="primary-btn" (click)="checkPassword(ref.value)">
+    <span *ngIf="!inProgress">{{langService.dictionary.generates}}</span>
+    <span *ngIf="inProgress">
+      {{langService.dictionary.generates_progress}} &nbsp; 
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    </span>
+  </div>
+  <div *ngIf="data.op !== 'enableTOTP'" class="primary-btn" (click)="checkPassword(ref.value)">
+    <span *ngIf="!inProgress">{{langService.dictionary.confirm}}</span>
+    <span *ngIf="inProgress">
+      {{langService.dictionary.confirm_progress}} &nbsp; 
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    </span>
+  </div>
+</div>

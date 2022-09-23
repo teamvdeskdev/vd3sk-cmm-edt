@@ -1,0 +1,175 @@
+<div id="userbygroupsSettings">
+
+    <div class="header">
+        <div class="first">
+            <span> {{ langService.dictionary.group }} </span>
+        </div>
+
+        <div class="second">
+            <span> {{ langService.dictionary.group_subtitle }} </span>
+        </div>
+
+        <div class="searchUser">
+            
+            <div class="search_filter">
+                <mat-form-field class="MatField" id="input">
+                    <input matInput type="text" [formControl]="searchTerm" [matAutocomplete]="auto">  
+                    <mat-placeholder class="placeholder"> {{ langService.dictionary.user_search }} </mat-placeholder>
+                    <mat-icon matSuffix class="forward" [ngClass]="{'selected': checkusericon}" *ngIf="!loading"> search </mat-icon>
+                    <mat-progress-spinner *ngIf="loading" diameter="19" mode="indeterminate"></mat-progress-spinner>
+                    <!-- AUTOCOMPLETE PANEL WITH OPTIONS -->
+                    <mat-autocomplete #auto="matAutocomplete" class="my-share-auto-panel">
+                    <mat-option *ngFor="let user of filteredUsers" [value]="user.id" (click)="getUserAdd(user)">
+                        <img src="{{user.image}}" class="profile_pic groupuser"/>{{ user.username }}</mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </div>
+            <div class="addFilterUser">
+                <mat-icon matSuffix class="mat-search-icon pointer" matTooltip="{{ langService.dictionary.addUser }}" (click)="addUser()"> person_add </mat-icon>
+            </div>
+        </div>
+    </div>
+
+    <div class="infinite-scroll-container tiny-scrollbar"
+      infiniteScroll
+      [scrollWindow]="false"
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      >
+
+        <ngx-spinner *ngIf="!isdata"
+            bdColor = "rgba(0,0,0,0)"
+            size = "default"
+            color = "#00B9B3"
+            type = "triangle-skew-spin"
+            [fullScreen] = "false" >
+        </ngx-spinner>
+
+        <div class="tableDiv" *ngIf="dataDone">
+                
+            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" id="table">
+        
+                <!-- ID Column -->
+                <!-- Usually this column is always hidden -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="usertableId"></th>
+                    <td mat-cell *matCellDef="let element" class="usertableId"> {{element.id}} </td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                    </ng-container>
+                
+                    <!-- IMAGE Column -->
+                <ng-container matColumnDef="image">
+                    <th mat-header-cell *matHeaderCellDef class="usertableImage head"></th>
+                    <td class="fileSharing-icon usertableImage" mat-cell *matCellDef="let element">
+                        <img  src="{{element.image}}" class="profile_pic"/>
+                    </td>
+                </ng-container>
+                
+                <!-- USERNAME Column -->
+                <ng-container matColumnDef="username">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="usertableUsername head"></th>
+                    <td mat-cell *matCellDef="let element" class="usertableUsername">
+                        <div class="TextUser">
+                            <div class="accountName">
+                            <mat-form-field class="input" appearance="none">
+                                <input matInput placeholder="" autocomplete="nope" [(value)]="element.accountname" #accountname readonly matSuffix>
+                            </mat-form-field>
+                            </div>
+                            <div class="userName">
+                            <span>{{ langService.dictionary.user_name }}: </span>
+                            <div appearance="none" class="userName">{{ element.username }}</div>
+                            </div>
+                        </div>
+                    </td>
+                </ng-container> 
+        
+                <!-- PASSWORD Column -->
+                <ng-container matColumnDef="password">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="usertablePassword head"></th>
+                    <td mat-cell *matCellDef="let element" class="usertablePassword">
+                        <div class="Text">
+                            <span> {{ langService.dictionary.password }} : </span>
+                            <mat-form-field class="input" appearance="none">
+                                <input matInput placeholder="********" autocomplete="nope" type="password" #password [(value)]="element.password" readonly matSuffix>
+                            </mat-form-field>
+                        </div>
+                    </td>
+                </ng-container> 
+        
+                <!-- EMAIL Column -->
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="usertableEmail head"></th>
+                    <td mat-cell *matCellDef="let element" class="usertableEmail">
+                        <div class="Text">
+                            <span> {{ langService.dictionary.email }} : </span>
+                            <mat-form-field class="input" appearance="none">
+                            <input matInput placeholder="" autocomplete="nope" #email [(value)]="element.email" readonly matSuffix>
+                            </mat-form-field>
+                        </div>
+                    </td>
+                </ng-container>
+        
+                <!--ACCOUNT ROLE Column -->
+                <ng-container matColumnDef="role">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="usertableRole head"></th>
+                    <td mat-cell *matCellDef="let element" class="usertableRole">
+                        <div class="Text"><span> {{ langService.dictionary.role }}: </span>
+                          <mat-form-field class="input" appearance="none">
+                            <input matInput placeholder="" autocomplete="nope" #role [(value)]="element.role" readonly matSuffix>
+                          </mat-form-field>
+                        </div>
+                    </td>
+                </ng-container>
+        
+                <!-- GROUPS Column -->
+                <ng-container matColumnDef="groups">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="usertableGroups head"></th>
+                    <td mat-cell *matCellDef="let element" class="usertableGroups">
+                        <div class="Text">
+                          <span> {{ langService.dictionary.groups }} : </span>
+                          <mat-form-field class="input" appearance="none">
+                            <input matInput placeholder="" autocomplete="nope" #groups [(value)]="element.groups" readonly matSuffix matTooltip="{{ element.groups }}">
+                          </mat-form-field>
+                        </div>
+                    </td>
+                </ng-container>
+        
+                <!-- QUOTA Column -->
+                <ng-container matColumnDef="quota">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="usertableQuota head"></th>
+                    <td mat-cell *matCellDef="let element" class="usertableQuota">
+                        <div class="Text"><span> {{ langService.dictionary.quota }} : </span>
+                          <mat-form-field class="input" appearance="none">
+                            <input matInput placeholder="" autocomplete="nope" #quota [(value)]="element.quota" readonly matSuffix>
+                          </mat-form-field>
+                        </div>
+                      </td>
+                </ng-container>
+
+                <!-- OTHERS Column -->
+                <ng-container matColumnDef="others">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="usertableOthers head"></th>
+                    <td mat-cell *matCellDef="let element" class="usertableOthers">
+                        <div class="divmenu">
+                            <button mat-icon-button [matMenuTriggerFor]="menu">
+                                <i class="material-icons">more_vert</i>
+                            </button>            
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item class="buttons" (click)="removeFromGroup(element)">{{langService.dictionary.removeUser}}</button>
+                            </mat-menu>
+                        </div> 
+                    </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" [hidden]="row.hide"></tr>
+            </table>
+        </div>
+        <div class="noUserFound" *ngIf="!dataDone && done">
+            <mat-icon matSuffix class="mat-search-icon pointer"> manage_accounts </mat-icon>
+            <span> {{ langService.dictionary.user_notfound }} </span>
+        </div>
+    </div>
+    
+
+</div>

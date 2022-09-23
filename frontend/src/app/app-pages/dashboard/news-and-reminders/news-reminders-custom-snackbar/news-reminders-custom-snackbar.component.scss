@@ -1,0 +1,29 @@
+.news-reminders-custom-snackbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: center;
+    height: 32px;
+
+    .snackbar-message {
+        margin-right: 30px;
+        font-family: 'Roboto';
+        font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #ffffff;
+    }
+
+    .snackbar-btn {
+        display: flex;
+
+        i {
+            cursor: pointer;
+            color: #ffffff;
+            font-size: 18px;
+        }
+    }
+}

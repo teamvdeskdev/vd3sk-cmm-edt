@@ -1,0 +1,120 @@
+<div id="editUserDialog">
+    <div class="pb-3 p-0"> <!-- col-12 -->
+        <span *ngIf="this.type == 'displayname'" class="editUserTitle">{{langService.dictionary.edit}} {{langService.dictionary.account_name}}</span>
+        <span *ngIf="this.type == 'password'" class="editUserTitle">{{langService.dictionary.edit}} {{langService.dictionary.password}}</span>
+        <span *ngIf="this.type == 'email'" class="editUserTitle">{{langService.dictionary.edit}} {{langService.dictionary.email}}</span>
+        <span *ngIf="this.type == 'newpassword'" class="editUserTitle">{{langService.dictionary.new_user_password}}</span>
+        <span *ngIf="this.type == 'newusername'" class="editUserTitle">{{langService.dictionary.new_username}}</span>
+
+    </div>
+
+    <div class="loader-wrapper" *ngIf="wait">
+        <div class="spin d-flex justify-content-center">
+            <ngx-spinner
+                bdColor = "rgba(0,0,0,0)"
+                size = "default"
+                color = "#00B9B3"
+                type = "triangle-skew-spin"
+                [fullScreen] = "false" >
+            </ngx-spinner>
+        </div>
+    </div>
+
+    <div class="dialogContent tiny-scrollbar" *ngIf="!isLoading && !wait">
+
+        <div class="editUser form-box p-0">
+
+            <!--Edit User Username-->
+            <div *ngIf="this.type == 'newusername'">
+              <form [formGroup]="usernameForm">
+                <mat-form-field class="w-100" style="margin-bottom: 20px">
+                  <input type="text" autocomplete="UserNameNoAutocomplete" formControlName="username" matInput placeholder="{{langService.dictionary.username}}" (focus)="hideError()">
+                  <mat-error *ngIf="usernameForm.get('username').hasError('required')">
+                    {{langService.dictionary.required_field}}
+                  </mat-error>
+                  <mat-error *ngIf="usernameForm.get('username').hasError('pattern')">
+                    {{langService.dictionary.no_special_space_character}}
+                  </mat-error>
+                </mat-form-field>
+              </form>
+            </div>
+
+            <!--Edit User Displayed Name-->
+            <div *ngIf="this.type == 'displayname'">
+                <mat-form-field class="w-100">
+                  <input [(ngModel)]="element.accountname" type="text" autocomplete="UserNameNoAutocomplete"
+                         name="UserNameNoAutocomplete" matInput placeholder="{{langService.dictionary.account_name}}" (focus)="hideError()" readonly>
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                  <input [(ngModel)]="this.newValue" type="text" autocomplete="off" matInput placeholder="{{langService.dictionary.new_displayed_name}}" (focus)="hideError()">
+                </mat-form-field>
+            </div>
+
+            <!--Edit User Password-->
+            <div *ngIf="this.type == 'password' || this.type == 'newpassword'">
+                <form [formGroup]="passwordForm">
+                    <mat-form-field class="w-100" style="margin-bottom: 20px">
+                        <input type="password" autocomplete="off" formControlName="newPassword" matInput placeholder="{{langService.dictionary.new_password}}" (focus)="hideError()">
+                        <mat-error *ngIf="passwordForm.get('newPassword').hasError('required')">
+                          {{langService.dictionary.required_field}}
+                        </mat-error>
+                        <mat-error *ngIf="passwordForm.get('newPassword').hasError('minlength')">
+                          {{langService.dictionary.min_length_password}}
+                        </mat-error>
+                        <mat-error *ngIf="passwordForm.get('newPassword').hasError('maxlength')">
+                          {{langService.dictionary.max_length_password}}
+                        </mat-error>
+                        <mat-error *ngIf="passwordForm.get('newPassword').hasError('pattern')">
+                          {{langService.dictionary.two_spaces}}
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="w-100" style="margin-bottom: 10px">
+                        <input type="password" autocomplete="off" formControlName="confirmPassword" matInput placeholder="{{langService.dictionary.confirm_new_password}}" (focus)="hideError()">
+                        <mat-error *ngIf="passwordForm.get('confirmPassword').hasError('required')">
+                          {{langService.dictionary.required_field}}
+                        </mat-error>
+                        <mat-error *ngIf="passwordForm.get('confirmPassword').hasError('minlength')">
+                          {{langService.dictionary.min_length_password}}
+                        </mat-error>
+                        <mat-error *ngIf="passwordForm.get('confirmPassword').hasError('maxlength')">
+                          {{langService.dictionary.max_length_password}}
+                        </mat-error>
+                        <mat-error *ngIf="passwordForm.get('confirmPassword').hasError('incorrect')">
+                          {{langService.dictionary.no_confirm_password_match}}
+                        </mat-error>
+                        <mat-error *ngIf="passwordForm.get('confirmPassword').hasError('pattern')">
+                          {{langService.dictionary.two_spaces}}
+                        </mat-error>
+                    </mat-form-field>
+                </form>
+            </div>
+
+            <!--Edit User Email-->
+            <div *ngIf="this.type == 'email'">
+                <mat-form-field class="w-100">
+                  <input [(ngModel)]="element.email" type="text" autocomplete="EmailNoAutocomplete"
+                         name="EmailNoAutocomplete" matInput placeholder="{{langService.dictionary.email}}" (focus)="hideError()" readonly>
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                  <input [(ngModel)]="this.newValue" type="text" autocomplete="off" matInput placeholder="{{langService.dictionary.new_email}}" (focus)="hideError()">
+                </mat-form-field>
+            </div>
+
+            
+        </div>
+    </div>
+
+    <div class="col-12 actions-box p-0">
+        <div (click)="confirm()" 
+                class="primary-btn dialogButton float-right">
+            {{langService.dictionary.save}}
+        </div>
+        <div class="secondary-btn dialogButton float-left" mat-dialog-close>
+            {{langService.dictionary.undo}}
+        </div>
+    </div>
+</div>
+

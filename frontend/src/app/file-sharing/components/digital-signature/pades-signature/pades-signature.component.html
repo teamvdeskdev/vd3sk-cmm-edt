@@ -1,0 +1,47 @@
+<div [style.visibility]="!isLoading ? 'visible' : 'hidden'" #containerPades class="container m-0">
+    <div class="row">
+        <div class="title">{{dictTitlePades}}</div>
+    </div>
+    <div class="row row-selector-page">
+        <div>
+            <span class="page-label">{{dictPage}}</span>
+            <mat-form-field class="field-page-number">
+                <input #pageNumberInput matInput type="text" [value]="pageNumber">
+                <button mat-button matSuffix mat-icon-button (click)="goToPage(pageNumberInput.value)">
+                    <mat-icon class="icon-arrow">arrow_forward</mat-icon>
+                </button>
+            </mat-form-field>
+            <span class="total-page-label">/{{totalDocumentPages}}</span>
+            <button #prevDocPageBtn class="prev-page-btn" (click)="prevDocPage()" [disabled]="pageNumber == 1 ? true : false">-</button>
+            <button #nextDocPageBtn class="next-page-btn" (click)="nextDocPage()" [disabled]="pageNumber == totalDocumentPages ? true : false">+</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 p-0 preview-container">
+            <div #previewBox id="previewBoxId" class="preview-box">
+                <div #previewImage>
+                    <img *ngIf="pagePreviewData" class="preview-image" [src]="pagePreviewData"/>
+                </div>
+                <div *ngIf="!pagePreviewData" class="no-preview-message">{{dictNoPreview}}</div>
+            </div>
+        </div>
+        <div #signatureBox class="col-md-6 p-0 signature-container">
+            <div class="signature-description">{{dictSignBoxLabel}}</div>
+            <div>
+                <ng-template #viewContainerRef></ng-template>
+            </div>   
+        </div>
+    </div>
+    <div class="row buttons-row">
+        <div class="button-back label text-nowrap" (click)="back()">{{dictBack}}</div>
+        <button class="button-confirm label text-nowrap" (click)="next()">{{dictContinue}}</button>
+    </div>
+</div>
+
+<ngx-spinner
+    bdColor = "rgba(0,0,0,0)"
+    size = "default"
+    color = "#00B9B3"
+    type = "triangle-skew-spin"
+    [fullScreen] = "false" >
+</ngx-spinner>

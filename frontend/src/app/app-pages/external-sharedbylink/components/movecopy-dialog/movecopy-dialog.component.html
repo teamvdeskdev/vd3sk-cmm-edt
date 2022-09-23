@@ -1,0 +1,42 @@
+<div id="dialogCopyFileFolder">
+    <div class="title">
+        <span> {{ langService.dictionary.choose_destination }} </span>
+        <mat-icon (click)="onNoClick()"><i class="material-icons">close</i></mat-icon>
+    </div>
+    <app-path-link  *ngIf="completename"
+        [class]="true"
+        [completename]="completename"
+        [arrayPath]="arrayPath"
+        (change)="navigatePath($event)">
+    </app-path-link>
+    <app-table-dialog *ngIf="dataValue && !noData"
+        [dataValue]="dataValue" 
+        (change)="navigateFolder($event)" 
+        (create)="createNewFolder($event)">
+    </app-table-dialog>
+    <div class="noData" *ngIf="noData">
+        <span> {{ langService.dictionary.no_folder }} </span>
+    </div>
+    <div class="buttons">
+        <div class="createNewFolder">
+            <div class="toggleNewFolder" *ngIf="!inputFolder" (click)="toggleInput()"><span> {{ langService.dictionary.create_folder }} </span></div>
+            <div class="input" *ngIf="inputFolder">
+                <mat-icon class="iconlabel" (click)="toggleInput()"><i class="material-icons"> folder </i></mat-icon>
+                  <input type="text"
+                        #valuenamefolder
+                        placeholder="{{langService.dictionary.folder_name}}"
+                        class="input">
+                  <mat-icon class="iconarrow" (click)="createNewFolder(valuenamefolder.value)"><i class="material-icons"> arrow_forward </i></mat-icon>
+            </div>
+        </div>
+
+        <div class="confirm">
+            <div class="move" (click)="onConfirmClick('m')">
+                <span> {{langService.dictionary.move}} </span>
+            </div>
+            <div class="copy" (click)="onConfirmClick('c')">
+                <span> {{langService.dictionary.copy}} </span>
+            </div>
+        </div>
+    </div>
+</div>

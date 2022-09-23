@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>save_alt-24px</title>
+    <defs>
+        <filter id="filter-1">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0.733333 0 0 0 0 0.733333 0 0 0 0 0.733333 0 0 0 1.000000 0"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon/burger&amp;sidebar/export">
+            <g filter="url(#filter-1)" id="save_alt-24px">
+                <g>
+                    <polygon id="Path" points="0 0 20 0 20 20 0 20"></polygon>
+                    <path d="M15.8333333,10 L15.8333333,15.8333333 L4.16666667,15.8333333 L4.16666667,10 L2.5,10 L2.5,15.8333333 C2.5,16.75 3.25,17.5 4.16666667,17.5 L15.8333333,17.5 C16.75,17.5 17.5,16.75 17.5,15.8333333 L17.5,10 L15.8333333,10 Z M10.8333333,5.69166667 L12.9916667,7.84166667 L14.1666667,6.66666667 L10,2.5 L5.83333333,6.66666667 L7.00833333,7.84166667 L9.16666667,5.69166667 L9.16666667,13.75 L10.8333333,13.75 L10.8333333,5.69166667 Z" id="Shape" fill="#000000" fill-rule="nonzero"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

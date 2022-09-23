@@ -1,0 +1,61 @@
+<div id="file-shares">
+    <ngx-spinner *ngIf="!done"
+        bdColor = "rgba(0,0,0,0)"
+        size = "default"
+        color = "#00B9B3"
+        type = "triangle-skew-spin"
+        [fullScreen] = "false" >
+    </ngx-spinner>
+
+    <ng-container *ngIf="!noData">
+        <!-- infinite scroll div -->
+        <div class="infinite-scroll-container"
+            infiniteScroll
+            [scrollWindow]="false"
+            [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50"
+            (scrolled)="onScroll()" >
+            <div id="filesharesmain" class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <div *ngFor="let key of tableList">
+                            <div class="date">
+                                <ng-container *ngIf="userLang === 'it'">
+                                    <span *ngIf="today === key[0]" class="date-prefix">Oggi, </span>
+                                    {{ key[0] | date:'fullDate':'+0200':'it' }}
+                                </ng-container>
+                                <ng-container *ngIf="userLang !== 'it'">
+                                    <span *ngIf="today === key[0]" class="date-prefix">Today, </span>
+                                    {{ key[0] | date:'fullDate' }}
+                                </ng-container>
+                            </div>
+                            <app-activity-table [dataValue]="key[1]"></app-activity-table>
+                        </div>
+                    </div>
+                </div>
+                <!-- spinner -->
+                <div class="row pb-5">
+                    <div class="col-md-12 p-5">
+                        <ngx-spinner *ngIf="!done2"
+                            bdOpacity = 0.9
+                            bdColor = ""
+                            size = "default"
+                            color = "#022E53"
+                            type = "ball-pulse-sync"
+                            [fullScreen] = "false"
+                        >
+                        </ngx-spinner>
+                    </div>
+                </div>
+                <div *ngIf="noNewData" class="no-new-data">
+                    {{dictAlertNoNewData}}
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="noData">
+        <app-no-data [page]="getpage"></app-no-data>
+    </ng-container>
+</div>
+

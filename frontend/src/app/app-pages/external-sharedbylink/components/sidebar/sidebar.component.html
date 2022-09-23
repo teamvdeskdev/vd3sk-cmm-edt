@@ -1,0 +1,79 @@
+<!--EMPTY-->
+<div class="emptysidebarFileSharing" *ngIf="isEmpty">
+  <img class="logo img-fluid" src="assets/img/icon-filefolder.png">
+  <span>{{ langService.dictionary.info_file_folder }}</span>
+</div>
+
+<!--MULTISELECT NORMAL-->
+<div class="sidebarLinkMulti" *ngIf="multipleFile && !isEmpty">
+    <div class="smdInfo" *ngIf="isRow">
+      <div class="smdInfoImg">
+        <mat-icon *ngFor="let index of info" matTooltip="{{index.completeName}}" matTooltipClass="tooltipicon">
+          <i *ngIf="index.classimage!='zip'" class="material-icons" [ngClass]="[index.classimage]">{{ index.image }}</i>
+          <img *ngIf="index.classimage=='zip'" [ngClass]="[index.classimage]" src="assets/img/icons/zip.svg">
+        </mat-icon>
+      </div>
+      <div class="smdInfoData">{{ nameMultiselect }}</div>
+    </div>
+    <div class="slInfoDataHead" *ngIf="!isRow">
+      <div class="icon">
+        <mat-icon *ngIf="info.classimage!='zip'"><i class="material-icons" [ngClass]="[info.classimage]">{{ info.image }}</i></mat-icon>
+        <mat-icon *ngIf="info.classimage=='zip'"><img [ngClass]="[info.classimage]" src="assets/img/icons/zip.svg"></mat-icon>
+      </div>
+      <div class="info">
+        <span class="infoName">{{ info.completeName }}</span>
+        <span class="infoWeight">{{ info.humanWeight }}</span>
+      </div>
+    </div>
+    <div class="slEvent">
+      <mat-list>
+
+        <mat-list-item *ngIf="allPermission.isCrearable" (click)="openDialogMoveCopy()">
+          <mat-icon><i class="material-icons">zoom_out_map</i></mat-icon>
+          <span class="spanInnerList">{{ langService.dictionary.movecopy }}</span>
+        </mat-list-item>
+
+        <mat-list-item *ngIf="!isRow && allPermission.isCrearable" (click)="toggleRenameFile()">
+          <mat-icon><i class="material-icons">create</i></mat-icon>
+          <span class="spanInnerList">{{ langService.dictionary.rename }}</span>
+        </mat-list-item>
+
+        <mat-list-item *ngIf="!hidedownload" (click)="filefolderDownload()">
+          <mat-icon><i class="material-icons">arrow_downward</i></mat-icon>
+          <span class="spanInnerList">{{ langService.dictionary.download }}</span>
+        </mat-list-item>
+
+        <!-- *ngIf="allPermission.isCrearable" -->
+        <!--<mat-list-item *ngIf="!isRow">
+          <mat-icon><i class="material-icons">arrow_upward</i></mat-icon>
+          <span class="spanInnerList">{{ langService.dictionary.upload_from_pc }}</span>
+        </mat-list-item>-->
+
+        <mat-list-item *ngIf="allPermission.isDeletable" (click)="openDialogDelete()">
+          <mat-icon><i class="material-icons">delete</i></mat-icon>
+          <span class="spanInnerList">{{ langService.dictionary.delete }}</span>
+        </mat-list-item>
+
+      </mat-list>
+    </div>
+</div>
+<!--MULTISELECT NORMAL-->
+
+<!--NORMAL-->
+<div class="sidebarLinkSingle" *ngIf="!isEmpty && !multipleFile">
+    <div class="slInfo">
+        <div class="slInfoData">
+          <div class="slInfoDataHeadSingle">
+            <span>{{langService.dictionary.actions}}</span>
+          </div>
+        </div>
+    </div>
+    <div class="slEvent">
+          <mat-list>
+            <mat-list-item *ngIf="!hidedownload" (click)="filefolderDownload()">
+              <mat-icon><i class="material-icons">arrow_downward</i></mat-icon>
+              <span class="spanInnerList">{{ langService.dictionary.download }}</span>
+            </mat-list-item>
+          </mat-list>
+    </div>
+</div>

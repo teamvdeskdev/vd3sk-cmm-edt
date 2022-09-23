@@ -1,0 +1,118 @@
+<div *ngIf="isDirectAppLoading" id="spinner-login-totp">
+    <div class="container-outer">
+        <div class="container-inner">  
+            <ngx-spinner bdColor="rgba(0,0,0,0)" size="default" 
+                color="#00B9B3" type="triangle-skew-spin" [fullScreen]="false">
+            </ngx-spinner>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!showTOTPSection" [ngClass]="{'login-totp': globalsVar.custom_FE !== 'COBRANDING' && globalsVar.custom_FE !== 'WHITELABEL',
+                    'login-totp-Cobranding' : globalsVar.custom_FE === 'COBRANDING' || globalsVar.custom_FE === 'WHITELABEL'}">
+    <div class="container-outer">
+        <div class="container-inner">
+            <div class="login-card">
+                <div class="card-title">
+                    <img *ngIf="globalsVar.custom_FE !== 'WHITELABEL'" class="logo" src="assets/loghi_apps_main/png/vdesk-principale.png">
+                    <img *ngIf="globalsVar.custom_FE === 'WHITELABEL'" class="logo" src="{{globalsVar.custom_logo_login ? globalsVar.custom_logo_login : globalsVar.custom_logo}}">
+                    <img *ngIf="globalsVar.custom_FE === 'WHITELABEL'" class="logoCobranding" src="assets/img/splash_page/desk-principal-blue.svg">
+                    <img *ngIf="globalsVar.custom_FE === 'COBRANDING'" class="logoCobranding" src="{{globalsVar.custom_logo_login ? globalsVar.custom_logo_login : globalsVar.custom_logo}}">
+                    <div *ngIf="globalsVar.custom_FE !== 'WHITELABEL'" class="label"> Digital workplace </div>
+
+                    <div class="back" (click)="goBackToLogin()">
+                        <span class="material-icons arrow">arrow_back</span>
+                        {{langService.dictionary.back_to_login}}
+                    </div>
+
+                    <div class="label2"> {{langService.dictionary.label_verify_identity}} </div>
+
+                    <div class="label3"> {{langService.dictionary.label_enter_code}} </div>
+                </div>
+                <div>
+                    <form [formGroup]="loginTotpForm" (ngSubmit)="loginTotpUser()" class="login-form">
+                        <mat-form-field [ngClass]="{ 'has-error': isSubmitted && challenge.errors }">
+                            <input matInput formControlName="challenge" name="challenge" placeholder="{{langService.dictionary.ph_code}}" required readonly onfocus="this.removeAttribute('readonly');">
+                        </mat-form-field>
+
+                        <div *ngIf="isSubmitted && challenge.invalid" class="error-help">
+                            <div *ngIf="challenge.errors.required">{{langService.dictionary.error_code}}</div>
+                        </div>
+
+                        <button mat-raised-button type="submit" class="btn login">
+                            <!-- IN CASE OF LOGIN -->
+                            <span *ngIf="!inProgress">{{langService.dictionary.bt_login}}</span>
+                            <span *ngIf="inProgress">
+                                {{langService.dictionary.bt_login_progress}} &nbsp; 
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            </span>
+                        </button>
+                    </form>
+
+                    
+                    <div class="mt-7 error-help" *ngIf="showInvalidLogin">
+                        {{langService.dictionary.error_invalid_login_totp}}
+                    </div> 
+                    
+                   
+                    <div class="recovery">
+                        <a (click)="goToLoginBackupCode()">
+                            {{langService.dictionary.use_backup_code}}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- TOTP ENABLE SECTION (FIRST ACCESS)-->
+
+<div *ngIf="showTOTPSection" [ngClass]="{'login-totp': globalsVar.custom_FE !== 'COBRANDING' && globalsVar.custom_FE !== 'WHITELABEL',
+                    'login-totp-Cobranding' : globalsVar.custom_FE === 'COBRANDING' || globalsVar.custom_FE === 'WHITELABEL'}">
+    <div class="container-outer totp-enable-section">
+        <div class="container-inner">
+            <div class="login-card">
+                <div class="card-title">
+                    <img *ngIf="globalsVar.custom_FE !== 'WHITELABEL'" class="logo" src="assets/loghi_apps_main/png/vdesk-principale.png">
+                    <img *ngIf="globalsVar.custom_FE === 'WHITELABEL'" class="logo" src="{{globalsVar.custom_logo}}">
+                    <img *ngIf="globalsVar.custom_FE === 'WHITELABEL'" class="logoCobranding" src="assets/img/splash_page/desk-principal-blue.svg">
+                    <img *ngIf="globalsVar.custom_FE === 'COBRANDING'" class="logoCobranding" src="{{globalsVar.custom_logo}}">
+                    <div *ngIf="globalsVar.custom_FE !== 'WHITELABEL'" class="label"> Digital workplace </div>
+                    <div class="back" (click)="goBackToLogin()">
+                        <span class="material-icons arrow">arrow_back</span>
+                        {{langService.dictionary.back_to_login}}
+                    </div>
+                    <div> {{langService.dictionary.your_new_totp}} <span class="bold">{{qrCode}}</span> </div>
+                    <div> {{langService.dictionary.configure}}  </div>
+                    <div> {{langService.dictionary.step1}} <span class="highlighted">Google Authenticator</span>, </div>
+                    <div> {{langService.dictionary.step2}} </div>
+                </div>
+                <div>        
+                    <div class="qrcode-wrapper">
+                        <qrcode [qrdata]="qrUrl" [width]="150" [errorCorrectionLevel]="'H'"></qrcode>
+                    </div>         
+                    <div class="final-step"> {{langService.dictionary.final_step}} </div>
+                    <div class="row-wrapper">
+                        <form [formGroup]="codeForm">
+                            <mat-form-field>
+                              <input matInput type="text" #ref formControlName="code" name="code" placeholder="{{langService.dictionary.auth_code}}">
+                            </mat-form-field>
+                            <div class="mt-7 error-help" *ngIf="showInvalidLogin">
+                                {{langService.dictionary.error_invalid_login_totp}}
+                            </div>
+                        </form>
+                        <div class="primary-btn" (click)="check(ref.value)">{{langService.dictionary.check}}</div>
+                    </div>
+
+                   <!-- <div class="recovery">
+                        <a (click)="goToLoginBackupCode()">
+                            {{langService.dictionary.use_backup_code}}
+                        </a>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,124 @@
+<div id="permission-setup">
+
+    <span class="arrow"></span>
+    <div class="inner-container" *ngIf="menuEdit">
+        <div>
+            <!-- CHECKBOX SECTION FOR NOMINAL SHARES START -->
+            <mat-checkbox *ngIf="(selectedShare.share_type === 0 && (!isTim || (isTim && !selectedShare.flagExp))) && selectedShare.item_type!='file'" color="primary" [(ngModel)]="edit" 
+                            (change)="updatePermissions('edit', $event)">
+                {{dictEdit}}
+            </mat-checkbox>
+            <mat-checkbox *ngIf="(selectedShare.share_type === 0 && (!isTim || (isTim && !selectedShare.flagExp)))" color="primary" [(ngModel)]="reshare" 
+                            (change)="updatePermissions('reshare', $event)">
+                {{dictReshare}}
+            </mat-checkbox>
+            <mat-checkbox *ngIf="(selectedShare.share_type === 0 && selectedShare.item_type === 'folder' && (!isTim || (isTim && !selectedShare.flagExp)))"
+                            color="primary" [(ngModel)]="create" 
+                            (change)="updatePermissions('create', $event)">
+                {{dictCreate}}
+            </mat-checkbox>
+            <mat-checkbox *ngIf="(selectedShare.share_type === 0 && selectedShare.item_type === 'folder' && (!isTim || (isTim && !selectedShare.flagExp)))" 
+                            color="primary" [(ngModel)]="change"
+                            (change)="updatePermissions('change', $event)">
+                {{dictChange}}
+            </mat-checkbox>
+            <mat-checkbox *ngIf="(selectedShare.share_type === 0 && selectedShare.item_type === 'folder' && (!isTim || (isTim && !selectedShare.flagExp)))"
+                            color="primary" [(ngModel)]="delete"
+                            (change)="updatePermissions('delete', $event)">
+                {{dictDelete}}
+            </mat-checkbox>
+            <!-- CHECKBOX SECTION FOR NOMINAL SHARES END -->
+
+            <!-- CHECKBOX SECTION FOR LINK SHARES START -->
+            <mat-checkbox *ngIf="(selectedShare.share_type === 3 && (!isTim || (isTim && !selectedShare.flagExp))) && selectedShare.item_type!='file'" color="primary" [(ngModel)]="linkPermissions"
+                            (change)="updateLinkPermissions($event)"
+                            [disabled]="updateCheckDisable">
+                {{dictAllowEdit}}
+            </mat-checkbox>
+            <mat-checkbox *ngIf="(selectedShare.share_type === 3 && (!isTim || (isTim && !selectedShare.flagExp)))" color="primary" [(ngModel)]="hideDownload"
+                            (change)="updateHideDownload($event)"
+                            [disabled]="downloadCheckDisable">
+                {{dictPreventDownload}}
+            </mat-checkbox>
+            <mat-checkbox *ngIf="(selectedShare.share_type === 3 && (!isTim || (isTim && !selectedShare.flagExp)))" color="primary" [(ngModel)]="pwdCheck"
+                            (change)="onCheckSetPassword($event)"
+                            [disabled]="passwordCheckDisable">
+                {{dictSetPassword}}
+            </mat-checkbox>
+
+            <form [formGroup]="passwordForm">
+                <mat-form-field *ngIf="pwdCheck === true" class="set-password">
+                    <input matInput type="password" #ref formControlName="password" (keyup)="checkPasswordLength(ref.value)">
+                    <mat-icon class="arrow-forward" [ngClass] ="{'ready': checkLength}" (click)="updatePassword(ref.value, selectedShare.id)"> 
+                        arrow_forward
+                    </mat-icon>
+                </mat-form-field>
+            </form>
+
+            <mat-checkbox *ngIf="(selectedShare.share_type === 3 && (!isTim || (isTim && !selectedShare.flagExp)))" color="primary" [(ngModel)]="nameCheck"
+                            (change)="onCheckSetName($event)"
+                            [disabled]="nameCheckDisable">
+                {{dictSetName}}
+            </mat-checkbox>
+
+            <form [formGroup]="nameForm">
+                <mat-form-field *ngIf="nameCheck === true" class="set-password">
+                    <input matInput type="text" #refName formControlName="name" (keyup)="checkNameLength(refName.value)">
+                    <mat-icon class="arrow-forward" [ngClass] ="{'ready': checkLenghtName}" (click)="updateName(refName.value, selectedShare.id)"> 
+                        arrow_forward
+                    </mat-icon>
+                </mat-form-field>
+            </form>
+            <!-- CHECKBOX SECTION FOR LINK SHARES END -->
+
+            <!-- CHECKBOX SECTION FOR COMMON START -->
+            <mat-checkbox color="primary" [(ngModel)]="expiration" (change)="onCheckSetExpiration($event)" [disabled]="dateCheckDisable">
+                {{dictExpiration}}
+            </mat-checkbox>
+            <!-- CHECKBOX SECTION FOR COMMON END -->
+        </div>
+
+        <form [formGroup]="expirationForm">
+            <mat-form-field *ngIf="expiration === true">
+                <input matInput #ref [matDatepicker]="picker" formControlName="date" [min]="minDate" [max]="maxDate" (dateChange)="updateExpiration(ref.value, selectedShare.id)">
+                <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </form>
+        <!-- <div *ngIf="selectedShare.flagProjExp">
+            <div *ngIf="selectedShare.share_type === 0 && expiration === true" class="checkLabel cantEdit"> {{dictExpirationDate}}:</div>
+            <div *ngIf="selectedShare.share_type === 0 && expiration === true" class="checkLabel cantEdit"> {{expirationdate}}</div>
+        </div> -->
+        
+        <button mat-button class="clear" *ngIf="(!isTim || (isTim && !selectedShare.flagExp))" (click)="deleteShare(selectedShare.id)"> 
+            <!-- CASE NOMINAL SHARES -->
+            <mat-icon *ngIf="selectedShare.share_type === 0"> clear </mat-icon>
+            <span *ngIf="selectedShare.share_type === 0"> {{dictDeleteShare}} </span>
+            <!-- CASE LINK SHARES -->
+            <mat-icon *ngIf="selectedShare.share_type === 3"> delete </mat-icon>
+            <span *ngIf="selectedShare.share_type === 3"> {{dictDeleteLink}} </span>
+        </button>
+    </div>
+
+    <div *ngIf="!menuEdit" class="inner-container notEdit">
+        <div>
+            <!-- NO CHECKBOX SECTION FOR NOMINAL SHARES START -->
+            <div *ngIf="selectedShare.share_type === 0 && edit && selectedShare.item_type!='file'" class="checkLabel cantEdit"> {{dictEdit}} </div>
+            <div *ngIf="selectedShare.share_type === 0 && reshare" class="checkLabel cantEdit"> {{dictReshare}} </div>
+            <div *ngIf="selectedShare.share_type === 0 && create" class="checkLabel cantEdit"> {{dictCreate}} </div>
+            <div *ngIf="selectedShare.share_type === 0 && change" class="checkLabel cantEdit"> {{dictChange}} </div>
+            <div *ngIf="selectedShare.share_type === 0 && delete" class="checkLabel cantEdit"> {{dictDelete}} </div>
+            <div *ngIf="selectedShare.share_type === 0 && expiration === true" class="checkLabel cantEdit"> {{dictExpirationDate}}:</div>
+            <div *ngIf="selectedShare.share_type === 0 && expiration === true" class="checkLabel cantEdit"> {{expirationdate}}</div>
+            <div *ngIf="selectedShare.share_type === 0 && read" class="checkLabel cantEdit"> {{dictReadOnly}} </div>
+            <!-- NO CHECKBOX SECTION FOR NOMINAL SHARES END -->
+            
+            <button mat-button *ngIf="(isOwner || isShareOwner) && (!isTim || (isTim && !selectedShare.flagExp))" class="clear" (click)="deleteShare(selectedShare.id)"> 
+                <!-- CASE NOMINAL SHARES -->
+                <mat-icon *ngIf="selectedShare.share_type === 0"> clear </mat-icon>
+                <span *ngIf="selectedShare.share_type === 0"> {{dictDeleteShare}} </span>
+            </button>
+        </div>
+    </div>
+</div>
+

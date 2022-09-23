@@ -1,0 +1,190 @@
+<!--EMPTY-->
+<div class="emptysidebarFileSharing" *ngIf="(isEmpty && !tableClick) && !isMultiselect">
+    <img class="logo img-fluid" src="../../../../assets/img/icon-filefolder.png">
+    <span>{{ text }}</span>
+</div>
+
+<!--MULTISELECT NORMAL-->
+<div class="sidebarMultiselect" *ngIf="isMultiselect">
+    <div class="smdInfo">
+      <div class="smdInfoImg">
+        <mat-icon *ngFor="let index of multiselect" matTooltip="{{index.name}}" matTooltipClass="tooltipicon">
+          <i *ngIf="index.classimage!='zip'" class="material-icons" [ngClass]="[index.classimage]">{{ index.image }}</i>
+          <img *ngIf="index.classimage=='zip'" [ngClass]="[index.classimage]" src="assets/img/icons/zip.svg">
+        </mat-icon>
+      </div>
+      <div class="smdInfoData">{{ nameMultiselect }}</div>
+    </div>
+    <div class="smdEvent">
+      <mat-list>
+        <mat-list-item class="smdEventHover" *ngIf="!isTim && permissions.isCrearable" (click)="openDialogMoveCopy()">
+          <mat-icon><i class="material-icons">zoom_out_map</i></mat-icon>
+          <span class="smdEventSpan">{{ movecopy }}</span>
+        </mat-list-item>
+
+        <mat-list-item *ngIf="!isTim && (datahasfolder && isVpecInstalled)" class="smdEventHover" (click)="openMailAttach()">
+          <mat-icon><i class="material-icons">mail</i></mat-icon>
+          <span class="smdEventSpan">{{ mail }}</span>
+        </mat-list-item>
+
+        <mat-list-item class="smdEventHover" (click)="filefolderDownload()">
+          <mat-icon><i class="material-icons">arrow_downward</i></mat-icon>
+          <span class="smdEventSpan">{{ download }}</span>
+        </mat-list-item>
+
+        <mat-list-item class="smdEventHover" *ngIf="permissions.isDeletable" (click)="openDialogDelete()">
+          <mat-icon><i class="material-icons">delete</i></mat-icon>
+          <span class="smdEventSpan">{{ delete }}</span>
+        </mat-list-item>
+      </mat-list>
+    </div>
+</div>
+<!--MULTISELECT NORMAL-->
+
+<!--NORMAL-->
+<div class="sidebarFileSharing" *ngIf="(!isEmpty && !isMultiselect) || (tableClick)">
+    <div class="sfsInfo">
+        <div class="sfsInfoData">
+          <div class="sfsInfoDataHead">
+            <mat-icon *ngIf="info.classimage!='zip'" [ngClass]="{'file-icon-blue': openFromSignedDocument}"><i class="material-icons" [ngClass]="[info.classimage]">{{ image }}</i></mat-icon>
+            <mat-icon *ngIf="info.classimage=='zip'"><img [ngClass]="[info.classimage]" src="assets/img/icons/zip.svg"></mat-icon>
+            <span>{{ name }}</span>
+          </div>
+          <div class="sfsInfoDataFoot">
+            <mat-icon class="sidebariconfoot"><i class="material-icons star" [ngClass]="{'selected': isFavorite}"> star </i></mat-icon>
+            <mat-icon class="sidebariconfoot"><i class="material-icons lock" [ngClass]="{'selected': coded}"> lock </i></mat-icon>
+            <span>{{ weight }}</span>
+          </div>
+        </div>
+
+        <div class="sfsLabels">
+          <div class="sfsLabelsHead">
+            <div *ngFor="let element of filetag" class="singlelabel">
+              <div> {{element}} </div>
+              <mat-icon (click)="removeTagFromFile(element)"><i class="material-icons">close</i></mat-icon>
+            </div>
+            <div class="sfsLabelsHeadButton">
+              <button (click)="toggleLabelInput()" matTooltip="{{ dictAddLabel }}">+</button>
+            </div>
+          </div>
+          <div class="sfsLabelsInput" *ngIf="showlabelinput">
+            <form class="labels-form">
+                <div class="allinput">
+                  <mat-icon class="iconlabel"><i class="material-icons"> label </i></mat-icon>
+                  <input type="text"
+                        #value #id
+                        matInput
+                        placeholder="Insert text"
+                        [formControl]="myControl"
+                        [matAutocomplete]="auto"
+                        class="input">
+                  <mat-icon *ngIf="addDone" class="iconarrow" (click)="addTagToFile(value.value)" matTooltip="{{ dictAddLabel }}"><i class="material-icons"> arrow_forward </i></mat-icon>
+                  <mat-spinner *ngIf="!addDone" class="tablespinner" [diameter]="24"></mat-spinner>
+                </div>
+                <mat-autocomplete #auto="matAutocomplete" class="autocomplete">
+                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+            </form>
+          </div>
+        </div>
+
+    </div>
+    <div class="sfsEvent">
+      <div class="sfsEventIcons">
+        <div (click)="changeSidebarTab(0)" [ngClass]="{'selected': tabSelectedIndex==0, 'folder': !info.file, 'noshare': !permissions.isSharable||isTim}" matTooltip="{{ dictActions }}">
+          <mat-icon class="example-tab-icon">more_vert</mat-icon>
+        </div>
+
+        <div *ngIf="!isTim && permissions.isSharable" (click)="changeSidebarTab(1)" [ngClass]="{'selected': tabSelectedIndex==1, 'folder': !info.file}" matTooltip="{{ dictShared | titlecase }}">
+          <mat-icon class="example-tab-icon">share</mat-icon>
+        </div>
+
+        <div (click)="changeSidebarTab(2)" [ngClass]="{'selected': tabSelectedIndex==2, 'folder': !info.file, 'noshare': !permissions.isSharable||isTim}" matTooltip="{{ dictActivities }}">
+          <mat-icon class="example-tab-icon">flash_on</mat-icon>
+        </div>
+
+        <div *ngIf="info.file" (click)="changeSidebarTab(3)" [ngClass]="{'selected': tabSelectedIndex==3, 'noshare': !permissions.isSharable||isTim}"><mat-icon class="example-tab-icon" matTooltip="{{ dictVersions }}">history</mat-icon></div>
+        <div *ngIf="openFromSignedDocument" matTooltip="{{badgeSignValue}} {{signatureVerifyTooltipLabel}}" (click)="changeSidebarTab(4)" [ngClass]="{'selected': tabSelectedIndex==3, 'folder': !info.file}">
+          <mat-icon *ngIf="!isLoadingVerify" matBadge="{{badgeSignValue}}" matBadgeOverlap="false" class="example-tab-icon">gesture</mat-icon>
+          <mat-icon *ngIf="isLoadingVerify" class="example-tab-icon gesture-icon-loading">gesture</mat-icon>
+        </div>
+      </div>
+
+      <div class="sfsEventBody">
+
+        <div class="sfsEventList" *ngIf="tabSelectedIndex==0">
+          <mat-list>
+            <mat-list-item *ngIf="!isFavorite" (click)="filefolderFavorite()" matTooltip="{{ addFavorites }}">
+              <mat-icon><i class="material-icons">star</i></mat-icon>
+              <span class="spanInnerList">{{ addFavorites }}</span>
+            </mat-list-item>
+            <mat-list-item *ngIf="isFavorite" (click)="filefolderFavorite()" matTooltip="{{ removeFavorites }}">
+              <mat-icon><i class="material-icons">star_outline</i></mat-icon>
+              <span class="spanInnerList">{{ removeFavorites }}</span>
+            </mat-list-item>
+
+            <mat-list-item *ngIf="!isTim && permissions.isCrearable" (click)="filefolderRename()" matTooltip="{{ rename }}">
+              <mat-icon><i class="material-icons">create</i></mat-icon>
+              <span class="spanInnerList">{{ rename }}</span>
+            </mat-list-item>
+
+            <mat-list-item *ngIf="!isTim && permissions.isCrearable" (click)="openDialogMoveCopy()" matTooltip="{{ movecopy }}">
+              <mat-icon><i class="material-icons">zoom_out_map</i></mat-icon>
+              <span class="spanInnerList">{{ movecopy }}</span>
+            </mat-list-item>
+
+            <mat-list-item *ngIf="!isTim && (datahasfolder && isVpecInstalled)" (click)="openMailAttach()" matTooltip="{{ mail }}">
+              <mat-icon><i class="material-icons">mail</i></mat-icon>
+              <span class="spanInnerList">{{ mail }}</span>
+            </mat-list-item>
+
+            <mat-list-item *ngIf="!isTim && (!isEncipher && permissions.isCrearable)" (click)="openDialogCrypt(info, true)" matTooltip="{{ encipher }}">
+              <mat-icon><i class="material-icons">lock</i></mat-icon>
+              <span class="spanInnerList">{{ encipher }}</span>
+            </mat-list-item>
+
+            <mat-list-item *ngIf="info.file" (click)="openDigitalSignature(info)" matTooltip="{{ sign }}">
+              <mat-icon><i class="material-icons">gesture</i></mat-icon>
+              <span class="spanInnerList">{{ sign }}</span>
+            </mat-list-item>
+
+            <mat-list-item *ngIf="globalsVar.enableVdpa && info.file && isP7M" (click)="extractSignatureFile(info)" matTooltip="{{ extractSigned }}">
+              <mat-icon><i class="material-icons">scanner</i></mat-icon>
+              <span class="spanInnerList">{{ extractSigned }}</span>
+            </mat-list-item>
+
+            <mat-list-item (click)="filefolderDownload()" matTooltip="{{ download }}">
+              <mat-icon><i class="material-icons">arrow_downward</i></mat-icon>
+              <span class="spanInnerList">{{ download }}</span>
+            </mat-list-item>
+
+            <mat-list-item *ngIf="permissions.isDeletable" (click)="openDialogDelete()" matTooltip="{{ delete }}">
+              <mat-icon><i class="material-icons">delete</i></mat-icon>
+              <span class="spanInnerList">{{ delete }}</span>
+            </mat-list-item>
+
+          </mat-list>
+        </div>
+
+        <div class="tabSelect1" *ngIf="!isTim && tabSelectedIndex==1">
+          <app-share [share]="this.info" [coded]="coded"></app-share>
+        </div>
+
+        <div class="tabSelect2" *ngIf="tabSelectedIndex==2">
+          <app-activities [activity]="this.info"></app-activities>
+        </div>
+
+        <div *ngIf="tabSelectedIndex==3 && info.file && !openFromSignedDocument">
+          <app-versions [info]="info"></app-versions>
+        </div>
+        <div *ngIf="tabSelectedIndex==4 && openFromSignedDocument">
+          <div>
+            <app-signature-verify *ngIf="!isLoadingVerify" [data]="signaturesData"></app-signature-verify>
+          </div>
+        </div>
+      </div>
+
+    </div>
+</div>

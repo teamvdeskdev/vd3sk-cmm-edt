@@ -1,0 +1,133 @@
+<!-- SHARING TAB CONTENT -->
+<div id="share-tab-content">
+    <div class="title"> {{dictShareTagTitle}} </div>
+
+    <!-- USERS LIST WHO SHARED WITH ME -->
+    <table *ngIf="sharedList.length > 0" class="shared-table">
+        <tr *ngFor="let item of sharedList">
+            <td> 
+                <img src="{{item.profile_pic_url}}" class="profile_pic"/>
+            </td>
+            <td> {{dictShareFrom}} {{item.displayname_owner}} </td>
+        </tr>
+    </table>
+
+    <div id="shareNoPermission" *ngIf="!share.reshare && !controlPage">
+        <span class="material-icons-outlined share">share</span>
+        <span> {{ dictNoSharePermission }} </span>
+    </div>
+
+    <div id="shareNoPermission" *ngIf="!share.reshare && controlPage">
+        <span class="material-icons-outlined share">share</span>
+        <span> {{ noShareEver }} </span>
+    </div>
+
+    <!-- SEARCH SECTION -->    
+    <form *ngIf="((share.reshare && !isTim) || (isTim &&  ((this.FolderZero && this.isOwner) || (!this.FolderZero && share.reshare))))">
+        <mat-form-field class="share-search" floatLabel="never">
+  
+            <!-- INPUT TEXT BOX LINKED TO THE AUTOCOMPLETE PANEL -->
+            <mat-icon class="person"> person </mat-icon>
+            <input matInput 
+                type="text"
+                [formControl]="searchTerm"
+                [matAutocomplete]="auto">  
+            <mat-placeholder class="placeholder"> {{dictSearchPlaceholder}} </mat-placeholder>
+            <mat-icon matSuffix class="forward" [ngClass]="{'selected': checkusericon}" (click)="insertShare(searchTerm.value)" *ngIf="!loading" matTooltip="{{ dictShare }}">
+                arrow_forward
+            </mat-icon>
+            <mat-progress-spinner *ngIf="loading" diameter="19" mode="indeterminate"></mat-progress-spinner>
+            <!-- AUTOCOMPLETE PANEL WITH OPTIONS -->
+            <mat-autocomplete #auto="matAutocomplete" class="my-share-auto-panel" [displayWith]="displayFn">
+              <mat-option *ngFor="let user of filteredUsers" [value]="user">
+                <img src="{{user.icon}}" class="profile_pic"/>
+                {{ user.label }}
+              </mat-option>
+            </mat-autocomplete>
+  
+        </mat-form-field>
+    </form>
+    
+    <div class="container-fluid" *ngIf="!isTim && (!coded && share.reshare)">
+        <div class="row">
+            <div class="col-xs-1 col-sm-2">
+                <mat-icon class="link"><i class="material-icons">link </i></mat-icon>
+            </div>
+            <div class="col-xs-10 col-sm-9">
+                <div class="lb-link"> {{dictCreateLink}} </div>
+            </div>
+            <div class="col-xs-1 col-sm-1 addicon" matTooltip="{{ dictCreateLink }}">
+                <mat-icon *ngIf="!loadingLink" class="add" (click)="insertShareLink($event)"> add </mat-icon>
+                <mat-progress-spinner *ngIf="loadingLink" diameter="19" mode="indeterminate"></mat-progress-spinner>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" *ngIf="isTim && (!coded && share.reshare || isTim) && isFolder">
+        <div class="row">
+            <div class="col-xs-1 col-sm-2">
+                <mat-icon class="link"><i class="material-icons"> insert_drive_file </i></mat-icon>
+            </div>
+            <div class="col-xs-10 col-sm-9">
+                <div class="lb-link"> {{dictReportSharing}} </div>
+            </div>
+            <div class="col-xs-1 col-sm-1 addicon" matTooltip="download">
+                <mat-icon class="add" *ngIf="!inProgress" (click)="reportDownload($event)"> file_download </mat-icon>
+                <mat-progress-spinner *ngIf="inProgress" diameter="19" mode="indeterminate"></mat-progress-spinner>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="isTim && FolderZero && isOwner" class="w-100 mt-2">
+        <div class="simple-btn" (click)="onProjExpirationClick()">
+            <div *ngIf="!setProjExp">{{dictSetProjExpiration}}</div>
+            <div *ngIf="setProjExp">{{dictRemoveProjExpiration}}</div>
+        </div>
+        <form *ngIf="setProjExp" [formGroup]="projExpirationForm">
+            <mat-form-field class="w-100">
+                <input matInput #ref [matDatepicker]="picker" formControlName="projExpDate" [min]="minDate" (dateChange)="setProjExpiration(ref.value)">
+                <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </form>
+    </div>
+
+    <!-- LINK AND USERS LIST TO WHOM I SHARED -->
+    <div class="table-container" *ngIf="share.reshare || isTim">
+        <table *ngIf="resharesList.length > 0" class="reshares-table">
+            <tr *ngFor="let item of resharesList">
+                <td> 
+                    <img *ngIf="item.share_type === 0" src="{{item.profile_pic_url}}" class="profile_pic"/>
+                    <mat-icon *ngIf="item.share_type === 3" class="table-icon"> link </mat-icon>
+                </td>
+                <td [ngClass]="{'expired': (isTim && item.flagExp)}">
+                    <span *ngIf="item.share_type === 0"> {{item.share_with_displayname}} </span>
+                    <span *ngIf="item.share_type === 3 && (item.note === '' || item.note === null)"> {{dictSharedLink}} </span>
+                    <span *ngIf="item.share_type === 3 && (item.note !== '' && item.note !== null)"> {{item.note}} </span>
+                </td>
+                <td class="copy">
+                    <mat-icon *ngIf="item.share_type === 3" matTooltip="{{dictCopyLink}}" 
+                        class="table-icon-2" (click)="copyLink(item.url)">
+                            filter_none
+                    </mat-icon>
+                </td>
+                <td class="menu">
+                    <mat-icon class="more" (click)="toggleShareSetupMenu(item.id)"  matTooltip="{{ dictActions }}"> more_horiz </mat-icon>
+                    <app-share-setup-menu 
+                        *ngIf="item.showSetupMenu" 
+                        [selectedShare]="item"
+                        [folderZero] = "this.FolderZero"
+                        [isOwner] = "this.isOwner"
+                        [isTim] = "isTim"
+                        [expirationProject]="expirationDate"
+                        (reshares)="resharesEventHandler($event)">
+                    </app-share-setup-menu>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div *ngIf="!(resharesList.length > 0) && (share.reshare || isTim)" class="noShare">
+        <p>{{dictNoSharing}}</p>
+    </div>
+</div>

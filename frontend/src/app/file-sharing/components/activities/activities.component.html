@@ -1,0 +1,21 @@
+<div id="sidebarActivity" *ngIf="checknodata && !nodata">
+
+    <div class="saTitle">{{title}}</div>
+
+    <div class="saList">
+        <div class="saElement" *ngFor="let element of data">
+            <div class="saeIcon">
+                <mat-icon><i class="material-icons"> {{ element.icon }} </i></mat-icon>
+            </div>
+            <div class="saeInfo">
+                <div class="saeInfoHead"> {{ (!element.dictType)? element.type : element.dictType }} </div>
+                <div class="saeInfoFoot"> {{ element.allInfo }} </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="sidebarActivityEmpty" *ngIf="nodata">
+    <mat-icon><i class="material-icons"></i>flash_on</mat-icon>
+    <span>{{empty}}</span>
+</div>

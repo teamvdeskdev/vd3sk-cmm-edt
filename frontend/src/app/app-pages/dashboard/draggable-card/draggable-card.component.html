@@ -1,0 +1,172 @@
+<ng-container *ngIf="name == 'News'">
+    <div id="newsAndRemindersDragContainer" class="container-fluid">
+        <div class="row">
+            <div class="col-2">
+
+            </div>
+            <div class="col-8">
+                <div class="text-center title">{{languageService.dictionary.titleDraggableNewsArea}}</div>
+                <div class="text-center subtitle">{{languageService.dictionary.subtitleDraggableNewsArea}}</div>
+            </div>
+            <div class="col-2 text-right">
+                <mat-checkbox #newsCheck [labelPosition]="'before'" [checked]= "!newsIsEnabled" (change)="disableNewsArea(newsCheck)">
+                    {{languageService.dictionary.disableNewsArea}}
+                </mat-checkbox>
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col-2">
+                <i class="material-icons drag-card-icon">drag_indicator</i>
+            </div>
+            <div class="col-8 text-center">
+                <div class="row">
+                    <div class="col-4" [style.order]="orderNews">
+                        <div class="news-module valign-icon-text">
+                            <div class="module-title">{{languageService.dictionary.titleDraggableCard}}</div>
+                            <i class="material-icons news-and-reminders-icon">local_fire_department</i>
+                            <div class="module-text">{{languageService.dictionary.newsTitle}}</div>
+                            <i class="material-icons more-btn">more_vert</i>
+                        </div>
+                    </div>
+                    <div class="col-4 vertical-align-col" [style.order]="1">
+                        <div class="swap-button" (click)="swapNewsReminders()">
+                            <i class="material-icons">swap_horiz</i>
+                        </div> 
+                        <div class="swap-button-text" (click)="swapNewsReminders()">{{languageService.dictionary.swapModule}}</div>
+                    </div>
+                    <div class="col-4" [style.order]="orderReminders">
+                        <div class="reminders-module valign-icon-text">
+                            <div class="module-title">{{languageService.dictionary.titleDraggableCard}}</div>
+                            <i class="material-icons news-and-reminders-icon">post_add</i>
+                            <div class="module-text">{{languageService.dictionary.remindersTitle}}</div>
+                            <i class="material-icons more-btn">more_vert</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2 text-right">
+                <i class="material-icons drag-card-icon">drag_indicator</i>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="name == 'VMeet'">
+    <div class="text-center title">{{languageService.dictionary.titleDraggableCard}}</div>
+    <div class="text-center subtitle">{{languageService.dictionary.subtitleDraggableCard}}</div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-2">
+                    <i class="material-icons drag-card-icon">drag_indicator</i>
+                </div>
+                <div class="col-8 text-center">
+                    <i class="material-icons valign-icon-text module-icon">videocam</i>                    
+                    <span class="message">{{languageService.dictionary.dragMessageVmeet}}</span>
+                    <img class="drag-card-logo-img" src="assets/loghi_apps_main/png/vmeet-principale.png">
+                </div>
+                <div class="col-2 text-right">
+                    <i class="material-icons drag-card-icon">drag_indicator</i>
+                </div>
+            </div>
+        </div>
+</ng-container>
+
+<ng-container *ngIf="name == 'VPec'">
+    <div class="text-center title">{{languageService.dictionary.titleDraggableCard}}</div>
+    <div class="text-center subtitle">{{languageService.dictionary.subtitleDraggableCard}}</div>
+        <div class="text-center container-fluid">
+            <div class="row">
+                <div class="col-2">
+                    <i class="material-icons drag-card-icon">drag_indicator</i>
+                </div>
+                <div class="col-8">
+                    <i class="material-icons valign-icon-text module-icon">mail</i>                    
+                    <span class="message">{{languageService.dictionary.dragMessageVpec}}</span>
+                    <img class="drag-card-logo-img" src="assets/loghi_apps_main/png/vpec-principale.png">
+                </div>
+                <div class="col-2 text-right">
+                    <i class="material-icons drag-card-icon">drag_indicator</i>
+                </div>
+            </div>
+        </div>
+</ng-container>
+
+<ng-container *ngIf="name == 'VCal'">
+    <div class="text-center title">{{languageService.dictionary.titleDraggableCard}}</div>
+    <div class="text-center subtitle">{{languageService.dictionary.subtitleDraggableCard}}</div>
+        <div class="text-center container-fluid">
+            <div class="row">
+                <div class="col-2">
+                    <i class="material-icons drag-card-icon">drag_indicator</i>
+                </div>
+                <div class="col-8">
+                    <i class="material-icons valign-icon-text module-icon">calendar_today</i>                    
+                    <span class="message">{{languageService.dictionary.dragMessageVcal}}</span>
+                    <img class="drag-card-logo-img" src="assets/loghi_apps_main/png/vcal-principale.png">
+                </div>
+                <div class="col-2 text-right">
+                    <i class="material-icons drag-card-icon">drag_indicator</i>
+                </div>
+            </div>
+        </div>
+</ng-container>
+
+<ng-container *ngIf="name == 'VShare'">
+    <div class="text-center title">{{languageService.dictionary.titleDraggableCard}}</div>
+    <div class="text-center subtitle">{{languageService.dictionary.subtitleDraggableCard}}</div>
+        <div class="text-center container-fluid">
+            <div class="row">
+                <div class="col-2">
+                    <i class="material-icons drag-card-icon">drag_indicator</i>
+                </div>
+                <div class="col-8">
+                    <i class="material-icons valign-icon-text module-icon">star_rate</i>                    
+                    <span class="message">{{languageService.dictionary.dragMessageVshare}}</span>
+                    <img class="drag-card-logo-img" src="assets/loghi_apps_main/png/vshare-principale.png">
+                </div>
+                <div class="col-2 text-right">
+                    <i class="material-icons drag-card-icon">drag_indicator</i>
+                </div>
+            </div>
+        </div>
+</ng-container>
+
+<ng-container *ngIf="name == 'VCanvas'">
+    <div class="text-center title">{{languageService.dictionary.titleDraggableCard}}</div>
+    <div class="text-center subtitle">{{languageService.dictionary.subtitleDraggableCard}}</div>
+        <div class="text-center container-fluid">
+            <div class="row">
+                <div class="col-2">
+                    <i class="material-icons drag-card-icon">drag_indicator</i>
+                </div>
+                <div class="col-8">
+                    <i class="material-icons valign-icon-text module-icon">view_module</i>                    
+                    <span class="message">{{languageService.dictionary.dragMessageVcanvas}}</span>
+                    <img class="drag-card-logo-img" src="assets/loghi_apps_main/png/vcanvas-principale.png">
+                </div>
+                <div class="col-2 text-right">
+                    <i class="material-icons drag-card-icon">drag_indicator</i>
+                </div>
+            </div>
+        </div>
+</ng-container>
+
+<ng-container *ngIf="name == 'VFlow'">
+    <div class="text-center title">{{languageService.dictionary.titleDraggableCard}}</div>
+    <div class="text-center subtitle">{{languageService.dictionary.subtitleDraggableCard}}</div>
+        <div class="text-center container-fluid">
+            <div class="row">
+                <div class="col-2">
+                    <i class="material-icons drag-card-icon">drag_indicator</i>
+                </div>
+                <div class="col-8">
+                    <i class="material-icons valign-icon-text module-icon">connect_without_contact</i>                    
+                    <span class="message">{{languageService.dictionary.dragMessageVflow}}</span>
+                    <img class="drag-card-logo-img" src="assets/loghi_apps_main/png/vflow-principale.png">
+                </div>
+                <div class="col-2 text-right">
+                    <i class="material-icons drag-card-icon">drag_indicator</i>
+                </div>
+            </div>
+        </div>
+</ng-container>

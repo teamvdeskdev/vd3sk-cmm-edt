@@ -1,0 +1,41 @@
+#nodata{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: 20%;
+    justify-content: center;
+    align-items: center;
+
+    mat-icon{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 45%;
+
+        i{
+            font-size: 54px;
+            color: #BBBBBB;
+        }
+    }
+
+    .nodatatitle{
+        height: 15%;
+        color: #444444;
+        font-family: Roboto;
+        font-size: 14px;
+        letter-spacing: -0.03px;
+        line-height: 16px;
+        text-align: center;
+    }
+
+    .nodatadescription{
+        height: 40%;
+        color: #444444;
+        font-family: Roboto;
+        font-size: 12px;
+        letter-spacing: -0.03px;
+        line-height: 13px;
+        text-align: center;
+    }
+}

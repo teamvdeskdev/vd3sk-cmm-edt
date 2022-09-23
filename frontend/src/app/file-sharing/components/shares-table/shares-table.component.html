@@ -1,0 +1,171 @@
+<div class="tableDiv" appDropFile>
+    <img *ngIf="isLoading" class="loader" src="/assets/img/loader.gif">
+
+    <!-- <input #uploader hidden multiple type="file" (change)="uploadFile($event)"/> -->
+    <input #uploader hidden multiple type="file"/>
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef class="tablecheckbox head">
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [aria-label]="checkboxLabel()"
+                        color="primary">
+          </mat-checkbox>
+        </th>
+        <td class="fileSharing-checkbox tablecheckbox" mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="onSelectRow($event, row)"
+                        [checked]="selection.isSelected(row)"
+                        [aria-label]="checkboxLabel(row)"
+                        color="primary">
+          </mat-checkbox><!--"$event ? selection.toggle(row) : null"-->
+        </td>
+      </ng-container>
+  
+      <!-- ID Column -->
+      <!-- Usually this column is always hidden -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="columnTableID"></th>
+        <td mat-cell *matCellDef="let element" class="columnTableID"> {{element.id}} </td>
+      </ng-container>
+  
+      <!-- IMAGE Column -->
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell class="table-col-img" *matCellDef="let element" (click)="onNameClick(element)">
+          <mat-icon *ngIf="element.classimage!='zip'"><i class="material-icons" [ngClass]="[element.classimage]">{{element.image}}</i></mat-icon>
+          <mat-icon *ngIf="element.classimage=='zip'"><img [ngClass]="[element.classimage]" src="assets/img/icons/zip.svg"></mat-icon>
+        </td>
+      </ng-container>
+  
+      <!-- NAME Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef (click)="sortEverything('name')" class="tablename head"> {{ dictLabelName }} </th>
+        <td mat-cell *matCellDef="let element" class="nameSingleFile">
+          <div class="divNameSingleFile" (click)="onNameClick(element)">
+            <span class="spanNameFile">{{ element.name }}</span>
+            <span class="spanExtensionFile">{{ element.extension }}</span>
+            <mat-icon *ngIf="element.favorite" class="tableiconname"><i class="material-icons star"> star</i></mat-icon>
+            <mat-icon *ngIf="element.coded" class="tableiconname"><i class="material-icons lock"> lock</i></mat-icon>
+          </div>
+        </td>
+      </ng-container>
+  
+      <!-- SHARED Column -->
+      <ng-container matColumnDef="share">
+        <th mat-header-cell *matHeaderCellDef class="tableshare head"> {{dictLabelShared}} </th>
+        <td mat-cell class="table-col-share" *matCellDef="let element" (click)="openShare(element.id)">
+          <div class="insideDivShare">
+            <!-- FIRST ICON -->
+            <div>
+              <mat-icon *ngIf="element.shareWith.length == 0">
+                <i class="material-icons share"> share </i>
+              </mat-icon>
+              <mat-icon *ngIf="element.shareWith.length > 1 || (element.shareWith.length === 1 && element.shareWith[0] !== user)">
+                <i class="material-icons share"> share </i>
+              </mat-icon>
+              <mat-icon *ngIf="element.shareWith.length === 1 && element.shareWith[0] === user"
+                        matTooltip = "{{dictShare}}" 
+                        matTooltipPosition="above" 
+                        matTooltipClass="sharetooltip">
+                <i class="material-icons share inactive"> share </i>
+              </mat-icon>
+            </div>
+            <!-- SECOND ICON -->
+            <div *ngIf="!element.byOthers && element.shareWith.length === 1 && element.url === undefined">
+              <mat-icon *ngIf="element.shareWith[0] !== null"
+                        matTooltip = "{{dictSharedWith}} {{element.shareWith[0].toUpperCase()}}" 
+                        matTooltipPosition="above" 
+                        matTooltipClass="sharetooltip">
+                  <img src="{{element.profile_pic_url}}" class="lens profile_pic" *ngIf="element.shareWith[0] !== ''"/>
+              </mat-icon>
+            </div>
+            <div *ngIf="!element.byOthers && element.shareWith.length === 1 && element.url !== undefined">
+              <mat-icon *ngIf="element.shareWith[0] !== null"
+                        matTooltip = "{{dictSharedByLinkAndWith}} {{element.shareWith[0].toUpperCase()}}" 
+                        matTooltipPosition="above" 
+                        matTooltipClass="sharetooltip">
+                  <i class="material-icons link">  link </i>
+              </mat-icon>
+              <mat-icon *ngIf="element.shareWith[0] !== null"
+                        matTooltip = "{{dictSharedByLinkAndWith}} {{element.shareWith[0].toUpperCase()}}" 
+                        matTooltipPosition="above" 
+                        matTooltipClass="sharetooltip">
+                  <img src="{{element.profile_pic_url}}" class="lens overlap profile_pic" *ngIf="element.shareWith[0] !== ''"/>
+              </mat-icon>
+            </div>
+            <div *ngIf="!element.byOthers && element.shareWith.length > 1 && element.url === undefined">
+              <mat-icon *ngIf="element.shareWith[0] !== null && (element.shareWith.length - 1) > 1"
+                        matTooltip = "{{dictSharedWith}} {{element.shareWith[0].toUpperCase()}} {{dictAnd}} {{element.shareWith.length - 1}} {{dictOtherPeople}}" 
+                        matTooltipPosition="above" 
+                        matTooltipClass="sharetooltip">
+                      <!--matBadge="+{{element.shareWith.length - 1}}"-->
+                  <img src="{{element.profile_pic_url}}" class="lens profile_pic" *ngIf="element.shareWith[0] !== ''"/>
+              </mat-icon>
+              <mat-icon *ngIf="element.shareWith[0] !== null && (element.shareWith.length - 1) === 1"
+                        matTooltip = "{{dictSharedWith}} {{element.shareWith[0].toUpperCase()}} {{dictAnd}} {{element.shareWith.length - 1}} {{dictOtherPerson}}" 
+                        matTooltipPosition="above" 
+                        matTooltipClass="sharetooltip">
+                        <!--matBadge="+{{element.shareWith.length - 1}}"-->
+                  <img src="{{element.profile_pic_url}}" class="lens profile_pic" *ngIf="element.shareWith[0] !== ''"/>
+              </mat-icon>
+            </div>
+            <div *ngIf="!element.byOthers && element.shareWith.length > 1 && element.url !== undefined">
+              <mat-icon matTooltip = "{{dictSharedByLinkAndWith}} {{element.shareWith.length}} {{dictPeople}}" 
+                        matTooltipPosition="above" 
+                        matTooltipClass="sharetooltip">
+                  <i class="material-icons link" >  link </i>
+              </mat-icon>
+              <mat-icon matTooltip = "{{dictSharedByLinkAndWith}} {{element.shareWith.length}} {{dictPeople}}" 
+                        matTooltipPosition="above" 
+                        matTooltipClass="sharetooltip"
+                        class="over">
+                        <!--matBadge="+{{element.shareWith.length}}"-->  
+                  <img src="{{element.profile_pic_url}}" class="lens overlap profile_pic" *ngIf="element.shareWith[0] !== ''"/>
+              </mat-icon>
+            </div>
+            <div *ngIf="!element.byOthers && element.url !== undefined && element.shareWith.length == 0">
+              <mat-icon matTooltip = "{{dictSharedByLink}}" 
+                        matTooltipPosition="above" 
+                        matTooltipClass="sharetooltip">
+                  <i class="material-icons link" *ngIf="element.url !== undefined">  link </i>
+              </mat-icon>
+            </div>
+            <mat-icon *ngIf="element.byOthers"
+                      matTooltip = "{{dictSharedBy}} {{element.owner.toUpperCase()}}" 
+                      matTooltipPosition="above" 
+                      matTooltipClass="sharetooltip">
+                <img src="{{element.profile_pic_url}}" class="lens profile_pic"/>
+            </mat-icon>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- SHARING TIME Column -->
+      <ng-container matColumnDef="dateFunc">
+        <th mat-header-cell *matHeaderCellDef (click)="sortEverything('date')" class="tableupdate head"> {{dictLabelSharingTime}} </th>
+        <td mat-cell *matCellDef="let element" class="table-col-time tableupdate">
+          <span matTooltip = "{{element.dateReal}}" matTooltipPosition="after" matTooltipClass="datetooltip">{{element.dateFunc}}</span>
+        </td>
+      </ng-container>
+
+      <!-- SEND DATA SIDEBAR COLUMN -->
+      <ng-container matColumnDef="senddetails">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element" class="senddetails" (click)="receiveIdDetails(element.id)">
+          <mat-icon><i class="material-icons">chevron_right</i></mat-icon>
+        </td>
+      </ng-container>
+  
+      <!-- TABLE FOOTER -->
+      <ng-container matColumnDef="getAllContent">
+        <td mat-footer-cell *matFooterCellDef colspan="10" class="tablefoot">{{ getAllContent }}</td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="sharesDisplayedColumns; sticky:true"></tr>
+      <tr mat-row *matRowDef="let row; columns: sharesDisplayedColumns;" [hidden]="row.hide"></tr>
+      <tr mat-footer-row *matFooterRowDef="['getAllContent']"></tr>
+    </table>
+</div>

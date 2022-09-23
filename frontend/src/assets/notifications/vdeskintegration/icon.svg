@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="81px" height="92px" viewBox="0 0 81 92" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>wizard-vConnect</title>
+    <defs>
+        <linearGradient x1="0.105882353%" y1="50%" x2="99.9875%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#0072BF" offset="0%"></stop>
+            <stop stop-color="#00AA9D" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="wizard-vConnect" fill-rule="nonzero">
+            <polygon id="Path" fill="#00396A" points="10.04 28.75 27.75 28.75 24.53 17.25 6.36 17.25"></polygon>
+            <polygon id="Path" fill="#00396A" points="15.79 46 33.04 46 29.59 34.5 12.11 34.5"></polygon>
+            <polygon id="Path" fill="#00396A" points="22.69 11.5 19.24 0 0.61 0 4.52 11.5"></polygon>
+            <polygon id="Path" fill="url(#linearGradient-1)" points="61.56 0 42.24 64.63 40.4 73.14 38.56 64.63 34.65 51.75 17.63 51.75 30.97 92 40.4 92 40.4 92 49.83 92 80.19 0"></polygon>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,250 @@
+<div *ngIf="isCrearable" class="tableDiv" appDropFile>
+
+  <ngx-spinner *ngIf="isLoading"
+        bdColor = "rgba(0,0,0,0)"
+        size = "default"
+        color = "#00B9B3"
+        type = "triangle-skew-spin"
+        [fullScreen] = "false" >
+    </ngx-spinner>
+
+  <input #uploader hidden multiple type="file" (change)="componentUploadFile($event)"/>
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef class="tablecheckbox head">
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [aria-label]="checkboxLabel()"
+                      color="primary">
+        </mat-checkbox>
+      </th>
+      <td class="fileSharing-checkbox tablecheckbox" mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="onSelectRow($event, row)"
+                      [checked]="selection.isSelected(row)"
+                      [aria-label]="checkboxLabel(row)"
+                      color="primary">
+        </mat-checkbox><!--"$event ? selection.toggle(row) : null"-->
+      </td>
+    </ng-container>
+
+    <!-- ID Column -->
+    <!-- Usually this column is always hidden -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="columnTableID"></th>
+      <td mat-cell *matCellDef="let element" class="columnTableID"> {{element.id}} </td>
+    </ng-container>
+
+    <!-- IMAGE Column -->
+    <ng-container matColumnDef="image">
+      <th mat-header-cell *matHeaderCellDef class="tableimage head"></th>
+      <td class="fileSharing-icon tableimage" mat-cell *matCellDef="let element" (click)="onNameClick(element)">
+        <mat-spinner *ngIf="element.isCoding" class="tablespinner" [diameter]="24"></mat-spinner>
+        <mat-icon class="tableimage" *ngIf="!element.isCoding && element.classimage!='zip'">
+          <i class="material-icons" [ngClass]="[element.classimage]">{{element.image}}</i>
+        </mat-icon>
+        <mat-icon class="tableimage" *ngIf="!element.isCoding && element.classimage=='zip'">
+          <img [ngClass]="[element.classimage]" src="assets/img/icons/zip.svg">
+        </mat-icon>
+      </td>
+    </ng-container>
+
+    <!-- NAME Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef class="tablename head" (click)="sortEverything('name')"> {{ name }} </th>
+      <td mat-cell *matCellDef="let element" class="nameSingleFile tablename">
+        <div class="divNameSingleFile" (click)="onNameClick(element)">
+          <span class="spanNameFile">{{ element.name }}</span>
+          <span class="spanExtensionFile">{{ element.extension }}</span>
+          <mat-icon *ngIf="element.favorite" class="tableiconname"><i class="material-icons star"> star</i></mat-icon>
+          <mat-icon *ngIf="element.coded" class="tableiconname"><i class="material-icons lock"> lock</i></mat-icon>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- SHARED Column -->
+    <ng-container matColumnDef="share">
+      <th mat-header-cell *matHeaderCellDef class="tableshare head"> {{dictLabelShared}} </th>
+      <td mat-cell class="table-col-share tableshare" *matCellDef="let element" (click)="openShare(element.id)">
+        <div class="insideDivShare">
+          <div>
+            <mat-icon *ngIf="element.shareTypes && element.shareTypes.length > 0">
+              <i class="material-icons share"> share </i>
+            </mat-icon>
+            <mat-icon *ngIf="!element.shareTypes || element.shareTypes.length === 0"
+                      matTooltip = "SHARE"
+                      matTooltipPosition="above"
+                      matTooltipClass="sharetooltip">
+              <i class="material-icons share inactive"> share </i>
+            </mat-icon>
+          </div>
+          <!-- SECOND ICON -->
+          <mat-icon *ngIf="element.owner !== undefined && element.owner !== user"
+                      matTooltip = "SHARED BY {{element.owner.toUpperCase()}}"
+                      matTooltipPosition="above"
+                      matTooltipClass="sharetooltip">
+              <img src="{{element.profile_pic_url}}" class="profile_pic"/>
+          </mat-icon>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- FILE WEIGHT Column -->
+    <ng-container matColumnDef="weight">
+      <th mat-header-cell *matHeaderCellDef class="tableweight head" (click)="sortEverything('size')"> {{ fileweight }} </th>
+      <td mat-cell *matCellDef="let element" class="tableweight"> {{element.weight}} </td>
+    </ng-container>
+
+    <!-- LAST UPDATE Column -->
+    <ng-container matColumnDef="dateFunc">
+      <th mat-header-cell *matHeaderCellDef class="tableupdate head" (click)="sortEverything('date')"> {{ lastupdate }} </th>
+      <td mat-cell *matCellDef="let element" class="tableupdate">
+        <span matTooltip = "{{element.dateReal}}" matTooltipPosition="after" matTooltipClass="datetooltip">{{element.dateFunc}}</span>
+      </td>
+    </ng-container>
+
+    <!-- SEND DATA SIDEBAR COLUMN -->
+    <ng-container matColumnDef="senddetails">
+      <th mat-header-cell *matHeaderCellDef class="tableaction head"></th>
+      <td mat-cell *matCellDef="let element" class="senddetails tableaction" (click)="receiveIdDetails(element)">
+        <mat-icon *ngIf="element.image!='storage'"><i class="material-icons">chevron_right</i></mat-icon>
+      </td>
+    </ng-container>
+
+    <!-- TABLE FOOTER -->
+    <ng-container matColumnDef="getAllContent">
+      <td mat-footer-cell *matFooterCellDef colspan="10" class="tablefoot">{{ getAllContent }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'selectedrow': row.isRow}" [hidden]="row.hide"></tr>
+    <tr mat-footer-row *matFooterRowDef="['getAllContent']"></tr>
+  </table>
+</div>
+
+<div *ngIf="!isCrearable" class="tableDiv">
+  <ngx-spinner *ngIf="isLoading"
+        bdColor = "rgba(0,0,0,0)"
+        size = "default"
+        color = "#00B9B3"
+        type = "triangle-skew-spin"
+        [fullScreen] = "false" >
+    </ngx-spinner>
+
+  <input #uploader hidden multiple type="file" (change)="componentUploadFile($event)"/>
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef class="tablecheckbox head">
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [aria-label]="checkboxLabel()"
+                      color="primary">
+        </mat-checkbox>
+      </th>
+      <td class="fileSharing-checkbox tablecheckbox" mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="onSelectRow($event, row)"
+                      [checked]="selection.isSelected(row)"
+                      [aria-label]="checkboxLabel(row)"
+                      color="primary">
+        </mat-checkbox><!--"$event ? selection.toggle(row) : null"-->
+      </td>
+    </ng-container>
+
+    <!-- ID Column -->
+    <!-- Usually this column is always hidden -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="columnTableID"></th>
+      <td mat-cell *matCellDef="let element" class="columnTableID"> {{element.id}} </td>
+    </ng-container>
+
+    <!-- IMAGE Column -->
+    <ng-container matColumnDef="image">
+      <th mat-header-cell *matHeaderCellDef class="tableimage head"></th>
+      <td class="fileSharing-icon tableimage" mat-cell *matCellDef="let element" (click)="onNameClick(element)">
+        <mat-spinner *ngIf="element.isCoding" class="tablespinner" [diameter]="24"></mat-spinner>
+        <mat-icon class="tableimage" *ngIf="!element.isCoding && element.classimage!='zip'">
+          <i class="material-icons" [ngClass]="[element.classimage]">{{element.image}}</i>
+        </mat-icon>
+        <mat-icon class="tableimage" *ngIf="!element.isCoding && element.classimage=='zip'">
+          <img [ngClass]="[element.classimage]" src="assets/img/icons/zip.svg">
+        </mat-icon>
+      </td>
+    </ng-container>
+
+    <!-- NAME Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tablename head"> {{ name }} </th>
+      <td mat-cell *matCellDef="let element" class="nameSingleFile tablename">
+        <div class="divNameSingleFile" (click)="onNameClick(element)">
+          <span class="spanNameFile">{{ element.name }}</span>
+          <span class="spanExtensionFile">{{ element.extension }}</span>
+          <mat-icon *ngIf="element.favorite" class="tableiconname"><i class="material-icons star"> star</i></mat-icon>
+          <mat-icon *ngIf="element.coded" class="tableiconname"><i class="material-icons lock"> lock</i></mat-icon>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- SHARED Column -->
+    <ng-container matColumnDef="share">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableshare head"> {{dictLabelShared}} </th>
+      <td mat-cell class="table-col-share tableshare" *matCellDef="let element" (click)="openShare(element.id)">
+        <div class="insideDivShare">
+          <div>
+            <mat-icon *ngIf="element.shareTypes && element.shareTypes.length > 0">
+              <i class="material-icons share"> share </i>
+            </mat-icon>
+            <mat-icon *ngIf="!element.shareTypes || element.shareTypes.length === 0"
+                      matTooltip = "SHARE"
+                      matTooltipPosition="above"
+                      matTooltipClass="sharetooltip">
+              <i class="material-icons share inactive"> share </i>
+            </mat-icon>
+          </div>
+          <!-- SECOND ICON -->
+          <mat-icon *ngIf="element.owner !== undefined && element.owner !== user"
+                      matTooltip = "SHARED BY {{element.owner.toUpperCase()}}"
+                      matTooltipPosition="above"
+                      matTooltipClass="sharetooltip">
+              <img src="{{element.profile_pic_url}}" class="profile_pic"/>
+          </mat-icon>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- FILE WEIGHT Column -->
+    <ng-container matColumnDef="weight">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableweight head"> {{ fileweight }} </th>
+      <td mat-cell *matCellDef="let element" class="tableweight"> {{element.weight}} </td>
+    </ng-container>
+
+    <!-- LAST UPDATE Column -->
+    <ng-container matColumnDef="dateFunc">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableupdate head"> {{ lastupdate }} </th>
+      <td mat-cell *matCellDef="let element" class="tableupdate">
+        <span matTooltip = "{{element.dateReal}}" matTooltipPosition="after" matTooltipClass="datetooltip">{{element.dateFunc}}</span>
+      </td>
+    </ng-container>
+
+    <!-- SEND DATA SIDEBAR COLUMN -->
+    <ng-container matColumnDef="senddetails">
+      <th mat-header-cell *matHeaderCellDef class="tableaction head"></th>
+      <td mat-cell *matCellDef="let element" class="senddetails tableaction" (click)="receiveIdDetails(element)">
+        <mat-icon *ngIf="element.image!='storage'"><i class="material-icons">chevron_right</i></mat-icon>
+      </td>
+    </ng-container>
+
+    <!-- TABLE FOOTER -->
+    <ng-container matColumnDef="getAllContent">
+      <td mat-footer-cell *matFooterCellDef colspan="10" class="tablefoot">{{ getAllContent }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'selectedrow': row.isRow}" [hidden]="row.hide"></tr>
+    <tr mat-footer-row *matFooterRowDef="['getAllContent']"></tr>
+  </table>
+</div>

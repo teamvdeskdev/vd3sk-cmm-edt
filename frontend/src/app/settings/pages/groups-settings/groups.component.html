@@ -1,0 +1,38 @@
+<div class="infinite-scroll-container tiny-scrollbar"
+      infiniteScroll
+      [scrollWindow]="false"
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50">
+
+    <div id="settingsGroups">
+
+        <ngx-spinner *ngIf="!isdata"
+            bdColor = "rgba(0,0,0,0)"
+            size = "default"
+            color = "#00B9B3"
+            type = "triangle-skew-spin"
+            zIndex = '1'
+            [fullScreen] = "false" >
+        </ngx-spinner>
+
+        <div class="groupsHeader">
+            <div class="title"> {{ langService.dictionary.group }} </div>
+            <div class="info">
+                <span> {{ langService.dictionary.group_subtitle }} </span>
+                <button *ngIf="!toggleButton" mat-flat-button color="primary" (click)="toggleAddGroup()"> {{ langService.dictionary.new_group }} </button>
+
+                <div *ngIf="toggleButton" class="infoForm">
+                    <mat-icon class="iconReturn" (click)="toggleAddGroup()"><i class="material-icons">groups</i></mat-icon>
+                    <input matInput placeholder="{{langService.dictionary.group_name}}" autocomplete="nope" #groupname>
+                    <mat-icon class="iconSend" matSuffix (click)="addGroup(groupname.value)"><i class="material-icons"> arrow_forward </i></mat-icon>
+                </div>
+            </div>
+        </div>
+        <app-groupstable *ngIf="data"
+            [data]="groupsList"
+            (deletegroup)="deleteGroup($event)">
+        </app-groupstable>
+
+    </div>
+
+</div>

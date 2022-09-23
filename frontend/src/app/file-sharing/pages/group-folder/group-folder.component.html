@@ -1,0 +1,24 @@
+<div id="group-folder">
+    <ngx-spinner *ngIf="!done"
+        bdColor = "rgba(0,0,0,0)"
+        size = "default"
+        color = "#00B9B3"
+        type = "triangle-skew-spin"
+        [fullScreen] = "false" >
+    </ngx-spinner>
+
+    <ng-container>
+        <div id="groupfoldermain">
+            <app-groupfolder-table *ngIf="done"
+                [noData]="noData"
+                [pageFavorite]="pageFavorite"
+                [getpage]="getpage"
+                [dataValue]="dataValue"
+                [blockActions]="blockActions"
+                [permissions]="permissions">
+            </app-groupfolder-table>
+        </div>
+        <app-groupfolder-sidebar [permissions]="permissions">
+        </app-groupfolder-sidebar>
+    </ng-container>
+</div>

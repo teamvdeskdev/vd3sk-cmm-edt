@@ -1,0 +1,11 @@
+<main class="main-container">
+        <header *ngIf="authService.isLoggedIn && !external && !openoffice && showHeader" class="headerMain"
+            [ngClass]="{'headercobranding': globalVar.custom_FE === 'COBRANDING' || globalVar.custom_FE === 'WHITELABEL'}">
+            <app-header *ngIf="authService.isLoggedIn" (openChat)="openCloseChat($event)"></app-header>
+        </header>
+
+        <router-outlet></router-outlet>
+                
+        <div class="clearfix"></div>
+
+</main>

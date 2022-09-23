@@ -1,0 +1,57 @@
+<div *ngIf="isDirectAppLoading" id="spinner-login-backup-code">
+    <div class="container-outer">
+        <div class="container-inner">  
+            <ngx-spinner bdColor="rgba(0,0,0,0)" size="default" 
+                color="#00B9B3" type="triangle-skew-spin" [fullScreen]="false">
+            </ngx-spinner>
+        </div>
+    </div>
+</div>
+
+<div id="login-backup-code">
+    <div class="container-outer">
+        <div class="container-inner">
+            <div class="login-card">
+                <div class="card-title">
+                    <img class="logo" src="assets/loghi_apps_main/png/vdesk-principale.png">
+                    <div class="label"> Digital workplace </div>
+
+                    <div class="back" (click)="goBackToLogin()">
+                        <span class="material-icons arrow">arrow_back</span>
+                        {{langService.dictionary.back_to_login}}
+                    </div>
+
+                    <div class="label2"> {{langService.dictionary.label_verify_identity}} </div>
+
+                    <div class="label3"> {{langService.dictionary.label_enter_backup_code}} </div>
+                </div>
+                <div>
+                    <form [formGroup]="loginBackupCodeForm" (ngSubmit)="loginBackupCodeUser()" class="login-form">
+                        <mat-form-field [ngClass]="{ 'has-error': isSubmitted && challenge.errors }">
+                            <input matInput formControlName="challenge" name="challenge" placeholder="{{langService.dictionary.ph_backup_code}}" required>
+                        </mat-form-field>
+
+                        <div *ngIf="isSubmitted && challenge.invalid" class="error-help">
+                            <div *ngIf="challenge.errors.required">{{langService.dictionary.error_code}}</div>
+                        </div>
+
+                        <button mat-raised-button type="submit" class="btn login">
+                            <!-- IN CASE OF LOGIN -->
+                            <span *ngIf="!inProgress">{{langService.dictionary.bt_login}}</span>
+                            <span *ngIf="inProgress">
+                                {{langService.dictionary.bt_login_progress}} &nbsp; 
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            </span>
+                        </button>
+                    </form>
+
+                    <!--
+                    <div class="mt-7 error-help" *ngIf="showInvalidLogin">
+                        {{langService.dictionary.error_invalid_login_totp}}
+                    </div>
+                     -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

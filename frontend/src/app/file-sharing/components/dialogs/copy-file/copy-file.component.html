@@ -1,0 +1,98 @@
+<div id="dialogCopyFileFolder">
+    <ngx-spinner *ngIf="!isLoading"
+        bdColor = "rgba(0,0,0,0)"
+        size = "default"
+        color = "#00B9B3"
+        type = "triangle-skew-spin"
+        [fullScreen] = "false" >
+    </ngx-spinner>
+
+    <div class="title">
+        <span> {{ destinationString }} </span>
+        <mat-icon (click)="onNoClick()"><i class="material-icons">close</i></mat-icon>
+    </div>
+
+    <div class="containercopymove">
+        <app-path *ngIf="isLoading" [class]="class" [movepath]="movepath" (change)="navigateFolder($event)"></app-path>
+        <div class="noData" *ngIf="noData && isLoading">
+            <span> {{ nofolder }} </span>
+        </div>
+        <div class="tableDiv" appDropFile *ngIf="!noData && isLoading">
+            <!--<img *ngIf="isLoading" class="loader" src="/assets/img/loader.gif">-->
+            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+          
+              <!-- ID Column -->
+              <!-- Usually this column is always hidden -->
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="columnTableID"></th>
+                <td mat-cell *matCellDef="let element" class="columnTableID"> {{element.id}} </td>
+              </ng-container>
+          
+              <!-- IMAGE Column -->
+              <ng-container matColumnDef="image">
+                <th mat-header-cell *matHeaderCellDef class="tableimage head"></th>
+                <td class="fileSharing-icon tableimage" mat-cell *matCellDef="let element" (click)="navigateFolder(element.name)">
+                  <mat-icon><i class="material-icons">{{element.image}}</i></mat-icon>
+                </td>
+              </ng-container>
+          
+              <!-- NAME Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef (click)="sortEverything('name')" class="tablename head"> {{ nameString }} </th>
+                <td mat-cell *matCellDef="let element" class="nameSingleFile tablename">
+                  <div *ngIf="!element.rename" class="divNameSingleFile" (click)="navigateFolder(element.name)">
+                    <span class="spanNameFile">{{ element.name }}</span>
+                    <span class="spanExtensionFile">{{ element.extension }}</span>
+                  </div>
+                </td>
+              </ng-container>
+          
+              <!-- FILE WEIGHT Column -->
+              <ng-container matColumnDef="weight">
+                <th mat-header-cell *matHeaderCellDef (click)="sortEverything('size')" class="tableweight head"> {{ fileweight }} </th>
+                <td mat-cell *matCellDef="let element" class="tableweight"> {{element.weight}} </td>
+              </ng-container>
+          
+              <!-- LAST UPDATE Column -->
+              <ng-container matColumnDef="dateFunc">
+                <th mat-header-cell *matHeaderCellDef (click)="sortEverything('update')" class="tableupdate head"> {{ lastupdate }} </th>
+                <td mat-cell *matCellDef="let element" class="tableupdate">{{element.dateFunc}}</td>
+              </ng-container>
+          
+              <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;" [hidden]="row.hide"></tr>
+            </table>
+        </div>
+    </div>
+    
+    <div class="buttons">
+        <div class="createNewFolder">
+            <div class="toggleNewFolder" *ngIf="!inputFolder" (click)="toggleInput()"><span> {{ createFolder }} </span></div>
+            <div class="input" *ngIf="inputFolder">
+                <mat-icon class="iconlabel" (click)="toggleInput()"><i class="material-icons"> folder </i></mat-icon>
+                    <input type="text"
+                        #valuenamefolder
+                        placeholder="{{folderName}}"
+                        class="input"
+                        (keydown.enter)="createNewFolder(valuenamefolder.value)">
+                    <mat-icon class="iconarrow" (click)="createNewFolder(valuenamefolder.value)">
+                      <i class="material-icons" [ngClass]="{'words': valuenamefolder.value.length>0}"> arrow_forward </i>
+                    </mat-icon>
+            </div>
+        </div>
+
+        <div class="confirm" *ngIf="!hideMoveButton">
+            <div class="move" (click)="onConfirmClick('m')">
+                <span> {{move}}</span>
+            </div>
+            <div class="copy" (click)="onConfirmClick('c')">
+                <span> {{copy}} </span>
+            </div>
+        </div>
+        <div class="confirmTim" *ngIf="hideMoveButton">
+          <div class="copyTim" (click)="onConfirmClick('c')">
+              <span> {{copy}} </span>
+          </div>
+      </div>
+    </div>
+</div>

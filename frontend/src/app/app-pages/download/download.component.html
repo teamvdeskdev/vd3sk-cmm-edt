@@ -1,0 +1,71 @@
+<div id="download">
+    <ng-container>
+        <div *ngIf="!isLoadingPage" class="inner-header flex-container">
+          <div (click)="goBack()">
+            <mat-icon aria-hidden="false" class="back-icon">keyboard_arrow_left</mat-icon>
+            <span>{{langService.dictionary.back}}</span>
+          </div>
+        </div>
+    </ng-container>
+    <div class="download-container">
+        <div *ngIf="!isLoadingPage" class="download-container-inner">
+            <div class="here-message">
+              {{langService.dictionary.download_title}}
+            </div>
+
+            <!--OS Choose-->
+            <img *ngIf="this.os != 'MacOS'" class="logo"
+                 src="assets/img/icons/windows-logo.svg">
+            <img *ngIf="this.os == 'MacOS'" class="logo"
+                 src="assets/img/icons/apple-logo.svg">
+
+            <div class="select-message">
+              {{langService.dictionary.select_app}}
+            </div>
+
+            <div>
+                <mat-card class="app-card">
+                  <img mat-card-image src="assets/img/icons/vdesk-logo.svg"/>
+                  <mat-card-content> Dashboard </mat-card-content>
+                </mat-card>
+            </div>
+            <div>
+                <mat-card class="app-card-module" [ngClass]="{'app-card-module-disabled': false }">
+                  <mat-icon mat-card-image> drive_file_move </mat-icon>
+                  <mat-card-content> {{globalsVar.custom_FE !== 'WHITELABEL' ? 'vShare' : 'Share' }}</mat-card-content>
+                </mat-card>
+                <mat-card class="app-card-module" [ngClass]="{'app-card-module-disabled': true }">
+                  <mat-icon mat-card-image> email </mat-icon>
+                  <mat-card-content> {{globalsVar.custom_FE !== 'WHITELABEL' ? 'vPEC' : 'PEC' }} </mat-card-content>
+                </mat-card>
+                <mat-card class="app-card-module" [ngClass]="{'app-card-module-disabled': true }">
+                  <mat-icon mat-card-image> videocam </mat-icon>
+                  <mat-card-content> {{globalsVar.custom_FE !== 'WHITELABEL' ? 'vMeet' : 'Meet' }} </mat-card-content>
+                </mat-card>
+                <mat-card class="app-card-module" [ngClass]="{'app-card-module-disabled': true }">
+                  <mat-icon mat-card-image> connect_without_contact </mat-icon>
+                  <mat-card-content> {{globalsVar.custom_FE !== 'WHITELABEL' ? 'vFlow' : 'Flow' }} </mat-card-content>
+                </mat-card>
+                <mat-card class="app-card-module" [ngClass]="{'app-card-module-disabled': true }">
+                  <mat-icon mat-card-image> calendar_today </mat-icon>
+                  <mat-card-content> {{globalsVar.custom_FE !== 'WHITELABEL' ? 'vCal' : 'Cal' }} </mat-card-content>
+                </mat-card>
+                <mat-card class="app-card-module" [ngClass]="{'app-card-module-disabled': true }">
+                  <mat-icon mat-card-image> view_module </mat-icon>
+                  <mat-card-content> {{globalsVar.custom_FE !== 'WHITELABEL' ? 'vCanvas' : 'Canvas' }} </mat-card-content>
+                </mat-card>
+            </div>
+            <div (click)="download()" class="save primary-btn">{{langService.dictionary.download}}</div>
+
+        </div>
+
+        <ngx-spinner bdColor="rgba(0,0,0,0)"
+                     size="default"
+                     color="#00B9B3"
+                     type="triangle-skew-spin"
+                     [fullScreen]="false">
+        </ngx-spinner>
+    </div>
+
+</div>
+

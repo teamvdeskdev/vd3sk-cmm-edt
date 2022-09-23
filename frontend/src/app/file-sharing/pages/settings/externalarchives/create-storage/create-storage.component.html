@@ -1,0 +1,123 @@
+<!-- ON CREATE -->
+<div id="eaCreate">
+
+    <div class="inputs">
+        <div class="authentication">
+            <mat-form-field class="select">
+                <mat-label> {{ authenticate }} </mat-label>
+                <mat-select [(ngModel)]="mech">
+                  <mat-option *ngFor="let mechanism of storage.mechList" [value]="mechanism.identifier" (click)="getSelectedMechanism(mechanism)"> {{ mechanism.name }} </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <!-- SAMBA -->
+        <div class="configSamba" *ngIf="config == 1">
+            <div class="config">
+                <mat-form-field class="configInput">
+                    <mat-label> {{ hostString }} </mat-label>
+                    <input matInput placeholder="" autocomplete="nope" [(ngModel)]="hostcreate">
+                </mat-form-field>
+
+                <mat-form-field class="configInput">
+                    <mat-label> {{ shareString }} </mat-label>
+                    <input matInput placeholder="" autocomplete="nope" [(ngModel)]="sharecreate">
+                </mat-form-field>
+
+                <mat-form-field class="configInput">
+                    <mat-label> {{ subfolderString }} </mat-label>
+                    <input matInput placeholder="" autocomplete="nope" [(ngModel)]="subfoldercreate">
+                </mat-form-field>
+
+                <mat-form-field class="configInput">
+                    <mat-label> {{ domainString }} </mat-label>
+                    <input matInput placeholder="" autocomplete="nope" [(ngModel)]="domaincreate">
+                </mat-form-field>
+            </div>
+
+            <div class="userdata" *ngIf="showPassword">
+                <mat-form-field class="user">
+                    <mat-label> {{ userName }} </mat-label>
+                    <input matInput placeholder="Name" autocomplete="nope" [(ngModel)]="createUser">
+                </mat-form-field>
+
+                <mat-form-field class="password">
+                    <mat-label> {{ password }} </mat-label>
+                    <input type="password" matInput placeholder="" autocomplete="nope" [(ngModel)]="createPass">
+                </mat-form-field>
+            </div>
+
+            <div class="configCheckbox">
+                <mat-checkbox [(ngModel)]="showHidden" class="singlecheck"> {{ showHiddenString }} </mat-checkbox>
+            </div>
+        </div>
+
+        <!-- AMAZON -->
+        <div class="configAmazon" *ngIf="config == 2">
+            <div class="config">
+                <mat-form-field class="configInput">
+                    <mat-label> {{ bucketString }} </mat-label>
+                    <input matInput placeholder="" autocomplete="off" [(ngModel)]="bucket">
+                </mat-form-field>
+
+                <mat-form-field class="configInput">
+                    <mat-label> {{ hostnameString }} </mat-label>
+                    <input matInput placeholder="" autocomplete="nope" [(ngModel)]="host">
+                </mat-form-field>
+
+                <mat-form-field class="configInput">
+                    <mat-label> {{ portString }} </mat-label>
+                    <input matInput placeholder="" autocomplete="nope" [(ngModel)]="port">
+                </mat-form-field>
+
+                <mat-form-field class="configInput">
+                    <mat-label> {{ regionString }} </mat-label>
+                    <input matInput placeholder="" autocomplete="nope" [(ngModel)]="region">
+                </mat-form-field>
+            </div>
+
+            <div class="configKey">
+                <mat-form-field class="user">
+                    <mat-label> {{ accesskeyString }} </mat-label>
+                    <input matInput placeholder="Name" autocomplete="nope" [(ngModel)]="key">
+                </mat-form-field>
+
+                <mat-form-field class="password">
+                    <mat-label> {{ secretkeyString }} </mat-label>
+                    <input type="password" matInput placeholder="" autocomplete="nope" [(ngModel)]="secretKey">
+                </mat-form-field>
+            </div>
+
+            <div class="configCheckbox">
+                <mat-checkbox [(ngModel)]="ssl" class="singlecheck"> {{ enablesslString }} </mat-checkbox>
+                <mat-checkbox [(ngModel)]="style" class="singlecheck"> {{ pathstyleString }} </mat-checkbox>
+                <mat-checkbox [(ngModel)]="authentication" class="singlecheck"> {{ authenticationv2String }} </mat-checkbox>
+            </div>
+        </div>
+    </div>
+
+    <div class="innerSettingsAll">
+        <span> {{ setpermissionsString }} </span>
+
+        <div class="checkUpdate">
+            <span> {{ checkupdateString }} </span>
+            <mat-form-field class="select">
+                <mat-select [(ngModel)]="checkUpdateSelect">
+                  <mat-option *ngFor="let a of checkUpdate" [value]="a.selected"> {{ a.name }} </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="multipleCheckbox">
+            <mat-checkbox [(ngModel)]="checkboxPreview" class="singlecheck"> {{ checkboxPreviewString }} </mat-checkbox>
+            <mat-checkbox [(ngModel)]="checkboxShare" class="singlecheck"> {{ checkboxShareString }} </mat-checkbox>
+            <mat-checkbox [(ngModel)]="checkboxCompatibility" class="singlecheck"> {{ checkboxCompatibilityString }} </mat-checkbox>
+            <mat-checkbox [(ngModel)]="checkboxReadonly" class="singlecheck"> {{ checkboxReadonlyString }} </mat-checkbox>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <div class="delete" (click)="deleteStorage()"> {{ deleteString }} </div>
+        <div class="save" (click)="createNewStorage()"> {{ save }} </div>
+    </div>
+</div>

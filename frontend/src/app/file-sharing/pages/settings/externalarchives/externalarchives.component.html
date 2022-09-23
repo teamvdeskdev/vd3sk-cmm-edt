@@ -1,0 +1,90 @@
+<ngx-spinner *ngIf="!isdata"
+    bdColor = "rgba(0,0,0,0)"
+    size = "default"
+    color = "#00B9B3"
+    type = "triangle-skew-spin"
+    [fullScreen] = "false" >
+</ngx-spinner>
+
+<div *ngIf="doneDataLoader">
+    <div class="head">
+
+        <span class="first"> {{ storageTitle }} </span>
+        <span class="second"> {{ storageSubtitle }} </span>
+        <span class="third"> {{ storageSubtitle2 }} </span>
+    
+        <div class="fourth">
+            <div class="inputs">
+                <input class="name" matInput placeholder="{{dictInsertFolderName}}" autocomplete="off" [(ngModel)]="namestorage">
+    
+                <mat-form-field class="backend">
+                    <mat-select [(ngModel)]="typestorage">
+                        <mat-option *ngFor="let backend of backendList" [value]="backend.identifier">
+                            {{ backend.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>        
+    
+            <button class="create" *ngIf="!isCreate" mat-flat-button (click)="createStorage()"> {{ addString }} </button>
+        </div>
+    </div>
+    
+    <div class="create" *ngIf="isCreate">
+        <app-create-storage 
+            [mechanismList]="mechanismList" 
+            [storage]="newCreateStorage" 
+            (create)="addNewStorage($event)"
+            (delete)="deleteStorage($event)"></app-create-storage>
+    </div>
+    
+    <div class="list" *ngIf="storageDone && mechanismDone && backendDone">
+        <span> {{dictLinkedArchives}}</span>
+        <mat-accordion class="example-headers-align" multi="false">
+    
+            <mat-expansion-panel *ngFor="let storage of storageList">
+              <mat-expansion-panel-header>
+                <mat-panel-title class="nametitle">
+                  {{ storage.name }}
+                </mat-panel-title>
+                <mat-panel-description class="descriptiontitle">
+                    {{ storage.backend }}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+          
+              <app-create-storage 
+                [mechanismList]="mechanismList" 
+                [storage]="storage"
+                (update)="updateNewStorage($event)"
+                (delete)="deleteStorage($event)"></app-create-storage>
+          
+            </mat-expansion-panel>
+            
+        </mat-accordion>
+    </div>
+    
+    <div class="global">
+        <div class="globalhead">
+            <div class="globalheadInfo">
+                <span class="title"> {{ globalTitle }} </span>
+                <span class="subtitle"> {{ globalSubtitle }} </span>
+            </div>
+    
+            <mat-slide-toggle class="slide" [(ngModel)]="slideOn"></mat-slide-toggle>
+        </div>
+    
+        <div class="globalbody" *ngIf="slideOn">
+            <span> {{ saveInfoString }} </span>
+            <div class="globalbodyInfo">
+                <div class="globalbodyInput">
+                    <input class="input first" matInput placeholder="{{dictInserUserName}}" autocomplete="none" [(ngModel)]="globalUser">
+    
+                    <input class="input" [type]="hide?'password':'text'" matInput placeholder="Password" autocomplete="none" [(ngModel)]="globalPassword">
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </div>
+    
+                <button class="save" mat-flat-button (click)="saveGlobal()"> {{ saveString }} </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+#emptyPostItItem.post-it-item {
+    width: 211px;
+    height: 131px;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #fffcea;
+    display: flex;
+    flex-direction: column;
+
+    .empty-background-color {
+        background-color: #f4edc4;
+        border-radius: 3px;
+    }
+
+    .post-it-image {
+        float: left;
+        margin-right: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 23px;
+        height: 23px;
+        border-radius: 50%;
+        background-color: #f4edc4;
+    }
+
+    .post-it-title {
+        margin-top: 6px;
+    }
+
+    .post-it-descr {
+        margin-top: 10px;
+    }
+
+    .done-btn-row {
+        margin-top: auto;
+    }
+
+    .post-it-done-btn {
+        display: flex;
+        justify-content: center;
+    }
+
+    .empty-date-div {
+        width: 75px; 
+        height: 10px;
+    }
+
+    .empty-title-div {
+        width: 108px; 
+        height: 10px;
+    }
+
+    .empty-description-div {
+        width: 191px; 
+        height: 10px;
+    }
+
+    .empty-done-btn-div {
+        width: 38px; 
+        height: 10px;
+    }
+}
+

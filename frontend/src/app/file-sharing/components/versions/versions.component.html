@@ -1,0 +1,28 @@
+<div id="sidebarVersions" *ngIf="checknodata && !nodata">
+
+    <div class="svTitle">{{title}}</div>
+
+    <div class="svList">
+        <div class="svElement" *ngFor="let element of data">
+            <div class="sveIconDownload">
+                <mat-icon (click)="functDownload(element.href)">
+                    <i class="material-icons"> arrow_downward </i>
+                </mat-icon>
+            </div>
+            <div class="sveInfo">
+                <div class="sveInfoHead"> {{ element.date }} </div>
+                <div class="sveInfoFoot"> {{ element.weight }} </div>
+            </div>
+            <div class="sveIconRestores">
+                <mat-icon (click)="openDialogRestore(element.completehref)">
+                    <i class="material-icons"> update </i>
+                </mat-icon>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="sidebarVersions" class="nodata" *ngIf="checknodata && nodata">
+    <mat-icon><i class="material-icons"> history </i></mat-icon>
+    <span> {{ nodatastring }} </span>
+</div>

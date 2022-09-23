@@ -1,0 +1,64 @@
+<div id="devicesession">
+    <div class="devicesession-header">
+        <div class="devicesession-header-title">
+            {{langService.dictionary.connection_history}}
+        </div>
+        <div class="devicesession-header-subtitle">
+            {{langService.dictionary.client_web}}
+        </div>
+    </div>
+    
+    <div class="devicesession-body">
+        <table mat-table [dataSource]="dataSource">
+          
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell class="hidden" *matHeaderCellDef></th>
+                <td mat-cell class="hidden" *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+
+            <!-- DEVICE Column -->
+            <ng-container matColumnDef="device">
+                <th class="device-col-header" mat-header-cell *matHeaderCellDef>{{langService.dictionary.device}}</th>
+                <td class="device-col" mat-cell *matCellDef="let element"> 
+                    <span>{{element.name}}</span>
+                    <span *ngIf="element.type === 2" class="remote-wipe">&nbsp;({{langService.dictionary.remote_wipe}})</span>
+                </td>
+            </ng-container>
+
+            <!-- Time Column -->
+            <ng-container matColumnDef="functime">
+                <th class="time-col-header" mat-header-cell *matHeaderCellDef>{{langService.dictionary.last_activity}}</th>
+                <td class="time-col" mat-cell *matCellDef="let element">{{getNotifTimeFunc(element.lastActivity)}}</td>
+            </ng-container>
+          
+            <!-- MENU Column -->
+            <ng-container matColumnDef="menu">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td class="menu-col" mat-cell *matCellDef="let element"> 
+                    <mat-icon class="more pointer" [matMenuTriggerFor]="menu">more_horiz</mat-icon> 
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="renameDevice(element)">
+                            <div class="valign-icon-text">
+                                <i class="material-icons">mode_edit</i><span>&nbsp;{{langService.dictionary.rename}}</span>
+                            </div>
+                        </button>
+                        <button *ngIf="element.type !== 2" mat-menu-item (click)="deleteDevice(element)">
+                          <div class="valign-icon-text">
+                            <i class="material-icons">phonelink_off</i><span>&nbsp;{{langService.dictionary.delete_device}}</span>
+                          </div>
+                        </button>
+                        <button mat-menu-item (click)="revocation(element)">
+                            <div class="valign-icon-text">
+                                <i class="material-icons">delete_forever</i><span>&nbsp;{{langService.dictionary.revocation}}</span>
+                            </div>
+                        </button>
+                    </mat-menu>
+                </td>
+            </ng-container>
+          
+            <tr mat-header-row class="table-header" *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>      
+    </div>
+</div>

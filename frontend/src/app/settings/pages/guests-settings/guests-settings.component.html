@@ -1,0 +1,141 @@
+<div id="guestsettingpage">
+
+    <div id="guestsetting">
+
+        <div id="top">
+            <span class="title span">{{ langService.dictionary.settings_title }}</span>
+    
+            <div class="topinner">
+                <i class="material-icons">assignment_ind</i>
+                <span class="subtitle span">{{ langService.dictionary.guests_settings }}</span>
+            </div>
+        </div>
+    
+        <div id="create">
+            <span class="title span"> {{ langService.dictionary.search_users }} </span>
+    
+            <div class="innercreate">
+    
+                <div class="form">
+                    <mat-form-field class="input">
+                        <input matInput placeholder="{{ langService.dictionary.search_guest }}" 
+                            autocomplete="nope" [value]="searchname" 
+                            [(ngModel)]="searchname" (keyup)="searchGuest()">
+                        <mat-icon matSuffix *ngIf="searchname.length==0"> search </mat-icon>
+                        <mat-icon matSuffix *ngIf="searchname.length>0" (click)="resetSearch()"> close </mat-icon>
+                    </mat-form-field>
+                </div>
+    
+                <button mat-flat-button (click)="openDialogCreate()">
+                    <mat-icon matSuffix> add </mat-icon>
+                    {{ langService.dictionary.add_guest }}                
+                </button>
+    
+            </div>
+    
+        </div>
+
+        <ngx-spinner *ngIf="!isLoading"
+            bdColor = "rgba(0,0,0,0)"
+            size = "default"
+            color = "#00B9B3"
+            type = "triangle-skew-spin"
+            [fullScreen] = "false" >
+        </ngx-spinner>
+    
+        <div id="emptybody" *ngIf="bodyEmpty && !searchEmpty">
+    
+            <div class="left">
+    
+                <span class="first span"> {{ langService.dictionary.no_guest }} </span>
+                
+                <div class="spancontainer">
+                    <span class="number span"> 1 </span>
+                    <span class="others span"> {{ langService.dictionary.first_noguest }} </span>
+                </div>
+    
+                <div class="spancontainer">
+                    <span class="number span"> 2 </span>
+                    <span class="others span"> {{ langService.dictionary.second_noguest }} </span>
+                </div>
+    
+                <div class="spancontainer">
+                    <span class="number span"> 3 </span>
+                    <span class="others span"> {{ langService.dictionary.third_noguest }} </span>
+                </div>
+                
+            </div>
+    
+            <div class="right">
+                <img src="assets/img/noguest.png">
+            </div>
+    
+        </div>
+    
+        <div id="body" *ngIf="!bodyEmpty">
+            <div id="bodyContent">
+                <table *ngIf="!searchEmpty" mat-table [dataSource]="dataSource" matSort class="mat-elevation-z0">
+
+                    <!-- Id Column -->
+                    <ng-container matColumnDef="id">
+                        <td mat-cell *matCellDef="let element" class="hidden"> {{element.id}} </td>
+                    </ng-container>
+                    
+                    <!-- Info Column -->
+                    <ng-container matColumnDef="info">
+                        <td mat-cell *matCellDef="let element" class="info">
+                            <div class="infoDiv">
+                                <div class="infoInner">
+                                    <span class="infospan span">{{element.name}}</span>
+                                    <span class="infospan span"> {{element.surname}} </span>
+                                    <span class="infospan span"> | </span>
+                                    <span class="infospan span"> {{element.company}} </span>
+                                </div>
+                                <span class="apps span"> {{element.appsString}} </span>
+                            </div>                         
+                        </td>
+                    </ng-container>
+    
+                    <!-- Actions Column -->
+                    <ng-container matColumnDef="actions">
+                        <td mat-cell *matCellDef="let element" class="actions">
+                            <button mat-icon-button [matMenuTriggerFor]="menu">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item (click)="updateGuest(element)">
+                                  <mat-icon>edit</mat-icon>
+                                  <span> {{ langService.dictionary.edit }} </span>
+                                </button>
+    
+                                <button mat-menu-item *ngIf="!globalsVar.disableDelete" (click)="deleteGuest(element.id)">
+                                  <mat-icon>delete</mat-icon>
+                                  <span> {{ langService.dictionary.delete }} </span>
+                                </button>
+
+                                <button mat-menu-item (click)="resetGuestPassword(element)">
+                                    <mat-icon>restart_alt</mat-icon>
+                                    <span> {{ langService.dictionary.reset_guest }} </span>
+                                </button>
+                            </mat-menu>
+                        </td>
+                    </ng-container>
+                    
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+
+                <div id="bodyNocontent" *ngIf="searchEmpty">
+                    <div class="left">
+                        <span class="first span"> {{ langService.dictionary.noguest_found }} </span>
+                    </div>
+            
+                    <div class="right">
+                        <img src="assets/img/noguest.png">
+                    </div>
+                </div>
+            </div>
+            <mat-paginator [length]="dataLength" [pageSize]="pageSize" (page)="pageEvent = $event"></mat-paginator>
+        </div>    
+    </div>
+
+</div>

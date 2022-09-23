@@ -1,0 +1,21 @@
+<div id="vflow">
+    <ngx-spinner *ngIf="!done"
+        bdColor = "rgba(0,0,0,0)"
+        size = "default"
+        color = "#00B9B3"
+        type = "triangle-skew-spin"
+        [fullScreen] = "false" >
+    </ngx-spinner>
+
+    <ng-container>
+        <div id="vflowmain">
+            <app-allfiles-table *ngIf="done"
+                [noData]="noData"
+                [pageFavorite]="pageFavorite"
+                [getpage]="getpage"
+                [dataValue]="dataValue">
+            </app-allfiles-table>
+        </div>
+        <app-allfiles-sidebar></app-allfiles-sidebar>
+    </ng-container>
+</div>

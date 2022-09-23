@@ -1,0 +1,66 @@
+<div id="FilterUserDialog">
+    <div class="pb-3 p-0 dialog-header">
+        <div class="text-header">
+            <div class="titleSearchUser"><mat-icon><i class="material-icons icon" width="10px" height="18px">how_to_reg</i></mat-icon> {{langService.dictionary.users_settings}} |  {{langService.dictionary.filter}} </div> 
+            <div class="subtitleSearchUser"> {{langService.dictionary.filter_subtitle}}</div>
+        </div>
+        <div class="close" mat-dialog-close>
+            <mat-icon><span>close</span></mat-icon>
+        </div>
+    </div>
+  
+    <div class="loader-wrapper" *ngIf="wait">
+        <div class="spin d-flex justify-content-center">
+            <ngx-spinner
+                bdColor = "rgba(0,0,0,0)"
+                size = "default"
+                color = "#00B9B3"
+                type = "triangle-skew-spin"
+                [fullScreen] = "false" >
+            </ngx-spinner>
+        </div>
+    </div>
+  
+    <div class="dialogContent" *ngIf="!isLoading && !wait">
+  
+        <div class="SearchUser form-box p-0">
+            <div class="SearchUserRow">
+                <div class="col-6 nopadding">
+                    <mat-form-field class="select">
+                        <mat-label>{{langService.dictionary.new_user_groups}}</mat-label>
+                        <mat-select multiple required [(ngModel)]="user.groups">
+                            <mat-select-trigger></mat-select-trigger>
+                            <mat-option class="Select" *ngFor="let group of groups" [value]="group" > {{group}} </mat-option>
+                        </mat-select>
+                  </mat-form-field>
+                    <div *ngIf="user.groups" class="label-groups">
+                        <mat-label *ngFor="let group of user.groups"><span>{{group}} </span><mat-icon (click)="deleteSelectGroups(user.groups,group)"><i class="material-icons">close</i></mat-icon></mat-label>
+                    </div>
+                </div>
+                <div class="col-6 nopadding rightSide">
+                    <mat-form-field class="select">
+                        <mat-label>{{langService.dictionary.new_user_quota}}</mat-label>
+                        <mat-select multiple required [(ngModel)]="user.quota">
+                            <mat-select-trigger></mat-select-trigger>
+                            <mat-option *ngFor="let mechanism of quotaList" [value]="mechanism.name">
+                                {{ mechanism.name }} 
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div *ngIf="user.quota" class="label-groups">
+                        <mat-label *ngFor="let quota of user.quota"><span>{{quota}} </span><mat-icon (click)="deleteSelectQuota(user.quota,quota)"><i class="material-icons">close</i></mat-icon></mat-label>
+                    </div>
+                </div>
+              </div>
+        </div>
+    </div>
+    <div class="col-12 actions-box p-0">
+        <div (click)="confirm(user)" 
+                class="primary-btn dialogButton float-right">
+            {{langService.dictionary.confirm}}
+        </div>
+        <div class="secondary-btn dialogButton float-left" mat-dialog-close>
+            {{langService.dictionary.undo}}
+        </div>
+    </div>
+</div>

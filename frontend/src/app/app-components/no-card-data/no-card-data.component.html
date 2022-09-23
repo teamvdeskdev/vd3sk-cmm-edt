@@ -1,0 +1,5 @@
+<div id="no-card-data">
+    <img *ngIf="app === 'vconnect'" class="no-card-data-icon" [src]="url">
+    <img *ngIf="app !== 'vconnect'" class="no-card-data-icon mb-20" [src]="url">
+    <span class="no-card-data-msg"> {{dictMessage}} </span>
+</div>

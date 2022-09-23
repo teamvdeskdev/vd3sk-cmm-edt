@@ -1,0 +1,68 @@
+$Roboto: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+.columnTableID {
+    display: none;
+}
+td.mat-cell {
+    border-bottom-color: white;
+    &.col-profile-pic {
+        text-align: center;
+        padding-left: 1%;
+    }
+}
+.col-profile-pic{
+    width: 5%;
+}
+img.profile_pic {
+    border-radius: 50%;
+}
+.col-image {
+    width: 4%;
+    color: #007789;
+}
+
+.col-description {
+    color: #2B2B2B;
+    font-family: $Roboto;
+    font-size: 13px;
+    letter-spacing: 0;
+    line-height: 16px;
+    width: 72%;
+
+    .divdescr{
+
+        .name{
+            font-weight: bold;
+        }
+
+        .descr{
+
+        }
+    }
+}
+
+.col-icons {
+    text-align: right;
+    width: 10%;
+
+    mat-icon {
+        margin-right: 8px;
+    
+        .material-icons.icon {
+            color: #007CB8;
+            font-size: 24px;
+            letter-spacing: 0;
+            line-height: 24px;
+        }
+    }
+}
+
+.col-time {
+    width: 9%;
+    color: #2B2B2B;
+    font-family: $Roboto;
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 14px;
+    text-align: right;
+}

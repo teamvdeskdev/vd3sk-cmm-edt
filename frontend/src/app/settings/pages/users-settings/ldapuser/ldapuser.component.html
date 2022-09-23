@@ -1,0 +1,172 @@
+<!-- <div>
+    <mat-tab-group mat-align-tabs="start">
+
+        <mat-tab label="Server">
+            <div class="server">
+                <div class="one">
+                    <div class="first">
+                        <mat-form-field appearance="fill">
+                            <mat-select name="server">
+                              <mat-option *ngFor="let server of serverList" [value]="server.name">
+                                {{server.name}}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+            
+                        <div class="buttonrow">
+                            <div class="example-button-container">
+                            <button mat-fab color="primary">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                            </div>
+                            <div class="example-button-container">
+                            <button mat-fab color="primary">
+                                <mat-icon>content_copy</mat-icon>
+                            </button>
+                            </div>
+                            <div class="example-button-container">
+                            <button mat-fab color="primary">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="second">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Host</mat-label>
+                            <input matInput placeholder="" value="">
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Porta</mat-label>
+                            <input matInput placeholder="" value="">
+                        </mat-form-field>
+                    </div>
+                </div>
+    
+                <div class="two">
+                    <div class="first">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>DN Utente</mat-label>
+                            <input matInput placeholder="" value="">
+                        </mat-form-field>
+                    </div>
+                    <div class="second">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Password</mat-label>
+                            <input matInput placeholder="" value="">
+                        </mat-form-field>
+                        <button mat-stroked-button color="primary">Salva credenziali</button>
+                    </div>
+                </div>
+    
+                <div class="three">
+                    <div class="first">
+                        <mat-form-field>
+                            <mat-label>Autosize textarea</mat-label>
+                            <textarea matInput
+                                      cdkTextareaAutosize
+                                      #autosize="cdkTextareaAutosize"
+                                      cdkAutosizeMinRows="1"
+                                      cdkAutosizeMaxRows="5"></textarea>
+                          </mat-form-field>
+                        <button mat-stroked-button color="primary">Rileva DN base</button>
+                        <button mat-stroked-button color="primary">Rileva DN base</button>
+                    </div>
+                    <div class="second">
+                        <mat-checkbox class="example-margin">Digita manualmente i filtri LDAP (consigliato per directory grandi)</mat-checkbox>
+                    </div>
+                </div>
+    
+                <div class="four">
+                    <button mat-stroked-button color="primary">Continua</button>
+                </div>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="Utenti"></mat-tab>
+
+        <mat-tab label="Attributi di accesso"></mat-tab>
+
+        <mat-tab label="Gruppi"></mat-tab>
+
+        <mat-tab label="Avanzate"></mat-tab>
+
+        <mat-tab label="Esperto">
+            <div class="expert">
+
+                <div class="one">
+                    <div class="title">
+                        Nome utente interno
+                    </div>
+                    <div class="text">
+                        In modo predefinito, il nome utente interno sarà creato dall'attributo UUID. Ciò assicura che il nome utente sia univoco e che non sia 
+                        necessario convertire i caratteri. Il nome utente interno consente l'uso di determinati caratteri: [ a-zA-Z0-9_.@- ]. 
+                        Altri caratteri sono sostituiti con il corrispondente ASCII o sono semplicemente omessi. In caso di conflitto, sarà aggiunto/incrementato
+                        un numero. Il nome utente interno è utilizzato per identificare un utente internamente. Rappresenta, inoltre, il nome predefinito per la
+                        cartella home dell'utente in ownCloud. Costituisce anche una parte di URL remoti, ad esempio per tutti i servizi *DAV. 
+                        Con questa impostazione, il comportamento predefinito può essere scavalcato. Lascialo vuoto per ottenere il comportamento predefinito. 
+                        Le modifiche avranno effetto solo sui nuovo utenti LDAP associati (aggiunti).
+                    </div>
+                    <div class="input">
+                        <span>Attributo nome utente interno:</span>
+                        <mat-form-field class="example-full-width">
+                            <mat-label></mat-label>
+                            <input matInput placeholder="" value="">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="two">
+                    <div class="title">
+                        Ignora rilevamento UUID
+                    </div>
+                    <div class="text">
+                        In modo predefinito, l'attributo UUID viene rilevato automaticamente. 
+                        L'attributo UUID è utilizzato per identificare senza alcun dubbio gli utenti e i gruppi LDAP. Inoltre, il nome utente interno sarà creato sulla base dell'UUID,
+                         se non è specificato in precedenza. Puoi ignorare l'impostazione e fornire un attributo di tua scelta. 
+                         Assicurati che l'attributo scelto possa essere ottenuto sia per gli utenti che per i gruppi e che sia univoco. 
+                         Lascialo vuoto per ottenere il comportamento predefinito.
+                         Le modifiche avranno effetto solo sui nuovi utenti e gruppi LDAP associati (aggiunti).
+                    </div>
+                    <div class="input">
+                        <span>Attributo UUID per gli utenti:</span>
+                        <mat-form-field class="example-full-width">
+                            <mat-label></mat-label>
+                            <input matInput placeholder="" value="">
+                        </mat-form-field>
+                    </div>
+                    <div class="input">
+                        <span>Attributo UUID per i gruppi:</span>
+                        <mat-form-field class="example-full-width">
+                            <mat-label></mat-label>
+                            <input matInput placeholder="" value="">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="three">
+                    <div class="title">
+                        Associazione Nome utente-Utente LDAP
+                    </div>
+                    <div class="text">
+                        I nomi utente sono utilizzati per archiviare e assegnare i metadati. 
+                        Per identificare con precisione e riconoscere gli utenti, ogni utente LDAP avrà un nome utente interno. 
+                        Il nome utente creato. Ciò richiede un'associazione tra il nome utente e l'utente LDAP. Il nome utente creato è associato allo UUID dell'utente LDAP. 
+                        In aggiunta, il DN viene memorizzato in cache per ridurre l'interazione con LDAP, ma non è utilizzato per l'identificazione. 
+                        Se il DN cambia, le modifiche saranno rilevate. Il nome utente interno è utilizzato dappertutto. 
+                        La cancellazione delle associazioni lascerà tracce residue ovunque e interesserà tutta la configurazione LDAP. 
+                        Non cancellare mai le associazioni in un ambiente di produzione, ma solo in una fase sperimentale o di test.
+                    </div>
+                    <button mat-stroked-button color="primary">Cancella associazione Nome utente-Utente LDAP</button>
+                    <button mat-stroked-button color="primary">Cancella associazione Nome gruppo-Gruppo LDAP</button>
+                </div>
+
+                <div class="four">
+                    <button mat-stroked-button color="primary">Prova Configurazione</button>
+                </div>
+
+            </div>
+        </mat-tab>
+
+    </mat-tab-group>
+</div> -->

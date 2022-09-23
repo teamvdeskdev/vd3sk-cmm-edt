@@ -1,0 +1,162 @@
+.span{
+    font-family: Roboto;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+}
+
+#dialogsamluser{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    width: 50vw;
+    height: 80vh;
+
+    #title{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+    
+        .divtitle{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+    
+            mat-icon{
+                display: flex;
+                align-items: center;
+                font-size: 18px;
+                color: #00396a;
+            }
+    
+            .title{
+                height: 21px;
+                margin: 2px 9px;
+                font-size: 18px;
+                color: #383838;
+            }
+    
+            .counterpage{
+                height: 21px;
+                margin: 2px 0px;
+                font-size: 18px;
+                font-weight: 900;
+                color: #00396a;
+            }
+    
+            .totalpage{
+                height: 21px;
+                margin: 2px 0px;
+                font-size: 18px;
+                font-weight: 900;
+                color: #8ea6be;
+                margin-left: 6px;
+            }
+        }
+    
+        .close{
+            font-size: 18px;
+            color: #00396a;
+            cursor: pointer;
+        }
+    }
+    
+    #bodyfirst{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+        height: 97%;
+    
+        .subtitle{
+            width: 335px;
+            height: 16px;
+            margin: 16px 0px;
+            font-size: 14px;
+            color: #808080;
+        }
+    
+        .usersamlForm{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            justify-content: center;
+            height: 90%;
+    
+            .usersamlFormDiv{
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                justify-content: center;
+                height: 84%;
+                margin-bottom: 2%;
+    
+                .containerForm{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 100%;
+                    height: 33%;
+    
+                    .mat-form-field{
+                        width: 46%;
+                        font-size: 14px;
+                        color: #313131;
+    
+                        input{
+                            color: #313131;
+                        }
+                    }
+    
+                    .mat-datepicker-toggle{
+                        font-size: 18px;
+                        color: #007789;
+                    }
+                }
+            }
+    
+            .buttonsFirst{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                height: 14%;
+    
+                button{
+                    width: 164px;
+                    height: 30px;
+                    border-radius: 3px;
+                    padding: 8px 40px;
+                    font-size: 14px;
+                    font-weight: bold;
+                    letter-spacing: 0.58px;
+                    text-transform: uppercase;
+    
+                    &.return{                        
+                        color: #228196;
+                    }
+    
+                    &.submit{                        
+                        opacity: 0.35;                        
+                        background-image: linear-gradient(to right, #00a59f 0%, #007cb9 100%);
+                        color: white;
+    
+                        &.active{
+                            opacity: unset;
+                        }
+                    }
+                }
+            }
+        }      
+    }
+}
+
+::ng-deep .mat-select-value {
+    padding-left: 0 !important;
+}

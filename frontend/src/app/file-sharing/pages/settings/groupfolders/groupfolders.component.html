@@ -1,0 +1,98 @@
+<div id="settingsvshareGF">
+
+    <ngx-spinner *ngIf="!isdata"
+      bdColor = "rgba(0,0,0,0)"
+      size = "default"
+      color = "#00B9B3"
+      type = "triangle-skew-spin"
+      [fullScreen] = "false" >
+    </ngx-spinner>
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="title"> {{ headerTitle }} </div>
+        <div class="body">
+            <span> {{ headerSubtitle }} </span>
+            <button *ngIf="!buttonCreateHide" (click)="toggleCreate()" mat-flat-button color="primary"> {{ headerButton }} </button>
+
+            <div *ngIf="buttonCreateHide" class="createGroup">
+                <mat-icon class="iconReturn" (click)="toggleCreate()"><i class="material-icons">folder_shared</i></mat-icon>
+                <input matInput placeholder="Name" autocomplete="nope" #groupfoldername>
+                <mat-icon class="iconSend" matSuffix (click)="addGroupFolder(groupfoldername.value)"><i class="material-icons"> arrow_forward </i></mat-icon>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- LIST COMPONENT -->
+    <div class="svshareUpperbody" *ngIf="!noData">
+        <table mat-table [dataSource]="dataSource" #table matSort *ngIf="data.length>0">
+                
+            <ng-container matColumnDef="id" >
+                <th mat-header-cell *matHeaderCellDef class="hidden"></th>
+                <td mat-cell *matCellDef="let element" class="hidden"> {{element.id}} </td>
+            </ng-container>
+
+            
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="head name"> {{ stringName }} </th>
+                <td mat-cell *matCellDef="let element" class="name">
+                    <div> {{ element.name }} </div>                                            
+                </td>
+            </ng-container>
+
+            
+            <ng-container matColumnDef="groups">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="head group"> {{ stringGroups }} </th>
+                <td mat-cell *matCellDef="let element" class="group">
+                    <div *ngIf="!element.regroup" class="listgroup">
+                        <span>{{element.groups}}</span>
+                    </div>
+                </td>
+            </ng-container>
+
+            
+            <ng-container matColumnDef="quota">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="head quota"> Quota </th>
+                <td mat-cell *matCellDef="let element" class="quota">
+                    <div *ngIf="!element.regroup" class="listgroup">
+                        <span>{{element.quota}}</span>
+                    </div>
+                </td>
+            </ng-container>
+             
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef class="head delete"></th>
+                <td mat-cell *matCellDef="let element" class="delete">
+                    <mat-icon class="delete">
+                        <button mat-icon-button [matMenuTriggerFor]="menu">
+                            <i class="material-icons">more_horiz</i>
+                        </button>            
+                        <mat-menu #menu="matMenu">
+                        <button mat-menu-item class="buttons" (click)="openDialogUpload(element)"> {{ stringUpdate }} </button>
+                        <button mat-menu-item class="buttons" (click)="deleteGroupFolder(element.id)"> {{ stringDelete }} </button>
+                        </mat-menu>
+                    </mat-icon>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" [hidden]="row.delete"></tr>
+            <tr mat-footer-row></tr>
+        </table>
+    </div>
+
+
+    <!-- EMPTY LIST -->
+    <div class="noFolderFound" *ngIf="noData">
+        <div class="header">
+            <div class="title"> {{ nodataTitle }} </div>
+            <div class="subtitle"> {{ nodataSubtitle }} </div>
+        </div>
+        <div class="body">
+            <mat-icon matSuffix><i class="material-icons"> folder_shared </i></mat-icon>
+            <span> {{ nodataBody }} </span>
+        </div>
+    </div>
+    
+</div>

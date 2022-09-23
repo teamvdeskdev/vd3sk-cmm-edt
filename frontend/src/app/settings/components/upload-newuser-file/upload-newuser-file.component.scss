@@ -1,0 +1,273 @@
+$icon-default-color: #BBBBBB;
+$text-default-color: #313131;
+$locked-hover-color: #007789;
+$locked-color: #009ea3;                
+$hover-color: #007CB8;
+
+#newUserDialog {
+    font-family: Roboto;
+    color: $text-default-color;
+    font-size: 14px;
+    padding: 0 15px;
+
+    .dialog-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        .titleNewUser{
+            font-family: Roboto;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #383838;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+
+            .icon{
+                color: #00396a;
+                height: 18px;
+                width: 18px;
+            }
+
+            mat-icon{
+                margin-right: 10px;       
+            }
+        }
+
+        .subtitleNewUser{
+            font-family: Roboto;
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #808080;
+            margin-bottom: 16px;
+        }
+
+        .close{
+            position: fixed;
+            right: 25px;
+            top: 25px;
+        }
+    }
+    
+    .loader-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .text-center {
+            text-align: center;
+        }
+
+        .dash-progress {
+            width: 100%;
+            margin: 0 10px;
+        }
+
+        .spin {
+            height: 150px;
+        }
+    }
+
+    .dialogContent {
+        height: 250px;
+        overflow-y: auto;  
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: default;
+        flex-direction: column;
+
+        label{
+
+            padding-top: 30px;
+
+            span{
+                font-weight: bolder;
+            }
+        }
+
+        .errorMessage{
+            display: flex;
+            flex-direction: column;
+            padding-top: 10px;
+            align-items: center;
+
+            label{
+                padding-top: 0px;
+            }
+        }
+
+        .single{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+    
+            .list{
+                border-radius: 6px;
+                box-shadow: 0 2px 10px 0 rgb(0 0 0 / 10%);
+                border: solid 1px #f0f0f0;
+                background-color: #ffffff;
+                font-size: 24px;
+                display: flex;
+                align-items: center;
+                width: 84px;
+                height: 84px;
+                justify-content: center;
+            }
+    
+            span{
+                margin-top: 7px;
+                font-family: Roboto;
+                font-size: 13px;
+                font-weight: normal;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: 1.38;
+                letter-spacing: 0.13px;
+                text-align: center;
+                color: #000000;
+                text-transform: capitalize;
+            }
+        }
+
+        
+
+        .list-option {
+
+            .list-icon {
+                color: #007789;
+                font-size: 20px;
+                &:hover {
+                    color: #00B9B3;
+                }
+            }
+            .list-icon-svg {
+                margin-right: 10px;
+                svg {
+                    width: 24px;
+                    .st0:hover {
+                        fill: #00B9B3;
+                    }
+                }
+            }
+            .hidden {
+                visibility: hidden;
+                width: 1px;
+                height: 1px;
+              }
+        }
+    }
+
+    .actions-box {
+        margin-top: 15px;
+        width: 90%;
+        margin-top: 15px;
+        position: absolute;
+        bottom: 30px;
+        
+        .secondary-btn {
+            margin-right: 16px;
+            height: 30px;
+            width: 23%; //29%; //198px;
+            //padding-top: 7px;
+            border-radius: 3px;
+            border: 1px solid #007789;
+            background-color: transparent;
+            color: #007789;
+            font-family: Roboto, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 0.58px;
+            line-height: 16px;
+            text-align: center;
+            text-transform: uppercase;
+            cursor: pointer;
+        
+            &:hover {
+                background: #00B9B3;
+                border: 1px solid #00B9B3;
+                color: #FFFFFF;
+            }
+        }
+        
+        .primary-btn {
+            height: 30px;
+            width: 23%; //29%; //198px;
+            //padding-top: 7px;
+            border-radius: 3px;
+            background: linear-gradient(90deg, #00A59F 0%, #007CB9 100%);;
+            color: #FFFFFF;
+            font-family: Roboto, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 0.58px;
+            line-height: 16px;
+            text-align: center;
+            text-transform: uppercase;
+            cursor: pointer;
+        
+            &:hover {
+                background: #00B9B3;
+            }
+        }
+        .primary-btn[disabled] {
+            opacity: 60%;
+        }
+
+        .continue {
+            margin-left: 16px;
+            padding-top: 4px;
+            font-size: 11px;
+            line-height: 12px;
+        }
+    }
+
+    .ResumePage{
+
+        .Resume{
+            display: flex;
+            flex-direction: column;
+
+            .Line{
+                display: flex;
+                flex-direction: row;
+
+                .left{
+                    display: flex;
+                    justify-content: left;
+                    padding-top: 18px;
+                }
+
+                .right{
+                    display: flex;
+                    justify-content: left;
+                    padding-top: 18px;
+                }
+
+                span{
+                    font-weight: bolder;
+                    padding-right: 10px;
+                }
+            }
+        }
+
+        .resum-btn{
+            display: flex;
+            justify-content: center;
+        }
+        }
+
+    }
+    
+

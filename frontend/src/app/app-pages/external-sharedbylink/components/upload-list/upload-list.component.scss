@@ -1,0 +1,136 @@
+div#listUploadNew {
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    color: black;
+  
+    div#listUploadNewInner{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  
+      mat-list{
+        width: 93%;
+        padding: 10px 0px;
+      }
+  
+      mat-list-item{
+        height: 38px;
+        cursor: pointer;
+  
+        mat-icon{
+          display: flex;
+          width: 20%;
+          align-items: center;
+          position: relative;
+  
+          i.material-icons{
+            font-size: 20px;
+            color: #007789;
+          }
+        }
+  
+        span.spanInnerList{
+          width: 80%;
+          font-size: 12px;
+          text-transform: capitalize;
+        }
+
+        .newfolderclose, .newfileclose,
+        .newdocumentclose, .newexelclose,
+        .newpowerclose {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
+          mat-icon{
+            display: flex;
+            width: 20%;
+            align-items: center;
+            position: relative;
+    
+            i.material-icons{
+              font-size: 20px;
+              color: #007789;
+            }
+          }
+    
+          span.spanInnerList{
+            width: 80%;
+            font-size: 12px;
+            text-transform: capitalize;
+          }
+        }
+
+        .newfolderopen, .newfileopen,
+        .newdocumentopen, .newexelopen,
+        .newpoweropen {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          border-bottom: 2px solid #007789;
+
+          mat-icon{
+            display: flex;
+            width: 15%;
+            align-items: center;
+            position: relative;
+    
+            i.material-icons{
+              font-size: 20px;
+              color: #007789;
+            }
+          }
+    
+          input{
+            width: 68%;
+            color: #2B2B2B;
+            font-family: Roboto;
+            font-size: 13px;
+            letter-spacing: 0;
+            border: none;
+            padding-left: 2%;
+            outline: none;
+          }
+        }
+
+        &:hover{
+          mat-icon i{
+            color: #00778999;
+          }
+          span{
+            color:#2B2B2B99;
+          }
+
+          .newfolderclose, .newfileclose,
+          .newdocumentclose, .newexelclose,
+          .newpowerclose{
+            mat-icon i{
+              color: #00778999;
+            }
+          }
+        }
+
+        ::-webkit-input-placeholder { /* Edge */
+          color: rgba(43,43,43,0.3);
+        }
+        
+        :-ms-input-placeholder { /* Internet Explorer 10-11 */
+          color: rgba(43,43,43,0.3);
+        }
+        
+        ::placeholder {
+          color: rgba(43,43,43,0.3);
+        }
+      } 
+    }
+  }

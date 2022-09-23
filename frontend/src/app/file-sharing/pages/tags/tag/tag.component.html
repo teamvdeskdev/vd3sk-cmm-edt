@@ -1,0 +1,41 @@
+<div id="labels">
+    <ngx-spinner *ngIf="!done"
+        bdColor = "rgba(0,0,0,0)"
+        size = "default"
+        color = "#00B9B3"
+        type = "triangle-skew-spin"
+        [fullScreen] = "false" >
+    </ngx-spinner>
+
+    <ng-container *ngIf="data">
+        <div class="selectlabels">
+            <mat-accordion>
+                <mat-expansion-panel *ngFor="let element of dataValue" [expanded]="element.open">
+                    <mat-expansion-panel-header (click)="getTagFiles(element)">
+                        <mat-panel-title>{{element.name}}</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div>
+                        <app-taglist *ngIf="element.open"
+                        [data]="element"
+                        (send)="sendToSidebar($event)"
+                        (rename)="renameData($event)">
+                    </app-taglist>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+        <app-tagsidebar [data]="sendSidebar"
+            (togglefavorite)="addremoveFavorite($event)"
+            (deletefile)="deleteData($event)"
+            (downloaddata)="downloadData($event)"
+            (movedata)="moveData($event)"
+            (copydata)="copyData($event)"
+            (cryptdata)="cryptData($event)"
+            (renamedata)="renameToggle($event)">
+        </app-tagsidebar>
+    </ng-container>
+
+    <ng-container *ngIf="!data">
+        <app-no-data *ngIf="data && dataValue.length==0" [page]="getpage"></app-no-data>
+    </ng-container>
+</div>

@@ -1,0 +1,180 @@
+@import "../digital-signature.component.scss";
+
+.preview-box {
+  width: 500px;
+  max-width: 100%;
+  border: solid #007789 1.5px;
+}
+
+#signatureBoxId {
+  width: 166px;
+  height: 102px;
+}
+
+.signature-box {
+  border: 1px solid #145AFE !important;
+}
+
+// .delete-signature {
+//   cursor: pointer !important;
+//   color: white;
+//   background-color: #145AFE;
+//   text-align: right;
+//   position: absolute;
+//   padding: 2px;
+//   right: 0;
+// }
+
+.preview-image {
+  width: 100%;
+  height: auto;
+}
+
+.no-preview-message {
+  text-align: center;
+  padding-top: 250px;
+}
+
+.ng-draggable {
+  cursor: grab;
+}
+
+.ng-dragging {
+  cursor: grabbing;
+}
+
+.field-page-number {
+  font-family: 'Roboto';
+  font-size: 14px;
+  width: 50px;
+  margin-right: 9px;
+}
+
+.total-page-label {
+  font-family: 'Roboto';
+  font-size: 14px;
+}
+
+.page-label {
+  font-family: 'Roboto';
+  font-size: 11px;
+  padding-right: 24px;
+}
+
+.buttons-row {
+  margin-bottom: 84px;
+}
+
+.ng-resizable-diagonal {
+  border-bottom: 0 !important;
+  border-left: 0 !important;
+}
+
+/*CSS resizer signature*/
+.signature-box .resizer{
+  width: 5px;
+  height: 5px;
+  background: #145AFE;
+  border: 3px solid #145AFE;
+  position: absolute;
+}
+
+.signature-box .resizer.top-left {
+  left: 0px;
+  top: 0px;
+  cursor: nwse-resize;
+}
+
+.signature-box .resizer.top-right {
+  right: 0px;
+  top: 0px;
+  cursor: nesw-resize;
+}
+
+.signature-box .resizer.bottom-left {
+  left: 0px;
+  bottom: 0px;
+  cursor: nesw-resize;
+}
+
+.signature-box .resizer.bottom-right {
+  right: 0px;
+  bottom: 0px;
+  cursor: nwse-resize;
+}
+
+.signature-box .resizer.top-middle {
+  left: 48%;
+  top: 0px;
+  cursor: n-resize;
+}
+
+.signature-box .resizer.left-middle {
+  left: 0px;
+  top: 48%;
+  cursor: w-resize;
+}
+
+.signature-box .resizer.right-middle {
+  right: 0px;
+  top: 48%;
+  cursor: e-resize;
+}
+
+.signature-box .resizer.bottom-middle {
+  left: 48%;
+  bottom: 0px;
+  cursor: s-resize;
+}
+
+.signature-box .resizer.delete-button {
+  right: 8px;
+  top: 8px;
+  width: 16px;
+  height: 16px;
+  color: white;
+  text-align: center;
+  font-size: 11px;
+  cursor: pointer !important;
+}
+
+.prev-page-btn, .next-page-btn {
+  width: 23px;
+  height: 23px;
+  margin-left: 9px;
+  color: white;
+  border-radius: 3px;
+  border: 0 !important;
+  outline: none !important;
+  background: linear-gradient(90deg, #00A59F 0%, #007DB9 100%);
+}
+
+.prev-page-btn:disabled, .next-page-btn:disabled {
+  opacity: 50%;
+}
+
+.row-selector-page {
+  height: 50px;
+}
+
+.title {
+  padding-bottom: 8px;
+}
+
+.icon-arrow {
+  color: #007789;
+  font-size: 20px !important;
+}
+
+.preview-container {
+  max-width: 500px;
+  margin-right: 24px;
+}
+
+.signature-description {
+  font-family: 'Roboto';
+  font-weight: bold;
+  font-size: 11px;
+  color: #525252;
+  margin-bottom: 15px;
+}

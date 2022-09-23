@@ -1,0 +1,185 @@
+<div id="editDomainDialog">
+    <div class="pb-3 p-0"> <!-- col-12 -->
+        <span *ngIf="data.mode == 'edit'" class="editDomainTitle">{{langService.dictionary.edit_domain}}</span>
+        <span *ngIf="data.mode == 'new'" class="editDomainTitle">{{langService.dictionary.new_domain}}</span>
+        <span *ngIf="data.mode == 'imap'" class="editDomainTitle">{{langService.dictionary.new_imap}}</span>
+    </div>
+
+    <div class="loader-wrapper" *ngIf="wait">
+        <div class="spin d-flex justify-content-center">
+            <ngx-spinner
+                bdColor = "rgba(0,0,0,0)"
+                size = "default"
+                color = "#00B9B3"
+                type = "triangle-skew-spin"
+                [fullScreen] = "false" >
+            </ngx-spinner>
+        </div>
+    </div>
+
+    <div class="dialogContent tiny-scrollbar" *ngIf="!isLoading && !wait && !IMAPdomain">
+
+        <div class="editDomain form-box p-0">
+
+            <div *ngIf="showError" class="error mb-2">
+                <div *ngIf="data.mode == 'new'">{{langService.dictionary.domain_creation_failed}}</div>
+                <div>{{langService.dictionary.check_config_param}}</div>
+            </div>
+
+            
+            <mat-form-field class="w-100">
+                <input [(ngModel)]="domainClicked.name" type="text" autocomplete="domainNameNoAutocomplete"
+                    name="domainNameNoAutocomplete" matInput placeholder="{{langService.dictionary.domainName}}" (focus)="hideError()">
+            </mat-form-field>
+
+            
+
+            <div class="serverBox col-12 mt-3 px-0 d-flex">
+                <div class="col-6 pl-0">
+                    <div class="type pb-1"><span class="label text-uppercase">{{langService.dictionary.imap}}</span></div>
+                    <div class="d-flex bd-highlight">
+                        <div class="pr-2 serverInputBox flex-grow-1 bd-highlight">
+                            <mat-form-field>
+                                <input [(ngModel)]="domainClicked.imapHost" type="text"
+                                    autocomplete="serverImapNoAutocomplete" name="serverImapNoAutocomplete" matInput
+                                    placeholder="{{langService.dictionary.imap_host}}" (focus)="hideError()">
+                            </mat-form-field>
+                        </div>
+                        <div class="portBox bd-highlight">
+                            <mat-form-field class="w-100">
+                                <input [(ngModel)]="domainClicked.imapPort" type="text"
+                                    autocomplete="portImapNoAutocomplete" name="portImapNoAutocomplete" matInput
+                                    placeholder="{{langService.dictionary.port}}" (focus)="hideError()">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <mat-form-field class="w-100">
+                        <mat-label>{{langService.dictionary.security}}</mat-label>
+                        <mat-select [(ngModel)]="domainClicked.imapEncryption" name="domain" (focus)="hideError()">
+                            <mat-option *ngFor="let security of securityList" [value]="security.value" (click)="getSecurityLabel(security.label)">
+                                {{security.label}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="w-100">
+                      <input [(ngModel)]="domainClicked.imapProtocol" type="text"
+                              autocomplete="serverImapNoAutocomplete" name="serverImapNoAutocomplete" matInput
+                              placeholder="{{langService.dictionary.imap_protocol}}" (focus)="hideError()">
+                    </mat-form-field>
+                    
+
+                </div>
+                <div class="col-6">
+
+                    <div class="type pb-1"><span class="label text-uppercase">{{langService.dictionary.smtp}}</span></div>
+                    <div class="d-flex bd-highlight">
+                        <div class="pr-2 serverInputBox flex-grow-1 bd-highlight">
+                            <mat-form-field>
+                                <input [(ngModel)]="domainClicked.smtpHost" type="text"
+                                    autocomplete="serverSmtpNoAutocomplete" name="serverSmtpNoAutocomplete" matInput
+                                    placeholder="{{langService.dictionary.smtp_host}}" (focus)="hideError()">
+                            </mat-form-field>
+                        </div>
+                        <div class="portBox bd-highlight">
+                            <mat-form-field class="w-100">
+                                <input [(ngModel)]="domainClicked.smtpPort" type="text"
+                                    autocomplete="portSmtpNoAutocomplete" name="portSmtpNoAutocomplete" matInput
+                                    placeholder="{{langService.dictionary.port}}" (focus)="hideError()">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <mat-form-field class="w-100">
+                        <mat-label>{{langService.dictionary.security}}</mat-label>
+                        <mat-select [(ngModel)]="domainClicked.smtpEncryption" name="domain" (focus)="hideError()">
+                            <mat-option *ngFor="let security of securityList" [value]="security.value" (click)="getSecurityLabel(security.label)">
+                                {{security.label}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div *ngIf="this.isTim">
+                        <mat-form-field class="w-100">
+                            <mat-label>Microsoft Exchange</mat-label>
+                            <mat-select [(ngModel)]="selectedValue" name="domain" (focus)="hideError()" [(value)]="hasExchange">
+                                <mat-option value="enabled">Abilitato</mat-option>
+                                <mat-option value="disabled">Disabilitato</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="w-100" *ngIf="selectedValue == 'enabled'">
+                            <input [(ngModel)]="domainClicked.username" type="text"
+                                  autocomplete="Username" name="username" matInput
+                                  placeholder="Username" (focus)="hideError()">
+                        </mat-form-field>
+                        <mat-form-field class="w-100" *ngIf="selectedValue == 'enabled'">
+                            <input [(ngModel)]="domainClicked.password" type="text"
+                                  autocomplete="Password" name="password" matInput
+                                  placeholder="{{langService.dictionary.password}}" (focus)="hideError()">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHECKBOX SECTION START -->
+            <div class="col-12 mt-3 px-0 d-flex checkboxes" *ngIf="data.mode == 'edit'">
+                <div class="mr-4 d-flex align-items-center">
+                    <input [ngModel]="domainClicked.active == 1 ? true : domainClicked.active == 0 ? false : null" type="checkbox" class="activeCheckboxDialog"
+                           (ngModelChange)="domainClicked.active = $event ? '1' : '0'"
+                           id="activeCheckboxDialog" name="active">
+                    <label class="form-check-label ml-2 checkboxLabel text-capitalize"
+                        for="activeCheckboxDialog">{{langService.dictionary.active}}</label>
+                </div>
+                <div class="mr-4 d-flex align-items-center">
+                    <input [ngModel]="domainClicked.imapValidateCert == 1 ? true : domainClicked.imapValidateCert == 0 ? false : null"
+                           (ngModelChange)="domainClicked.imapValidateCert = $event ? '1' : '0'" type="checkbox" class="validateCheckbox"
+                           id="validateCheckbox">
+                    <label class="form-check-label ml-2 checkboxLabel text-capitalize" for="validateCheckbox">
+                      {{langService.dictionary.imap_validate}}
+                    </label>
+                </div>
+                <div class="mr-4 d-flex align-items-center">
+                    <input [ngModel]="isChecked? true : false" type="checkbox" class="useAuthCheckbox"
+                            (ngModelChange)="domainClicked.active = $event ? '1' : '0'" id="useAuthCheckbox" [disabled]="isHidden">
+                    <label class="form-check-label ml-2 checkboxLabel text-capitalize" for="useAuthCheckbox">
+                      {{langService.dictionary.smtp_use_auth}}
+                    </label>
+                </div>
+            </div>
+            <!--  CHECKBOX SECTION END -->
+
+        </div>
+    </div>
+    <div class="col-12 actions-box p-0" *ngIf="!IMAPdomain">
+        <div (click)="saveDomain(domainClicked)" 
+                class="primary-btn dialogButton float-right">
+            {{langService.dictionary.save}}
+        </div>
+        <div class="secondary-btn dialogButton float-left" mat-dialog-close>
+            {{langService.dictionary.undo}}
+        </div>
+    </div>
+
+
+    <div class="dialogContent tiny-scrollbar" *ngIf="!isLoading && !wait && IMAPdomain">
+        <mat-form-field class="w-100">
+            <input [(ngModel)]="domainClickedImap.url" type="text" autocomplete="domainNameNoAutocomplete"
+                name="domainNameNoAutocomplete" matInput placeholder="{{langService.dictionary.imap_name}}" required (focus)="hideError()">
+        </mat-form-field>
+        <mat-radio-group [(ngModel)]="domainClickedImap.type" class="Radio">
+            <mat-radio-button value="plain" class="RadioButton"> PLAIN </mat-radio-button>
+            <mat-radio-button value="gssapi"> GSSAPI </mat-radio-button>
+          </mat-radio-group>
+    </div>
+
+    <div class="col-12 actions-box p-0" *ngIf="IMAPdomain">
+        <div (click)="saveDomainImap(domainClickedImap)" 
+                class="primary-btn dialogButton float-right">
+            {{langService.dictionary.save}}
+        </div>
+        <div class="secondary-btn dialogButton float-left" mat-dialog-close>
+            {{langService.dictionary.undo}}
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,146 @@
+//importo solamente la parte relativa le breakpoint grid
+@import "~bootstrap/scss/bootstrap-grid.scss";
+.fileSharing-checkbox {
+  @include media-breakpoint-down(sm) {
+    padding: 0 1rem;
+  }
+}
+
+.fileSharing-icon {
+  cursor: pointer;
+    @include media-breakpoint-down(sm) {
+      padding-right: 1rem;
+    }
+}
+
+//width table columns
+.tablecheckbox{
+  width: 5%;
+}
+.tableimage{
+  width: 3%;
+
+  i{
+    &.folder{
+      color:#00396A;
+    }
+    &.text{
+      color:#5FBEEC;
+    }
+    &.image, &.svg,
+    &.video, &.audio{
+      color:#9669D2;
+    }
+    &.xlxs{
+      color:#66BA6C;
+    }
+    &.pptx{
+      color:#D98753;
+    }
+    &.pdf{
+      color:#B54F4F;
+    }
+    &.generic{
+      color:#ADB4B8;
+    }
+    &.zip{
+      color: #F7C408;
+    }
+  }
+}
+.tablename{
+  width: 72%;
+  color: #2B2B2B;
+  font-size: 13px;
+  letter-spacing: 0;
+  &.head{
+    color: #848484;
+    font-size: 11px;
+    letter-spacing: 0;
+    cursor: pointer;
+  }
+}
+.tablerefresh{
+  width: 4%;
+  cursor: pointer;
+
+  &:hover{
+    span{
+      color: #2B2B2B99;
+    }
+    i{
+      color: #00B9B3;
+    }
+    
+  }
+
+  span{
+    padding-left: 5px;
+    color: #2B2B2B;
+    font-size: 11px;
+    letter-spacing: 0;
+  }
+
+  i{
+    color: #007789;
+  }
+}
+.tabledelete{
+  width: 4%;
+  cursor: pointer;
+
+  i{
+    color: #007789;
+
+    &:hover{
+      color: #00B9B3;
+    }
+  }
+}
+.tableupdate{
+  width: 14%;
+  color: #2B2B2B;
+  font-size: 11px;
+  letter-spacing: 0;
+  &.head{
+    color: #848484;
+    cursor: pointer;
+  }
+}
+.tablefoot{
+  color: #2B2B2B;
+  font-size: 11px;
+  letter-spacing: 0;
+}
+
+
+.iconSettingFile{
+  cursor: pointer;
+}
+
+.nameSingleFile{
+  cursor: pointer;
+
+  .divNameSingleFile{
+    .spanNameFile{}
+    .spanExtensionFile{
+      color: #8e8d8d;
+    }
+  }
+}
+
+::ng-deep .datetooltip{
+  background-color: #00396A;
+  color: white !important;
+  border-radius: 3px;
+}
+
+.columnTableID {
+  display: none;
+}
+
+.table-col-share {
+  .share {
+    cursor: pointer;
+  }
+}

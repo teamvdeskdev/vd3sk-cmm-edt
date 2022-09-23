@@ -1,0 +1,72 @@
+#labels {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+
+    .selectlabels{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-around;
+        width: 80%;
+        height: 100%;
+        z-index: 0;
+        border-right: 1px solid rgba(0, 0, 0, 0.15);
+
+        div{
+            color: #40403F;
+            font-family: Roboto;
+            font-size: 16px;
+            letter-spacing: 0;
+            text-align: center;
+        }
+    }
+
+    .not-found {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-around;
+        width: 80%;
+        height: 100%;
+        z-index: 0;
+        border-right: 1px solid rgba(0, 0, 0, 0.15);
+
+        div{
+            color: #40403F;
+            font-family: Roboto;
+            font-size: 16px;
+            letter-spacing: 0;
+            text-align: center;
+        }
+    }
+
+    app-table{
+        width: 80%;
+        height: 100%;
+        z-index: 0;
+    }
+
+    app-no-data{
+        width: 100%;
+        height: 99%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    app-sidebar{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 20%;
+        background-color: #f0f0f0;
+    }
+}

@@ -1,0 +1,18 @@
+<div class="header">
+    <div class="divHead">
+        <span class="title"> {{ stringTitle }} </span>
+        <span class="subtitle"> {{ stringSubtitle }} </span>
+    </div>
+    <mat-icon (click)="onNoClick()"><i class="material-icons"> close </i></mat-icon>
+</div>
+
+<div class="body">
+    <mat-form-field class="input">
+        <input class="input" matInput placeholder="Name" autocomplete="none" [(ngModel)]="name">
+    </mat-form-field>
+</div>
+
+<div class="buttons">
+    <button class="remove" (click)="onNoClick()" mat-flat-button> {{ stringCancel }} </button>
+    <button class="save" (click)="onConfirmClick()" mat-flat-button> {{ stringSave }} </button>
+</div>

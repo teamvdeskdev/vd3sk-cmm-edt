@@ -1,0 +1,134 @@
+<div *ngIf="route.children.length === 0 && !isLoading" class="container m-0">
+    <div class="row">
+        <div class="title">
+            <span>{{dictTitle}} {{file.name}}{{file.extension}}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 align-self-center nopadding label-col-width label-text">
+            <mat-label>{{dictSignatory}}</mat-label>
+        </div>
+        <div class="col-md-7 nopadding normal-input">
+            <mat-form-field>
+                <mat-select>
+                    <mat-option *ngFor="let dto of signatureListDtos" [value]="dto" (click)="selectSignatureService(dto)">
+                        {{dto.signatureServiceIdentifier ? dto.signatureServiceIdentifier : dto.signatureServiceName}}
+                    </mat-option>
+                </mat-select> 
+            </mat-form-field>
+        </div>
+        <div class="col-md-3 nopadding"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 align-self-center nopadding label-col-width label-text">
+            <mat-label>{{dictSaveIn}}</mat-label>
+        </div>
+        <div class="col-md-7 nopadding normal-input">
+            <mat-form-field>
+                <input #inputSaveFile matInput [value]="pathSaveFile ? pathSaveFile : ''" (change)="pathSaveFile = inputSaveFile.value">
+            </mat-form-field>
+        </div>
+        <div class="col-md-3 nopadding">
+            <div class="button-cambia label text-nowrap" (click)="openDialogChangePath()">{{dictChange}}</div>
+        </div>
+    </div>
+
+    <!-- MARK -->
+    <div class="row" *ngIf="isPers">
+        <div class="col-md-2 align-self-center nopadding label-col-width label-text">
+            <mat-label>{{mark}}</mat-label>
+        </div>
+        <div class="col-md-7 nopadding normal-input">
+            <mat-checkbox (change)="getMark()"></mat-checkbox>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="notCustom && notShare">
+        <div class="col-md-2 align-self-center nopadding label-col-width label-text">
+            <mat-label>{{dictCode}}</mat-label>
+        </div>
+        <div class="col-md-7 nopadding normal-input">
+            <mat-form-field>
+                <mat-select>
+                    <mat-option *ngFor="let code of codes" [value]="code" (click)="selectCode(code)">
+                        {{code}}
+                    </mat-option>
+                </mat-select> 
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="notCustom && notShare && codeNotar">
+        <div class="col-md-2 align-self-center nopadding label-col-width label-text">
+            <mat-label>{{dictCert}}</mat-label>
+        </div>
+        <div class="col-md-7 nopadding normal-input">
+            <mat-form-field>
+                <mat-select>
+                    <mat-option *ngFor="let cert of certify" [value]="cert" (click)="selectCert(cert)">
+                        {{cert}}
+                    </mat-option>
+                </mat-select> 
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div *ngIf="signatureType === signatureTypeEnum.PAdES && !notCustom" class="row">
+        <div class="col-md-2 align-self-center nopadding label-col-width label-text">
+            <mat-label>{{dictPlace}}</mat-label>
+        </div>
+        <div class="col-md-7 nopadding normal-input">
+            <mat-form-field>
+                <input #location matInput (change)="setLocation(location.value)">
+            </mat-form-field>
+        </div>
+        <div class="col-md-3 nopadding"></div>
+    </div>
+    <div *ngIf="signatureType === signatureTypeEnum.PAdES && !notCustom" class="row">
+        <div class="col-md-2 align-self-center nopadding label-col-width label-text">
+            <mat-label>{{dictCausal}}</mat-label>
+        </div>
+        <div class="col-md-7 nopadding normal-input">
+            <mat-form-field>
+                <input #reason matInput (change)="setReason(reason.value)">
+            </mat-form-field>
+        </div>
+        <div class="col-md-3 nopadding"></div>
+    </div>
+    <div class="row pt-3">
+        <div class="col-md-2 nopadding label-col-width label-text">
+            <mat-label>{{dictFormat}}</mat-label>
+        </div>
+        <div class="col-md-2 nopadding label-text radio-width">
+            <form [formGroup]="form">
+                <mat-radio-group class="flex-radio-group" formControlName="signatureTypeRadio" (change)="changeSignatureType($event)">
+                    <mat-radio-button [value]="signatureTypeEnum.CAdES">CAdES</mat-radio-button>
+                    <mat-radio-button *ngIf="isPdfFile" [value]="signatureTypeEnum.PAdES">PAdES</mat-radio-button>
+                </mat-radio-group>
+            </form>
+        </div>
+        <div *ngIf="isPdfFile" class="col-md-5 nopadding">
+            <mat-form-field class="flex-input">
+                <mat-select #selectGraphInvis [value]="graphicOrInvisible" (selectionChange)="selectGraphicOrInvisible(selectGraphInvis)" [disabled]="this.signatureType == signatureTypeEnum.CAdES ? true : false">
+                    <mat-option value="firmaGrafica">{{dictGraphicSignature}}</mat-option>
+                    <mat-option value="firmaInvisibile">{{dictInvisibleSignature}}</mat-option>
+                </mat-select> 
+            </mat-form-field>
+        </div>
+        <div class="col-md-3 nopadding"></div>
+    </div>
+    <div class="row buttons-row">
+        <div class="button-back label text-nowrap" (click)="Back()">{{dictBack}}</div>
+        <button class="button-confirm label text-nowrap" (click)="Next()" [disabled]="disableNextButton() ? true : false">{{dictContinue}}</button>
+    </div>
+</div>
+
+<router-outlet></router-outlet>
+
+<ngx-spinner *ngIf="isLoading"
+    bdColor = "rgba(0,0,0,0)"
+    size = "default"
+    color = "#00B9B3"
+    type = "triangle-skew-spin"
+    [fullScreen] = "false" >
+</ngx-spinner>

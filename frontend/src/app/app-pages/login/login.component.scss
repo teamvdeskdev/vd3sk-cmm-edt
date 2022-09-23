@@ -1,0 +1,313 @@
+@import "node_modules/bootstrap/scss/bootstrap.scss";
+
+#spinner-login {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    background-color: #ffffff;
+}
+
+#chooseLogin{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    background: white;
+
+    .container-outer{
+        width: 36%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .container-inner{
+            width: 80%;
+            height: 85%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .container-top{
+                width: 80%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+    
+                .logo {
+                    width: 234px;
+                    @include media-breakpoint-up(lg) {
+                      width: 234px;
+                    }
+                }
+    
+                .label{
+                    height: 24px;
+                    margin: 39px 6px 84px 7px;
+                    font-family: Roboto;
+                    font-size: 20px;
+                    font-weight: normal;
+                    font-stretch: normal;
+                    font-style: normal;
+                    line-height: normal;
+                    letter-spacing: normal;
+                    color: #2b2b2b;
+                }
+            }
+    
+            .container-mid{
+                width: 80%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                button{
+                    width: 100%;
+                    height: 60px;
+                    margin-bottom: 20px;
+                    padding: 26px 16px 25px;
+                    border-radius: 33.5px;
+                    font-family: Roboto;
+                    font-size: 14px;
+                    font-weight: bold;
+                    font-stretch: normal;
+                    font-style: normal;
+                    line-height: normal;
+                    letter-spacing: 0.58px;
+                    text-align: center;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    &.up{
+                        background: linear-gradient(to right, #00a59f 0%, #007cb9 100%);
+                        color: #ffffff;
+                        text-transform: uppercase;
+                    }
+        
+                    &.down{
+                        background: white;
+                        color: #007789;
+    
+                        mat-icon{
+                            margin-right: 7px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .container-bot{
+            width: 80%;
+            display: flex;
+            flex-direction: row;
+            align-items: baseline;
+            justify-content: center;
+
+            .logo {
+                width: 80px;
+                margin-right: 8px;
+            }
+
+            .label{
+                color: #c7c7c7;
+                font-size: 12px;
+                font-family: Roboto;
+                font-weight: bold;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: normal;
+                letter-spacing: 0.5px;
+            }
+        }
+    }
+}
+
+.container-SUA {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .button-SUA{
+        background: linear-gradient(to right, #00a59f 0%, #007cb9 100%);
+        color: #ffffff;
+        text-transform: uppercase;
+        border-radius: 33.5px;
+        width: 60%;
+        height: 60px;
+        margin-bottom: 20px;
+        padding: 26px 16px 25px;
+        border-radius: 33.5px;
+        font-family: Roboto;
+        font-size: 14px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: 0.58px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+}
+
+.login{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: nowrap;
+
+    //background-image: linear-gradient(#374857 20%, white 80%);
+    background: linear-gradient(180deg, #007DB8 0%, #00A69F 100%);
+}
+
+.loginCobranding{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: nowrap;
+
+    //background-image: linear-gradient(#374857 20%, white 80%);
+    background: var(--cobranding-color);
+}
+
+.loginSua {
+    background-image: url('../../../assets/img/splash_page/background_image.png');
+    background-size: cover;
+}
+
+.logo {
+    width: 100px;
+    @include media-breakpoint-up(lg) {
+      width: 111px;
+      max-height: 70px;
+    }
+}
+
+.logoCobranding {
+    width: 100px;
+    @include media-breakpoint-up(lg) {
+      width: 111px;
+      max-height: 47.45px;
+      float: right;
+    }
+}
+.container-outer {
+    width: 33.33%;
+    height: 100%;
+    display: table;  
+}
+.container-inner {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+.login-card {
+    //width: 450px;
+    height: auto;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.15);
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+}
+.card-title {
+    text-align: left;
+
+    .label {
+        color: #7d7d7d;
+        font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px;
+        padding-left: 10px;
+    }
+
+    .label2 {
+        padding-top: 2.5rem;
+        color: #2b2b2b;
+        font-family: Roboto;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 24px;
+    }
+}
+.login-form {
+    display: flex;
+    flex-direction: column;
+
+    .mat-form-field {
+        font-size: 13px;
+        line-height: 17px;
+    }
+}
+.btn.login {
+    width: 100%;
+    height: 36px;
+    background-image: var(--bg-color-bt);
+    margin-top: 7%;
+
+    color: #ffffff;
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 14px;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+.error-help {
+    margin-bottom: 5%;
+    color: red;
+}
+.mt-1 {
+    margin-top: 1%;
+}
+.recovery {
+    text-align: left;
+    color: #2673e8;
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+}
+.mb-4 {
+    margin-bottom: 4%;
+}
+.mb-5 {
+    margin-bottom: 5%;
+}
+.check {
+    text-align: left;
+    height: 14px;
+    color: #2b2b2b;
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+}
+
+
+

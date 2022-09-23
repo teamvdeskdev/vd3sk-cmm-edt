@@ -1,0 +1,45 @@
+<div id="dialogCopyFileFolder">
+    <ngx-spinner        
+        bdColor = "rgba(0,0,0,0)"
+        size = "default"
+        color = "#00B9B3"
+        type = "triangle-skew-spin"
+        [fullScreen] = "false" >
+    </ngx-spinner>
+
+    <div class="title">
+        <span> {{ destinationString }} </span>
+        <mat-icon (click)="closeDialog()"><i class="material-icons">close</i></mat-icon>
+    </div>
+
+    <div class="containercopymove">
+        <app-path *ngIf="!isLoading" [class]="class" [movepath]="movepath" (change)="navigateFolder($event)"></app-path>
+        <app-dialog-table *ngIf="!isLoading && (dataValue.length>0 && !noData)" [dataValue]="dataValue" (change)="navigateFolder($event)" (create)="createNewFolder($event)"></app-dialog-table>
+        <div class="noData" *ngIf="noData && !isLoading">
+            <span> {{ nofolder }} </span>
+        </div>
+    </div>
+    
+    <div class="buttons">
+        <div class="createNewFolder">
+            <div class="toggleNewFolder" *ngIf="!inputFolder" (click)="toggleInput()"><span> {{ createFolder }} </span></div>
+            <div class="input" *ngIf="inputFolder">
+                <mat-icon class="iconlabel" (click)="toggleInput()"><i class="material-icons"> folder </i></mat-icon>
+                  <input type="text"
+                        #valuenamefolder
+                        placeholder="{{folderName}}"
+                        class="input">
+                  <mat-icon class="iconarrow" (click)="createNewFolder(valuenamefolder.value)"><i class="material-icons"> arrow_forward </i></mat-icon>
+            </div>
+        </div>
+
+        <div class="confirm">
+            <div>
+
+            </div>
+            <div class="copy" (click)="onConfirmClick()">
+                <span>{{selectButton}}</span>
+            </div>
+        </div>
+    </div>
+</div>

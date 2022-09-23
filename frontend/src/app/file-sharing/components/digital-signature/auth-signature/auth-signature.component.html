@@ -1,0 +1,58 @@
+<div *ngIf="!isLoading" class="container m-0">
+    <div class="row">
+        <div class="title">
+            <span>{{dictAuthTitle}}</span>
+        </div>
+    </div>
+    <!-- <div class="row">
+        <div class="col-md-2 align-self-center nopadding label-col-width label-text">
+            <mat-label>Certificato</mat-label>
+        </div>
+        <div class="col-md-7 nopadding normal-input">
+            <mat-form-field>
+                <mat-select>
+                    <mat-option>
+                            Option
+                    </mat-option>
+                </mat-select> 
+            </mat-form-field>
+        </div>
+        <div class="col-md-3 nopadding"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 align-self-center nopadding label-col-width label-text">
+            <mat-label>PIN</mat-label>
+        </div>
+        <div class="col-md-7 nopadding normal-input">
+            <mat-form-field>
+                <input matInput>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3 nopadding">
+        </div>
+    </div> -->
+    <div class="row">
+        <div class="col-md-2 align-self-center nopadding label-col-width label-text">
+            <mat-label>OTP</mat-label>
+        </div>
+        <div class="col-md-7 nopadding normal-input">
+            <mat-form-field>
+                <input #otpInput matInput [disabled]="!otpRequested" (change)="otp = otpInput.value">
+            </mat-form-field>
+        </div>
+        <div class="col-md-3 nopadding">
+        </div>
+    </div>
+    <div class="row buttons-row">
+        <div class="button-back label text-nowrap" (click)="Back()">{{dictBack}}</div>
+        <div class="button-confirm label text-nowrap" (click)="Next()">{{dictContinue}}</div>
+    </div>
+</div>
+
+<ngx-spinner *ngIf="isLoading"
+    bdColor = "rgba(0,0,0,0)"
+    size = "default"
+    color = "#00B9B3"
+    type = "triangle-skew-spin"
+    [fullScreen] = "false" >
+</ngx-spinner>

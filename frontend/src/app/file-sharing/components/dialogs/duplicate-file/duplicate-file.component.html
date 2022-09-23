@@ -1,0 +1,66 @@
+<div class="title">
+    <span> {{ title }} </span>
+    <i class="material-icons" (click)="onNoClick()">close</i>
+</div>
+
+<div class="subtitle">
+    <div> {{ subtitle1 }} </div>
+    <div class="second"> {{ subtitle2 }} </div>
+</div>
+
+<div class="body">
+    <div class="header">
+        <div class="half">
+            <div class="checkbox">
+                <mat-checkbox class="example-margin" (change)="setAllOld()"></mat-checkbox>
+            </div>
+            <div class="text"> {{ oldFile }} </div>
+        </div>
+        <div class="half">
+            <div class="checkbox">
+                <mat-checkbox class="example-margin" (change)="setAllNew()"></mat-checkbox>
+            </div>
+            <div class="text"> {{ newFile }} </div>
+        </div>
+    </div>
+
+    <div class="inner">
+        <div class="element" *ngFor="let item of allArray">
+            <div class="name"> {{ item.name }} </div>
+            <div class="body">
+
+                <div class="half">
+                    <div class="image">
+                        <i class="material-icons" [ngClass]="item.classimage"> {{ item.image }} </i>
+                    </div>
+                    <div class="info">
+                        <div class="checkbox">
+                            <mat-checkbox class="example-margin" [(ngModel)]="item.old"></mat-checkbox>
+                        </div>
+                        <div class="info1"> {{ item.dateDuplicate }} </div>
+                        <div class="info1"> {{ item.weightDuplicate }} </div>
+                    </div>
+                </div>
+
+                <div class="half">
+                    <div class="image">
+                        <i class="material-icons" [ngClass]="item.classimage"> {{ item.image }} </i>
+                    </div>
+                    <div class="info">
+                        <div class="checkbox">
+                            <mat-checkbox class="example-margin" [(ngModel)]="item.new"></mat-checkbox>
+                        </div>
+                        <div class="info1"> {{ item.dateOriginal }} </div>
+                        <div class="info1"> {{ item.weightOriginal }} </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="buttons">
+    <div class="return" (click)="onNoClick()"> {{ deny }} </div>
+    <div class="confirm" (click)="onConfirmClick()"> {{ confirm }} </div>
+</div>

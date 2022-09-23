@@ -1,0 +1,248 @@
+#vdpaSettings {
+  height: 90%;
+  width: 100%;
+  background-color: #F0F0F0;
+  overflow-y: auto;
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // IE and Edge
+
+  .vdpaSettings-inner-container {
+    width: 100%;
+    margin-bottom: 100px;
+  }
+
+  .vdpaSettings-header {
+    padding: 20px;
+
+    .vdpaSettings-header-title {
+      color: #2B2B2B;
+      font-family: Roboto;
+      font-size: 18px;
+      letter-spacing: 0;
+      line-height: 21px;
+      margin-bottom: 10px;
+    }
+
+    .vdpaSettings-header-subtitle {
+      color: #2B2B2B;
+      font-family: Roboto;
+      font-size: 16px;
+      letter-spacing: 0;
+      line-height: 16px;
+    }
+  }
+
+  .vdpaSettings-body {
+    padding: 0px 20px;
+
+    .providers {
+      font-size: 14px;
+
+      .mat-form-field {
+        font-size: 13px;
+        line-height: 17px;
+        width: 60%;
+
+        .mat-form-field-infix {
+          font-size: 13px;
+        }
+
+        .mat-form-field-label {
+          padding-left: 5px;
+        }
+      }
+    }
+
+    button {
+      &.addDomain {
+        font-weight: bold;
+        letter-spacing: 0.58px;
+      }
+
+      &.deleteRow {
+        font-size: 9.8px;
+        font-weight: bold;
+        letter-spacing: 0.41px;
+        text-transform: uppercase;
+        background-color: #009ea3;
+      }
+
+      &.save {
+        width: 165px !important;
+        margin: 0 2rem;
+        // position: relative;
+        // bottom: 15px;
+        text-transform: uppercase;
+        background-color: #009ea3;
+      }
+    }
+
+    .myTooltip {
+      color: #808080;
+    }
+
+    .section {
+      border-bottom: solid 1px #bfbfbf;
+      padding-bottom: 5px;
+      margin-top: 20px;
+
+      .mat-icon.edit {
+        cursor: pointer;
+        font-size: 25px;
+        color: #0077894D;
+
+        &.selected {
+          color: #007789;
+        }
+
+        &:hover {
+          color: #007789;
+        }
+      }
+
+      .vdpaSettings-header-title {
+        color: #2B2B2B;
+        font-family: Roboto;
+        font-size: 18px;
+        letter-spacing: 0;
+        line-height: 21px;
+        margin-bottom: 10px;
+      }
+
+      .vdpaSettings-header-subtitle {
+        color: #2B2B2B;
+        font-family: Roboto;
+        font-size: 16px;
+        letter-spacing: 0;
+        line-height: 16px;
+      }
+    }
+
+    .checkbox-field {
+      margin-top: 10px;
+
+      .checkboxLabel {
+        font-size: 14px;
+      }
+    }
+
+    .mat-select-value {
+      padding-left: 0;
+    }
+
+    .mat-form-field {
+      font-size: 13px;
+      line-height: 17px;
+      width: 20%;
+
+      .mat-form-field-infix {
+        font-size: 13px;
+      }
+
+      .mat-form-field-label {
+        padding-left: 5px;
+      }
+    }
+
+
+    .primary-btn {
+      margin-top: 30px;
+      height: 30px;
+      width: 240px;
+      padding-top: 7px;
+      border-radius: 3px;
+      background: linear-gradient(90deg, #00A59F 0%, #007CB9 100%);
+      color: #FFFFFF;
+      font-family: 'Roboto';
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 0.58px;
+      line-height: 16px;
+      text-align: center;
+      text-transform: uppercase;
+      cursor: pointer;
+
+      &:hover {
+        background: #00B9B3;
+      }
+    }
+
+    .cancel-btn {
+      margin-top: 30px;
+      margin-right: 30px;
+      height: 30px;
+      width: 240px;
+      padding-top: 7px;
+      border-radius: 3px;
+      border: 1px solid #368BA2;
+      // background: linear-gradient(90deg, #00A59F 0%, #007CB9 100%);
+      color: #368BA2;
+      font-family: 'Roboto';
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 0.58px;
+      line-height: 16px;
+      text-align: center;
+      text-transform: uppercase;
+      cursor: pointer;
+
+      &:hover {
+        background: #00B9B3;
+        color: #FFFFFF;
+      }
+    }
+  }
+}
+
+/*** TOAST MESSAGE: Mat Snackbar CSS START ***/
+.toast-success {
+  background-color: #007CB8;
+  color: white;
+  -webkit-box-shadow: unset;
+  -moz-box-shadow: unset;
+  box-shadow: unset;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.toast-error {
+  background-color: rgba(255, 0, 0, 0.493);
+  color: #2B2B2B;
+  -webkit-box-shadow: unset;
+  -moz-box-shadow: unset;
+  box-shadow: unset;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.toast-info {
+  background-color: #FFFFFF;
+  color: #007CB8;
+  -webkit-box-shadow: unset;
+  -moz-box-shadow: unset;
+  box-shadow: unset;
+}
+/*** TOAST MESSAGE: Mat Snackbar CSS END ***/
+
+.loader-row {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+  width: 30%;
+
+  .loader-col {
+    display: flex;
+    flex-direction: col;
+    height: 100%;
+  }
+}
+
+.vdesk-spinner {
+  color: #00B9B3;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+}

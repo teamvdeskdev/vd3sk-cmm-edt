@@ -1,0 +1,12 @@
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    #backupcode-title-print {
+        visibility: visible;
+    }
+    .authentication-print-zone {    
+        visibility: visible;    
+    }
+}

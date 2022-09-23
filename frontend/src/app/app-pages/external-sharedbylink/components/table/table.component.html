@@ -1,0 +1,105 @@
+<div class="tableDiv" appDropFileLink>
+
+  <ngx-spinner *ngIf="isLoading"
+      bdColor = "rgba(0,0,0,0)"
+      size = "default"
+      color = "#00B9B3"
+      type = "triangle-skew-spin"
+      [fullScreen] = "false" >
+  </ngx-spinner>
+
+  <div id="noData" *ngIf="noData">
+    <div class="noData">
+        <mat-icon><i class="material-icons"> folder </i></mat-icon>
+        <span class="nodatatitle"> {{ langService.dictionary.nodata_title }} </span>
+        <span class="nodatadescription"> {{ langService.dictionary.allfiles_nodata_desc }} </span>
+    </div>
+  </div>
+
+    <!--<img *ngIf="isLoading" class="loader" src="/assets/img/loader.gif">-->
+    <table mat-table *ngIf="!noData" [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+        <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef class="tablecheckbox head">
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [aria-label]="checkboxLabel()"
+                        color="primary">
+          </mat-checkbox>
+        </th>
+        <td class="fileSharing-checkbox tablecheckbox" mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="onSelectRow($event, row)"
+                        [checked]="selection.isSelected(row)"
+                        [aria-label]="checkboxLabel(row)"
+                        color="primary">
+          </mat-checkbox><!--"$event ? selection.toggle(row) : null"-->
+        </td>
+      </ng-container>
+  
+      <!-- ID Column -->
+      <!-- Usually this column is always hidden -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="columnTableID"></th>
+        <td mat-cell *matCellDef="let element" class="columnTableID"> {{element.id}} </td>
+      </ng-container>
+  
+      <!-- IMAGE Column -->
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef class="tableimage head"></th>
+        <td class="fileSharing-icon tableimage" mat-cell *matCellDef="let element" (click)="navigateFolder(element)">
+          <mat-icon class="tableimage" *ngIf="element.classimage!='zip'">
+            <i class="material-icons" [ngClass]="[element.classimage]">{{element.image}}</i>
+          </mat-icon>
+          <mat-icon class="tableimage" *ngIf="element.classimage=='zip'">
+            <img [ngClass]="[element.classimage]" src="assets/img/icons/zip.svg">
+          </mat-icon>
+        </td>
+      </ng-container>
+  
+      <!-- NAME Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="tablename head"> {{ langService.dictionary.name }} </th>
+        <td mat-cell *matCellDef="let element" class="nameSingleFile tablename">
+          <div *ngIf="!element.rename" class="divNameSingleFile" (click)="navigateFolder(element)">
+            <span class="spanNameFile">{{ element.name }}</span>
+            <span class="spanExtensionFile">{{ element.extension }}</span>
+          </div>
+          <div *ngIf="element.rename" class="changeNameFileDiv">
+            <input class="changeNameFileInput" [(ngModel)]=newname>
+            <i class="material-icons changeNameFileI" (click)="changeName(element.id)">done_outline</i>
+          </div>
+        </td>
+      </ng-container>
+  
+      <!-- FILE WEIGHT Column -->
+      <ng-container matColumnDef="weight">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableweight head"> {{ langService.dictionary.size }} </th>
+        <td mat-cell *matCellDef="let element" class="tableweight"> {{element.humanWeight}} </td>
+      </ng-container>
+  
+      <!-- LAST UPDATE Column -->
+      <ng-container matColumnDef="dateFunc">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableupdate head"> {{ langService.dictionary.last_update }} </th>
+        <td mat-cell *matCellDef="let element" class="tableupdate">{{element.pastHumandate}}</td>
+      </ng-container>
+
+      <!-- SEND DATA SIDEBAR COLUMN -->
+      <ng-container matColumnDef="senddetails">
+        <th mat-header-cell *matHeaderCellDef class="tableaction head"></th>
+        <td mat-cell *matCellDef="let element" class="senddetails tableaction" (click)="receiveIdDetails(element.id)">
+          <mat-icon><i class="material-icons">chevron_right</i></mat-icon>
+        </td>
+      </ng-container>
+  
+      <!-- TABLE FOOTER -->
+      <ng-container matColumnDef="getAllContent">
+        <td mat-footer-cell *matFooterCellDef colspan="10" class="tablefoot">{{ getAllContent }}</td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" [hidden]="row.hide"></tr>
+      <tr mat-footer-row *matFooterRowDef="['getAllContent']"></tr>
+    </table>
+</div>

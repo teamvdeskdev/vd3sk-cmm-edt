@@ -1,0 +1,443 @@
+#linknoPassword{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+#linkPassword{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #007DB8 0%, #00A69F 100%);
+    &.cobranding {
+        background: #cf331c;
+    }
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+    height: 15%;
+    width: 100%;
+    padding: 1% 1%;
+    background: linear-gradient(180deg, #022E53 0%, #00396A 100%);
+    &.cobranding {
+        background: #cf331c;
+    }
+
+    .left{
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+        justify-content: center;
+        align-content: flex-start;
+
+        .logo{
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            color: white;
+            flex-direction: row;
+            height: 80%;
+
+            img{
+                height: 52%;
+            }
+        }
+
+        .item{
+            width: 100%;
+            height: 20%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            color: #FFFFFF;
+            font-family: Roboto;
+            letter-spacing: 0;
+            line-height: 16px;
+
+            div.first{
+                display: flex;
+                align-items: center;
+                height: 100%;
+                font-size: 18px;
+                font-weight: 500;
+                padding-right: 5px;
+                color: #FFFFFF;
+                font-family: Roboto;
+                letter-spacing: 0;
+                line-height: 16px;
+            }
+
+            div.second{
+                display: flex;
+                align-items: center;
+                height: 100%;
+                font-size: 14px;
+                color: #FFFFFF;
+                font-family: Roboto;
+                letter-spacing: 0;
+                line-height: 17px;
+                padding-left: 3px;
+            }
+        }
+
+        app-path-link{
+            width: 100%;
+            height: 20%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            color: #FFFFFF;
+        }
+    }
+
+    .right{
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+        justify-content: center;
+        align-items: center;
+        color: #FFFFFF;
+
+        .upright{
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            justify-content: flex-end;
+            height: 50%;
+            width: 100%;
+
+            .loginimg{
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                align-items: center;
+                height: 100%;
+                margin-left: 20px;
+    
+                img.login{
+                    filter: invert(1);
+                    width: 24px;
+                    height: 26px;
+                }
+            }
+
+            .people{
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+                align-items: center;
+                height: 100%;
+    
+                mat-icon{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding-right: 10px;
+                }
+    
+                div.sharedby{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    font-family: Roboto;
+                    font-size: 11px;
+                    letter-spacing: 0;
+    
+                    span.first{
+                        padding-right: 5px;
+                    }
+    
+                    span.second{
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+
+        .downright{
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            justify-content: flex-end;
+            height: 70%;
+            width: 100%;
+
+            .createbutton{
+                display: flex;
+                flex-direction: column;
+                align-content: center;
+                justify-content: center;
+                width: 50%;
+                height: 50%;
+                border: 1px solid #FFFFFF;
+                border-radius: 3px;
+                cursor: pointer;
+                position: relative;
+
+                span{
+                    text-transform: uppercase;
+                    color: #FFFFFF;
+                    font-family: Roboto;
+                    font-size: 14px;
+                    font-weight: bold;
+                    letter-spacing: 0.58px;
+                    line-height: 16px;
+                    text-align: center;
+                    width: 100%;
+                }
+            }
+        }
+
+        app-upload-list {
+            display: flex;
+            position: absolute;
+            right: 1%;
+            width: 14.6%;
+            top: 14%;
+        }
+    }
+}
+
+.mainbody{
+    display: flex;
+    flex-direction: row;
+    height: 85%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+
+    .singleFileBody{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 82%;
+        align-items: center;
+        justify-content: center;
+    
+        .preview{
+            display: flex;
+            width: 100%;
+            height: 72px;
+            justify-content: center;
+            align-items: center;
+    
+            mat-icon{
+                display: flex;
+                height: 100%;
+                width: 30%;
+                justify-content: center;
+                align-items: center;
+    
+                i{
+                    font-size: 72px;
+        
+                    &.folder{
+                      color:#00396A;
+                    }
+                    &.text{
+                      color:#5FBEEC;
+                    }
+                    &.image, &.svg,
+                    &.video, &.audio{
+                      color:#9669D2;
+                    }
+                    &.xlxs{
+                      color:#66BA6C;
+                    }
+                    &.pptx{
+                      color:#D98753;
+                    }
+                    &.pdf{
+                      color:#B54F4F;
+                    }
+                    &.generic{
+                      color:#ADB4B8;
+                    }
+                    &.zip{
+                      color: #F7C408;
+                    }
+                }
+            }
+        }
+    
+        .download{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 7px;
+            letter-spacing: 0;
+            font-family: Roboto;
+    
+            span.first{
+                color: #2B2B2B;
+                font-size: 18px;
+                line-height: 21px;
+                margin-bottom: 5px;
+            }
+    
+            span.second{
+                color: #808080;
+                font-size: 14px;
+                line-height: 16px;
+            }
+        }
+    }
+
+    .tableMultiBody{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 82%;
+
+        app-table-link{
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+    }
+
+    app-sidebar-link{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 18%;
+        background-color: #f0f0f0;
+    }
+}
+
+.divPass{
+    height: 46%;
+    width: 36%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px 0 rgba(0,0,0,0.15);
+    padding: 1%;
+
+    .title{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 25%;
+
+        .logo{
+            display: flex;
+            width: 40%;
+            height: 60%;
+            align-items: flex-start;
+
+            img{
+                width: 75%;
+            }
+        }
+        .text{
+            display: flex;
+            width: 100%;
+            height: 30%;
+            justify-content: center;
+            align-items: flex-start;
+            margin-left: 2%;
+            span{
+                color: #7D7D7D;
+                font-family: Roboto;
+                font-size: 13px;
+                font-weight: bold;
+                letter-spacing: 0;
+                line-height: 15px;
+            }
+        }
+    }
+
+    .text{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 37%;
+
+        .title{
+            display: flex;
+            width: 100%;
+            height: 50%;
+            align-items: flex-start;
+            justify-content: center;
+
+            span{
+                color: #2B2B2B;
+                font-family: Roboto;
+                font-size: 20px;
+                letter-spacing: 0;
+                line-height: 24px;
+            }
+        }
+        .subtitle{
+            display: flex;
+            width: 100%;
+            height: 50%;
+            align-items: flex-start;
+            justify-content: center;
+
+            span{
+                display: flex;
+                width: 100%;
+                color: rgba(0,0,0,0.87);
+                font-family: Roboto;
+                font-size: 14px;
+                letter-spacing: 0;
+                line-height: 20px;
+            }
+        }
+    }
+
+    .input{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 20%;
+
+        input{
+            height: 45%;
+
+        }
+    }
+
+    .button{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 18%;
+
+        .buttondiv{
+            display: flex;
+            width: 100%;
+            height: 85%;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #00A59F 0%, #007CB9 100%);
+            cursor: pointer;
+
+            span{
+                color: #FFFFFF;
+                font-family: Roboto;
+                font-size: 12px;
+                font-weight: bold;
+                letter-spacing: 0.5px;
+                line-height: 14px;
+                text-align: center;
+                text-transform: uppercase;
+            }
+        }
+    }
+}

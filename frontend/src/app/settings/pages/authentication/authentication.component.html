@@ -1,0 +1,92 @@
+<div id="authentication">
+    <div class="authentication-header">
+        <div class="authentication-header-title">
+            {{langService.dictionary.two_factor_auth}}
+        </div>
+        <div class="authentication-header-subtitle">
+            {{langService.dictionary.use_second_factor}}
+        </div>
+    </div>
+    
+    <div class="authentication-body">
+        <!-- BACKUP CODES SECTION -->
+        <div class="section-title" id="backupcode-title-print">
+            {{langService.dictionary.backup_code}}
+        </div>
+        <div class="section-subtitle">
+            {{langService.dictionary.backup_code_subtitle}}
+        </div>
+        <div *ngIf="showBackupCodes">
+            <div class="section-subtitle">
+                {{langService.dictionary.save_print_codes}}
+            </div>
+            <div>
+                <div *ngFor="let code of backupCodes" class="authentication-print-zone">
+                    {{code}}
+                </div>
+            </div>
+            <div class="btn-row">
+                <div class="secondary-btn" (click)="saveBackupCodes()">
+                    {{langService.dictionary.save_codes}}
+                </div>
+                <div class="secondary-btn ml-2" (click)="printBackupCodes()">
+                    {{langService.dictionary.print_codes}}
+                </div>
+            </div>
+        </div>
+        <div class="section-btn" (click)="regenerateBackupCodes()">
+            <span *ngIf="!inProgressCodes">{{langService.dictionary.regenerate_backup_codes}}</span>
+            <span *ngIf="inProgressCodes">
+                {{langService.dictionary.regenerate_backup_codes_progress}} &nbsp; 
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            </span>
+        </div>
+        <div class="section-footer">
+            {{langService.dictionary.if_regenerate}}
+        </div>
+
+        <!-- TWO-FACTOR SECTION -->
+        <div class="section-title">
+            {{langService.dictionary.totp}}
+        </div>
+        <div class="section-subtitle">
+            {{langService.dictionary.totp_subtitle}}
+        </div>
+        <div *ngIf="!totpEnabled && globalsVar.customCustomer !== 'TIM'" class="section-btn" (click)="openConfirmDialog('enableTOTP')">
+            {{langService.dictionary.enable_totp}}
+        </div>
+
+        <!-- TOTP ENABLE SECTION -->
+        <div class="totp-enable-section" *ngIf="showTOTPSection">
+            <div> {{langService.dictionary.your_new_totp}} <span class="bold">{{qrCode}}</span> </div>
+            <div> {{langService.dictionary.configure}}  </div>
+            <div> {{langService.dictionary.step1}} <span class="highlighted">Google Authenticator</span>, </div>
+            <div> {{langService.dictionary.step2}} </div>
+
+            <div class="qrcode-wrapper">
+                <qrcode [qrdata]="qrUrl" [width]="150" [errorCorrectionLevel]="'H'"></qrcode>
+            </div>
+            
+            <div class="final-step"> {{langService.dictionary.final_step}} </div>
+
+            <div class="row-wrapper">
+                <form [formGroup]="codeForm">
+                    <mat-form-field>
+                      <input matInput type="text" #ref formControlName="code" name="code" placeholder="{{langService.dictionary.auth_code}}">
+                    </mat-form-field>
+                </form>
+                <div class="primary-btn" (click)="check(ref.value)">{{langService.dictionary.check}}</div>
+            </div>
+        </div>
+
+        <div *ngIf="totpEnabled" class="success"> 
+            <div class="status">
+                <mat-icon class="icon">done</mat-icon>  {{langService.dictionary.totp_enabled}}
+            </div>
+            <div class="section-btn" (click)="disableTOTP()">
+                <div *ngIf="globalsVar.customCustomer !== 'TIM'">{{langService.dictionary.disable_totp}}</div>
+                <div *ngIf="globalsVar.customCustomer === 'TIM'">{{langService.dictionary.regenerates_totp}}</div>
+            </div>
+        </div>
+    </div>
+</div>

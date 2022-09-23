@@ -1,0 +1,323 @@
+<div id="settings" *ngIf="screen">
+	<div id="settingsSidebar">
+		<div class="innerHeaderSettings">
+            <!-- <div>{{langService.dictionary.settings_title}}</div> -->
+            <div (click)="goBack()" *ngIf="!UserManager">
+                <mat-icon aria-hidden="false" class="back-icon">keyboard_arrow_left</mat-icon>
+                <span>{{langService.dictionary.back}}</span>
+            </div>
+        </div>
+        <div class="sidebarListSettings">
+            <mat-list class="ssList">
+                
+                <!-- USER SETTINGS -->
+                <mat-list-item [ngClass]="{'selected': currentpage=='profile'}">
+                    <a routerLink="profile" routerLinkActive="active">
+                        <mat-icon><i class="material-icons">person</i></mat-icon>
+                        <span>{{ langService.dictionary.profile }}</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item *ngIf="!UserManager" [ngClass]="{'selected': currentpage=='devicesession'}">
+                    <a routerLink="devicesession" routerLinkActive="active">
+                        <mat-icon><i class="material-icons">devices</i></mat-icon>
+                        <span>{{ langService.dictionary.device_session }}</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item *ngIf="globalsVar.enableV2fa" [ngClass]="{'selected': currentpage=='authentication'}">
+                    <a routerLink="authentication" routerLinkActive="active">
+                        <mat-icon><i class="material-icons">vpn_key</i></mat-icon>
+                        <span>{{ langService.dictionary.authentication }}</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item *ngIf="!UserManager" [ngClass]="{'selected': currentpage=='encryption'}">
+                    <a routerLink="encryption" routerLinkActive="active">
+                        <mat-icon><i class="material-icons">lock</i></mat-icon>
+                        <span>{{ langService.dictionary.encryption }}</span>
+                    </a>
+                </mat-list-item>
+                <!-- <mat-list-item [ngClass]="{'selected': currentpage=='configurations'}">
+                    <a routerLink="configurations" routerLinkActive="active">
+                        <mat-icon><i class="material-icons">settings_applications</i></mat-icon>
+                        <span>{{ langService.dictionary.configurations }}</span>
+                    </a>
+                </mat-list-item> -->
+
+                <!-- ADMIN SETTINGS -->
+                <div *ngIf="isAdmin && !GroupFolderManager">
+                    <mat-list-item [ngClass]="{'selected': currentpage=='users-settings'}">
+                        <a routerLink="users-settings" routerLinkActive="active">
+                            <mat-icon><i class="material-icons">manage_accounts</i></mat-icon>
+                            <span>{{ langService.dictionary.users_settings }}</span>
+                        </a>
+                    </mat-list-item>
+
+                    <mat-list-item [ngClass]="{'selected': currentpage=='groups-settings'}">
+                        <a routerLink="groups-settings" routerLinkActive="active">
+                            <mat-icon><i class="material-icons">groups</i></mat-icon>
+                            <span>{{ langService.dictionary.groups_settings }}</span>
+                        </a>
+                    </mat-list-item>
+
+                    <!-- Samluser Settings -->
+                    <mat-list-item *ngIf="globalsVar.enableSaml" [ngClass]="{'selected': currentpage=='samlusers-settings'}">
+                        <a routerLink="samlusers-settings" routerLinkActive="active">
+                            <mat-icon><i class="material-icons">manage_accounts</i></mat-icon>
+                            <span>{{ langService.dictionary.saml_settings }}</span>
+                        </a>
+                    </mat-list-item>
+
+                    <!-- Guest Settings -->
+                    <mat-list-item [ngClass]="{'selected': currentpage=='guest-settings'}">
+                        <a routerLink="guest-settings" routerLinkActive="active">
+                            <mat-icon><i class="material-icons">assignment_ind</i></mat-icon>
+                            <span>{{ langService.dictionary.guests_settings }}</span>
+                        </a>
+                    </mat-list-item>
+
+                    <!-- Download -->
+                    <mat-list-item [ngClass]="{'selected': currentpage=='setting-report'}">
+                        <a (click)="downloadReport()" id="downloadreport">
+                            <mat-icon><i class="material-icons">download</i></mat-icon>
+                            <span>{{ langService.dictionary.report }}</span>
+                        </a>
+                    </mat-list-item>
+
+                    <mat-list-item *ngIf="globalsVar.enableVpec && !UserManager" [ngClass]="{'selected': currentpage=='vpec'}">
+                        <a routerLink="vpec" routerLinkActive="active">
+                            <mat-icon><i class="material-icons">email</i></mat-icon>
+                            <span>{{ langService.dictionary.vpec_settings }}</span>
+                        </a>
+                    </mat-list-item>
+
+                    <mat-list-item class="dropdown" *ngIf="globalsVar.enableVcanvas && !UserManager" [ngClass]="{'selected': currentpage=='vcanvas'}">
+                        <a routerLink="vcanvas" routerLinkActive="active">
+                            <mat-icon><i class="material-icons">view_module</i></mat-icon>
+                            <span>{{ langService.dictionary.vcanvas_settings }}</span>
+                        </a>                    
+                        <mat-icon *ngIf="isCanvasOpen" (click)="listCanvasToggle()"><i class="material-icons">arrow_drop_up</i></mat-icon>
+                        <mat-icon *ngIf="!isCanvasOpen" (click)="listCanvasToggle()"><i class="material-icons">arrow_drop_down</i></mat-icon>
+                    </mat-list-item>
+                    <!-- vCanvas - share dropdown list -->
+                    <div *ngIf="globalsVar.enableVcanvas" class="listCanvasDropdown" [ngClass]="{'open': isCanvasOpen}">
+                        <div [ngClass]="{'selected': currentpage=='vcanvas-users'}">
+                            <a routerLink="vcanvas-users" routerLinkActive="active">
+                                <span> {{ langService.dictionary.vcanvas_users_settings }} </span>
+                            </a>
+                        </div>
+                        <div [ngClass]="{'selected': currentpage=='vcanvas-apps'}">
+                            <a routerLink="vcanvas-apps" routerLinkActive="active">
+                                <span> {{ langService.dictionary.vcanvas_apps_settings }} </span>
+                            </a>
+                        </div>
+                        <div [ngClass]="{'selected': currentpage=='vcanvas-groups'}">
+                            <a routerLink="vcanvas-groups" routerLinkActive="active">
+                                <span> {{ langService.dictionary.vcanvas_groups_settings }} </span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <mat-list-item *ngIf="globalsVar.enableVFlow && !UserManager" [ngClass]="{'selected': currentpage=='vflow'}">
+                        <a routerLink="vflow" routerLinkActive="active">
+                            <mat-icon><i class="material-icons">connect_without_contact</i></mat-icon>
+                            <span>{{ langService.dictionary.vflow_settings }}</span>
+                        </a>
+                    </mat-list-item>
+                    <mat-list-item *ngIf="globalsVar.enableVdpa && !UserManager" [ngClass]="{'selected': currentpage=='vdpa'}">
+                    <a routerLink="vdpa" routerLinkActive="active">
+                        <mat-icon><i class="material-icons">gesture</i></mat-icon>
+                        <span>{{ langService.dictionary.vdpa_settings }}</span>
+                    </a>
+                    </mat-list-item>
+                    <mat-list-item *ngIf="globalsVar.enableVshare && !UserManager" [ngClass]="{'selected': currentpage=='config-panel'}">
+                        <a routerLink="config-panel" routerLinkActive="active">
+                            <mat-icon><i class="material-icons">settings</i></mat-icon>
+                            <span>{{ langService.dictionary.config_panel }}</span>
+                        </a>
+                    </mat-list-item>
+
+                    <mat-list-item *ngIf="globalsVar.enableStagingArea && !UserManager" [ngClass]="{'selected': currentpage=='staging-area-settings'}">
+                        <a routerLink="staging-area-settings" routerLinkActive="active">
+                            <mat-icon><i class="material-icons">backup_table</i></mat-icon>
+                            <span>{{ langService.dictionary.stagingAreaSettings }}</span>
+                        </a>
+                    </mat-list-item>
+
+                    <!--                    
+                    <mat-list-item *ngIf="!UserManager" [ngClass]="{'selected': currentpage=='smtp'}">
+                        <a routerLink="smtp" routerLinkActive="active">
+                            <mat-icon><i class="material-icons">mail</i></mat-icon>
+                            <span>{{ langService.dictionary.smtp }}</span>
+                        </a>
+                    </mat-list-item>
+                    -->
+                </div>
+                <mat-list-item *ngIf="globalsVar.enableCalendar365" [ngClass]="{'selected': currentpage=='outlook'}">
+                    <a routerLink="outlook" routerLinkActive="active">
+                        <mat-icon><i class="material-icons">alternate_email</i></mat-icon>
+                        <span>{{ langService.dictionary.outlookSettings }}</span>
+                    </a>
+                </mat-list-item>
+            </mat-list>
+        </div>
+	</div>
+
+    <div id="settingsMain">
+        <div class="innerHeaderSettings">
+            <div  *ngIf=" ! isMultiLevel"  class="path">{{langService.dictionary.settings_title}} > {{dictPath}}</div>
+            <div *ngIf="isMultiLevel" class="path">
+                <span *ngIf="isCanvasSettings">
+                 {{langService.dictionary.settings_title}} > {{langService.dictionary.vcanvas_settings}} > {{dictPath}}
+                 <span *ngIf="isCanvasUserDetailsOpened === true">
+                    > {{vCanvasUser.username}}
+                 </span>
+                 <span *ngIf="isCanvasGroupDetailsOpened === true">
+                    > {{vCanvasGroup.id}}
+                 </span>
+                </span>
+            </div>
+        </div>
+
+        <router-outlet></router-outlet>
+	</div>
+
+</div>
+
+<!-- FOR SCREEN < 1024 -->
+<div id="settings" class="screen" *ngIf="!screen">
+    <div id="sHeaderSecondLevel">
+        <div class="openSideButton">
+            <mat-icon (click)="toggleClickScreen(drawer)">
+                <i *ngIf="!controltrick" class="material-icons"> dehaze </i>
+                <i *ngIf="controltrick" class="material-icons"> close </i>
+            </mat-icon>
+        </div>        
+        <div class="path">{{dictPath}}</div>
+    </div>
+
+    <mat-drawer-container autosize id="sMainBody">
+        <mat-drawer #drawer class="settingsSide" mode="over">
+            <mat-list class="ssList">
+                
+                <!-- USER SETTINGS-->
+                <mat-list-item [ngClass]="{'selected': currentpage=='profile'}">
+                    <a routerLink="profile" routerLinkActive="active">
+                        <mat-icon><i class="material-icons">person</i></mat-icon>
+                        <span>{{ langService.dictionary.profile }}</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item  *ngIf="!UserManager" [ngClass]="{'selected': currentpage=='devicesession'}">
+                    <a routerLink="devicesession" routerLinkActive="active">
+                        <mat-icon><i class="material-icons">devices</i></mat-icon>
+                        <span>{{ langService.dictionary.device_session }}</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item [ngClass]="{'selected': currentpage=='authentication'}">
+                    <a routerLink="authentication" routerLinkActive="active">
+                        <mat-icon><i class="material-icons">vpn_key</i></mat-icon>
+                        <span>{{ langService.dictionary.authentication }}</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item *ngIf="!UserManager" [ngClass]="{'selected': currentpage=='encryption'}">
+                    <a routerLink="encryption" routerLinkActive="active">
+                        <mat-icon><i class="material-icons">lock</i></mat-icon>
+                        <span>{{ langService.dictionary.encryption }}</span>
+                    </a>
+                </mat-list-item>
+
+                <!-- ADMIN SETTINGS-->
+                <div *ngIf="isAdmin">
+                    <mat-list-item [ngClass]="{'selected': currentpage=='users-settings'}">
+                        <a routerLink="users-settings" routerLinkActive="active">
+                            <mat-icon><i class="material-icons">manage_accounts</i></mat-icon>
+                            <span>{{ langService.dictionary.users_settings }}</span>
+                        </a>
+                    </mat-list-item>
+                    <mat-list-item [ngClass]="{'selected': currentpage=='groups-settings'}">
+                        <a routerLink="groups-settings" routerLinkActive="active">
+                            <mat-icon><i class="material-icons">groups</i></mat-icon>
+                            <span>{{ langService.dictionary.groups_settings }}</span>
+                        </a>
+                    </mat-list-item>
+                    <!-- Samluser Settings -->
+                    <mat-list-item *ngIf="globalsVar.enableSaml" [ngClass]="{'selected': currentpage=='samlusers-settings'}">
+                        <a routerLink="samlusers-settings" routerLinkActive="active">
+                            <mat-icon><i class="material-icons">manage_accounts</i></mat-icon>
+                            <span>{{ langService.dictionary.saml_settings }}</span>
+                        </a>
+                    </mat-list-item>
+
+                    <!-- Guest Settings -->
+                    <mat-list-item [ngClass]="{'selected': currentpage=='guest-settings'}">
+                        <a routerLink="guest-settings" routerLinkActive="active">
+                            <mat-icon><i class="material-icons">assignment_ind</i></mat-icon>
+                            <span>{{ langService.dictionary.guests_settings }}</span>
+                        </a>
+                    </mat-list-item>
+
+                    <!-- Download -->
+                    <mat-list-item [ngClass]="{'selected': currentpage=='setting-report'}">
+                        <a (click)="downloadReport()" id="downloadreport">
+                            <mat-icon><i class="material-icons">download</i></mat-icon>
+                            <span>{{ langService.dictionary.report }}</span>
+                        </a>
+                    </mat-list-item>
+
+                    <mat-list-item *ngIf="!UserManager" [ngClass]="{'selected': currentpage=='vpec'}">
+                        <a routerLink="vpec" routerLinkActive="active">
+                            <mat-icon><i class="material-icons">email</i></mat-icon>
+                            <span>{{ langService.dictionary.vpec_settings }}</span>
+                        </a>
+                    </mat-list-item>
+                    <mat-list-item *ngIf="globalsVar.enableVcanvas && !UserManager" [ngClass]="{'selected': currentpage=='vcanvas'}">
+                        <a routerLink="vcanvas" routerLinkActive="active">
+                            <mat-icon><i class="material-icons">view_module</i></mat-icon>
+                            <span>{{ langService.dictionary.vcanvas_settings }}</span>
+                        </a>
+                    </mat-list-item>
+                    <mat-list-item *ngIf="globalsVar.enableVFlow && !UserManager" [ngClass]="{'selected': currentpage=='vflow'}">
+                        <a routerLink="vflow" routerLinkActive="active">
+                            <mat-icon><i class="material-icons">connect_without_contact</i></mat-icon>
+                            <span>{{ langService.dictionary.vflow_settings }}</span>
+                        </a>
+                    </mat-list-item>
+                    <mat-list-item *ngIf="globalsVar.enableVdpa && !UserManager" [ngClass]="{'selected': currentpage=='vdpa'}">
+                    <a routerLink="vdpa" routerLinkActive="active">
+                        <mat-icon><i class="material-icons">gesture</i></mat-icon>
+                        <span>{{ langService.dictionary.vdpa_settings }}</span>
+                    </a>
+                    </mat-list-item>
+                    <mat-list-item *ngIf="globalsVar.enableVshare && !UserManager" [ngClass]="{'selected': currentpage=='config-panel'}">
+                        <a routerLink="config-panel" routerLinkActive="active">
+                            <mat-icon><i class="material-icons">settings</i></mat-icon>
+                            <span>{{ langService.dictionary.config_panel }}</span>
+                        </a>
+                    </mat-list-item>
+                    <mat-list-item *ngIf="globalsVar.enableStagingArea && !UserManager" [ngClass]="{'selected': currentpage=='staging-area-settings'}">
+                        <a routerLink="staging-area-settings" routerLinkActive="active">
+                            <mat-icon><i class="material-icons">backup_table</i></mat-icon>
+                            <span>{{ langService.dictionary.stagingAreaSettings }}</span>
+                        </a>
+                    </mat-list-item>
+                    <!--
+                    <mat-list-item *ngIf="!UserManager" [ngClass]="{'selected': currentpage=='smtp'}">
+                        <a routerLink="smtp" routerLinkActive="active">
+                            <mat-icon><i class="material-icons">mail</i></mat-icon>
+                            <span>{{ langService.dictionary.smtp }}</span>
+                        </a>
+                    </mat-list-item>
+                    -->
+                </div>
+                <mat-list-item *ngIf="globalsVar.enableCalendar365" [ngClass]="{'selected': currentpage=='outlook'}">
+                    <a routerLink="outlook" routerLinkActive="active">
+                        <mat-icon><i class="material-icons">alternate_email</i></mat-icon>
+                        <span>{{ langService.dictionary.outlookSettings }}</span>
+                    </a>
+                </mat-list-item>
+            </mat-list>
+        </mat-drawer>
+      
+        <div class="settingsMain">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-drawer-container>
+</div>

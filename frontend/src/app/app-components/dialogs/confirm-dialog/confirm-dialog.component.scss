@@ -1,0 +1,109 @@
+.title{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 20%;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+    span{
+        color: #2B2B2B;
+        font-family: Roboto;
+        font-size: 18px;
+        letter-spacing: 0;
+        line-height: 21px;
+    }
+
+    mat-icon{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        i{
+            color: #00396a;
+            font-size: 20px;
+
+            &:hover{
+                color: #00396a;
+            }
+        }
+    }
+}
+
+.content{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    height: 15%;
+    margin-bottom: 30px;
+
+    span{
+        color: #808080;
+        font-family: Roboto;
+        font-size: 14px;
+        letter-spacing: 0;
+        line-height: 16px;
+    }
+}
+
+.weight{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    height: 10%;
+
+    span{
+        color: #808080;
+        font-family: Roboto;
+        font-size: 13px;
+        letter-spacing: 0;
+        line-height: 16px;
+    }
+}
+
+.buttonsdialog{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 30%;
+    align-items: center;
+    justify-content: space-between;
+
+    div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        padding: 5px 0px;
+        outline: none;
+        width: 45%;
+        cursor: pointer;
+        height: fit-content;
+        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: bold;
+        letter-spacing: 0.58px;
+        font-family: Roboto;
+
+        &.return{
+            background: white;
+            color: #228196;
+            max-width: 164px;
+        }
+    
+        &.save{            
+            color: white;
+            background: linear-gradient(to right, #00a59f 0%, #007cb9 100%);
+            border: none;
+            max-width: 200px;           
+            
+            &:hover{
+                background: #00B9B3;
+            }
+        }
+    }
+}

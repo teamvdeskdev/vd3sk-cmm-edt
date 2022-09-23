@@ -1,0 +1,64 @@
+<mat-list class="fssList">
+    <mat-list-item class="buttonexport">
+        <button class="buttonexportboth" (click)="exportPDF()">
+            <span> {{ export }} </span>    
+        </button>
+    </mat-list-item>
+
+    <mat-list-item [ngClass]="{'selected': currentpage=='activities-all'}">
+        <a routerLink="activities-all" routerLinkActive="active" (click)="emitPath('activities-all')">
+            <mat-icon><i class="material-icons">flash_on</i></mat-icon>
+            <span>{{ dictAllActivities }}</span>
+        </a>
+    </mat-list-item>
+    <mat-list-item [ngClass]="{'selected': currentpage=='activities-your'}">
+        <a routerLink="activities-your" routerLinkActive="active" (click)="emitPath('activities-your')">
+            <mat-icon><i class="material-icons">person</i></mat-icon>
+            <span>{{ dictYourActivities }}</span>
+        </a>
+    </mat-list-item>
+    <mat-list-item [ngClass]="{'selected': currentpage=='activities-others'}">
+        <a routerLink="activities-others" routerLinkActive="active" (click)="emitPath('activities-others')">
+            <mat-icon><i class="material-icons">people</i></mat-icon>
+            <span>{{ dictOtherActivities }}</span>
+        </a>
+    </mat-list-item>
+    <mat-list-item [ngClass]="{'selected': currentpage=='activities-favorites'}">
+        <a routerLink="activities-favorites" routerLinkActive="active" (click)="emitPath('activities-favorites')">
+            <mat-icon><i class="material-icons">star</i></mat-icon>
+            <span>{{ dictFavorites }}</span>
+        </a>
+    </mat-list-item>
+    <mat-list-item [ngClass]="{'selected': currentpage=='activities-filechanges'}">
+        <a routerLink="activities-filechanges" routerLinkActive="active" (click)="emitPath('activities-filechanges')">
+            <mat-icon><i class="material-icons">edit</i></mat-icon>
+            <span>{{ dictFileChanges }}</span>
+        </a>
+    </mat-list-item>
+    <mat-list-item [ngClass]="{'selected': currentpage=='activities-security'}">
+        <a routerLink="activities-security" routerLinkActive="active" (click)="emitPath('activities-security')">
+            <mat-icon><i class="material-icons">lock</i></mat-icon>
+            <span>{{ dictSecurity }}</span>
+        </a>
+    </mat-list-item>
+    <mat-list-item [ngClass]="{'selected': currentpage=='activities-fileshares'}">
+        <a routerLink="activities-fileshares" routerLinkActive="active" (click)="emitPath('activities-fileshares')">
+            <mat-icon><i class="material-icons">share</i></mat-icon>
+            <span>{{ dictFileShares }}</span>
+        </a>
+    </mat-list-item>
+
+    <!-- WIP: add controll (only admin can see them) -->
+    <!--<mat-list-item [ngClass]="{'selected': currentpage=='activities-calendar'}">
+        <a routerLink="activities-calendar" routerLinkActive="active" (click)="emitPath('activities-calendar')">
+            <mat-icon><i class="material-icons">today</i></mat-icon>
+            <span>{{ dictCalendar }}</span>
+        </a>
+    </mat-list-item>
+    <mat-list-item [ngClass]="{'selected': currentpage=='activities-task'}">
+        <a routerLink="activities-task" routerLinkActive="active" (click)="emitPath('activities-task')">
+            <mat-icon><i class="material-icons">check</i></mat-icon>
+            <span>{{ dictTask }}</span>
+        </a>
+    </mat-list-item>-->
+</mat-list>

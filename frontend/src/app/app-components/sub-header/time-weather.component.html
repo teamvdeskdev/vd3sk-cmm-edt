@@ -1,0 +1,4 @@
+<span *ngIf="dayName && todayDate && time">{{dayName}} {{todayDate}} | {{time}}</span>
+<span *ngIf="cityName && weatherIcon && weatherTemp" class="weather-info"> | {{cityName}}
+    <i [ngClass]="weatherIcon" class="weather-icon"></i> {{weatherTemp}} °C
+</span>

@@ -1,0 +1,131 @@
+
+<div id="remindersPage" class="container-fluid">
+    <div class="sub-header-reminders-page container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="back-button">
+                    <div class="material-icons back-icon" (click)="backToDashboard()">chevron_left</div><div class="back-text" (click)="backToDashboard()">{{langService.dictionary.backButton}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!firstLoading" class="page-reminders-section">
+        <!-- Sezione promemoria attivi -->
+        <div class="row title-row">
+            <div class="col-md-12">
+                <div class="page-title-with-icon">
+                    <div class="material-icons icon-page-title">post_add</div>
+                    <div class="page-title">{{langService.dictionary.pageTitle}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="row active-subtitle-row">
+            <div class="col-md-12">
+                <div class="big-subtitle-active">{{langService.dictionary.bigSubtitleActive}}</div>
+                <div class="little-subtitle-active">{{langService.dictionary.littleSubtitleActive}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 search-col">
+                <mat-form-field class="search-form-field">
+                    <input #searchActive matInput type="search" placeholder="{{langService.dictionary.searchPlaceholder}}" (keyup)="keyupSearchActive(searchActive.value)">
+                    <mat-icon matSuffix class="search-icon">search</mat-icon>
+                    <mat-hint class="hint-no-results-search" *ngIf="activePostIts && activePostIts.length === 0 && searchActive.value">{{langService.dictionary.noSearchResultsMsg}}</mat-hint>
+                </mat-form-field>
+                <div class="filter-container">
+                    <div class="filter-btn-text">{{langService.dictionary.filterBtnText}}</div>
+                    <div class="material-icons filter-icon" (click)="openFilterPostItDialog(true)" 
+                        matBadge="{{activePostItsFiltersCounter}}" 
+                        matBadgePosition="after" 
+                        matBadgeColor="warn"
+                        [matBadgeHidden]="activePostItsFiltersCounter < 1">
+                        filter_list
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="active-post-it-container">
+                    <ul class="ul-post-it-container">
+                        <!-- Active post-it list -->
+                        <ng-container *ngIf="activePostIts">
+                            <ng-container *ngFor="let postIt of activePostIts">
+                                <li class="li-post-it">
+                                    <app-post-it-item *ngIf="postIt" [data]="postIt"></app-post-it-item>
+                                </li>
+                            </ng-container>
+                        </ng-container>
+                        <!-- Active empty post-it -->
+                        <ng-container *ngIf="emptyActivePostItsView">
+                            <ng-container *ngFor="let emptyPostIt of emptyActivePostItsView">
+                                <li class="li-post-it">
+                                    <app-empty-post-it-item></app-empty-post-it-item>
+                                </li>
+                            </ng-container>
+                        </ng-container>
+                        <!-- Add post-it button -->
+                        <li class="li-post-it">
+                            <div class="add-post-it-item" [ngClass]="{'add-post-it-item-active': !searchActive.value, 'add-post-it-item-inactive': searchActive.value}" (click)="!searchActive.value && openAddPostItDialog()">
+                                <div class="material-icons-outlined add-post-it-icon">add_circle</div>
+                                <div class="add-post-it-text">{{langService.dictionary.addNewPostIt}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Sezione promemoria completati -->
+        <div class="row completed-subtitle-row">
+            <div class="col-md-12">
+                <div class="big-subtitle-completed">{{langService.dictionary.bigSubtitleCompleted}}</div>
+                <div class="little-subtitle-completed">{{langService.dictionary.littleSubtitleCompleted}}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 search-col">
+                <mat-form-field class="search-form-field">
+                    <input #searchCompleted matInput type="search" placeholder="{{langService.dictionary.searchPlaceholder}}" (keyup)="keyupSearchCompleted(searchCompleted.value)">
+                    <mat-icon matSuffix class="search-icon">search</mat-icon>
+                    <mat-hint class="hint-no-results-search" *ngIf="completedPostIts && completedPostIts.length === 0 && searchCompleted.value">{{langService.dictionary.noSearchResultsMsg}}</mat-hint>
+                </mat-form-field>
+                <div class="filter-container">
+                    <div class="filter-btn-text">{{langService.dictionary.filterBtnText}}</div>
+                    <div class="material-icons filter-icon" (click)="openFilterPostItDialog(false)" 
+                        matBadge="{{completesPostItsFiltersCounter}}" 
+                        matBadgePosition="after" 
+                        matBadgeColor="warn"
+                        [matBadgeHidden]="completesPostItsFiltersCounter < 1">
+                        filter_list
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="completed-post-it-container">
+                    <ul class="ul-post-it-container">
+                        <ng-container *ngIf="completedPostIts">
+                            <ng-container *ngFor="let postIt of completedPostIts">
+                                <li class="li-post-it">
+                                    <app-post-it-item *ngIf="postIt" [data]="postIt" [isRemindersPage]="true"></app-post-it-item>
+                                </li>
+                            </ng-container>
+                        </ng-container>
+                        <ng-container *ngIf="emptyCompletedPostItsView">
+                            <ng-container *ngFor="let emptyPostIt of emptyCompletedPostItsView">
+                                <li class="li-post-it">
+                                    <app-empty-post-it-item></app-empty-post-it-item>
+                                </li>
+                            </ng-container>
+                        </ng-container>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ngx-spinner bdColor="rgba(0,0,0,0)" size="default" color="#00B9B3"
+    type="triangle-skew-spin" [fullScreen]="false">
+</ngx-spinner>

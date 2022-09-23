@@ -1,0 +1,77 @@
+<div id="folder">
+    <ngx-spinner *ngIf="!done"
+        bdColor = "rgba(0,0,0,0)"
+        size = "default"
+        color = "#00B9B3"
+        type = "triangle-skew-spin"
+        [fullScreen] = "false" >
+    </ngx-spinner>
+
+    <!-- ALL FILES -->
+    <ng-container *ngIf="(home=='all-files' || home == 'vflow') && done">
+        <div id="foldermain">
+            <app-allfiles-table
+                *ngIf="done"
+                [pageFavorite]="pageFavorite"
+                [getpage]="getpage"
+                [dataValue]="dataValue"
+                [permissions]="permissions"
+                [noData]="noData">
+            </app-allfiles-table>
+        </div>
+        <app-allfiles-sidebar></app-allfiles-sidebar>
+    </ng-container>
+
+    <!-- GROUP FOLDER -->
+    <ng-container *ngIf="home=='group-folder' && done">
+        <div id="foldermain">
+            <app-groupfolder-table
+                *ngIf="done"
+                [pageFavorite]="pageFavorite"
+                [getpage]="getpage"
+                [dataValue]="dataValue"
+                [noData]="noData"
+                [permissions]="permissions"
+                [blockActions]="blockActions">
+            </app-groupfolder-table>
+        </div>
+        <app-groupfolder-sidebar [permissions]="permissions"></app-groupfolder-sidebar>
+    </ng-container>
+
+    <ng-container *ngIf="home != 'all-files' && home != 'group-folder' && home != 'vflow'">
+        <div id="foldermain">
+            <app-table
+                *ngIf="!noData && (home == 'recents' ||
+                    home == 'favorites' || home == 'favorites'
+                    || home == 'protectedfile') && dataValue.length>0"
+                [pageFavorite]="pageFavorite"
+                [getpage]="getpage"
+                [dataValue]="dataValue"
+                [permissions]="permissions">
+            </app-table>
+
+            <app-shares-table 
+                *ngIf="!noData && (this.home == 'shares' || this.home == 'shared-by-you' || 
+                    this.home == 'shared-by-others' || this.home == 'shared-by-link') && dataValue.length>0" 
+                [pageFavorite]="pageFavorite" 
+                [getpage]="getpage"
+                [dataValue]="dataValue">
+            </app-shares-table>
+
+            <app-delete-table *ngIf="!noData &&(home=='deleted' && dataValue.length>0)" [pageFavorite]="pageFavorite" [dataValue]="dataValue"></app-delete-table>
+
+            <app-archives-table *ngIf="!noData && (home=='externalarchives' && dataValue.length>0 && !errorData)" [pageFavorite]="pageFavorite" [dataValue]="dataValue" [isfolder]="isfolder"></app-archives-table>
+            <div id="storageUnauthorized" *ngIf="!noData && (home=='externalarchives' && errorData)">
+                <mat-icon><i class="material-icons"> dns </i></mat-icon>
+                <span>{{unauthorized}}</span>
+            </div>
+
+            <app-vpec-table *ngIf="!noData && (home=='attachmentsvpec' && dataValue.length>0)"
+                [pageFavorite]="pageFavorite"
+                [dataValue]="dataValue">
+            </app-vpec-table>
+            <app-no-data *ngIf="noData" [page]="getpage" appDropFile></app-no-data>
+        </div>
+        <app-sidebar [page]="getpage"></app-sidebar>
+    </ng-container>
+</div>

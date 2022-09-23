@@ -1,0 +1,199 @@
+#eaCreate{
+    display: flex;
+    flex-direction: column;
+
+    .inputs{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+
+        .authentication{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+
+            .select{
+                margin-right: 20px;
+                font-family: Roboto;
+                font-size: 14px;
+                letter-spacing: 0;
+                line-height: 16px;
+                width: 217px;
+            }
+        }
+
+        //AMAZON
+        .configAmazon, .configSamba{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+
+            .config{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start;
+                width: 100%;
+    
+                .configInput{
+                    margin-right: 20px;
+                    font-family: Roboto;
+                    font-size: 14px;
+                    letter-spacing: 0;
+                    line-height: 16px;
+                    width: 18%;
+                }
+            }
+
+            .configKey, .userdata{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start;
+                width: 100%;
+    
+                .user{
+                    margin-right: 20px;
+                    font-family: Roboto;
+                    font-size: 14px;
+                    letter-spacing: 0;
+                    line-height: 16px;
+                    width: 18%;
+                }
+        
+                .password{
+                    margin-right: 20px;
+                    font-family: Roboto;
+                    font-size: 14px;
+                    letter-spacing: 0;
+                    line-height: 16px;
+                    width: 18%;
+                }
+            }
+
+            .configCheckbox{
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                height: 30px;
+
+                .singlecheck{
+                    height: 16px;
+                    width: fit-content;
+                    color: #2B2B2B;
+                    font-family: Roboto;
+                    font-size: 14px;
+                    letter-spacing: 0;
+                    line-height: 16px;
+                    margin-right: 2%;
+                }
+            }
+        }
+    }
+
+    .innerSettingsAll{
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 15px;
+
+        span{
+            font-family: Roboto;
+            font-size: 12px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #808080;
+        }
+
+        .checkUpdate{
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            align-items: center;
+
+            span{
+                margin-right: 2%;
+                width: fit-content;
+                font-family: Roboto;
+                font-size: 14px;
+                font-weight: normal;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                color: #313131;
+            }
+
+            mat-form-field{
+                width: 15%;
+            }
+        }
+
+        .multipleCheckbox{
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            height: 30px;
+
+            .singlecheck{
+                height: 16px;
+                width: fit-content;
+                color: #2B2B2B;
+                font-family: Roboto;
+                font-size: 14px;
+                letter-spacing: 0;
+                line-height: 16px;
+                margin-right: 2%;
+            }
+        }
+    }
+
+    .buttons{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+
+        div{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 94px;
+            height: 30px;
+            font-family: Roboto;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.58px;
+            line-height: 16px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            outline: none;
+            width: 217px;
+            cursor: pointer;
+
+            &.delete{            
+                border: 1px solid #228196;
+                background-color: white;
+                color: #228196;
+                margin-right: 20px;
+            }
+    
+            &.save{
+                background: linear-gradient(145deg, #009ea3 0%, #007cb8 100%);
+                color: white;
+                margin-right: 20px;          
+    
+                &:hover{
+                    background: #00B9B3;
+                }
+            }
+        }
+    }
+}

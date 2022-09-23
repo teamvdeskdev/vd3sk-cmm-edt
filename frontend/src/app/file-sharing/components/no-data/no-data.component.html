@@ -1,0 +1,11 @@
+<div id="nodata">
+    <mat-icon><i class="material-icons"> {{ nodataiconpage }} </i></mat-icon>
+    <span class="nodatatitle"> {{ nodatatitle }} </span>
+    <span class="nodatadescription" *ngIf="page !== 'activity' && page !== 'search-result'">
+        {{ nodatadescription }}
+    </span>
+    
+    <span class="nodatadescription" *ngIf="page === 'activity'"> {{ noDataDescActivity }} </span>
+
+    <span class="nodatadescription" *ngIf="page === 'search-result'"> {{ noDataDescSearch }} </span>
+</div>

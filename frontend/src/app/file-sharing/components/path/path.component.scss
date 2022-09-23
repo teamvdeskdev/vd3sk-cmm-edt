@@ -1,0 +1,99 @@
+#pathFolder{
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+
+    #drawPathFolder{
+        display: flex;
+        align-items: center;
+        color: var(--central-font-color);
+
+        .drawPathFolderHome{
+            font-family: Roboto;
+            font-size: 16px;
+            letter-spacing: 0;
+            width: fit-content;
+            padding-left: 10px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+    
+        i{
+            font-size: 24px;
+            &.homebutton{
+                cursor: pointer;
+            }
+        }
+
+        .insidefolder{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 500;
+
+            tbody{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                td{
+                    display: flex;
+                    align-items: center;
+                    
+                    span{
+                        cursor: pointer;
+                        font-size: 13px;
+                        letter-spacing: 0;
+                        width: fit-content;
+                    }
+                }
+            }
+        }
+    }
+
+    &.dialog{
+        #drawPathFolder{    
+            .drawPathFolderHome{
+                color: #212529;
+            }
+    
+            .insidefolder{    
+                tbody{
+                    td{
+                        span{
+                            color: #212529;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #searchPath{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-left: 1%;
+        width: 30%;
+        justify-content: space-between;
+        font-size: 16px;
+        text-transform: uppercase;
+        font-weight: 500;
+
+        mat-icon{
+            color: #CCC;
+
+            &:hover{
+                color: white;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+::ng-deep .headericonstooltip{
+    background-color: #00396A;
+    color: white !important;
+    border-radius: 3px;
+}

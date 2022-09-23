@@ -1,0 +1,221 @@
+#newsAndReminders.news-and-reminders-container {
+    /* il valore di margin-right viene usato in calculatePostItNumberToShow()*/
+    app-post-it-item,
+    app-empty-post-it-item {
+        // margin-right: 18px;
+        // margin-top: 20px;
+    }
+
+    app-empty-feed-item {
+        width: 100%;
+    }
+
+    color: #808080;
+    background-color: rgb(255, 255, 255, 0.9);
+    padding-top: 22px;
+    padding-bottom: 30px;
+    padding-left: 20px;
+    /* il valore di padding-right viene usato in calculatePostItNumberToShow()*/
+    padding-right: 20px;
+    margin-bottom: 20px;
+
+    .border-right {
+        border-right: 1px solid;
+    }
+
+    .padding-right {
+        padding-right: 20px;
+    }
+
+    .padding-left {
+        padding-left: 20px;
+    }
+
+    .section-title {
+        margin-left: 10px;
+        font-family: 'Roboto';
+        font-size: 14px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 0.86;
+        letter-spacing: normal;
+        color: #2b2b2b;
+    }
+
+    .section-description {
+        margin-top: 10px;
+        font-family: 'Roboto';
+        font-size: 12px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1;
+        letter-spacing: normal;
+        color: #808080;
+    }
+
+    .post-it-area {
+        padding-right: 15px;
+    }
+
+    .ul-post-it-container {
+        // display: flex;
+        // flex-wrap: wrap;
+        // justify-content: flex-start;
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(211px, max-content));
+        grid-column-gap: 18px;
+        grid-row-gap: 20px;
+        padding: initial;
+        justify-content: flex-start;
+    }
+
+    .li-post-it-item {
+        list-style-type: none;
+    }
+
+    /* i valori di width e margin-right vengono usati in calculatePostItNumberToShow()*/
+    .add-post-it-item {
+        // margin-top: 20px;
+        // margin-right: 18px;
+        width: 211px;
+        height: 131px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+        background-color: #eeeeee;
+        cursor: pointer;
+    }
+
+    .label-add-post-it {
+        font-family: 'Roboto';
+        font-size: 12px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.17;
+        letter-spacing: normal;
+        text-align: center;
+        color: #2b2b2b;
+    }
+
+    .add-post-it-icon {
+        align-self: center;
+        margin-top: auto;
+        color: #00396a;
+    }
+
+    .add-post-it-text {
+        margin-top: auto;
+        font-family: 'Roboto';
+        font-size: 12px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1;
+        letter-spacing: normal;
+        text-align: center;
+        color: #00396a;  
+    }
+
+    .no-feeds-container {
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .no-feeds-icon {
+        font-size: 60px;
+        color: #eeeeee;
+    }
+
+    .no-feeds-text {
+        font-size: 14px;
+        color: #BFBFBF;
+        margin-left: 20px;
+        font-family: 'SF Pro Display';
+    }
+
+    .more-btn-feed {
+        color: #00396a;
+        cursor: pointer;
+    }
+
+    .set-feed-source-row {
+        height: 81px;
+        border-radius: 10px;
+        background-color: #ffffff;
+    }
+
+    .set-feed-source-title {
+        font-family: 'Roboto';
+        font-size: 14px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #2b2b2b;
+    }
+
+    .set-feed-source-subtitle {
+        margin-top: 7px;
+        font-family: 'Roboto';
+        font-size: 12px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1;
+        letter-spacing: normal;
+        color: #808080;
+    }
+
+    .set-feed-source-btn {
+        font-family: 'Roboto';
+        font-size: 12px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1;
+        letter-spacing: normal;
+        text-align: center;
+        color: #00396a;
+        cursor: pointer;
+    }
+
+    .set-feed-source-flex-column {
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+    }
+}
+
+::ng-deep {
+    .news-reminders-snackbar {
+        background-color: #4c4c4c;
+    }
+
+    .news-section-more-menu {
+        background-color: #00396a;
+
+        .mat-menu-item {
+            color: #ffffff;
+            height: 30px;
+            line-height:30px;
+        }
+
+        .mat-menu-item[disabled] {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .mat-menu-item:hover {
+            background-color: rgba(234, 243, 255, 0.5);
+        }
+    }
+}

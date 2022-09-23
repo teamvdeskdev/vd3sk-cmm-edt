@@ -1,0 +1,220 @@
+<div id="profile" class="default-scrollbar">
+    <div *ngIf="!isLoadingPage" class="profile-inner-container">
+        <div class="profile-header">
+            <div class="profile-header-title" *ngIf="displayNameString">
+                {{langService.dictionary.account_of}} {{displayNameString}}
+            </div>
+            <div class="label" *ngIf="currentUser">
+                {{langService.dictionary.user_id}} {{currentUser.id}}
+            </div>
+            <div class="profile-header-content">
+                <div class="profile-picture-wrapper">
+                    <img *ngIf="!isLoading" src="{{profilePicUrl}}" class="profile_pic" />
+                    <div *ngIf="isLoading" class="spinner-border vdesk-spinner" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+
+                <div class="profile-picture-section">
+                    <div class="list-option" (click)="openFileExplorer()">
+                        <mat-icon class="list-icon"> arrow_upward </mat-icon>
+                        {{langService.dictionary.upload_from_device}}
+
+                        <input class="hidden" type="file" id="upload-file" name="upload-file" accept=".png,.jpg" ngf-max-size="20MB" (change)="addFile($event, $event.target.files)">
+                    </div>
+
+                    <div class="list-option disabled"> <!--(click)="openVShareUploadDialog()"-->
+                        <div class="list-icon-svg">
+                            <!-- Generator: Adobe Illustrator 23.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                            <svg version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                    viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
+                                <style type="text/css">
+                                    .st0{fill:#007789;}
+                                </style>
+                                <path class="st0" d="M19.5,7.2h-7.3l-1.5-1.7c0-0.1-0.1-0.1-0.2-0.1H4.6C3.7,5.4,3,6.1,3,7v5.4C3.8,11,5.4,10,7.2,10H8V7.4l4,4.4
+                                    l-4,4.4v-2.6H7.8c-1.8,0-3.5,0.7-4.8,2v0.9c0,0.9,0.7,1.6,1.6,1.6h14.9c0.9,0,1.6-0.7,1.6-1.6V8.9C21.2,8,20.4,7.2,19.5,7.2z"/>
+                            </svg>
+                        </div>
+                        {{langService.dictionary.upload_from_vshare}}
+                    </div>
+
+                    <div class="list-option" (click)="deletePicture()">
+                        <mat-icon class="list-icon"> delete </mat-icon>
+                        {{langService.dictionary.delete_photo}}
+                    </div>
+
+                    <div class="footer">
+                        {{langService.dictionary.format_size}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="profile-body">
+            <table mat-table [dataSource]="dataSource" *ngIf="dataSource">
+            
+                <!-- ID Column -->
+                <ng-container matColumnDef="id">
+                <td mat-cell *matCellDef="let element" class="id-col"> {{element.id}} </td>
+                </ng-container>
+            
+                <!-- LABEL Column -->
+                <ng-container matColumnDef="label">
+                <td mat-cell *matCellDef="let element" class="label-col"> {{element.label}} </td>
+                </ng-container>
+            
+                <!-- VALUE Column -->
+                <ng-container matColumnDef="value">
+                    <td mat-cell *matCellDef="let element" class="value-col"> 
+                        <img *ngIf="element.label === langService.dictionary.used_space" src={{iconSpace}} class="space mr-6">
+                        <span *ngIf="element.label === langService.dictionary.membership_groups || element.label === langService.dictionary.used_space">
+                            {{element.value}}
+                        </span>
+                        <span *ngIf="element.label === langService.dictionary.full_name">
+                            <form [formGroup]="nameForm">
+                                <mat-form-field>
+                                    <input matInput  [readonly]="SamlUSer"
+                                    type="text" #ref formControlName="fullName" (focus)="nameIsChanging = true" (blur)="nameIsChanging = false">
+                                    <mat-icon *ngIf="!SamlUSer" matSuffix class="forward" [ngClass]="{'selected': nameIsChanging}" (click)="updateDisplayName(ref.value)"> 
+                                        arrow_forward
+                                    </mat-icon>
+                                </mat-form-field>
+                            </form>
+                        </span>
+                        <span *ngIf="element.label === langService.dictionary.primary_email">
+                            <form [formGroup]="emailForm">
+                                <mat-form-field>
+                                    <input matInput [readonly]="SamlUSer" type="text" #ref formControlName="email" (focus)="emailIsChanging = true" (blur)="emailIsChanging = false">
+                                    <mat-icon *ngIf="!SamlUSer" matSuffix class="forward" [ngClass]="{'selected': emailIsChanging}" (click)="updateEmail(ref.value)"> 
+                                        arrow_forward
+                                    </mat-icon>
+                                </mat-form-field>
+                            </form>
+                        </span>
+                        <!-- Password -->
+                        <span *ngIf="element.label === langService.dictionary.login_password && !SamlUSer">
+                            <div *ngIf="!isLoadingPassword">
+                                <form [formGroup]="passwordForm">
+                                    <mat-form-field>
+                                        <input [readonly]="true" matInput type="password" #ref formControlName="password" (focus)="passwordIsChanging = true" (blur)="passwordIsChanging = false">
+                                        <mat-icon matSuffix class="edit" (click)="editPassword()"> 
+                                            edit
+                                        </mat-icon>
+                                    </mat-form-field>
+                                    <div *ngIf="showEditPasswordInput">
+                                        <!-- Old Password -->
+                                        <mat-form-field style="margin-bottom: 15px">
+                                            <input matInput type="password" #oldPassword placeholder="{{langService.dictionary.old_password}}" formControlName="oldPassword" (focus)="passwordIsChanging = true" (blur)="passwordIsChanging = false" required>
+                                            <mat-error *ngIf="passwordForm.get('oldPassword').hasError('required')">
+                                              {{langService.dictionary.required_field}}
+                                            </mat-error>
+                                            <mat-error *ngIf="passwordForm.get('oldPassword').hasError('incorrect')">
+                                              {{langService.dictionary.wrong_password}}
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <!-- New Password -->
+                                        <mat-form-field style="margin-bottom: 15px">
+                                            <input matInput type="password" #newPassword placeholder="{{langService.dictionary.new_password}}" formControlName="newPassword" (focus)="passwordIsChanging = true" (blur)="passwordIsChanging = false" required>
+                                            <mat-error *ngIf="passwordForm.get('newPassword').hasError('required')">
+                                              {{langService.dictionary.required_field}}
+                                            </mat-error>
+                                            <mat-error *ngIf="passwordForm.get('newPassword').hasError('minlength')">
+                                              {{langService.dictionary.min_length_password}}
+                                            </mat-error>
+                                            <mat-error *ngIf="passwordForm.get('newPassword').hasError('maxlength')">
+                                              {{langService.dictionary.max_length_password}}
+                                            </mat-error>
+                                            <mat-error *ngIf="passwordForm.get('newPassword').hasError('pattern')">
+                                              {{langService.dictionary.two_spaces}}
+                                            </mat-error>
+                                            <mat-error *ngIf="passwordForm.get('newPassword').hasError('rules')">
+                                                {{langService.dictionary.invalid_password}} 
+                                            </mat-error>
+                                        </mat-form-field>
+                                        <!-- Confirm Password -->
+                                        <mat-form-field style="margin-bottom: 15px">
+                                            <input matInput type="password" #confirmPassword placeholder="{{langService.dictionary.confirm_password}}" formControlName="confirmPassword" (focus)="passwordIsChanging = true" (blur)="passwordIsChanging = false" required>
+                                            <mat-error *ngIf="passwordForm.get('confirmPassword').hasError('required')">
+                                              {{langService.dictionary.required_field}}
+                                            </mat-error>
+                                            <mat-error *ngIf="passwordForm.get('confirmPassword').hasError('minlength')">
+                                              {{langService.dictionary.min_length_password}}
+                                            </mat-error>
+                                            <mat-error *ngIf="passwordForm.get('confirmPassword').hasError('maxlength')">
+                                              {{langService.dictionary.max_length_password}}
+                                            </mat-error>
+                                            <mat-error *ngIf="passwordForm.get('confirmPassword').hasError('incorrect')">
+                                              {{langService.dictionary.no_confirm_password_match}}
+                                            </mat-error>
+
+                                            <mat-error *ngIf="passwordForm.get('confirmPassword').hasError('pattern')">
+                                              {{langService.dictionary.two_spaces}}
+                                            </mat-error>
+                                            <button mat-button matSuffix mat-icon-button>
+                                            <mat-icon matSuffix class="forward" [ngClass]="{'selected': passwordIsChanging}" (click)="savePassword()"> 
+                                                arrow_forward
+                                            </mat-icon>
+                                            </button>
+                                        </mat-form-field>
+                                    </div>
+                                </form>
+                            </div>
+                            <div *ngIf="isLoadingPassword" class="section-loader-row">
+                                <div class="section-loader-col">
+                                    <div class="spinner-border section-vdesk-spinner" role="status">
+                                      <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="istructionPsw" *ngIf="showEditPasswordInput">
+                                <ul> {{langService.dictionary.psw_must_contain}}:
+                                    <li>{{langService.dictionary.psw_rules_one}}</li>
+                                    <li>{{langService.dictionary.psw_rules_two}}</li>
+                                    <li> {{langService.dictionary.psw_rules_three}}</li>
+                                    <li>{{langService.dictionary.psw_rules_four}}</li>
+                                    <li>{{langService.dictionary.psw_rules_five}}</li>
+                                </ul>
+                            </div>
+                        </span>
+                        
+                        <span *ngIf="element.label === langService.dictionary.language">
+                            <!-- <span *ngIf="element.value=='it'">Italiano</span>
+                            <span *ngIf="element.value=='en'">English</span> -->
+                            <mat-form-field>
+                                <mat-select #selectLanguage [value]="element.value" (selectionChange)="changeUserLanguage(selectLanguage.value)">
+                                  <mat-option value="it"> Italiano </mat-option>
+                                  <mat-option value="en"> English </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </span>
+                        <span *ngIf="element.label === langService.dictionary.localization">
+                            <span>{{element.value}}</span>
+                            <!-- <mat-form-field>
+                                <mat-select [(value)]="element.value">
+                                  <mat-option value="{{element.value}}"> Italia </mat-option>
+                                  <mat-option value="{{element.value}}"> United States </mat-option>
+                                  <mat-option value="{{element.value}}"> United Kingdom </mat-option>
+                                </mat-select>
+                            </mat-form-field> -->
+                        </span>
+                    </td>
+                </ng-container>
+
+                <!-- NEXT Column -->
+                <ng-container matColumnDef="next">
+                    <td mat-cell *matCellDef="let element" class="next-col"></td>
+                </ng-container>
+            
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>      
+        </div>
+    </div>
+
+    <div *ngIf="isLoadingPage" class="loader-row">
+        <div class="loader-col">
+            <div class="spinner-border vdesk-spinner" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+</div>

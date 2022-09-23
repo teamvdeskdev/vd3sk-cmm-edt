@@ -1,0 +1,46 @@
+#labels {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+
+    .selectlabels{
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        height: 100%;
+        z-index: 0;
+        border-right: 1px solid rgba(0, 0, 0, 0.15);
+
+        overflow-y: auto;
+        scrollbar-width: none; // Firefox
+        -ms-overflow-style: none; // IE and Edge
+        &::-webkit-scrollbar { // Chrome, Safari and Opera
+          display: none;
+        }
+
+        .disabled-pointer {
+            pointer-events: none;
+        }
+    }
+
+    app-no-data{
+        width: 100%;
+        height: 99%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    app-tagsidebar{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 20%;
+        background-color: #f0f0f0;
+    }
+}

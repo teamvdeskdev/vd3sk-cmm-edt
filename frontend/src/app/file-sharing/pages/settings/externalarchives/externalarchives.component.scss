@@ -1,0 +1,261 @@
+.head{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: solid 1px #bfbfbf;
+    min-height: 160px;
+    max-height: 160px;
+
+    .first{
+        font-family: Roboto;
+        font-size: 18px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #383838;
+        margin-bottom: 15px;
+    }
+
+    .second{
+        font-family: Roboto;
+        font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #808080;
+        margin-bottom: 10px;
+    }
+
+    .third{
+        font-family: Roboto;
+        font-size: 12px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #808080;
+    }
+
+    .fourth{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 50%;
+        align-items: center;
+        justify-content: space-between;
+
+        .inputs{
+            display: flex;
+            flex-direction: row;
+            width: 80%;
+            height: 100%;
+            align-items: center;
+            font-family: Roboto;
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #313131;
+
+            .name{
+                width: 20%;
+                border-bottom: solid 1px gray;
+                margin-right: 5%;
+    
+                &:focus{
+                    border-bottom: solid 2px #007789;
+                }
+            }
+
+            .backend{
+                width: 20%;
+            }
+        }
+
+        .create{
+            padding: 0px 35px;
+            border-radius: 3px;
+            border: solid 1px #00899e;
+            color: #00899e;
+            text-transform: uppercase;
+            font-size: 14px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            letter-spacing: 0.58px;
+            text-align: center;
+            margin-right: 3%;
+
+            &:focus{
+                outline: none;
+            }
+        }
+
+
+    }
+}
+
+.create{
+    margin-top: 20px;
+}
+
+.list{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    span{
+        font-family: Roboto;
+        font-size: 18px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #383838;
+        margin-bottom: 15px;
+    }
+
+    .nametitle{
+        width: 30%;
+    }
+
+    .descriptiontitle{
+        width: 70%;
+    }
+}
+
+.global{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 20px;
+
+    .globalhead{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+
+        .globalheadInfo{
+            display: flex;
+            flex-direction: column;
+            width: 70%;
+            margin-bottom: 15px;
+
+            span{
+                font-family: Roboto;
+                font-weight: normal;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: normal;
+                letter-spacing: normal;
+
+                &.title{
+                    font-size: 18px;
+                    color: #383838;
+                    margin-bottom: 5px;
+                }
+
+                &.subtitle{
+                    font-size: 14px;
+                    color: #808080;
+                }
+            }
+        }
+
+        .slide{
+
+        }
+    }
+
+    .globalbody{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: flex-start;
+        justify-content: center;
+
+        span{
+            font-family: Roboto;
+            font-size: 12px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #808080;
+            margin-bottom: 15px;
+        }
+
+        .globalbodyInfo{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+
+            .globalbodyInput{
+                display: flex;
+                flex-direction: row;
+                width: 70%;
+                align-items: center;
+                justify-content: flex-start;
+
+                .input{
+                    width: 25%;
+                    
+                    border-bottom: 2px solid #007789;
+                    font-family: Roboto;
+                    font-size: 14px;
+                    font-weight: normal;
+                    font-stretch: normal;
+                    font-style: normal;
+                    line-height: normal;
+                    letter-spacing: normal;
+                    color: #313131;
+
+                    &.first{
+                        margin-right: 2%;
+                    }
+                }
+
+                mat-icon{
+                    color:  #007789;
+                    cursor: pointer;
+                }
+            }
+
+            .save{
+                padding: 0px 35px;
+                border-radius: 3px;
+                border: solid 1px #00899e;
+                color: #00899e;
+                text-transform: uppercase;
+                font-size: 14px;
+                font-weight: bold;
+                font-stretch: normal;
+                font-style: normal;
+                letter-spacing: 0.58px;
+                text-align: center;
+                margin-right: 3%;
+
+                &:focus{
+                    outline: none;
+                }
+            }
+        }
+    }
+}

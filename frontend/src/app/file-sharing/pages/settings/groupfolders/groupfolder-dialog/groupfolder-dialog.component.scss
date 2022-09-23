@@ -1,0 +1,259 @@
+.title{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 10%;
+}
+
+.select{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 20%;
+
+    .name{
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+        margin-right: 3%;
+        height: 100%;
+
+        span{
+            font-family: Roboto;
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #808080;
+        }
+    }
+
+    .quota{
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+        margin-right: 3%;
+        height: 100%;
+
+        span{
+            font-family: Roboto;
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #808080;
+        }
+    }
+
+    .groups{
+        display: flex;
+        flex-direction: column;
+        width: 33%;
+        height: 100%;
+
+        span{
+            font-family: Roboto;
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #808080;
+        }
+    }
+}
+
+.table{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 60%;
+
+    span{
+        width: 100%;
+        height: 15%;
+        font-family: Roboto;
+        font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #808080;
+    }
+
+    .tableDivDialog{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 85%;
+        overflow: auto;
+        scrollbar-width: none; // Firefox
+        -ms-overflow-style: none; // IE and Edge
+        &::-webkit-scrollbar { // Chrome, Safari and Opera
+            display: none;
+        }
+
+        table {
+            padding-top: 1%;
+            padding-bottom: 1%;
+            width: 100%;
+            max-height: 100%;
+
+            th.mat-header-cell {
+                padding-bottom: 1%;
+            }
+    
+            td.mat-cell,
+            td.mat-footer-cell {
+                border-bottom-color: white;
+            }
+            td.mat-cell {
+                color: #2B2B2B;
+                font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                font-size: 13px;
+                letter-spacing: 0;
+                padding-top: 1%;
+                padding-left: 1%;
+
+                &.name{
+                    padding-left: 3%;
+                }
+    
+                mat-icon.delete{
+                    i{
+                        color: #00396A;
+                    }
+                }                
+            }
+    
+            .name{
+                width: 40%;
+                
+                .divName{
+                    display: flex;
+                    flex-direction: row;
+                    width: fit-content;
+                    justify-content: flex-start;
+                    padding: 7px 10px 7px 16px;
+                    border-radius: 4px;
+                    border: solid 1px #bfbfbf;
+                    align-items: center;
+
+                    span{
+                        font-size: 12px;
+                        font-weight: normal;
+                        font-stretch: normal;
+                        font-style: normal;
+                        line-height: normal;
+                        letter-spacing: normal;
+                        color: #313131;
+                    }
+
+                    mat-icon{
+                        display: flex;
+                        height: fit-content;
+
+                        i{
+                            font-size: 16px;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+    
+            .write{
+                width: 20%;
+            }
+    
+            .share{
+                width: 20%;
+            }
+    
+            .delete{
+                width: 20%;
+            }
+            
+            .head {
+                color: #848484;
+                font-size: 11px;
+            }
+            .footer {
+                padding-top: 1%;
+    
+                .btCreate {
+                    margin-left: 1%;
+                }
+            }
+        }
+    }
+}
+
+.emptyTable{
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    width: 100%;
+    height: 60%;
+    align-items: center;
+    padding-top: 5%;
+
+    span{
+        font-family: Roboto;
+        font-size: 18px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #383838;
+    }
+
+    mat-icon{
+        width: 100%;
+        font-size: 50px;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        color:#808080;
+    }
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 10%;
+    align-items: center;
+    justify-content: flex-end;
+
+    button{
+        text-transform: uppercase;
+        font-family: Roboto;
+        font-size: 14px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        letter-spacing: 0.58px;
+        text-align: center;
+        width: 12%;
+        border-radius: 3px;
+
+        &.remove{
+            margin-right: 3%;
+            border: 1px solid #00a59f;
+            color: #00a59f;
+        }
+
+        &.save{
+            background-image: linear-gradient(to right, #00a59f 0%, #007cb9 100%);
+            color: white;
+        }
+    }
+}

@@ -1,0 +1,124 @@
+#sidebarActivity{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 5% 5%;
+    min-height: 150px;
+    overflow: auto;
+    -ms-overflow-style: none; /* IE 11 */
+    scrollbar-width: none; /* Firefox */
+
+    .saTitle{
+        display: flex;
+        flex-direction: row;
+        height: 6%;
+        width: 100%;
+        color: #223140;
+        font-family: Roboto;
+        font-size: 12px;
+        letter-spacing: 0;
+        text-transform: uppercase;
+        min-height: 30px;
+        padding-bottom: 10px;
+    }
+
+    .saList{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 90%;
+        overflow: auto;
+        -ms-overflow-style: none; /* IE 11 */
+        scrollbar-width: none; /* Firefox */
+
+        .saElement{
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            align-items: center;
+            margin-bottom: 8px;
+
+            .saeIcon{
+                display: flex;
+                flex-direction: row;
+                height: 100%;
+                width: 13%;
+
+                i{
+                    color: #007789;
+                    font-size: 20px;
+                }
+            }
+            .saeInfo{
+                display: flex;
+                flex-direction: column;
+                height: fit-content;
+                width: 87%;
+
+                .saeInfoHead{
+                    display: flex;
+                    flex-direction: column;
+                    height: 50%;
+                    width: 100%;
+                    color: #363636;
+                    font-family: Roboto;
+                    font-size: 13px;
+                    letter-spacing: 0;
+                    text-transform: capitalize;
+                }
+
+                .saeInfoFoot{
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    height: 50%;
+                    width: 100%;
+                    color: #7D7D7D;
+                    font-family: Roboto;
+                    font-size: 11px;
+                    letter-spacing: 0;
+                }
+            }
+        }
+    }
+
+    .saList::-webkit-scrollbar { /* Chrome, opera,safari */
+        display: none;
+    }
+}
+#sidebarActivity::-webkit-scrollbar { /* Chrome, opera,safari */
+    display: none;
+}
+
+#sidebarActivityEmpty{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 5% 5%;
+    min-height: 150px;
+    font-size: 18px;
+    text-transform: uppercase;
+
+    mat-icon{
+        width: fit-content;
+        height: fit-content;
+        
+        i{
+            font-size: 40px;
+            color: #808080;
+        }
+    }
+
+    span{
+        width: fit-content;
+        color: #7D7D7D;
+        font-family: Roboto;
+        font-size: 13px;
+        letter-spacing: 0;
+        text-transform: capitalize;
+    }
+}

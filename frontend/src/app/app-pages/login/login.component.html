@@ -1,0 +1,142 @@
+<div *ngIf="beforeLogin" id="chooseLogin">
+    <div class="container-outer">
+        <div class="container-inner">
+
+            <div class="container-top">
+                <img class="logo" src="assets/loghi_apps_main/png/vdesk-principale.png">
+                <div class="label"> {{ langService.dictionary.login_workstation }} </div>
+            </div>
+    
+            <div class="container-mid">
+                <button mat-button class="up" (click)="checkSaml()">
+                    <mat-icon><i class="material-icons">vpn_key</i></mat-icon>
+                    <span> {{ samlName }}</span>
+                </button>
+
+                <button mat-button class="down" (click)="gotoLogin()">{{langService.dictionary.bt_login_external}}</button>
+            </div>
+
+        </div>
+
+        <div class="container-bot">
+            <img class="logo" src="assets/loghi_apps_main/png/vdesk-principale.png">
+            <div class="label"> {{ langService.dictionary.digital_workspace }} </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isDirectAppLoading" id="spinner-login">
+    <div class="container-outer">
+        <div class="container-inner">  
+            <ngx-spinner bdColor="rgba(0,0,0,0)" size="default" 
+                color="#00B9B3" type="triangle-skew-spin" [fullScreen]="false">
+            </ngx-spinner>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!isDirectAppLoading  && !beforeLogin" [ngClass]="{ 'login': globalsVar.custom_FE !== 'COBRANDING' && globalsVar.custom_FE !== 'WHITELABEL',
+                                             'loginCobranding' : globalsVar.custom_FE === 'COBRANDING' || globalsVar.custom_FE === 'WHITELABEL'}">
+    <div class="container-outer">
+        <div class="container-inner">
+            <div class="login-card" *ngIf="!this.isSUA">
+                <div class="card-title">
+                    <img *ngIf="globalsVar.custom_FE !== 'WHITELABEL'" class="logo" src="assets/loghi_apps_main/png/vdesk-principale.png">
+                    <img *ngIf="globalsVar.custom_FE === 'WHITELABEL'" class="logo" src="{{globalsVar.custom_logo_login ? globalsVar.custom_logo_login : globalsVar.custom_logo}}">
+                    <img *ngIf="globalsVar.custom_FE === 'WHITELABEL'" class="logoCobranding" src="assets/img/splash_page/desk-principal-blue.svg">
+                    <img *ngIf="globalsVar.custom_FE === 'COBRANDING'" class="logoCobranding" src="{{globalsVar.custom_logo_login ? globalsVar.custom_logo_login : globalsVar.custom_logo}}">
+                    <div *ngIf="globalsVar.custom_FE !== 'WHITELABEL'" class="label"> Digital workplace </div>
+
+                    <div class="label2"> {{langService.dictionary.login_workstation}} </div>
+                </div>
+                <div>
+                    <form [formGroup]="loginForm" (ngSubmit)="loginUser(isPwdRecoveryRequested)" class="login-form">
+
+                        <mat-form-field [ngClass]="{ 'has-error': isSubmitted && user.errors }">
+                            <input matInput type="user" formControlName="user" name="user" placeholder="{{langService.dictionary.ph_user_login}}" required readonly onfocus="this.removeAttribute('readonly');">
+                        </mat-form-field>
+
+                        <div *ngIf="isSubmitted && user.invalid" class="error-help">
+                            <div *ngIf="user.errors.required">{{langService.dictionary.error_user_login}}</div>
+                            <div *ngIf="user.errors.pattern">{{langService.dictionary.no_spaces_special_character}}</div>
+                        </div>
+
+                        <mat-form-field *ngIf="!isPwdRecoveryRequested" [ngClass]="{ 'has-error': isSubmitted && password.errors }">
+                            <input matInput type="password" formControlName="password" name="password" placeholder="{{langService.dictionary.ph_password}}" required readonly onfocus="this.removeAttribute('readonly');">
+                        </mat-form-field>
+
+                        <div *ngIf="isSubmitted && password.invalid && !isPwdRecoveryRequested" class="error-help">
+                            <div *ngIf="password.errors.required">{{langService.dictionary.error_pwd_login}}</div>
+                        </div>
+    
+                        <!--
+                        <div class="mt-1 recovery mb-4" *ngIf="!isPwdRecoveryRequested && !showMsgPwdRecovery">
+                            <a (click)="isPwdRecoveryRequested = !isPwdRecoveryRequested">
+                                {{langService.dictionary.pwd_recovery}}
+                            </a>
+                        </div>
+
+                        <div class="check mb-5">
+                            <mat-checkbox formControlName="stayConnected" (change)="SetPermanentConnection()">
+                                {{langService.dictionary.check_stay_connected}}
+                            </mat-checkbox>
+                        </div>
+                         -->
+
+                        <button mat-raised-button type="submit" class="btn login" [disabled]="inProgress">
+                            <!-- IN CASE OF LOGIN -->
+                            <span *ngIf="!isPwdRecoveryRequested && !inProgress">{{langService.dictionary.bt_login}}</span>
+                            <span *ngIf="!isPwdRecoveryRequested && inProgress">
+                                {{langService.dictionary.bt_login_progress}} &nbsp; 
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            </span>
+
+                            <!-- IN CASE OF PASSWORD RECOVERY -->
+                            <span *ngIf="isPwdRecoveryRequested && !inProgress">{{langService.dictionary.bt_pwd_recovery}}</span>
+                            <span *ngIf="isPwdRecoveryRequested && inProgress">
+                                {{langService.dictionary.bt_pwd_recovery_progress}} &nbsp; 
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            </span>
+                        </button>
+                    </form>
+
+                    <div class="mt-7 error-help" *ngIf="showInvalidLogin">
+                        {{langService.dictionary.error_invalid_login}}
+                    </div>
+
+                    <div class="mt-7" *ngIf="showMsgPwdRecovery">
+                        <mat-card *ngIf="!isLDAP">
+                            {{langService.dictionary.msg_pwd_recovery}}
+                        </mat-card>
+                        <mat-card *ngIf="isLDAP">
+                            {{langService.dictionary.msg_pwd_recovery_LDAP}}
+                        </mat-card>
+                    </div>
+                    <div class="mt-7" *ngIf="showMsgPwdRecovery">
+                        <button mat-button (click)="goBackToLogin()">
+                            {{langService.dictionary.back_to_login}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="this.isSUA">
+                    <div class="dash-progress-col">
+                        <!-- vDesk Logo -->
+                        <img [ngStyle]="{'padding-bottom': isSUALogged ? '50px' : '30px'}" class="splash-normal-logo" src="/assets/img/splash_page/main_logo.png">
+                    </div>
+                    <div *ngIf="!isSUALogged" class="container-SUA">
+                        <button mat-raised-button type="submit" class="button-SUA" (click)="redirectSUA()" >
+                            <span>Login SUA</span> 
+                        </button>
+                    </div>
+                    <!-- Bottom Livebox Logo -->
+                    <div class="splash-bottom-logo">
+                        <img [ngStyle]="{'padding-top': isSUALogged ? '50px' : '30px'}" src="/assets/img/splash_page/bottom_logo.svg">
+                    </div>
+                <ngx-spinner *ngIf="isSUALogged" bdColor="rgba(0,0,0,0)" size="default" color="#00B9B3"
+                    type="triangle-skew-spin" [fullScreen]="false">
+                </ngx-spinner> 
+            </div>
+        </div>
+    </div>
+</div>

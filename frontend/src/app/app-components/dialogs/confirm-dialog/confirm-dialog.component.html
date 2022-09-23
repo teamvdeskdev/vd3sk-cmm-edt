@@ -1,0 +1,11 @@
+<div class="title">
+    <span>{{data.title}}</span>
+    <mat-icon (click)="onNoClick()"><i class="material-icons"> close </i></mat-icon>
+</div>
+<div class="content">
+    <span>{{data.content}}</span>
+</div>  
+<div class="buttonsdialog">
+    <div class="return" (click)="onNoClick()"><span>{{data.textCancelBtn}}</span></div>
+    <div class="save" (click)="onConfirmClick()"><span>{{data.textConfirmBtn}}</span><span *ngIf="data.isIdleDialog">&nbsp;({{idleTimeService.countdown}})</span></div>
+</div>

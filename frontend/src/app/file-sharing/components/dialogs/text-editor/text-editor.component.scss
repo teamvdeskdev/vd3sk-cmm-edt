@@ -1,0 +1,64 @@
+.closedialog{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+    align-content: center;
+    height: 8%;
+
+    mat-icon{
+        display: flex;
+        align-content: center;
+        cursor: pointer;
+    }
+}
+
+.texteditor{
+    height: 77%;
+    width: 100%;
+
+    ejs-richtexteditor{
+        height: 100% !important;
+
+        div#defaultRTErte-view{
+            height: calc(100% - 42px) !important;
+        }
+    }
+}
+
+.buttonsdialog{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+    align-content: center;
+    height: 15%;
+    align-items: center;
+
+    div{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        border-radius: 6px;
+        padding: 6px 15px;
+        outline: none;
+        width: 15%;
+        cursor: pointer;
+        height: fit-content;
+        text-transform: uppercase;
+
+        &.return{
+            color: #007789;
+            background: white;
+            margin-right: 15px;
+            border: 1px solid #007789;
+        }
+    
+        &.save{            
+            color: white;
+            background: linear-gradient(145deg, #009ea3 0%, #007cb8 100%);
+            margin: 0;
+            border: none;            
+        }
+    }
+}

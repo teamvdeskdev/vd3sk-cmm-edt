@@ -1,0 +1,68 @@
+.title {
+    color: #2B2B2B;
+    font-family: Roboto, sans-serif;
+    font-size: 18px;
+    letter-spacing: 0;
+    line-height: 21px;
+}
+.right {
+    float: right;
+}
+.text {
+    color: #808080;
+    font-family: Roboto,sans-serif;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 16px;
+}
+.secondary-btn {
+    margin-right: 19px;
+    height: 30px;
+    width: 198px;
+    padding-top: 7px;
+    border-radius: 3px;
+    border: 1px solid #007789;
+    background-color: transparent;
+    color: #007789;
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.58px;
+    line-height: 16px;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &:hover {
+        background: #00B9B3;
+        border: 1px solid #00B9B3;
+        color: #FFFFFF;
+    }
+}
+
+.primary-btn {
+    height: 30px;
+    width: 198px;
+    padding-top: 7px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, #00A59F 0%, #007CB9 100%);;
+    color: #FFFFFF;
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.58px;
+    line-height: 16px;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &:hover {
+        background: #00B9B3;
+    }
+}
+
+.error-help {
+    margin-bottom: 5%;
+    color: red;
+}
+

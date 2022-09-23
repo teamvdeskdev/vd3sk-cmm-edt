@@ -1,0 +1,99 @@
+<div class="sidebarFileSharing" *ngIf="!isEmpty">
+    <div class="sfsInfo">
+        <div class="sfsInfoData">
+          <div class="sfsInfoDataHead">
+            <mat-icon *ngIf="data.imageClass!='zip'"><i class="material-icons" [ngClass]="[data.imageClass]">{{ data.image }}</i></mat-icon>
+            <mat-icon *ngIf="data.imageClass=='zip'"><img [ngClass]="[data.imageClass]" src="assets/img/icons/zip.svg"></mat-icon>
+            <span>{{ data.completename }}</span>
+          </div>
+          <div class="sfsInfoDataFoot">
+            <mat-icon class="sidebariconfoot"><i class="material-icons star" [ngClass]="{'selected': data.favorite}"> star </i></mat-icon>
+            <mat-icon class="sidebariconfoot"><i class="material-icons lock" [ngClass]="{'selected': data.coded}"> lock </i></mat-icon>
+            <!--<span>{{ weight }}</span>-->
+          </div>
+        </div>
+
+        <div *ngIf="data.path.length>0 && data.path!='/'" class="navigatePath" (click)="navigateFolder()">
+          <i class="material-icons"> folder </i>
+          <span>{{ data.path }}</span>
+        </div>
+
+    </div>
+
+    <div class="sfsEvent">
+
+      <div class="sfsEventIcons">
+        <!--
+        <div (click)="changeSidebarTab(0)" [ngClass]="{'selected': tabSelectedIndex==0, 'folder': !data.isFile}"><mat-icon class="example-tab-icon">more_vert</mat-icon></div>
+        <div (click)="changeSidebarTab(1)" [ngClass]="{'selected': tabSelectedIndex==1, 'folder': !data.isFile}"><mat-icon class="example-tab-icon">share</mat-icon></div>
+        <div (click)="changeSidebarTab(2)" [ngClass]="{'selected': tabSelectedIndex==2, 'folder': !data.isFile}"><mat-icon class="example-tab-icon">flash_on</mat-icon></div>
+        <div *ngIf="data.isFile" (click)="changeSidebarTab(3)" [ngClass]="{'selected': tabSelectedIndex==3}"><mat-icon class="example-tab-icon">history</mat-icon></div>
+        -->
+      </div>
+
+      <div class="sfsEventBody">
+
+        <div class="sfsEventList" *ngIf="tabSelectedIndex==0">
+          <mat-list>
+            <mat-list-item *ngIf="!data.favorite" (click)="addremoveFavorite()">
+              <mat-icon><i class="material-icons">star</i></mat-icon>
+              <span class="spanInnerList">{{ addFavorites }}</span>
+            </mat-list-item>
+            <mat-list-item *ngIf="data.favorite" (click)="addremoveFavorite()">
+              <mat-icon><i class="material-icons">star_outline</i></mat-icon>
+              <span class="spanInnerList">{{ removeFavorites }}</span>
+            </mat-list-item>
+
+            <mat-list-item *ngIf="!data.coded" (click)="filefolderRename()">
+              <mat-icon><i class="material-icons">create</i></mat-icon>
+              <span class="spanInnerList">{{ rename }}</span>
+            </mat-list-item>
+
+            <mat-list-item *ngIf="!data.coded" (click)="openDialogMoveCopy()">
+              <mat-icon><i class="material-icons">zoom_out_map</i></mat-icon>
+              <span class="spanInnerList">{{ movecopy }}</span>
+            </mat-list-item>
+
+            <mat-list-item *ngIf="!data.coded" (click)="openDialogCrypt(true)">
+              <mat-icon><i class="material-icons">lock</i></mat-icon>
+              <span class="spanInnerList">{{ encipher }}</span>
+            </mat-list-item>
+            <mat-list-item *ngIf="data.coded" (click)="openDialogCrypt(false)">
+              <mat-icon><i class="material-icons">lock_open</i></mat-icon>
+              <span class="spanInnerList">{{ decipher }}</span>
+            </mat-list-item>
+
+            <mat-list-item (click)="filefolderDownload()">
+              <mat-icon><i class="material-icons">arrow_downward</i></mat-icon>
+              <span class="spanInnerList">{{ download }}</span>
+            </mat-list-item>
+
+            <mat-list-item (click)="openDialogDelete()">
+              <mat-icon><i class="material-icons">delete</i></mat-icon>
+              <span class="spanInnerList">{{ delete }}</span>
+            </mat-list-item>
+
+          </mat-list>
+        </div>
+
+        <div class="tabSelect1" *ngIf="tabSelectedIndex==1">
+          <!--<app-share [share]="this.info" [coded]="coded"></app-share>-->
+        </div>
+
+        <div class="tabSelect2" *ngIf="tabSelectedIndex==2">
+          <!--<app-activities [activity]="this.info"></app-activities>-->
+        </div>
+
+        <div *ngIf="tabSelectedIndex==3 && data.isFile">
+          <!--<app-versions [info]="info"></app-versions>-->
+        </div>
+      </div>
+
+    </div>
+</div>
+
+<!--EMPTY-->
+<div class="emptysidebarFileSharing" *ngIf="isEmpty">
+    <img class="logo img-fluid" src="../../../../assets/img/icon-filefolder.png">
+    <span>{{ text }}</span>
+</div>

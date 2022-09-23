@@ -1,0 +1,271 @@
+<div id="newUserDialog" *ngIf="!resumeDispley"  style="height:525px;">
+    <div class="pb-3 p-0 dialog-header">
+        <div class="text-header">
+            <div class="titleNewUser"><mat-icon><i class="material-icons icon" width="10px" height="18px">how_to_reg</i></mat-icon> {{langService.dictionary.new_user}}</div> 
+            <div class="subtitleNewUser"> {{langService.dictionary.subtitle_new_user}}</div>
+            <div class="requiredFIeld">*{{langService.dictionary.required_fields}}</div>
+        </div>
+        <div class="close" mat-dialog-close>
+            <mat-icon><span>close</span></mat-icon>
+        </div>
+    </div>
+  
+    <div class="loader-wrapper" *ngIf="wait">
+        <div class="spin d-flex justify-content-center">
+            <ngx-spinner
+                bdColor = "rgba(0,0,0,0)"
+                size = "default"
+                color = "#00B9B3"
+                type = "triangle-skew-spin"
+                [fullScreen] = "false" >
+            </ngx-spinner>
+        </div>
+    </div>
+  
+    <div class="dialogContent tiny-scrollbar" *ngIf="!isLoading && !wait">
+  
+        <div class="newUser form-box p-0">
+          <!--New User-->
+          <div class="newUserRow">
+            <div class="col-6">
+                <mat-form-field class="w-100" [formGroup]="nameForm">
+                    <mat-label>{{langService.dictionary.name_and_surname_new_user}}</mat-label>
+                    <input [(ngModel)]="user.name"  type="text" autocomplete="off" formControlName="name" matInput required (focus)="hideError()">
+                    <mat-error *ngIf="nameForm.get('name').hasError('required')">
+                        {{langService.dictionary.required_field}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+          
+            <div class="col-6">
+              <mat-form-field class="w-100" style="margin-bottom: 20px" [formGroup]="usernameForm">
+                <mat-label>{{langService.dictionary.new_user_username}}</mat-label>
+                <input type="text" required  [(ngModel)]="user.username" autocomplete="UserNameNoAutocomplete" formControlName="username" matInput  (focus)="hideError()">
+                <mat-error *ngIf="usernameForm.get('username').hasError('required')">
+                  {{langService.dictionary.required_field}}
+                </mat-error>
+                <mat-error *ngIf="usernameForm.get('username').hasError('pattern')">
+                  {{langService.dictionary.no_special_space_character}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+  
+            <div class="newUserRow">
+                <div class="col-6">
+                    <mat-form-field class="w-100" style="margin-bottom: 20px"  [formGroup]="emailForm">
+                        <mat-label>{{langService.dictionary.new_user_email}}</mat-label>
+                        <input  [(ngModel)]="user.email" type="email" autocomplete="off" matInput required formControlName="email" (focus)="hideError()">
+                        <mat-error *ngIf="emailForm.get('email').hasError('required')">
+                            {{langService.dictionary.required_field}}
+                        </mat-error>
+                        <mat-error *ngIf="emailForm.get('email').hasError('email')">
+                            {{langService.dictionary.invalid_email}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-6">
+                    <mat-form-field class="select">
+                        <mat-label>{{langService.dictionary.role}}</mat-label>
+                        <mat-select  [(ngModel)]="user.role">
+                            <mat-option *ngFor="let valueRole of roleList" [value]="valueRole.name">
+                                {{ valueRole.name }} 
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+            </div>
+
+            <div class="newUserRow"> 
+                    <div class="col-6">
+                        <mat-form-field class="w-100" style="margin-bottom: 20px"  [formGroup]="passwordForm">
+                            <mat-label>{{langService.dictionary.new_user_password}}</mat-label>
+                            <input #newUserPassword type="text" [(ngModel)]="user.password" autocomplete="off" required formControlName="newPassword" id="Input" matInput (blur)="hideRules()" (focus)="changeTypeInput(newUserPassword)" (input)="changeTypeInput(newUserPassword)">
+                            <mat-icon matSuffix (click)="showPassword()">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            <mat-error *ngIf="passwordForm.get('newPassword').hasError('required')">
+                                {{langService.dictionary.required_field}}
+                            </mat-error>
+                            <mat-error *ngIf="passwordForm.get('newPassword').hasError('minlength')">
+                                {{langService.dictionary.min_length_password}}
+                            </mat-error>
+                            <mat-error *ngIf="passwordForm.get('newPassword').hasError('maxlength')">
+                                {{langService.dictionary.max_length_password}}
+                            </mat-error>
+                            <mat-error *ngIf="passwordForm.get('newPassword').hasError('pattern')">
+                                {{langService.dictionary.two_spaces}}
+                            </mat-error>
+                            <mat-error *ngIf="passwordForm.get('newPassword').hasError('rules')">
+                                {{langService.dictionary.invalid_password}} 
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field class="w-100" style="margin-bottom: 20px"  [formGroup]="passwordForm">
+                            <input #newUserPasswordConfirm type="text" autocomplete="off" formControlName="confirmPassword" required matInput placeholder="{{langService.dictionary.confirm_new_password}}" (focus)="changeTypeInputComfirm(newUserPasswordConfirm)" (input)="changeTypeInputComfirm(newUserPasswordConfirm)">
+                            <mat-icon matSuffix (click)="showPasswordconfirm()">{{hidePsw ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            <mat-error *ngIf="passwordForm.get('confirmPassword').hasError('required')">
+                            {{langService.dictionary.required_field}}
+                            </mat-error>
+                            <mat-error *ngIf="passwordForm.get('confirmPassword').hasError('minlength')">
+                            {{langService.dictionary.min_length_password}}
+                            </mat-error>
+                            <mat-error *ngIf="passwordForm.get('confirmPassword').hasError('maxlength')">
+                            {{langService.dictionary.max_length_password}}
+                            </mat-error>
+                            <mat-error *ngIf="passwordForm.get('confirmPassword').hasError('incorrect')">
+                            {{langService.dictionary.no_confirm_password_match}}
+                            </mat-error>
+                            <mat-error *ngIf="passwordForm.get('confirmPassword').hasError('pattern')">
+                            {{langService.dictionary.two_spaces}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+            </div>
+
+            <div class="newUserRow psw" *ngIf="this.showRules">
+                <div class="istructionPsw col-6">
+                    <ul> {{langService.dictionary.psw_must_contain}}:
+                        <li>{{langService.dictionary.psw_rules_one}}</li>
+                        <li>{{langService.dictionary.psw_rules_two}}</li>
+                    </ul>
+                </div>
+                <div class="istructionPsw col-6">
+                    <ul>
+                        <li> {{langService.dictionary.psw_rules_three}}</li>
+                        <li>{{langService.dictionary.psw_rules_four}}</li>
+                        <li>{{langService.dictionary.psw_rules_five}}</li>
+                    </ul>
+                </div>
+            </div>
+
+          <div class="newUserRow">
+            <div class="col-6">
+                <mat-form-field class="select">
+                    <mat-label>{{langService.dictionary.new_user_groups}}</mat-label>
+                    <mat-select multiple [(ngModel)]="user.groups">
+                        <mat-select-trigger></mat-select-trigger>
+                        <mat-option class="Select" *ngFor="let group of groups" [value]="group" > {{group}} </mat-option>
+                    </mat-select>
+              </mat-form-field>
+                <div *ngIf="user.groups" class="label-groups">
+                    <mat-label *ngFor="let group of user.groups"><span>{{group}} </span><mat-icon (click)="deleteSelect(user.groups,group)"><i class="material-icons">close</i></mat-icon></mat-label>
+                </div>
+            </div>
+            <div class="col-6">
+                <mat-form-field class="select">
+                    <mat-label>{{langService.dictionary.new_user_quota}}</mat-label>
+                    <mat-select  [(ngModel)]="user.quota">
+                        <mat-option *ngFor="let mechanism of quotaList" [value]="mechanism.name">
+                            {{ mechanism.name }} 
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="col-12 actions-box p-0">
+        <button (click)="next(user)" [disabled]="!nameForm.valid || !usernameForm.valid || !emailForm.valid || !passwordForm.valid" 
+                class="primary-btn dialogButton float-right">
+            {{langService.dictionary.next}}
+    </button>
+        <div class="secondary-btn dialogButton float-left" mat-dialog-close>
+            {{langService.dictionary.undo}}
+        </div>
+    </div>
+</div>
+
+  <div id="confirmUserDialog" *ngIf="resumeDispley"  style="height:371px;">
+    <div class="pb-3 p-0 dialog-header">
+        <div class="text-header">
+            <div class="titleNewUser"><mat-icon><i class="material-icons icon" width="10px" height="18px">how_to_reg</i></mat-icon> {{langService.dictionary.new_user}}</div> 
+            <div class="subtitleNewUser"> {{langService.dictionary.confrim_newUser_subtitle}} </div>
+        </div>
+        <div class="close" mat-dialog-close>
+            <mat-icon><span>close</span></mat-icon>
+        </div>
+    </div>
+  
+    <div class="loader-wrapper" *ngIf="wait">
+        <div class="spin d-flex justify-content-center">
+            <ngx-spinner
+                bdColor = "rgba(0,0,0,0)"
+                size = "default"
+                color = "#00B9B3"
+                type = "triangle-skew-spin"
+                [fullScreen] = "false" >
+            </ngx-spinner>
+        </div>
+    </div>
+  
+    <div class="dialogContent tiny-scrollbar" *ngIf="!isLoading && !wait">
+  
+        <div class="confirmUser form-box p-0">
+  
+          <!--New User-->
+          <div class="confirmUserRow">
+            <div class="col-4 label-groups">
+                <mat-label class="titleLabel">
+                    {{langService.dictionary.user_name}}
+                </mat-label>
+                <mat-label class="textLabel">
+                   {{user.name}}
+                </mat-label>
+            </div>
+            <div class="col-4  label-groups">
+                <mat-label class="titleLabel">
+                    {{langService.dictionary.username}}
+                </mat-label>
+                <mat-label class="textLabel">
+                   {{user.username}}
+                </mat-label>
+            </div>
+            <div class="col-4  label-groups">
+                <mat-label class="titleLabel">
+                    {{langService.dictionary.email}}
+                </mat-label>
+                <mat-label class="textLabel">
+                   {{user.email}}
+                </mat-label>
+            </div>
+          </div>
+
+          <div class="confirmUserRow">
+            <div class="col-4  label-groups">
+                <mat-label class="titleLabel">
+                    {{langService.dictionary.role}}
+                </mat-label>
+                <mat-label class="textLabel">
+                    {{user.role}}
+                </mat-label>
+            </div>    
+            <div class="col-4  label-groups">
+                <mat-label class="titleLabel">
+                    {{langService.dictionary.groups}}
+                </mat-label>
+                <mat-label class="textLabel">
+                   {{user.groups}}
+                </mat-label>
+            </div>
+            <div class="col-4  label-groups">
+                <mat-label class="titleLabel">
+                    {{langService.dictionary.quota}}
+                </mat-label>
+                <mat-label class="textLabel">
+                   {{user.quota}}
+                </mat-label>
+            </div>
+        </div>
+      </div>
+      <div class="col-12 actions-box p-0">
+        <div (click)="confirm(user)" 
+                class="primary-btn dialogButton float-right">
+            {{langService.dictionary.confirm}}
+        </div>
+        <div class="secondary-btn dialogButton float-left" mat-dialog-close>
+            {{langService.dictionary.undo}}
+        </div>
+    </div>
+  </div>

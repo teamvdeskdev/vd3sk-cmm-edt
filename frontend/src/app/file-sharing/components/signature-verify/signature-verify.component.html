@@ -1,0 +1,74 @@
+<div id="sidebarSignatureVerify" *ngIf="signaturesData && !isLoading">
+
+    <div class="signTitle">{{dictTitle}}</div>
+
+    <div class="signDataList">
+        <div class="signDataElement" *ngFor="let element of signaturesData; let i = index">
+
+            <div class="element-title">
+                <mat-icon class="material-icons title-icon">gesture</mat-icon>
+                <span>{{dictGivenName}}</span>
+            </div>
+            <div class="element-text">
+                <span>{{element.givenName}} {{element.surname}}</span>
+                <mat-icon *ngIf="checkCertificateValidity(element.validitySince, element.validityUntil)" class="material-icons verified-icon">verified_user</mat-icon>
+            </div>
+
+            <div class="element-title">
+                <mat-icon class="material-icons title-icon">event_available</mat-icon>
+                <span>{{dictValidity}}</span>
+            </div>
+            <div class="element-text-date">
+                <span>{{this.dictDateFrom}} {{formatValidityDate(element.validitySince)}}</span>
+                <mat-icon *ngIf="checkCertificateValidity(element.validitySince, element.validityUntil)" class="material-icons verified-icon">verified_user</mat-icon>
+            </div>
+            <div class="element-text-date" style="margin-bottom: 13px;margin-top: 8px;">
+                <span>{{this.dictDateTo}} {{formatValidityDate(element.validityUntil)}}</span>
+                <mat-icon *ngIf="checkCertificateValidity(element.validitySince, element.validityUntil)" class="material-icons verified-icon">verified_user</mat-icon>
+            </div>
+
+            <div class="element-title">
+                <mat-icon class="material-icons title-icon">business</mat-icon>
+                <span>{{dictCommonName}}</span>
+            </div>
+            <div class="element-text"><span>{{element.commonName}}</span></div>
+
+            <div class="element-title">
+                <mat-icon class="material-icons title-icon">high_quality</mat-icon>
+                <span>{{dictDomainQualifier}}</span>
+            </div>
+            <div class="element-text"><span>{{element.domainQualifier}}</span></div>
+
+            <div class="element-title">
+                <mat-icon class="material-icons title-icon">business</mat-icon>
+                <span>{{dictOrganizationUnitName}}</span>
+            </div>
+            <div class="element-text"><span>{{element.organizationUnitName}}</span></div>
+
+            <div class="element-title">
+                <mat-icon class="material-icons title-icon">business</mat-icon>
+                <span>{{dictIssuerAltName}}</span>
+            </div>
+            <div class="element-text"><span>{{element.issuerAltName}}</span></div>
+
+            <div class="element-title">
+                <mat-icon class="material-icons title-icon">confirmation_number</mat-icon>
+                <span>{{dictCertSerialNumber}}</span>
+            </div>
+            <div class="element-text"><span>{{element.certSerialNumber}}</span></div>
+
+            <div *ngIf="isPers" class="element-title">
+                <mat-icon class="material-icons title-icon">business</mat-icon>
+                <span>{{dictMarked}}</span>
+            </div>
+            <div *ngIf="isPers" class="element-text"><span>{{element.marked}}</span></div>
+
+            <hr class="separator" *ngIf="i != signaturesData.length-1">
+        </div>
+    </div>
+</div>
+
+<div id="sidebarSignatureVerify" class="nodata" *ngIf="!signaturesData && !isLoading">
+    <mat-icon><i class="material-icons"> gesture </i></mat-icon>
+    <span>{{dictNoData}}</span>
+</div>

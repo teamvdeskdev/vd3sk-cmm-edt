@@ -1,0 +1,135 @@
+.tableDiv {
+    max-height: 100%;
+    min-height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    background-color: white;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      box-shadow: none !important;
+
+      //column start
+      .usertableId{
+        display: none;
+      }
+
+      .usertableImage{
+        width: 5%;
+        
+        i{
+          cursor: pointer;
+          margin-left: 12px;
+          color: #007cb8;
+        }
+      }
+
+      .usertableUsername{
+        width: 20%;
+        padding-right: 15px;
+        mat-icon{
+          cursor: pointer;
+        }
+      }
+
+      .userNumber{
+        width: 10%;
+        padding-right: 15px;
+        mat-icon{
+          cursor: pointer;
+        }
+      }
+
+      .userAdmin{
+        width: 30%;
+        padding-right: 15px;
+        mat-icon{
+          cursor: pointer;
+        }
+      }
+
+      .usertableOthers{
+        width: 7%;
+        .divmenu{
+          i{
+            cursor: pointer;
+            padding-left: 10px;
+            color: #007cb8;
+          }
+          button{
+            outline: none;
+            i{
+              cursor: pointer;
+              color: #007cb8;
+            }
+          }
+          button.buttons:focus{
+            outline: none;
+          }
+        }
+      }
+
+      .usertableNavigate{
+        width: 7%;
+        i{
+          cursor: pointer;
+          padding-left: 10px;
+          color: #007cb8;
+        }
+        button{
+          outline: none;
+          i{
+            cursor: pointer;
+            color: #007cb8;
+          }
+        }
+        button.buttons:focus{
+          outline: none;
+        }
+      }
+      //column end
+
+      img.profile_pic {
+        border-radius: 50%;
+      }
+
+      td.usertableGroups{
+        mat-form-field.mat-form-field{
+            .mat-form-field-flex{
+              background-color: white !important;
+            } 
+        }
+      }
+
+      .input, select{
+        display: flex;
+        background-color: white;
+
+      }
+
+      td.mat-cell{
+        position: relative;
+      }
+
+      td.senddetails{
+        width: 6%;
+        i{
+          display: none;
+        }
+      }
+
+      mat-icon.mat-icon{
+        vertical-align: middle;
+
+        &.tableimage{
+          display: flex;
+        }
+      }
+      mat-checkbox {
+        label {
+          margin: 0px;
+        }
+      }
+    }
+}

@@ -1,0 +1,174 @@
+//importo solamente la parte relativa le breakpoint grid
+@import "~bootstrap/scss/bootstrap-grid.scss";
+.fileSharing-checkbox {
+  @include media-breakpoint-down(sm) {
+    padding: 0 1rem;
+  }
+}
+
+.fileSharing-icon {
+  cursor: pointer;
+    @include media-breakpoint-down(sm) {
+      padding-right: 1rem;
+    }
+}
+
+.hide{
+  display: none;
+}
+
+//table width every column
+.tableimage{
+  width: 5%;
+  
+  i{
+    &.folder{
+      color:#00396A;
+    }
+    &.text{
+      color:#5FBEEC;
+    }
+    &.image, &.svg,
+    &.video, &.audio{
+      color:#9669D2;
+    }
+    &.xlxs{
+      color:#66BA6C;
+    }
+    &.pptx{
+      color:#D98753;
+    }
+    &.pdf{
+      color:#B54F4F;
+    }
+    &.generic{
+      color:#ADB4B8;
+    }
+    &.zip{
+      color: #F7C408;
+    }
+  } 
+}
+
+.tablecheckbox{
+  width: 5%;
+}
+
+.tablename{
+  width: 65%;
+  font-size: 13px;
+  letter-spacing: 0;
+  color: #2B2B2B;
+  &.head{
+    color: #848484;
+    font-size: 11px;
+  }
+  .tableiconname{
+    width: fit-content;
+    height: auto;
+    display: flex;
+    i.star{
+      padding-left: 10px;
+      color: #FDCA0B;
+      font-size: 13px;
+    }
+    i.lock{
+      padding-left: 10px;
+      color: #46ABDB;
+      font-size: 13px;
+    }
+  }
+}
+
+.tableweight,
+.tableupdate{
+  width: 10%;
+  font-size: 11px;
+  letter-spacing: 0;
+  color: #2B2B2B;
+  &.head{
+    color: #848484;
+  }
+}
+.tablemailconfig{
+  width: 5%;
+  i{
+    color: #007789;
+  }
+
+  &:hover{
+    i{
+      cursor: pointer;
+      color: #00B9B3;
+    }
+  }
+}
+.tableaction{
+  width: 5%;
+  
+  i{
+    color: #007789;
+  }
+
+  &:hover{
+    i{
+      cursor: pointer;
+      color: #00B9B3;
+    }
+  }
+}
+.tablefoot{
+  color: #848484;
+  font-size: 11px;
+  letter-spacing: 0;
+}
+
+
+
+.favoritesStar{
+  position: absolute;
+  top: -6px;
+  left: 20px;
+  i{
+    font-size: 13px !important;
+  }
+}
+
+.iconSettingFile{
+  cursor: pointer;
+}
+
+.nameSingleFile{
+  cursor: pointer;
+
+  .divNameSingleFile{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .spanNameFile{
+      padding-left: 10px;
+    }
+    .spanExtensionFile{
+      color: #8e8d8d;
+    }
+  }
+}
+
+::ng-deep .datetooltip{
+  background-color: #00396A;
+  color: white !important;
+  border-radius: 3px;
+}
+
+.columnTableID {
+  display: none;
+}
+
+.mat-icon {
+  .material-icons.lens {
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+  }
+}

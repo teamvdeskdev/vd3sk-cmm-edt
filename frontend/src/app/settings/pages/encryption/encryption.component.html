@@ -1,0 +1,105 @@
+<div id="encryption">
+    <div class="encryption-header">
+        <div class="encryption-header-title">
+            {{langService.dictionary.encryption}}
+        </div>
+        <div class="encryption-header-subtitle">
+            {{langService.dictionary.increase_security}}
+        </div>
+    </div>
+    
+    <div class="encryption-body mt-1">
+        <div class="section-subtitle">
+            {{langService.dictionary.pwd_subtitle}}
+        </div>
+        <div class="section-subtitle">
+            {{langService.dictionary.phrase_subtitle}}
+        </div>
+        <form *ngIf="!isLoading" [formGroup]="encryptionForm">
+            <div class="row" style="margin-bottom: 10px">
+                <div class="col-12 col-sm-6 col-md-5">
+                    <div class="field-wrapper">
+                        <label style="margin-right: 10px">{{langService.dictionary.encryption_password}}:  </label>
+                        <mat-form-field class="input-field" color="accent" (keyup)="showInvalidPassword = false">
+                            <input matInput formControlName="password" name="password" type="password" required>
+                            <mat-error *ngIf="encryptionForm.get('password').hasError('required')">
+                                {{langService.dictionary.required_field}}
+                            </mat-error>
+                            <mat-error *ngIf="encryptionForm.get('password').hasError('minlength')">
+                                {{langService.dictionary.min_length_password}}
+                            </mat-error>
+                            <mat-error *ngIf="encryptionForm.get('password').hasError('pattern')">
+                              {{langService.dictionary.two_spaces}}
+                            </mat-error>
+                            <mat-icon *ngIf="!showEdit" matSuffix class="edit" (click)="toggleEdit()"> 
+                                edit
+                            </mat-icon>
+                        </mat-form-field>
+                    </div>
+
+                    <div *ngIf="showInvalidPassword" class="error">
+                        {{langService.dictionary.invalid_pwd}}
+                    </div>
+                </div>
+                <div class="d-none d-sm-block col-sm-6 col-md-7"></div>
+            </div>
+            <div *ngIf="showEdit">
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-5">
+                        <div class="field-wrapper">
+                            <label style="margin-right: 10px">{{langService.dictionary.confirm_pwd}}:  </label>
+                            <mat-form-field class="input-field" color="accent" (keyup)="showNoMatchPassword = false">
+                                <input matInput formControlName="confirmPwd" name="confirmPwd" type="password" required>
+                                <mat-error *ngIf="encryptionForm.get('confirmPwd').hasError('required')">
+                                    {{langService.dictionary.required_field}}
+                                </mat-error>
+                                <mat-error *ngIf="encryptionForm.get('confirmPwd').hasError('minlength')">
+                                    {{langService.dictionary.min_length_password}}
+                                </mat-error>
+                                <mat-error *ngIf="encryptionForm.get('confirmPwd').hasError('pattern')">
+                                  {{langService.dictionary.two_spaces}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div *ngIf="showNoMatchPassword" class="error">
+                            {{langService.dictionary.no_match_pwd}}
+                        </div>
+                    </div>
+                    <div class="d-none d-sm-block col-sm-6 col-md-7"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-5">
+                        <div class="field-wrapper">
+                            <label style="margin-right: 10px">{{langService.dictionary.pass_phrase}}: </label>
+                            <mat-form-field class="input-field" color="accent">
+                                <input matInput formControlName="phrase" name="phrase" type="text" required>
+                                <mat-error *ngIf="encryptionForm.get('phrase').hasError('required')">
+                                    {{langService.dictionary.required_field}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="d-none d-sm-block col-sm-6 col-md-7"></div>
+                </div>
+
+                <div *ngIf="showInvalidForm" class="error">
+                    {{langService.dictionary.invalid_form}}
+                </div>
+                <div class="row">
+                    <div class="cancel-btn" (click)="toggleEdit()">{{langService.dictionary.cancel}}</div>
+                    <div type="submit" class="primary-btn button-save" (click)="onSubmit()">{{langService.dictionary.save}}</div>
+                </div>
+            </div>
+        </form>
+
+        <div *ngIf="isLoading" class="loader-row">
+            <div class="loader-col">
+                <div class="spinner-border vdesk-spinner" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

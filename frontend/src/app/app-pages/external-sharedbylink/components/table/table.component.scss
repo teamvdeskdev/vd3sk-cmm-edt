@@ -1,0 +1,239 @@
+//importo solamente la parte relativa le breakpoint grid
+@import "~bootstrap/scss/bootstrap-grid.scss";
+.fileSharing-checkbox {
+  @include media-breakpoint-down(sm) {
+    padding: 0 1rem;
+  }
+}
+
+.fileSharing-icon {
+  cursor: pointer;
+    @include media-breakpoint-down(sm) {
+      padding-right: 1rem;
+    }
+}
+
+.tableDiv {
+  height: 100%;
+    overflow-y: auto;
+    background-color: white;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      box-shadow: none !important;
+
+      tbody tr{
+        td.senddetails i{
+          display: inline-block;
+          cursor: pointer;
+        }
+        &.mat-row:hover {
+            background-color: #007CB826;
+        }
+        &.mat-row.selectedrow{
+          background-color: #007CB826;
+        }
+      }
+
+      td.mat-cell{
+        position: relative;
+      }
+    }
+  }
+
+#noData{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+
+  .noData{
+      display: flex;
+      flex-direction: column;
+      width: 20%;
+      height: 20%;
+      justify-content: center;
+      align-items: center;
+
+      mat-icon{
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 45%;
+  
+              i{
+                  font-size: 54px;
+                  color: #BBBBBB;
+              }
+          }
+  
+          .nodatatitle{
+              height: 15%;
+              color: #444444;
+              font-family: Roboto;
+              font-size: 14px;
+              letter-spacing: -0.03px;
+              line-height: 16px;
+              text-align: center;
+          }
+  
+          .nodatadescription{
+              height: 40%;
+              color: #444444;
+              font-family: Roboto;
+              font-size: 12px;
+              letter-spacing: -0.03px;
+              line-height: 13px;
+              text-align: center;
+          }
+  }
+}
+
+//table width every column
+.tableimage{
+  width: 3%;
+  mat-icon{
+    i{
+      &.folder{
+        color:#00396A;
+      }
+      &.text{
+        color:#5FBEEC;
+      }
+      &.image, &.svg,
+      &.video, &.audio{
+        color:#9669D2;
+      }
+      &.xlxs{
+        color:#66BA6C;
+      }
+      &.pptx{
+        color:#D98753;
+      }
+      &.pdf{
+        color:#B54F4F;
+      }
+      &.generic{
+        color:#ADB4B8;
+      }
+      &.zip{
+        color: #F7C408;
+      }
+    }
+  }
+}
+
+.tablecheckbox{
+  width: 5%;
+}
+
+.tablename{
+  width: 57%;
+  font-size: 13px;
+  letter-spacing: 0;
+  color: #2B2B2B;
+  &.head{
+    color: #848484;
+    font-size: 11px;
+  }
+  .tableiconname{
+    width: fit-content;
+    height: auto;
+    display: flex;
+    i.star{
+      padding-left: 10px;
+      color: #FDCA0B;
+      font-size: 13px;
+    }
+    i.lock{
+      padding-left: 10px;
+      color: #46ABDB;
+      font-size: 13px;
+    }
+  }
+}
+
+.tableweight,
+.tableupdate{
+  width: 10%;
+  font-size: 11px;
+  letter-spacing: 0;
+  color: #2B2B2B;
+  &.head{
+    color: #848484;
+  }
+}
+.tableaction{
+    width: 5%;
+    
+    i{
+      color: #007789;
+    }
+  
+    &:hover{
+      i{
+        cursor: pointer;
+        color: #00B9B3;
+      }
+    }
+  }
+.tablefoot{
+  color: #848484;
+  font-size: 11px;
+  letter-spacing: 0;
+}
+
+.nameSingleFile{
+  cursor: pointer;
+
+  .divNameSingleFile{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .spanNameFile{}
+    .spanExtensionFile{
+      color: #8e8d8d;
+    }
+  }
+
+  .changeNameFileDiv{
+    display: flex;
+    position: relative;
+    align-items: center;
+
+    .changeNameFileInput{
+      width: 90%;
+      outline: none;
+      border-radius: 6px;
+    }
+    .changeNameFileI{
+      position: absolute;
+      left: 82%;
+      color: rgb(0, 139, 139);
+      cursor: pointer;
+    }
+  }
+}
+
+::ng-deep .datetooltip{
+  background-color: #00396A;
+  color: white !important;
+  border-radius: 3px;
+}
+
+.columnTableID {
+  display: none;
+}
+
+.mat-icon {
+  .material-icons.lens {
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+  }
+}

@@ -1,0 +1,41 @@
+<div id="configurations">
+    <div class="configurations-header">
+        <div class="configurations-header-title">
+            {{langService.dictionary.conf_page_title}}
+        </div>
+        <div class="configurations-header-subtitle">
+            <!-- SUB-TITLE -->
+        </div>
+    </div>
+    
+    <div class="configurations-body mt-1">
+        <div class="section-subtitle">
+            <!-- sub1 -->
+        </div>
+        <div class="section-subtitle">
+            <!-- sub2 -->
+        </div>
+        <form [formGroup]="expireSessionForm">
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-5">
+                    <div class="field-wrapper">
+                        <label>{{langService.dictionary.session_time}}:</label> 
+                        <mat-form-field>
+                            <select matNativeControl formControlName="expireTime" (change)="updateExpireTime($event)">
+                                <option *ngFor="let hour of hours" value="hour">{{hour}} {{langService.dictionary.hour_label}}</option>
+                            </select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div *ngIf="isLoading" class="loader-row">
+            <div class="loader-col">
+                <div class="spinner-border vdesk-spinner" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+<div class="cardTableDiv tiny-scrollbar">
+    <table mat-table [dataSource]="dataSource">
+  
+      <!-- ID Column -->
+      <!-- Usually this column is always hidden -->
+      <ng-container matColumnDef="id">
+        <td mat-cell *matCellDef="let element" class="columnTableID">{{element.activity_id}}</td>
+      </ng-container>
+  
+      <!-- PROFILE_PIC Column -->
+      <ng-container matColumnDef="profile_pic">
+        <td class="col-profile-pic" mat-cell *matCellDef="let element">
+          <img src="{{element.profile_pic_url}}" class="profile_pic"/>
+        </td>
+      </ng-container>
+
+      <!-- IMAGE Column -->
+      <ng-container matColumnDef="image">
+        <td class="col-image" mat-cell *matCellDef="let element">
+          <mat-icon *ngIf="element.type === 'systemtags'"><i class="material-icons">label</i></mat-icon>
+          <mat-icon *ngIf="element.type === 'shared'"><i class="material-icons">share</i></mat-icon>
+          <mat-icon *ngIf="element.type === 'security'"><i class="material-icons">lock</i></mat-icon>
+          <mat-icon *ngIf="element.type === 'file_created'"><i class="material-icons">add</i></mat-icon>
+          <mat-icon *ngIf="element.type === 'file_deleted'"><i class="material-icons">delete</i></mat-icon>
+          <mat-icon *ngIf="element.type === 'file_changed' || element.type === 'file_restored'">
+            <i class="material-icons">refresh</i>
+          </mat-icon>
+          <mat-icon *ngIf="element.type === 'favorite'"><i class="material-icons">star</i></mat-icon>
+          <mat-icon *ngIf="element.type === 'personal_settings' || element.type === 'group_settings'">
+            <i class="material-icons">settings</i>
+          </mat-icon>
+          <mat-icon *ngIf="element.type === 'calendar'"><i class="material-icons">calendar_today</i></mat-icon>
+          <mat-icon *ngIf="element.type === 'calendar_event'"><i class="material-icons">event</i></mat-icon>
+        </td>
+      </ng-container>
+  
+      <!-- DESCRIPTION Column -->
+      <ng-container matColumnDef="description">
+        <td mat-cell class="col-description" *matCellDef="let element">
+         {{element.subject}}
+        </td>
+      </ng-container>  
+  
+      <!-- ICONS Column -->
+      <ng-container matColumnDef="icons">
+          <td mat-cell class="col-icons" *matCellDef="let element">
+            <mat-icon *ngFor="let icon of element.icons">
+                <i class="material-icons icon">{{icon}}</i>
+              </mat-icon>
+          </td>
+      </ng-container>
+
+      <!-- DATE Column -->
+      <ng-container matColumnDef="date">
+        <td mat-cell *matCellDef="let element" class="col-date">
+          <span>{{getDate(element.datetime)}}</span>
+        </td>
+      </ng-container>
+
+      <!-- TIME Column -->
+      <ng-container matColumnDef="time">
+        <td mat-cell *matCellDef="let element" class="col-time">
+          <span matTooltip = "{{element.datetime}}" matTooltipPosition="after" matTooltipClass="datetooltip">
+            {{element.dateFunc}}
+          </span>
+        </td>
+      </ng-container>
+  
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openActivities(row)" class="cursor-pointer"></tr>
+    </table>
+</div>
+  

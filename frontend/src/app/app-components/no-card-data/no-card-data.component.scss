@@ -1,0 +1,25 @@
+#no-card-data {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .no-card-data-icon {
+        width: 88px;
+        margin: 0px 30px;
+    }
+
+    .mb-20 {
+        margin-bottom: 20px;
+    }
+
+    .no-card-data-msg {
+        min-height: 36px;
+        max-height: 40px;
+        color: #BFBFBF;
+        font-family:  "SF Pro Display", sans-serif;
+        font-size: 14px;
+        letter-spacing: 0;
+        line-height: 16px;
+    }
+}

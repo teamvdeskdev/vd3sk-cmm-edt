@@ -1,0 +1,108 @@
+#configPanel {
+    height: 91%;
+    width: 100%;
+    background-color: #F0F0F0;
+    overflow-y: auto;
+    scrollbar-width: none; // Firefox
+    -ms-overflow-style: none; // IE and Edge
+    &::-webkit-scrollbar { // Chrome, Safari and Opera
+        display: none;
+    }
+
+    .configPanel-header {
+        padding: 20px;
+
+        .configPanel-header-title {
+            color: #2B2B2B;
+            font-family: Roboto;
+            font-size: 18px;
+            letter-spacing: 0;
+            line-height: 21px;
+            margin-bottom: 10px;
+        }
+
+        .configPanel-header-subtitle {
+            color: #808080;
+            font-family: Roboto;
+            font-size: 14px;
+            letter-spacing: 0;
+            line-height: 16px;
+        }
+    }
+
+    .configPanel-body {
+        margin-top: 30px;
+        padding-left: 20px;
+        
+        table {
+            width: 100%;
+
+           .hidden {
+               display: none;
+           }
+           .icon {
+               padding-left: 20px;
+           }
+           .more {
+               color: #007789;
+           }
+        }
+        .device-col-header {
+            padding-left: 20px;
+        }
+        .device-col {
+            padding-left: 20px;
+            width: 40%;
+        }
+        .time-col {
+            width: 15%;
+        }
+
+        .remote-wipe {
+            font-weight: 500;
+            color: #00396A;
+        }
+
+        .url-input-field {
+            width: 320px;
+        }
+
+        .primary-btn {
+            margin-top: 30px;
+            height: 30px;
+            width: 240px;
+            padding-top: 7px;
+            border-radius: 3px;
+            background: linear-gradient(90deg, #00A59F 0%, #007CB9 100%);
+            color: #FFFFFF;
+            font-family: 'Roboto';
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 0.58px;
+            line-height: 16px;
+            text-align: center;
+            text-transform: uppercase;
+            cursor: pointer;
+                
+            &:hover {
+                background: #00B9B3;
+            }
+        }
+    }
+
+    .pointer {
+        cursor: pointer;
+    }
+
+    .mat-header-cell {
+        color: #848484;
+    }
+
+    tr.mat-header-row {
+        height: 49px;
+    }
+
+    .table-header {
+        background-color: rgba(178, 214, 219, 0.4);
+    }
+}

@@ -1,0 +1,217 @@
+#profile {
+    width: 100%;
+    height: 100%;
+    background-color: #F0F0F0;
+    overflow-y: auto;
+
+    .disabled {
+        opacity: 0.5;
+    }
+
+    .profile-inner-container {
+        width: 100%;
+        margin-bottom: 100px;
+    }
+    .profile-header {
+        padding: 20px;
+
+        .profile-header-title {
+            color: #2B2B2B;
+            font-family: Roboto, sans-serif;
+            font-size: 18px;
+            letter-spacing: 0;
+            line-height: 21px;
+        }
+        .label {
+            color: #8B8B8B;
+            font-size: 14px;
+            font-family: Roboto, sans-serif;
+        }
+
+        .profile-header-content {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: row;
+            
+            .profile-picture-wrapper {
+                width: 120px;
+                margin-right: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                img.profile_pic {
+                    border-radius: 50%;
+                }
+
+                .vdesk-spinner {
+                    color: #00B9B3;
+                }
+            }
+
+            .profile-picture-section {
+                color: #2B2B2B;
+                font-family: Roboto;
+                font-size: 14px;
+                letter-spacing: 0;
+                line-height: 14px;
+
+                .list-option {
+                    cursor: pointer;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    height: auto;
+                    padding-bottom: 10px;
+    
+                    .list-icon {
+                        color: #007789;
+                        font-size: 20px;
+                        margin-right: 10px;
+                        &:hover {
+                            color: #00B9B3;
+                        }
+                    }
+                    .list-icon-svg {
+                        margin-right: 10px;
+                        svg {
+                            width: 24px;
+                            .st0:hover {
+                                fill: #00B9B3;
+                            }
+                        }
+                    }
+                    .hidden {
+                        visibility: hidden;
+                        width: 1px;
+                        height: 1px;
+                      }
+                }
+                .footer {
+                    color: #8B8B8B;
+                    padding-top: 10px;
+                }
+            }
+        }
+    }
+
+    .profile-body {
+        margin-top: 30px;
+        
+        table {
+            width: 100%;
+
+            img.space {
+                width: 30px;
+                height: 30px;
+            }
+
+            .id-col {
+                display: none;
+            }
+            .label-col {
+                width: 25%;
+                padding-left: 20px;
+            }
+            .value-col {
+                width: 25%;
+                font-weight: normal;
+            }
+            .next-col {
+                width: 50%;
+            }
+            mat-form-field {
+                width: 100%;
+            }
+            .mat-icon.forward, .mat-icon.edit {
+                cursor: pointer;
+                font-size: 20px;
+                color: #0077894D;
+          
+                &.selected{
+                  color: #007789;
+                }
+          
+                &:hover{
+                  color: #007789;
+                }
+            } 
+        }
+        .istructionPsw{
+            background-color: white;
+            border: 1px solid black;
+            padding-top: 10px;
+            margin-bottom: 30px;
+            border-radius: 1%;
+        }
+    }
+
+}
+
+.toast-success {
+    background-color: #007CB8;
+    color: white;
+    -webkit-box-shadow: unset;
+    -moz-box-shadow: unset;
+    box-shadow: unset;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+  }
+  .toast-error {
+    background-color: rgba(255, 0, 0, 0.493);
+    color: #2B2B2B;
+    -webkit-box-shadow: unset;
+    -moz-box-shadow: unset;
+    box-shadow: unset;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+  }
+
+  .loader-row {
+    display: block;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+    width: 30%;
+
+    .loader-col {
+        display: flex;
+        flex-direction: col;
+        height: 100%;
+    }
+}
+.vdesk-spinner {
+    color: #00B9B3;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+}
+
+.section-loader-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+  width: 30%;
+
+  .section-loader-col {
+    display: flex;
+    flex-direction: col;
+    height: 100%;
+  }
+}
+
+.section-vdesk-spinner {
+  color: #00B9B3;
+  top: 50%;
+  left: 50%;
+  position: relative;
+}
+
+:host ::ng-deep {
+    .mat-select-value {
+        padding-left: 0;
+    }
+}

@@ -1,0 +1,72 @@
+<div id="vdpaSettings" class="default-scrollbar">
+  <div *ngIf="!isLoadingPage && providerList" class="vdpaSettings-inner-container">
+
+    <div class="vdpaSettings-header">
+      <div class="vdpaSettings-header-title">
+        {{langService.dictionary.vdpa_title}}
+      </div>
+    </div>
+
+    <div class="vdpaSettings-body">
+
+      <!--Configurated domain-->
+      <div class="section">
+        <div class="vdpaSettings-header-title">
+          {{langService.dictionary.signature_provider}}
+        </div>
+        <div class="providers">
+          <div class="col-12">
+            <table class="table w-100">
+              <thead>
+                <tr>
+                  <th>{{langService.dictionary.provider_service_name}}</th>
+                  <th>{{langService.dictionary.provider_service_url}}</th>
+                  <th>{{langService.dictionary.supported_signatures}}</th>
+                  <th>{{langService.dictionary.service_active}}</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let p of providerList">
+                  <td>{{p.ServiceName}}</td>
+                  <td>{{p.ServiceUrl}}</td>
+                  <td>{{setSupportedSignatures(p)}}</td>
+                  <td>
+                    <span *ngIf="p.ServiceActive">Yes</span>
+                    <span *ngIf="!p.ServiceActive">No</span>
+                  </td>
+                  <td>
+                    <mat-icon matSuffix class="edit" (click)="openEditProviderDialog(p)">
+                      edit
+                    </mat-icon>
+                  </td>
+                  <!--<td>
+                    <button (click)="deleteProvider(p)" type="button"
+                            class="btn btn-primary btn-sm deleteRow">
+                      {{langService.dictionary.delete}}
+                    </button>
+                  </td>-->
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+
+      <!--<div (click)="saveSettings(instanceConfig)" class="save primary-btn">{{langService.dictionary.save}}</div>-->
+
+    </div>
+
+  </div>
+
+  <div *ngIf="isLoadingPage" class="loader-row">
+    <div class="loader-col">
+      <div class="spinner-border vdesk-spinner" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+
+</div>

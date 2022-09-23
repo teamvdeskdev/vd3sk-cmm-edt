@@ -1,0 +1,48 @@
+<div id="editDeviceDialog">
+    <div class="pb-3 p-0"> <!-- col-12 -->
+        <span class="editDeviceTitle">{{langService.dictionary.edit_name}}</span>
+
+    </div>
+
+    <div class="loader-wrapper" *ngIf="wait">
+        <div class="spin d-flex justify-content-center">
+            <ngx-spinner
+                bdColor = "rgba(0,0,0,0)"
+                size = "default"
+                color = "#00B9B3"
+                type = "triangle-skew-spin"
+                [fullScreen] = "false" >
+            </ngx-spinner>
+        </div>
+    </div>
+
+    <div class="dialogContent tiny-scrollbar" *ngIf="!isLoading && !wait">
+
+        <div class="editDevice form-box p-0">
+            <!--Edit Device Name-->
+            <div>
+                <mat-form-field class="w-100">
+                  <input [(ngModel)]="element.name" type="text" autocomplete="DeviceNameNoAutocomplete"
+                         name="DeviceNameNoAutocomplete" matInput placeholder="{{langService.dictionary.first_name}}" (focus)="hideError()" readonly>
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                  <input [(ngModel)]="this.newValue" type="text" autocomplete="off" matInput placeholder="{{langService.dictionary.new_name}}" (focus)="hideError()">
+                </mat-form-field>
+            </div>
+          
+            
+        </div>
+    </div>
+
+    <div class="col-12 actions-box p-0">
+        <div (click)="confirm()" 
+                class="primary-btn dialogButton float-right">
+            {{langService.dictionary.save}}
+        </div>
+        <div class="secondary-btn dialogButton float-left" mat-dialog-close>
+            {{langService.dictionary.undo}}
+        </div>
+    </div>
+</div>
+

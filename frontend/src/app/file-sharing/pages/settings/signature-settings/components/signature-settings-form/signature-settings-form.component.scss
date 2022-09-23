@@ -1,0 +1,123 @@
+.container {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.title {
+    font-family: 'Roboto';
+    font-size: 18px;
+    color: #2B2B2B;
+    padding-top: 21px;
+    padding-bottom: 35px;
+}
+
+.row {
+    padding-left: 21px;
+}
+
+.buttons-row {
+    padding-top: 40px;
+}
+
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.label-col-width {
+    max-width: 97px !important;
+}
+
+.radio-width {
+    max-width: 75px;
+}
+
+.label-text {
+    font-family: 'Roboto';
+    font-size: 14px;
+}
+
+.normal-input {
+    max-width: 335px !important;
+}
+
+.flex-input {
+    max-width: 225px !important;
+    margin-left: 36px;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.required-label {
+    color: red;
+    padding-bottom: 10px;
+    font-size: 13px;
+}
+
+.button-back, .button-confirm, .button-reset, .button-upload {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.58px;
+    border: 1px solid #368BA2;
+    padding: 7px 14px;
+    outline: none;
+    text-transform: uppercase;
+
+    &:disabled{
+        background: linear-gradient(45deg, #007CB954 0%, #00A59F54 100%);
+    }
+}
+
+.button-back {
+    cursor: pointer;
+    width: 205px;
+    height: 30px;
+    color: #368BA2;
+
+    &:hover{
+        background: #00B9B3;
+        color: white;
+    }
+}
+
+.button-confirm {
+    cursor: pointer;
+    width: 205px;
+    height: 30px;
+    margin-left: 30px;
+    background: linear-gradient(45deg, #007CB9 0%, #00A59F 100%);
+    color: white;
+
+    &:hover{
+        background: #00B9B3;
+    }    
+}
+
+.button-reset, .button-upload {
+    cursor: pointer;
+    width: 90px;
+    height: 30px;
+    margin-left: 0px;
+    background: linear-gradient(45deg, #007CB9 0%, #00A59F 100%);
+    color: white;
+
+    &:hover{
+        background: #00B9B3;
+    }    
+}
+
+.button-upload {
+    margin-left: 20px;
+}
+
+.signature-pad-box {
+    border-radius: 15px;
+}

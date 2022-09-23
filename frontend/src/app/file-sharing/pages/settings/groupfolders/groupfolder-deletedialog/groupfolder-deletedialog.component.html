@@ -1,0 +1,18 @@
+<div class="title">
+    <span> {{ stringTitle }} </span>
+    <mat-icon><i class="material-icons" (click)="onNoClick()"> close </i></mat-icon>
+</div>
+
+<div class="body">
+    <span> {{ stringBody }} </span>
+</div>
+
+<div class="buttons" *ngIf="!this.data.secondDialog">
+    <button class="remove" (click)="onNoClick()" mat-flat-button> {{ stringCancel }} </button>
+    <button class="save" (click)="onConfirmClick()" mat-flat-button> {{ stringSave }} </button>
+</div>
+
+<div class="buttons" *ngIf="this.data.secondDialog">
+    <button class="saveSecond" (click)="onConfirmClick()" mat-flat-button> {{ stringSave }} </button>
+    <button class="removeSecond" (click)="onNoClick()" mat-flat-button> {{ stringCancel }} </button>
+</div>

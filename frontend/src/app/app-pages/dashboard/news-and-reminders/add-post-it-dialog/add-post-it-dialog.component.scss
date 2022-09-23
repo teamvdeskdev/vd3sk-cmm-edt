@@ -1,0 +1,183 @@
+#postItDialog {
+    padding-left: 10px;
+    padding-right: 10px;
+    .title{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 20%;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+
+        .title-with-icon {
+            display: flex;
+        }
+
+        .title-icon {
+            font-size: 21px;
+            margin-right: 10px;
+            color: #00396a;
+        }
+
+        .title-text {
+            font-family: 'Roboto';
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #383838;
+        }
+
+        span{
+            color: #2B2B2B;
+            font-family: 'Roboto';
+            font-size: 18px;
+            letter-spacing: 0;
+            line-height: 21px;
+        }
+
+        mat-icon{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+
+            i{
+                color: #00396a;
+                font-size: 20px;
+
+                &:hover{
+                    color: #00396a;
+                }
+            }
+        }
+    }
+
+    .subtitle {
+        margin-top: 20px;
+        font-family: 'Roboto';
+        font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #808080;
+    }
+
+    .note {
+        margin-top: 16px;
+    }
+
+    .required-fields-star {
+        font-size: 12px;
+        color: #d06a6a;
+    }
+
+    .note .required-fields-text {
+        font-family: 'Roboto';
+        font-size: 12px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.33;
+        letter-spacing: normal;
+        color: #888888;
+    }
+
+    .description-row {
+        margin-top: 30px;
+    }
+
+    .form-field-description, 
+    .form-field-title, 
+    .form-field-share {
+        width: 100%;
+    }
+
+    ::ng-deep.mat-form-field-underline {
+        /*change color of underline*/
+        background-color: #007789 !important;
+    }
+
+    .user-avatar {
+        border-radius: 50%;
+        margin-right: 5px;
+    }
+
+    .delete-icon {
+        color: #007789;
+        cursor: pointer;
+    }
+
+    .mat-form-field {
+        font-size: 14px;
+    }
+
+    .input-container {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        padding: 0;
+    }
+
+    .share-user-row {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .buttonsdialog{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 30%;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 70px;
+
+        button{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3px;
+            padding: 5px 0px;
+            outline: none;
+            width: 45%;
+            height: fit-content;
+            text-transform: uppercase;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 0.58px;
+            font-family: Roboto;
+
+            &.return{
+                background: white;
+                color: #228196;
+                border: none;
+                max-width: 164px;
+                cursor: pointer;
+            }
+            &.save-valid{            
+                color: white;
+                background: linear-gradient(to right, #00a59f 0%, #007cb9 100%);
+                border: none;
+                max-width: 164px;
+                cursor: pointer;           
+                
+                &:hover{
+                    background: #00B9B3;
+                }
+            }
+            &.save-invalid{            
+                color: white;
+                background: linear-gradient(to right, #00a59f 0%, #007cb9 100%);
+                border: none;
+                max-width: 164px;
+                opacity: 0.35;    
+                cursor: unset;      
+            }
+        }
+    }
+}

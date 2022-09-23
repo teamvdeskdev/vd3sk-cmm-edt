@@ -1,0 +1,81 @@
+#dialogDeleteFileFolder{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+    .text{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 60%;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        span{
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    }
+
+    .inputs{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 100%;
+        height: 40%;
+        align-items: center;
+
+        button{
+            width: fit-content;
+            border-radius: 6px;
+            outline: none;
+            text-transform: uppercase;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 0.58px;
+            font-family: Roboto;
+            margin: 0px;
+            width: 25%;
+            padding: 6px 15px;
+
+            &.confirm{
+                background: linear-gradient(145deg, #009ea3 0%, #007cb8 100%);
+                color: white;                
+                border: none;
+    
+                &:hover{
+                    background: #00B9B3;
+                }
+            }
+    
+            &.deny{
+                border: 1px solid #007789;                
+                background-color: white;
+                color: #007789;                
+            }
+
+            &.second_confirm{
+                background: linear-gradient(145deg, #a34100 0%, #a34100 100%);
+                color: white;                
+                border: none;
+    
+                &:hover{
+                    background: #b94f09;
+                }
+            }
+    
+            &.second_deny{
+                border: 1px solid #a34100;                
+                background-color: white;
+                color: #a34100;                
+            }
+
+        }
+    }
+
+    .second_dialog{
+        background-color: orangered;
+    }
+}

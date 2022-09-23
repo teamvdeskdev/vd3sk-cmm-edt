@@ -1,0 +1,89 @@
+<div id="newUserDialog" style="height:525px;">
+    <div class="pb-3 p-0 dialog-header">
+        <div class="text-header">
+            <div class="titleNewUser"><mat-icon><i class="material-icons icon" width="10px" height="18px">how_to_reg</i></mat-icon> {{langService.dictionary.new_user_file}}</div> 
+            <div class="subtitleNewUser" *ngIf="!ResponsePage"> {{langService.dictionary.subtitle_new_user_file}}</div>
+            <div class="subtitleNewUser" *ngIf="ResponsePage"> {{langService.dictionary.subtitle_new_user_file_resume}}</div>
+        </div>
+        <div class="close" mat-dialog-close>
+            <mat-icon><span>close</span></mat-icon>
+        </div>
+    </div>
+  
+    <div class="loader-wrapper" *ngIf="wait">
+        <div class="spin d-flex justify-content-center">
+            <ngx-spinner
+                bdColor = "rgba(0,0,0,0)"
+                size = "default"
+                color = "#00B9B3"
+                type = "triangle-skew-spin"
+                [fullScreen] = "false" >
+            </ngx-spinner>
+        </div>
+    </div>
+
+    <div *ngIf="!ResponsePage">
+
+        <div class="dialogContent tiny-scrollbar" *ngIf="!isLoading && !wait">
+
+            <!-- UPLOAD FROM PC -->
+            <div class="list-option single">
+                <button class="list" (click)="openFileExplorer()">
+                    <mat-icon class="list-icon"> arrow_upward </mat-icon>
+                </button>
+                <span> {{langService.dictionary.upload_file}} </span>
+            
+                <input class="hidden" type="file" id="upload-file" name="upload-file" accept=".txt," (change)="addFile($event)">
+            </div>
+            <label *ngIf="confirmUpload"><span>  {{langService.dictionary.file_name}} </span> {{name}}</label>
+            <div *ngIf="ErorrMessage" class="errorMessage">
+                <label > <span> {{langService.dictionary.file_name_wrong}} </span></label>
+                <label >  {{langService.dictionary.file_name_format}} </label>
+            </div>
+
+        </div>
+        <div class="col-12 actions-box p-0">
+            <button class="primary-btn dialogButton float-right" (click)="uploadFile()" [disabled]="!confirmUpload">
+                {{langService.dictionary.confirm}}
+            </button>
+            <button class="secondary-btn dialogButton float-left" mat-dialog-close>
+                {{langService.dictionary.undo}}
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="ResponsePage" class="ResumePage">
+
+        <div class="Resume">
+            <div class="Line col-12">
+                <div class="left col-6"><span> {{langService.dictionary.upload_total_records}} </span> {{ResumeData.totalRecords}} </div>
+                <div class="right col-6"><span></span></div>
+            </div>
+            <div class="Line col-12">
+                <div class="left col-6"><span> {{langService.dictionary.upload_new}} </span> {{ResumeData.newlyCreated}} </div>
+                <div class="right col-6"><span> {{langService.dictionary.upload_disabled}} </span> {{ResumeData.disabled}} </div>
+            </div>
+            <div class="Line col-12">
+                <div class="left col-6"><span> {{langService.dictionary.upload_new_Guest}} </span> {{ResumeData.newlyCreatedGUESTS}} </div>
+                <div class="right col-6"><span> {{langService.dictionary.upload_new_Saml}} </span> {{ResumeData.newlyCreatedSAML}} </div>
+            </div>
+            <div class="Line col-12">
+                <div class="left col-6"><span> {{langService.dictionary.upload_total_Guest_modified}} </span> {{ResumeData.totalGUESTSmodified}} </div>
+                <div class="right col-6"><span> {{langService.dictionary.upload_total_Saml_modified}} </span> {{ResumeData.totalSAMLmodified}} </div>
+            </div>
+            <div class="Line col-12">
+                <div class="left col-6"><span> {{langService.dictionary.upload_total_Guest}} </span> {{ResumeData.totalGUESTSUsers}} </div>
+                <div class="right col-6"><span> {{langService.dictionary.upload_total_Saml}} </span> {{ResumeData.totalSAMLUsers}} </div>
+            </div>
+        </div>
+         
+
+        <div class="col-12 actions-box resum-btn p-0">
+            <button class="primary-btn dialogButton" mat-dialog-close (click)="Close()">
+                {{langService.dictionary.close}}
+            </button>
+        </div>
+
+    </div>
+
+</div>

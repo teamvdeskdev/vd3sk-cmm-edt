@@ -1,0 +1,241 @@
+<div id="dialogguest"[ngClass]="{'first': firstBody, 'second': secondBody, 'third': thirdBody}">
+
+    <div id="title">
+
+        <div class="divtitle">
+            <mat-icon matSuffix> assignment_ind </mat-icon>
+            <span class="title span"> {{ langService.dictionary.guests_settings }} </span>
+            <span class="counterpage span"> {{ counterpage }} </span>
+            <span class="totalpage span"> {{ totalpage }} </span>
+        </div>
+
+        <mat-icon class="close" matSuffix (click)="onNoClick()"> close </mat-icon>
+
+    </div>
+
+    <!-- FIRST BODY -->
+    <div id="bodyfirst" *ngIf="firstBody">
+        <span class="subtitle span"> {{ langService.dictionary.set_guest_data }} </span>
+
+        <form class="guestForm" [formGroup]="guestForm">
+            <div class="guestFormDiv">
+                <div class="containerForm">
+                    <mat-form-field>
+                        <input type="input" matInput #userName formControlName="userName" placeholder="{{ langService.dictionary.guest_name }}" required>
+                        <mat-hint> {{ langService.dictionary.character_limit_50 }} </mat-hint>
+
+                        <mat-error *ngIf="guestForm.get('userName').hasError('required')"> {{ langService.dictionary.error_nameRequired }} </mat-error>
+                        <mat-error *ngIf="guestForm.get('userName').hasError('maxlength')"> {{ langService.dictionary.character_limit_exceeded }} </mat-error>
+                    </mat-form-field>
+        
+                    <mat-form-field>
+                        <input type="input" matInput #userSurname formControlName="userSurname" placeholder="{{ langService.dictionary.guest_surname }}" required>
+                        <mat-hint> {{ langService.dictionary.character_limit_50 }} </mat-hint>
+
+                        <mat-error *ngIf="guestForm.get('userSurname').hasError('required')"> {{ langService.dictionary.error_surnameRequired }} </mat-error>
+                        <mat-error *ngIf="guestForm.get('userSurname').hasError('maxlength')"> {{ langService.dictionary.character_limit_exceeded }} </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="containerForm">
+                    <mat-form-field>
+                        <input type="input" matInput #userUsername formControlName="userUsername" placeholder="{{ langService.dictionary.guest_username }}" required>
+                        <mat-hint> {{ langService.dictionary.character_limit_50 }} </mat-hint>
+
+                        <mat-error *ngIf="guestForm.get('userUsername').hasError('required')"> {{ langService.dictionary.error_usernameRequired }} </mat-error>
+                        <mat-error *ngIf="guestForm.get('userUsername').hasError('maxlength')"> {{ langService.dictionary.character_limit_exceeded }} </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="containerForm">
+                    <mat-form-field>
+                        <input type="input" matInput #userCompany formControlName="userCompany" placeholder="{{ langService.dictionary.guest_company }}" required>
+                        <mat-hint> {{ langService.dictionary.character_limit_50 }} </mat-hint>
+
+                        <mat-error *ngIf="guestForm.get('userCompany').hasError('required')"> {{ langService.dictionary.error_companyRequired }} </mat-error>
+                        <mat-error *ngIf="guestForm.get('userCompany').hasError('maxlength')"> {{ langService.dictionary.character_limit_exceeded }} </mat-error>
+                    </mat-form-field>
+        
+                    <mat-form-field>
+                        <input type="input" matInput #userMail formControlName="userMail" placeholder="{{ langService.dictionary.guest_email }}" required>
+                        <mat-hint> {{ langService.dictionary.character_limit_50 }} </mat-hint>
+
+                        <mat-error *ngIf="guestForm.get('userMail').hasError('required')"> {{ langService.dictionary.error_emailRequired }} </mat-error>
+                        <mat-error *ngIf="guestForm.get('userMail').hasError('maxlength')"> {{ langService.dictionary.character_limit_exceeded }} </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="containerForm">
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="pickerStart" #dateStart formControlName="dateStart" placeholder="{{ langService.dictionary.guest_start }}" disabled required>
+                        <mat-datepicker-toggle matSuffix [for]="pickerStart" [disabled]="!isCreate"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerStart disabled="false"></mat-datepicker>
+
+                        <mat-error *ngIf="guestForm.get('dateStart').hasError('required')"> {{ langService.dictionary.error_startdateRequired }} </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input matInput [min]="dateMin" [matDatepicker]="pickerEnd" #dateEnd formControlName="dateEnd" placeholder="{{ langService.dictionary.guest_end }}" disabled required>
+                        <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerEnd disabled="false"></mat-datepicker>
+
+                        <mat-error *ngIf="guestForm.get('dateEnd').hasError('required')"> {{ langService.dictionary.error_enddateRequired }} </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="containerForm">
+                    <mat-form-field>
+                        <input type="input" matInput #managerName formControlName="managerName" placeholder="{{ langService.dictionary.guest_managerName }}" required>
+                        <mat-hint> {{ langService.dictionary.character_limit_50 }} </mat-hint>
+
+                        <mat-error *ngIf="guestForm.get('managerName').hasError('required')"> {{ langService.dictionary.error_nameRequired }} </mat-error>
+                        <mat-error *ngIf="guestForm.get('managerName').hasError('maxlength')"> {{ langService.dictionary.character_limit_exceeded }} </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input type="input" matInput #managerSurname formControlName="managerSurname" placeholder="{{ langService.dictionary.guest_managerSurname }}" required>
+                        <mat-hint> {{ langService.dictionary.character_limit_50 }} </mat-hint>
+
+                        <mat-error *ngIf="guestForm.get('managerSurname').hasError('required')"> {{ langService.dictionary.error_surnameRequired }} </mat-error>
+                        <mat-error *ngIf="guestForm.get('managerSurname').hasError('maxlength')"> {{ langService.dictionary.character_limit_exceeded }} </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="containerForm">
+                    <mat-form-field>
+                        <input type="input" matInput #managerMail formControlName="managerMail" placeholder="{{ langService.dictionary.guest_managerMail }}" required>
+                        <mat-hint> {{ langService.dictionary.character_limit_50 }} </mat-hint>
+
+                        <mat-error *ngIf="guestForm.get('managerMail').hasError('required')"> {{ langService.dictionary.error_uidRequired }} </mat-error>
+                        <mat-error *ngIf="guestForm.get('managerMail').hasError('maxlength')"> {{ langService.dictionary.character_limit_exceeded }} </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input type="input" matInput #managerUid formControlName="managerUid" placeholder="{{ langService.dictionary.guest_managerUid }}" required>
+                        <mat-hint> {{ langService.dictionary.character_limit_50 }} </mat-hint>
+
+                        <mat-error *ngIf="guestForm.get('managerUid').hasError('required')"> {{ langService.dictionary.error_companyRequired }} </mat-error>
+                        <mat-error *ngIf="guestForm.get('managerUid').hasError('maxlength')"> {{ langService.dictionary.character_limit_exceeded }} </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>            
+
+            <div class="buttonsFirst">
+                <button mat-flat-button class="return span" (click)="onNoClick()">
+                    {{ langService.dictionary.undo }}                
+                </button>        
+                <button mat-flat-button class="submit span" type="submit" [ngClass]="{'active': guestForm.valid}" [disabled]="guestForm.invalid" (click)="getGuest()">
+                    {{ langService.dictionary.confirm }}                
+                </button>        
+            </div>
+        </form>
+    </div>
+
+    <!-- SECOND BODY -->
+    <div id="bodysecond" *ngIf="secondBody">
+        <div class="divSubtitle">
+            <span class="subtitle span"> {{ langService.dictionary.second_subtitle }} </span>
+            <img src="assets/loghi_apps_main/png/vdesk-principale.png">
+        </div>
+
+        <div class="appContainer">
+            <div class="single" *ngFor="let element of arrayElement">
+                <button class="list">
+                    <svg [attr.viewBox]="element.box" [ngClass]="{'selected': element.added}" (click)="selectApp(element)">
+                        <path [attr.d]="element.src"></path>
+                    </svg>
+                </button>
+                <span class="name span"> {{element.name}} </span>
+            </div>
+        </div>
+
+        <div class="buttonsSecond">
+            <button mat-flat-button class="return span" (click)="backAgain()">
+                {{ langService.dictionary.back }}                
+            </button>    
+            <button mat-flat-button class="submit span" [ngClass]="{'active': checkApps}" [disabled]="!checkApps" (click)="getApps()">
+                {{ langService.dictionary.confirm }}                
+            </button>    
+        </div>        
+    </div>
+
+    <!-- THIRD BODY -->
+    <div id="bodythird" *ngIf="thirdBody">
+        <div class="divSubtitle">
+            <span class="subtitle span"> {{ langService.dictionary.third_subtitle }} </span>
+        </div>
+
+        <div class="allInfos">
+            <div class="choosenInfos">
+                <div class="infoline">
+                    <div class="info">
+                        <span class="up span"> {{ langService.dictionary.guest_name_surname }} </span>
+                        <span class="down span"> {{userName.value}}  {{userSurname.value}}</span>
+                    </div>
+                    <div class="info">
+                        <span class="up span"> {{ langService.dictionary.guest_username }} </span>
+                        <span class="down span"> {{userUsername.value}}</span>
+                    </div>
+                    <div class="info">
+                        <span class="up span"> {{ langService.dictionary.guest_email }} </span>
+                        <span class="down span"> {{userMail.value}}</span>
+                    </div>
+                </div>
+
+                <div class="infoline">   
+                    <div class="info">
+                        <span class="up span"> {{ langService.dictionary.guest_company }} </span>
+                        <span class="down span"> {{userCompany.value}}</span>
+                    </div>                 
+                    <div class="info">
+                        <span class="up span"> {{ langService.dictionary.guest_start }} </span>
+                        <span class="down span"> {{readStartDate}}</span>
+                    </div>
+                    <div class="info">
+                        <span class="up span"> {{ langService.dictionary.guest_end }} </span>
+                        <span class="down span"> {{readEndDate}} </span>
+                    </div>
+                </div>
+
+                <div class="infoline">
+                    <div class="info">
+                        <span class="up span"> {{ langService.dictionary.guestmanager_namesurname }} </span>
+                        <span class="down span"> {{managerName.value}} {{managerSurname.value}}</span>
+                    </div>
+                    <div class="info">
+                        <span class="up span"> {{ langService.dictionary.guest_managerMail }} </span>
+                        <span class="down span"> {{managerMail.value}}</span>
+                    </div>
+                    <div class="info">
+                        <span class="up span"> {{ langService.dictionary.guest_managerUid }} </span>
+                        <span class="down span"> {{managerUid.value}} </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="choosenApps">
+                <span> {{ langService.dictionary.active_modules }} </span>
+                <div class="appContainer">
+                    <div class="single" *ngFor="let element of choosenApps">
+                        <button class="list">
+                            <svg [attr.viewBox]="element.box" [ngClass]="{'selected': element.added}">
+                                <path [attr.d]="element.src"></path>
+                            </svg>
+                        </button>
+                        <span class="name span"> {{element.name}} </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="buttonsThird">
+            <button mat-flat-button class="return span" (click)="backAgain()">
+                {{ langService.dictionary.back }}                
+            </button>    
+            <button mat-flat-button class="submit span" (click)="onConfirmClick()">
+                {{ langService.dictionary.confirm }}                
+            </button>    
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<div id="shares-deleted">
+    <ng-container *ngIf="!noData">
+        <app-shares-table *ngIf="dataValue.length>0" [pageFavorite]="pageFavorite" [getpage]="getpage" [dataValue]="dataValue"></app-shares-table>
+        <app-sidebar></app-sidebar>
+    </ng-container>
+
+    <ng-container *ngIf="noData">
+        <div class="noData"> 
+            <mat-icon> share </mat-icon>
+            <h3> {{dictNoSharesDeletedH3}} </h3>
+            <p> {{dictNoSharesDeletedP}} </p>
+        </div>
+    </ng-container>
+</div>

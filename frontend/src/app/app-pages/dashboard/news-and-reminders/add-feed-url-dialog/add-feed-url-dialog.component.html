@@ -1,0 +1,39 @@
+<div id="feedUrlDialog">
+    <div class="title">
+        <div class="title-with-icon">
+            <i class="material-icons title-icon">post_add</i>
+            <span class="title-text">{{langService.dictionary.setSourcesFeed}}</span>
+        </div>
+        <mat-icon (click)="onNoClick()"><i class="material-icons">close</i></mat-icon>
+    </div>
+    <div class="subtitle">
+        <span>{{langService.dictionary.subtitleUrlFeedDialog}}</span>
+    </div>
+    <div class="note">
+        <span class="required-fields-star">*</span><span class="required-fields-text">{{langService.dictionary.requiredFieldsText}}</span>
+    </div>
+    <form [formGroup]="addFeedUrlForm" (ngSubmit)="onConfirmClick()" class="post-it-form">
+        <div class="container-fluid input-container">
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-form-field class="form-field-name">
+                        <mat-label>{{langService.dictionary.inputNameFeedDialog}}<span class="required-fields-star"> *</span></mat-label>
+                        <input matInput formControlName="name" placeholder="{{langService.dictionary.inputNameFeedDialog}} *">
+                        <mat-hint *ngIf="!addFeedUrlForm.get('name').errors?.maxlength">{{langService.dictionary.titleHintDialogAddPostIt}}</mat-hint>
+                        <mat-hint *ngIf="addFeedUrlForm.get('name').errors?.maxlength" [style.color]="'#f44336'">{{langService.dictionary.characterLimitError}}</mat-hint>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field class="form-field-url">
+                        <mat-label>{{langService.dictionary.inputUrlFeedDialog}}<span class="required-fields-star"> *</span></mat-label>
+                        <input matInput formControlName="url" placeholder="{{langService.dictionary.inputUrlFeedDialog}} *">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="buttonsdialog">
+            <button class="return" type="reset" (click)="onNoClick()"><span>{{langService.dictionary.backDialogAddPostIt}}</span></button>
+            <button class="save" [ngClass]="{'save-valid': addFeedUrlForm.valid, 'save-invalid': addFeedUrlForm.invalid}" type="submit"><span>{{langService.dictionary.confirmDialogAddPostIt}}</span></button>
+        </div>
+    </form>
+</div>

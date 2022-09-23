@@ -1,0 +1,64 @@
+<div id="settingsvshareAN">
+
+    <div id="settingsvshareANGenaral">
+        <div class="svshareHeader">
+            <span class="svshareHeaderTitle"> {{ titleGeneral }} </span>
+            <span class="svshareHeaderSpan"> {{ subString }} </span>
+        </div>
+        <div class="svshareUpperbody">
+            <div class="svshareListHeader">
+                <div class="mail"><span> {{ mail }} </span></div>
+                <div class="flow"><span> {{ flow }} </span></div>
+            </div>
+            <div class="svshareListBody">
+                <div class="svshareListElement" *ngFor="let element of data">
+                    <div class="svshareCheckbox">
+                        <mat-checkbox 
+                            [disabled]="element.string==notifyFavourites"
+                            (change)="$event ? getChecked(element.id, 'mail') : null"
+                            [checked]="element.mail">
+                        </mat-checkbox>
+                    </div>
+                    <div class="svshareCheckbox">
+                        <mat-checkbox 
+                            (change)="$event ? getChecked(element.id, 'flow') : null"
+                            [checked]="element.flow">
+                        </mat-checkbox>
+                    </div>
+                    <div class="svshareInfo">
+                        <span> {{ element.string }} </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="settingsvshareANPersonal">
+        <div class="svshareHeader">
+            <span class="svshareHeaderTitle"> {{ titlePersonal }} </span>
+            <span class="svshareHeaderSpan"> {{ subString }} </span>
+        </div>
+        <div class="svshareListBody">
+            <div class="svshareListElement" *ngFor="let element of data2">
+                <div class="svshareCheckbox">
+                    <mat-checkbox [checked]="element.checked"></mat-checkbox>
+                </div>
+                <div class="svshareInfo">
+                    <span> {{ element.string }} </span>
+                </div>
+            </div>
+        </div>
+        <div class="svshareLowerbodySelect">
+            <div class="sendmail"><span> {{ sendmail }} </span></div>
+            <mat-form-field class="formsendmail">
+                <select matNativeControl required class="selectsendmail">
+                  <option value="asap">{{asap}}</option>
+                  <option value="everyhour">{{everyhour}}</option>
+                  <option value="everyday">{{everyday}}</option>
+                  <option value="everyweek">{{everyweek}}</option>
+                </select>
+              </mat-form-field>
+        </div>
+    </div>
+    
+</div>

@@ -1,0 +1,22 @@
+<div id="dialogCopyFileFolder">
+    <div class="title">
+        <span> Scegli l'immagine del profilo </span>
+    </div>
+    <app-breadcrumb [class]="class" [movepath]="movepath" (change)="navigateFolder($event)"></app-breadcrumb>
+    <app-vsh-upload-dialog-table 
+        *ngIf="dataValue.length>0 && !noData" 
+        [dataValue]="dataValue" 
+        (change)="navigateFolder($event)">
+    </app-vsh-upload-dialog-table>
+    <div class="noData" *ngIf="noData">
+        <span> No data found. </span>
+    </div>
+
+    <div mat-dialog-actions>
+        <div class="right">
+            <div class="secondary-btn" mat-dialog-close>{{dictCancel}}</div>
+            <div class="primary-btn" (click)="onConfirmClick()"> {{dictLoad}} </div>
+        </div>
+    </div>
+</div>
+

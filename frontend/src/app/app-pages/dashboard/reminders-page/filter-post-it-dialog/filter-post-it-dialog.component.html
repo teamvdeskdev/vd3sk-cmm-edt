@@ -1,0 +1,66 @@
+<div id="filterPostItDialog">
+    <div class="title">
+        <div class="title-with-icon">
+            <i class="material-icons title-icon">post_add</i>
+            <span class="title-text">{{langService.dictionary.titleRemindersFiltersDialog}}</span>
+        </div>
+        <mat-icon (click)="onCloseClick()"><i class="material-icons">close</i></mat-icon>
+    </div>
+    <div class="subtitle">
+        <span>{{langService.dictionary.subTitleRemindersFiltersDialog}}</span>
+    </div>
+    <form [formGroup]="filterPostItForm" (ngSubmit)="onFilterClick()" class="post-it-form">
+        <div class="container-fluid input-container">
+            <div class="row">
+                <div class="col-md-5 pr-0">
+                    <div class="date-range-picker-container">
+                        <mat-form-field class="start-date-field no-pointer-events">
+                            <input formControlName="startDateControl"  matInput [matDatepicker]="dpRange" type="text" placeholder="{{langService.dictionary.placeholderDateFrom}}">
+                            <mat-daterangepicker #dpRange [touchUi]="false" [dualView]="false" [applyButton]="false" [showCustomRanges]="false"></mat-daterangepicker>
+                        </mat-form-field>
+                        <mat-form-field class="end-date-field no-pointer-events">
+                            <input formControlName="endDateControl" matInput [matDaterangepickerEnd]="dpRange" type="text" placeholder="{{langService.dictionary.placeholderDateTo}}">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-md-1 pl-0">
+                    <mat-datepicker-toggle matSuffix [for]="dpRange" [style.color]="'#228196'" [disableRipple]="true"></mat-datepicker-toggle>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field class="associated-users-form-field">
+                        <mat-label>{{labelAssociatedUsers}}</mat-label>
+                        <mat-select panelClass="filter-post-it-mat-select-panel" formControlName="associatedUsersControl" [disabled]="!associatedUsers || (associatedUsers && associatedUsers.length < 1)" multiple>
+                          <mat-select-trigger>
+                            {{filterPostItForm.get('associatedUsersControl').value ? filterPostItForm.get('associatedUsersControl').value[0] : ''}}
+                            <span *ngIf="filterPostItForm.get('associatedUsersControl').value?.length > 1" class="example-additional-selection">
+                              (+{{filterPostItForm.get('associatedUsersControl').value.length - 1}} {{filterPostItForm.get('associatedUsersControl').value?.length === 2 ? langService.dictionary.otherLabelUsers : langService.dictionary.othersLabelUsers }})
+                            </span>
+                          </mat-select-trigger>
+                          <mat-option *ngFor="let user of associatedUsers" [value]="user.displayName">
+                                <div>
+                                    <img [src]="getUserAvatar(user.userId)" class="avatar-associated-user" width="23" height="23"/>
+                                    <span>{{user.displayName}}</span>
+                                </div>
+                            </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+            </div>
+            <div class="row checkbox-row">
+                <div class="col-md-12">
+                    <mat-checkbox #personalCheckbox formControlName="personalRemindersCheck" class="mr-4" [labelPosition]="'before'">{{langService.dictionary.checkPersonalReminders}}</mat-checkbox>
+                    <mat-checkbox #sharedCheckbox formControlName="sharedRemindersCheck" [labelPosition]="'before'">{{langService.dictionary.checkSharedReminders}}</mat-checkbox>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <mat-hint *ngIf="filterPostItForm.errors && filterPostItForm.errors.unchecked">{{langService.dictionary.checkBoxErrorUnchecked}}</mat-hint>
+                </div>
+            </div>
+        </div>
+        <div class="buttonsdialog">
+            <button class="return" type="reset" (click)="onResetFilterClick()"><span>{{langService.dictionary.resetFiltersBtn}}</span></button>
+            <button class="filter" [ngClass]="{'filter-valid': filterPostItForm.valid, 'filter-invalid': filterPostItForm.invalid}" type="submit"><span>{{langService.dictionary.filterBtn}}</span></button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,71 @@
+#pathFolder{
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+
+    #drawPathFolder{
+        display: flex;
+        align-items: center;
+
+        .drawPathFolderHome{
+            color: #FFFFFF;
+            font-family: Roboto;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 0;
+            line-height: 16px;
+            cursor: pointer;
+        }
+    
+        i{
+            font-size: 24px;
+            &.homebutton{
+                cursor: pointer;
+            }
+        }
+
+        .insidefolder{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 500;
+
+            tbody{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                td{
+                    display: flex;
+                    align-items: center;
+                    
+                    span{
+                        cursor: pointer;
+                        font-size: 13px;
+                        letter-spacing: 0;
+                        width: fit-content;
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+
+    &.dialog{
+        #drawPathFolder{    
+            .drawPathFolderHome{
+                color: #212529;
+            }
+    
+            .insidefolder{    
+                tbody{
+                    td{
+                        span{
+                            color: #212529;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

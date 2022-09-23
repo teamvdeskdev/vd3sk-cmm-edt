@@ -1,0 +1,20 @@
+<div #signatureBoxId id="signatureBoxId-{{id}}" class="signature-box"
+    [position] = "positionSignature"
+    [inBounds] = "inBounds"
+    [bounds] = "bounds"
+    [rzHandles] = "'all'"
+    [ngDraggable] = "true"
+    ngResizable 
+    [rzAspectRatio] = "true"
+    (started)="onDragBegin($event)">
+        <img *ngIf="signatureImageBase64" id="signatureImgId-{{id}}" style="width: 100%;height: auto;" [src]="signatureImageBase64" />
+        <div class='resizer top-left'></div>
+        <div class='resizer top-right'></div>
+        <div class='resizer bottom-left'></div>
+        <div class='resizer bottom-right'></div>
+        <div class='resizer top-middle'></div>
+        <div class='resizer left-middle'></div>
+        <div class='resizer right-middle'></div>
+        <div class='resizer bottom-middle'></div>
+        <div *ngIf="showDeleteSignatureBtn" class='resizer delete-button material-icons' (click)="deleteSignatureBtn()">close</div>
+</div>

@@ -1,0 +1,167 @@
+
+$icon-default-color: #BBBBBB;
+$text-default-color: #313131;
+$locked-hover-color: #007789;
+$locked-color: #009ea3;                
+$hover-color: #007CB8;
+
+
+#editProviderDialog {
+    font-family: Roboto;
+    color: $text-default-color;
+    font-size: 14px;
+    padding: 0 15px;
+
+    /* 
+    Change from mail to settings - resizable row issue - NgxResizableModule from '@3dgenomes/ngx-resizable';
+    */
+    //.row { flex-flow: row wrap; }
+
+    
+    .serverBox {
+        .serverInputBox { width: 70%; }
+        .portBox { width: 30%; }
+    }
+
+    .checkboxLabel {
+        font-size: 13px;
+        letter-spacing: 0;
+    }
+    .mat-select-value {
+        padding-left: 0;
+    }
+    .mat-form-field {
+        .mat-form-field-infix { font-size: 13px; }
+        .mat-form-field-label { padding-left: 5px; }
+    }
+    .dialogContent {
+        height: auto;
+        overflow-y: auto;  
+    }
+    .form-box {
+        width: 98%;
+        
+        &.editProvider {
+            textarea.mat-input-element {
+                resize: none;
+                overflow: auto;
+            }
+        }
+        .checkboxes {
+            margin-bottom: 2.5rem;
+        }
+        .pwd-visibility {
+            cursor: pointer;
+            font-size: 20px;
+        }
+    }
+    .error {
+        font-family: Roboto, sans-serif;
+        font-size: 13px;
+        color: red;
+        text-align: center;
+    }
+    .actions-box {
+        margin-top: 15px;
+
+        .newProvider {
+            height: 30px;
+            display: flex;
+            align-items: center;
+
+            .label {
+                color: $locked-hover-color;
+                font-size: 14px;
+                font-weight: 550;
+                letter-spacing: 0;
+                cursor: pointer;
+
+                &:hover {
+                    color: #00B9B3;
+                }
+            } 
+        }
+        
+        .secondary-btn {
+            margin-right: 16px;
+            height: 30px;
+            width: 23%; //29%; //198px;
+            padding-top: 7px;
+            border-radius: 3px;
+            border: 1px solid #007789;
+            background-color: transparent;
+            color: #007789;
+            font-family: Roboto, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 0.58px;
+            line-height: 16px;
+            text-align: center;
+            text-transform: uppercase;
+            cursor: pointer;
+        
+            &:hover {
+                background: #00B9B3;
+                border: 1px solid #00B9B3;
+                color: #FFFFFF;
+            }
+        }
+        
+        .primary-btn {
+            height: 30px;
+            width: 23%; //29%; //198px;
+            padding-top: 7px;
+            border-radius: 3px;
+            background: linear-gradient(90deg, #00A59F 0%, #007CB9 100%);;
+            color: #FFFFFF;
+            font-family: Roboto, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 0.58px;
+            line-height: 16px;
+            text-align: center;
+            text-transform: uppercase;
+            cursor: pointer;
+        
+            &:hover {
+                background: #00B9B3;
+            }
+        }
+
+        .continue {
+            margin-left: 16px;
+            padding-top: 4px;
+            font-size: 11px;
+            line-height: 12px;
+        }
+    }
+    .editProviderTitle {
+        color: $text-default-color;
+        font-size: 18px;
+    }
+    .contactDetailHeader {
+        padding: 30px 0 20px 0!important;
+        .label {
+            font-size: 18px;
+        }
+    }
+    .contactDetailInfo{
+        .label {            
+            padding-top: 3px;
+        }
+    }
+    .actions {
+        width: 130px;                  
+        height: 20%;
+        .action {
+            cursor: pointer;
+            width: 24px;
+            &:not(:last-child) {
+                margin-right: 16px;
+            }
+            &:hover {
+                color: $hover-color;
+            }
+        }
+    }
+}

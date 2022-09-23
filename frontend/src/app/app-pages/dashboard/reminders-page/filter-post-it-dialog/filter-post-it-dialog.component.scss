@@ -1,0 +1,267 @@
+#filterPostItDialog {
+    padding-left: 10px;
+    padding-right: 10px;
+    .title{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 20%;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+
+        .title-with-icon {
+            display: flex;
+        }
+
+        .title-icon {
+            font-size: 21px;
+            margin-right: 10px;
+            color: #00396a;
+        }
+
+        .title-text {
+            font-family: 'Roboto';
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #383838;
+        }
+
+        span{
+            color: #2B2B2B;
+            font-family: 'Roboto';
+            font-size: 18px;
+            letter-spacing: 0;
+            line-height: 21px;
+        }
+
+        mat-icon{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+
+            i{
+                color: #00396a;
+                font-size: 20px;
+
+                &:hover{
+                    color: #00396a;
+                }
+            }
+        }
+    }
+
+    .subtitle {
+        margin-top: 20px;
+        font-family: 'Roboto';
+        font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #808080;
+    }
+
+    .start-date-field, .end-date-field {
+        width: 50%;
+    }
+
+    .associated-users-form-field {
+        width: 100%;
+    }
+    
+    .checkbox-row {
+        margin-top: 33px;
+        font-family: 'Roboto';
+        font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #2b2b2b;
+    }
+
+    .mat-hint {
+        color: #f44336;
+        font-family: 'Roboto';
+        font-size: 11px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+    }
+
+    .required-fields-star {
+        font-size: 12px;
+        color: #d06a6a;
+    }
+
+    .note .required-fields-text {
+        font-family: 'Roboto';
+        font-size: 12px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.33;
+        letter-spacing: normal;
+        color: #888888;
+    }
+
+    .description-row {
+        margin-top: 30px;
+    }
+
+    .form-field-description, 
+    .form-field-title, 
+    .form-field-share {
+        width: 100%;
+    }
+
+    .user-avatar {
+        border-radius: 50%;
+        margin-right: 5px;
+    }
+
+    .delete-icon {
+        cursor: pointer;
+    }
+
+    .mat-form-field {
+        font-size: 14px;
+    }
+
+    .input-container {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        padding: 0;
+    }
+
+    .no-pointer-events {
+        pointer-events: none;
+    }
+
+    .share-user-row {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .buttonsdialog{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 30%;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 150px;
+
+        button{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3px;
+            padding: 5px 0px;
+            outline: none;
+            width: 45%;
+            height: fit-content;
+            text-transform: uppercase;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 0.58px;
+            font-family: Roboto;
+
+            &.return{
+                background: white;
+                color: #228196;
+                border: none;
+                max-width: 164px;
+                cursor: pointer;
+            }
+            &.filter-valid{            
+                color: white;
+                background: linear-gradient(to right, #00a59f 0%, #007cb9 100%);
+                border: none;
+                max-width: 164px;
+                cursor: pointer;           
+                
+                &:hover{
+                    background: #00B9B3;
+                }
+            }
+            &.filter-invalid{            
+                color: white;
+                background: linear-gradient(to right, #00a59f 0%, #007cb9 100%);
+                border: none;
+                max-width: 164px;
+                opacity: 0.35;    
+                cursor: unset;      
+            }
+        }
+    }
+}
+
+img.avatar-associated-user {
+    border-radius: 50%;
+    margin-right: 8px;
+    margin-left: 8px;
+}
+
+::ng-deep {
+    .mat-form-field-underline {
+        /*change color of underline*/
+        background-color: #007789 !important;
+    }
+
+    .filter-post-it-mat-select-panel {
+        background: #007789;
+        border-radius: unset;
+        min-width: 100% !important;
+        margin-top: 20px;
+    
+        .mat-option {
+            color: #FFFFFF;
+        }
+    
+        .mat-option:hover {
+            background: #007789;
+            color: #FFFFFF;
+        }
+    
+        .mat-pseudo-checkbox {
+            color: #FFFFFF;
+        }
+    
+        .mat-pseudo-checkbox::after {
+            color: #007789 !important;
+        }
+    
+        .mat-pseudo-checkbox-checked {
+            background: #FFFFFF !important;
+        }
+    
+        .mat-option.mat-selected:not(.mat-option-disabled) {
+            background: #007789;
+            color: #FFFFFF;
+        }    
+    }
+
+    .mat-calendar-body-selected {
+        background-color: #007789 !important;
+    }
+
+    .mat-daterange-calendar-body-in-range {
+        background-color: rgba(0, 119, 137, 0.35) !important;
+    }
+
+    .mat-datepicker-content .mat-calendar {
+        width: 295px !important;
+        height: 355px !important;
+    }
+}

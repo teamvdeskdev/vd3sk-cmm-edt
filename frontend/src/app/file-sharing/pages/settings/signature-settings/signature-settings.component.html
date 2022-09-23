@@ -1,0 +1,16 @@
+<div *ngIf="!isLoading" id="signatureSettings" class="hide-scrollbar">
+    <div class="title">{{dictSettingsTitle}}</div>
+    <div class="addButton" (click)="goToAddSettings()"> {{dictAddButton}} </div>
+
+    <div id="signatureTableComponent">
+        <app-signature-table></app-signature-table>
+    </div>
+</div>
+
+<ngx-spinner *ngIf="isLoading"
+          bdColor = "rgba(0,0,0,0)"
+          size = "default"
+          color = "#00B9B3"
+          type = "triangle-skew-spin"
+          [fullScreen] = "false" >
+</ngx-spinner>

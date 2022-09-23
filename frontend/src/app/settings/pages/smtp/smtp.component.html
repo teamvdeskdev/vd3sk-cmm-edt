@@ -1,0 +1,68 @@
+<div id="smtpSettings">
+    
+
+    <ngx-spinner
+      bdColor = "rgba(0,0,0,0)"
+      size = "default"
+      color = "#00B9B3"
+      type = "triangle-skew-spin"
+      [fullScreen] = "false" >
+    </ngx-spinner>
+
+    <div class="smtpSettings-header">
+        <div class="smtpSettings-header-title">
+            {{langService.dictionary.smtp}}
+        </div>
+        <div class="smtpSettings-header-subtitle">
+            {{langService.dictionary.smtp_subtitle}}
+        </div>
+    </div>
+    <div class="smtpSettings-body pt-3">
+        <mat-form-field>
+            <mat-label>{{langService.dictionary.smtpEncryption}}</mat-label>
+            <mat-select [(ngModel)]="secureSelected">
+              <mat-option *ngFor="let s of smtpSettingsSelect.secure" value="{{s.value}}">{{s.label}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>{{langService.dictionary.smtpSenderAddress}}</mat-label>
+            <input [(ngModel)]="smtpSettings.mail_from_address" type="text" autocomplete="off" matInput
+                placeholder="{{langService.dictionary.smtpSenderAddressTooltip}}">
+        </mat-form-field>
+        
+        <mat-form-field>
+            <mat-label>{{langService.dictionary.smtpAuthtypeTooltip}}</mat-label>
+            <mat-select [(ngModel)]="authtypeSelected">
+              <mat-option *ngFor="let at of smtpSettingsSelect.authtype" value="{{at.value}}">{{at.label}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="host">
+            <mat-label>{{langService.dictionary.smtpHost}}</mat-label>
+            <input [(ngModel)]="smtpSettings.mail_smtphost" type="text" autocomplete="off" matInput
+                placeholder="{{langService.dictionary.smtpHostTooltip}}">
+        </mat-form-field>
+        <span class="twoPoints">:</span>
+        <mat-form-field class="port">
+            <mat-label>{{langService.dictionary.smtpPortTooltip}}</mat-label>
+            <input [(ngModel)]="smtpSettings.mail_smtpport" type="number" autocomplete="off" matInput>
+        </mat-form-field>
+
+        <mat-checkbox [(ngModel)]="smtpSettings.mail_smtpauth">{{langService.dictionary.smtpAuthRequired}}</mat-checkbox>        
+
+        <mat-form-field *ngIf="smtpSettings.mail_smtpauth === true">
+            <mat-label>{{langService.dictionary.smtpUsername}}</mat-label>
+            <input [(ngModel)]="smtpCredentials.mail_smtpname" type="text" autocomplete="off" matInput
+                placeholder="{{langService.dictionary.smtpSenderAddressTooltip}}">
+        </mat-form-field>
+        <mat-form-field *ngIf="smtpSettings.mail_smtpauth === true">
+            <mat-label>{{langService.dictionary.smtpPassword}}</mat-label>
+            <input [(ngModel)]="smtpCredentials.mail_smtppassword" type="password" autocomplete="off" matInput>
+        </mat-form-field>
+
+        <button (click)="save()" class="saveButton mr-3">{{langService.dictionary.smtpSave}}</button>
+        <button (click)="sendTestEmail()" class="testButton">{{langService.dictionary.smtpSendTestEmail}}</button>
+
+    </div>
+</div>

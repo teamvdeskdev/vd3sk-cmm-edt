@@ -1,0 +1,19 @@
+<div id="pathFolder" [ngClass]="{'dialog': class}">
+    <div id="drawPathFolder">
+        <div class="drawPathFolderHome" (click)="navigateHome()"> {{ completename }} </div>
+
+        <div class="insidefolder" *ngIf="arrayPath.length>0">
+            <table mdbTable>
+                <thead></thead>
+                <tbody>
+                  <tr mdbTableCol *ngFor="let el of arrayPath">
+                    <td>
+                        <mat-icon><i class="material-icons arrowright"> keyboard_arrow_right </i></mat-icon>
+                        <span (click)="returnToPath(el.id)"> {{ el.name }} </span>                        
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

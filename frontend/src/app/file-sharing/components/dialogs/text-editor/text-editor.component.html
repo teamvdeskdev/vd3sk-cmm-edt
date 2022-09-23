@@ -1,0 +1,28 @@
+<div class="closedialog">
+    <mat-icon>
+        <mat-icon (click)="onNoClick()"><i class="material-icons">close</i></mat-icon>
+    </mat-icon>
+</div>
+
+<div class="texteditor">
+    <ejs-richtexteditor id='defaultRTE' [(ngModel)]="txtFileContent"
+                [toolbarSettings]='tools' [undoRedoSteps] ='steps' [undoRedoTimer]='timer'
+                cssClass="textEditor">
+        <ng-template #valueTemplate>
+            <p></p>
+        </ng-template>
+    </ejs-richtexteditor>
+</div>
+
+<div class="buttonsdialog">
+    <div class="return" (click)="onNoClick()"> {{ cancel }} </div>
+    <div class="save" (click)="onConfirmClick(txtFileContent)"> {{ save }} </div>
+</div>
+
+<ngx-spinner *ngIf="!done"
+        bdColor = "rgba(0,0,0,0)"
+        size = "default"
+        color = "#00B9B3"
+        type = "triangle-skew-spin"
+        [fullScreen] = "false" >
+</ngx-spinner>

@@ -1,0 +1,172 @@
+<div id="dialogsamluser">
+
+    <div id="title">
+
+        <div class="divtitle">
+            <mat-icon matSuffix> assignment_ind </mat-icon>
+            <span class="title span"> {{ langService.dictionary.saml_settings }} </span>
+        </div>
+    
+        <mat-icon class="close" matSuffix (click)="onNoClick()"> close </mat-icon>
+    
+    </div>
+    
+    <!-- FIRST BODY -->
+    <div id="bodyfirst">
+        <span class="subtitle span"> {{ langService.dictionary.samluser_setData }} </span>
+    
+        <form class="usersamlForm" [formGroup]="usersamlForm">
+            <div class="usersamlFormDiv">
+                <div class="containerForm">
+                    <mat-form-field>
+                        <input type="input" matInput #userName formControlName="userName" placeholder="{{ langService.dictionary.samlUserName }}" required>
+                        <mat-hint> {{ langService.dictionary.character_limit_50 }} </mat-hint>
+    
+                        <mat-error *ngIf="usersamlForm.get('userName').hasError('required')"> {{ langService.dictionary.error_nameRequired }} </mat-error>
+                        <mat-error *ngIf="usersamlForm.get('userName').hasError('maxlength')"> {{ langService.dictionary.character_limit_exceeded }} </mat-error>
+                    </mat-form-field>
+        
+                    <mat-form-field>
+                        <input type="input" matInput #userSurname formControlName="userSurname" placeholder="{{ langService.dictionary.samlUserSurname }}" required>
+                        <mat-hint> {{ langService.dictionary.character_limit_50 }} </mat-hint>
+    
+                        <mat-error *ngIf="usersamlForm.get('userSurname').hasError('required')"> {{ langService.dictionary.error_surnameRequired }} </mat-error>
+                        <mat-error *ngIf="usersamlForm.get('userSurname').hasError('maxlength')"> {{ langService.dictionary.character_limit_exceeded }} </mat-error>
+                    </mat-form-field>
+                </div>
+    
+                <div class="containerForm">
+                    <mat-form-field>
+                        <mat-select #userQuota formControlName="userQuota" placeholder="{{ langService.dictionary.samlUserQuota }}" required>
+                            <mat-option *ngFor="let quota of quotaList" [value]="quota.id" > {{quota.name}} </mat-option>
+                        </mat-select>
+                        <mat-hint> {{ langService.dictionary.character_limit_50 }} </mat-hint>
+    
+                        <mat-error *ngIf="usersamlForm.get('userQuota').hasError('required')"> {{ langService.dictionary.error_quotaRequired }} </mat-error>
+                        <mat-error *ngIf="usersamlForm.get('userQuota').hasError('maxlength')"> {{ langService.dictionary.character_limit_exceeded }} </mat-error>
+                    </mat-form-field>
+        
+                    <mat-form-field>
+                        <input type="input" matInput #userMail formControlName="userMail" placeholder="{{ langService.dictionary.samlUserMail }}" required>
+                        <mat-hint> {{ langService.dictionary.character_limit_50 }} </mat-hint>
+    
+                        <mat-error *ngIf="usersamlForm.get('userMail').hasError('required')"> {{ langService.dictionary.error_emailRequired }} </mat-error>
+                        <mat-error *ngIf="usersamlForm.get('userMail').hasError('maxlength')"> {{ langService.dictionary.character_limit_exceeded }} </mat-error>
+                    </mat-form-field>
+                </div>
+    
+                <div class="containerForm">
+                    <mat-form-field>
+                        <input type="input" matInput #userSerial formControlName="userSerial" placeholder="{{ langService.dictionary.samlUserSerial }}" required>
+                        <mat-hint> {{ langService.dictionary.character_limit_50 }} </mat-hint>
+    
+                        <mat-error *ngIf="usersamlForm.get('userSerial').hasError('required')"> {{ langService.dictionary.error_serialRequired }} </mat-error>
+                        <mat-error *ngIf="usersamlForm.get('userSerial').hasError('maxlength')"> {{ langService.dictionary.character_limit_exceeded }} </mat-error>
+                    </mat-form-field>
+    
+                    <mat-form-field>
+                        <mat-select #userProfile formControlName="userProfile" placeholder="{{ langService.dictionary.samlUserProfile }}" required>
+                            <mat-option *ngFor="let profile of profileList" [value]="profile.id" (click)="showAppsComponent()"> {{profile.name}} </mat-option>
+                        </mat-select>
+                        <mat-hint> {{ langService.dictionary.character_limit_50 }} </mat-hint>
+    
+                        <mat-error *ngIf="usersamlForm.get('userProfile').hasError('required')"> {{ langService.dictionary.error_profileRequired }} </mat-error>
+                        <mat-error *ngIf="usersamlForm.get('userProfile').hasError('maxlength')"> {{ langService.dictionary.character_limit_exceeded }} </mat-error>
+                    </mat-form-field>
+                </div>
+    
+                <div class="containerForm">
+                    <mat-form-field>
+                        <mat-select multiple #userGroups formControlName="userGroups" placeholder="{{ langService.dictionary.samlUserGroups }}">
+                            <mat-option *ngFor="let group of groups" [value]="group" > {{group}} </mat-option>
+                        </mat-select>
+    
+                        <mat-error *ngIf="usersamlForm.get('userGroups').hasError('required')"> {{ langService.dictionary.error_groupRequired }} </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field *ngIf="showApps">
+                        <mat-select multiple #userApps [ngModel]="arrayListApps" formControlName="userApps" [disabled]="getProfileValue" placeholder="{{ langService.dictionary.samluserApps }}">
+                            <mat-option *ngFor="let app of arrayApps" [value]="app" > {{app}} </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+    
+                <div class="containerForm">
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="pickerStart" #dateStart formControlName="dateStart" placeholder="{{ langService.dictionary.guest_start }}" disabled required>
+                        <mat-datepicker-toggle matSuffix [for]="pickerStart" [disabled]="!isCreate"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerStart disabled="false"></mat-datepicker>
+    
+                        <mat-error *ngIf="usersamlForm.get('dateStart').hasError('required')"> {{ langService.dictionary.error_startdateRequired }} </mat-error>
+                    </mat-form-field>
+    
+                    <mat-form-field>
+                        <input matInput [min]="dateMin" [matDatepicker]="pickerEnd" #dateEnd formControlName="dateEnd" placeholder="{{ langService.dictionary.guest_end }}" disabled required>
+                        <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerEnd disabled="false"></mat-datepicker>
+    
+                        <mat-error *ngIf="usersamlForm.get('dateEnd').hasError('required')"> {{ langService.dictionary.error_enddateRequired }} </mat-error>
+                    </mat-form-field>
+                </div>
+    
+                <div class="containerForm">
+                    <mat-form-field>
+                        <input type="input" matInput #managerName formControlName="managerName" placeholder="{{ langService.dictionary.samlBossName }}" required>
+                        <mat-hint> {{ langService.dictionary.character_limit_50 }} </mat-hint>
+    
+                        <mat-error *ngIf="usersamlForm.get('managerName').hasError('required')"> {{ langService.dictionary.error_nameRequired }} </mat-error>
+                        <mat-error *ngIf="usersamlForm.get('managerName').hasError('maxlength')"> {{ langService.dictionary.character_limit_exceeded }} </mat-error>
+                    </mat-form-field>
+        
+                    <mat-form-field>
+                        <input type="input" matInput #managerSurname formControlName="managerSurname" placeholder="{{ langService.dictionary.samlBossSurname }}" required>
+                        <mat-hint> {{ langService.dictionary.character_limit_50 }} </mat-hint>
+    
+                        <mat-error *ngIf="usersamlForm.get('managerSurname').hasError('required')"> {{ langService.dictionary.error_surnameRequired }} </mat-error>
+                        <mat-error *ngIf="usersamlForm.get('managerSurname').hasError('maxlength')"> {{ langService.dictionary.character_limit_exceeded }} </mat-error>
+                    </mat-form-field>
+                </div>
+    
+                <div class="containerForm">
+                    <mat-form-field>
+                        <input type="input" matInput #managerMail formControlName="managerMail" placeholder="{{ langService.dictionary.samlBossMail }}" required>
+                        <mat-hint> {{ langService.dictionary.character_limit_50 }} </mat-hint>
+    
+                        <mat-error *ngIf="usersamlForm.get('managerMail').hasError('required')"> {{ langService.dictionary.error_emailRequired }} </mat-error>
+                        <mat-error *ngIf="usersamlForm.get('managerMail').hasError('maxlength')"> {{ langService.dictionary.character_limit_exceeded }} </mat-error>
+                    </mat-form-field>
+    
+                    <mat-form-field>
+                        <input type="input" matInput #managerUid formControlName="managerUid" placeholder="{{ langService.dictionary.samlBoss }}" required>
+                        <mat-hint> {{ langService.dictionary.character_limit_50 }} </mat-hint>
+    
+                        <mat-error *ngIf="usersamlForm.get('managerUid').hasError('required')"> {{ langService.dictionary.error_uidRequired }} </mat-error>
+                        <mat-error *ngIf="usersamlForm.get('managerUid').hasError('maxlength')"> {{ langService.dictionary.character_limit_exceeded }} </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>  
+            
+            <div class="containerForm">
+                <mat-form-field>
+                    <input type="input" matInput #societaName formControlName="societaName" placeholder="{{ langService.dictionary.samlSocietaName }}" required>
+                    <mat-hint> {{ langService.dictionary.character_limit_50 }} </mat-hint>
+
+                    <mat-error *ngIf="usersamlForm.get('societaName').hasError('required')"> {{ langService.dictionary.societaRequired }} </mat-error>
+                    <mat-error *ngIf="usersamlForm.get('societaName').hasError('maxlength')"> {{ langService.dictionary.character_limit_exceeded }} </mat-error>
+                    <mat-error *ngIf="usersamlForm.get('societaName').hasError('pattern')"> {{ langService.dictionary.error_name_societa }} </mat-error>
+                </mat-form-field>
+            </div>
+ 
+    
+            <div class="buttonsFirst">
+                <button mat-flat-button class="return span" (click)="onNoClick()">
+                    {{ langService.dictionary.undo }}                
+                </button>        
+                <button mat-flat-button class="submit span" type="submit" (click)="onConfirmClick()" [ngClass]="{'active': usersamlForm.valid}" [disabled]="usersamlForm.invalid"> 
+                    {{ langService.dictionary.confirm }}                
+                </button>        
+            </div>
+        </form>
+    </div>
+
+</div>

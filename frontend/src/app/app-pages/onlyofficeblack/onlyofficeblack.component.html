@@ -1,0 +1,13 @@
+<div class="header">
+    <div class="logo">
+        <img src="assets/loghi_apps_main/neg/vshare-principale.svg">
+    </div>
+
+    <div class="profile">
+        <img *ngIf="!pictureLoading" src="{{profilePicUrl}}" class="profile_pic"/>
+    </div>
+</div>
+
+<div class="onlyoffice" *ngIf="!nodata">
+    <onlyoffice [config]="config"></onlyoffice>
+</div>

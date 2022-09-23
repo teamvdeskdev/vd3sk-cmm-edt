@@ -1,0 +1,153 @@
+#sidebarVersions{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 5% 5%;
+    min-height: 150px;
+    overflow: auto;
+    -ms-overflow-style: none; /* IE 11 */
+    scrollbar-width: none; /* Firefox */
+
+    .svTitle{
+        display: flex;
+        flex-direction: row;
+        height: 6%;
+        width: 100%;
+        color: #223140;
+        font-family: Roboto;
+        font-size: 12px;
+        letter-spacing: 0;
+        text-transform: uppercase;
+        min-height: 30px;
+        padding-bottom: 10px;
+    }
+
+    .svList{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 90%;
+        overflow: auto;
+        -ms-overflow-style: none; /* IE 11 */
+        scrollbar-width: none; /* Firefox */
+
+        .svElement{
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            min-height: 45px;
+            max-height: fit-content;
+            align-items: center;
+
+            .sveIconDownload{
+                display: flex;
+                flex-direction: row;
+                height: 100%;
+                width: 10%;
+                align-items: center;
+
+                mat-icon{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+
+                    i{
+                        color: #007789;
+                        font-size: 20px;
+                        cursor: pointer;
+
+                        &:hover{
+                            color: #00B9B3;
+                        }
+                    }
+                }
+            }
+
+            .sveInfo{
+                display: flex;
+                flex-direction: column;
+                height: fit-content;
+                width: 80%;
+
+                .sveInfoHead{
+                    display: flex;
+                    flex-direction: column;
+                    height: 50%;
+                    width: 100%;
+                    color: #061B2D;
+                    font-family: Roboto;
+                    font-size: 13px;
+                    letter-spacing: 0;
+                }
+
+                .sveInfoFoot{
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    height: 50%;
+                    width: 100%;
+                    color: #7D7D7D;
+                    font-family: Roboto;
+                    font-size: 11px;
+                    letter-spacing: 0;
+                }
+            }
+
+            .sveIconRestores{
+                display: flex;
+                flex-direction: row;
+                height: 100%;
+                width: 10%;
+                align-items: center;
+
+                mat-icon{
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+
+                    i{
+                        color: #007789;
+                        font-size: 20px;
+                        cursor: pointer;
+
+                        &:hover{
+                            color: #00B9B3;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .svList::-webkit-scrollbar { /* Chrome, opera,safari */
+        display: none;
+    }
+
+    &.nodata{
+        align-items: center;
+        justify-content: center;
+
+        mat-icon{
+            width: fit-content;
+            height: fit-content;
+            
+            i{
+                font-size: 40px;
+                color: #808080;
+            }
+        }
+
+        span{
+            width: fit-content;
+            color: #7D7D7D;
+            font-family: Roboto;
+            font-size: 13px;
+            letter-spacing: 0;
+            text-transform: capitalize;
+        }
+    }
+}
+#sidebarSettings::-webkit-scrollbar { /* Chrome, opera,safari */
+    display: none;
+}

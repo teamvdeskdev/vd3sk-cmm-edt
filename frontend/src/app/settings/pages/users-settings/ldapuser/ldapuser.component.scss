@@ -1,0 +1,45 @@
+.server{
+    display: flex;
+    flex-direction: column;
+
+    .one{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+    
+        .first{
+            display: flex;
+            flex-direction: row;
+            
+            .buttonrow{
+                display: flex;
+                flex-direction: row;
+            }
+        }
+        
+        .second{
+            display: flex;
+            flex-direction: row;
+        }
+    }
+    
+    .two{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+    
+        .first{
+            display: flex;
+            flex-direction: row;
+        }
+    
+        .second{
+            display: flex;
+            flex-direction: row;
+        }
+    }
+}
+
+.expert{
+    
+}

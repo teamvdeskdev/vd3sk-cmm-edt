@@ -1,0 +1,40 @@
+<mat-list class="fssList">
+    <!--
+        <mat-list-item *ngIf="userAdmin" [ngClass]="{'selected': currentpage=='settings-activitiesandnotifications'}">
+        <a routerLink="settings-activitiesandnotifications" routerLinkActive="active" (click)="emitPath('settings-activitiesandnotifications')">
+            <mat-icon><i class="material-icons">flash_on</i></mat-icon>
+            <span>{{ dictNotify }}</span>
+        </a>
+    </mat-list-item>
+    -->
+
+    <mat-list-item *ngIf="!isNota && (userAdmin && !GroupFolderManager)" [ngClass]="{'selected': currentpage=='settings-externalarchives'}">
+        <a routerLink="settings-externalarchives" routerLinkActive="active" (click)="emitPath('settings-externalarchives')">
+            <mat-icon><i class="material-icons">dns</i></mat-icon>
+            <span>{{ dictArchives }}</span>
+        </a>
+    </mat-list-item>
+
+    <mat-list-item *ngIf="!isNota && (userAdmin || GroupFolderManager)" [ngClass]="{'selected': currentpage=='settings-groupfolders'}">
+        <a routerLink="settings-groupfolders" routerLinkActive="active" (click)="emitPath('settings-groupfolders')">
+            <mat-icon><i class="material-icons">folder_shared</i></mat-icon>
+            <span>{{ dictGroupFolders }}</span>
+        </a>
+    </mat-list-item>
+    <mat-list-item *ngIf="globalsVar.enableVdpa" [ngClass]="{'selected': currentpage=='settings-signaturesettings'}">
+        <a routerLink="settings-signaturesettings" routerLinkActive="active" (click)="emitPath('settings-signaturesettings')">
+            <mat-icon><i class="material-icons">gesture</i></mat-icon>
+            <span>{{ dictSignatureSettings }}</span>
+        </a>
+    </mat-list-item>
+
+    <!-- WIP: add controll (only admin can see them) -->
+    <!--
+    <mat-list-item [ngClass]="{'selected': currentpage=='settings-applications'}">
+        <a routerLink="settings-applications" routerLinkActive="active" (click)="emitPath('settings-applications')">
+            <mat-icon><i class="material-icons">people</i></mat-icon>
+            <span>{{ dictApp }}</span>
+        </a>
+    </mat-list-item>-->
+
+</mat-list>

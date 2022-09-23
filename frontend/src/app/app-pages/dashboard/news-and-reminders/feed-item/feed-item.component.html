@@ -1,0 +1,17 @@
+<div id="feedItem" class="container-fluid feed-item">
+    <a [href]="data.link" target="_blank">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="feed-title">{{data.title}}</div>
+                <div class="feed-description">{{data.description}}</div>
+                <div class="feed-source"><span *ngIf="data.source">{{data.source}}<span *ngIf="feedElapsedTime"> | </span>{{feedElapsedTime}}</span></div>
+            </div>
+            <div class="col-md-2 feed-image-col">
+                <img *ngIf="data.imgLink" class="feed-image" [src]="data.imgLink">
+                <div *ngIf="!data.imgLink" class="container-no-image">
+                    <i class="material-icons-outlined no-image-icon">article</i>
+                </div>
+            </div>
+        </div>
+    </a>    
+</div>

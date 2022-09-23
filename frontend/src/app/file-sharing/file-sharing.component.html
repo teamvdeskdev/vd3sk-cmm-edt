@@ -1,0 +1,353 @@
+<div id="fileSharing" *ngIf="screen">
+	<div id="filesharingSidebar">
+		<div class="innerHeaderFileSharing">
+            <mat-icon *ngIf="isFilesharing">
+                <i class="material-icons">insert_drive_file</i>
+            </mat-icon>
+            <div *ngIf="isFilesharing">FILE</div>
+
+            <mat-icon *ngIf="isActivity">
+                <i class="material-icons">flash_on</i>
+            </mat-icon>
+            <div *ngIf="isActivity"> {{dictOneActivity}} </div>
+
+            <mat-icon *ngIf="isSettings">
+                <i class="material-icons">settings</i>
+            </mat-icon>
+            <div *ngIf="isSettings"> {{dictOnlySettings}} </div>
+        </div>
+        <div class="sidebarListFileSharing">
+            <mat-list class="fssList" *ngIf="isFilesharing && !isActivity && !isSettings">
+                <mat-list-item class="buttoncreate">
+                    <button class="buttoncreateboth" (click)="openDialogCreate()" [disabled]="!editmode">
+                        <span> {{ dictCreate }} </span>    
+                    </button>
+                </mat-list-item>
+                <mat-list-item [ngClass]="{'selected': currentpage=='all-files'}">
+                    <a routerLink="all-files" routerLinkActive="active" (click)="updatePathAndCurrentPage('all-files')">
+                        <mat-icon><i class="material-icons">folder</i></mat-icon>
+                        <span>{{ dictAllFiles }}</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item [ngClass]="{'selected': currentpage=='recents'}">
+                    <a routerLink="recents" routerLinkActive="active" (click)="updatePathAndCurrentPage('recents')">
+                        <mat-icon><i class="material-icons">access_time</i></mat-icon>
+                        <span>{{ dictRecent }}</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item [ngClass]="{'selected': currentpage=='favorites'}">
+                    <a routerLink="favorites" routerLinkActive="active" (click)="updatePathAndCurrentPage('favorites')">
+                        <mat-icon><i class="material-icons">star</i></mat-icon>
+                        <span>{{ dictFavorites }}</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item [ngClass]="{'selected': currentpage=='shares'}">
+                    <a routerLink="shares" routerLinkActive="active" (click)="updatePathAndCurrentPage('shares')">
+                        <mat-icon><i class="material-icons">share</i></mat-icon>
+                        <span>{{ dictShares }}</span>
+                    </a>
+                    <mat-icon *ngIf="panelOpenState" (click)="listShareToggle()"><i class="material-icons">arrow_drop_up</i></mat-icon>
+                    <mat-icon *ngIf="!panelOpenState" (click)="listShareToggle()"><i class="material-icons">arrow_drop_down</i></mat-icon>
+                </mat-list-item>    
+
+                <!-- share dropdown list -->
+                <div class="listShareDropdown" [ngClass]="{'open': isSharedOpen}">
+                    <div [ngClass]="{'selected': currentpage=='shared-by-you'}">
+                        <a routerLink="shared-by-you" routerLinkActive="active" (click)="updatePathAndCurrentPage('shared-by-you')">
+                            <span> {{ dictSharedYou }} </span>
+                        </a>
+                    </div>
+                    <div [ngClass]="{'selected': currentpage=='shared-by-others'}">
+                        <a routerLink="shared-by-others" routerLinkActive="active" (click)="updatePathAndCurrentPage('shared-by-others')">
+                            <span> {{ dictSharedOthers }} </span>
+                        </a>
+                    </div>
+                    <div [ngClass]="{'selected': currentpage=='shared-by-link'}" *ngIf="!this.isTim">
+                        <a routerLink="shared-by-link" routerLinkActive="active" (click)="updatePathAndCurrentPage('shared-by-link')">
+                            <span> {{ dictSharedLink }} </span>
+                        </a>
+                    </div>
+                </div>
+                <!-- -->
+
+                <!--<mat-list-item [ngClass]="{'selected': currentpage=='labels'}">
+                    <a routerLink="labels" routerLinkActive="active">
+                        <mat-icon><i class="material-icons">label</i></mat-icon>
+                        <span>{{ dictLabels }}</span>
+                    </a>
+                </mat-list-item>-->
+                <!-- <mat-list-item [ngClass]="{'selected': currentpage=='setting-report'}">
+                    <a (click)="downloadReport()" id="downloadreport">
+                        <mat-icon><i class="material-icons">download</i></mat-icon>
+                        <span>Download report</span>
+                    </a>
+                </mat-list-item> -->
+                <mat-list-item class="delete" [ngClass]="{'selected': currentpage=='deleted'}">
+                    <a routerLink="deleted" routerLinkActive="active" (click)="updatePathAndCurrentPage('deleted')">
+                        <mat-icon><i class="material-icons">delete</i></mat-icon>
+                        <span>{{ dictDeletedFiles }}</span>
+                    </a>
+                </mat-list-item>
+                <hr class="hrdelete">
+                <mat-list-item [ngClass]="{'selected': currentpage=='protectedfile'}">
+                    <a routerLink="protectedfile" routerLinkActive="active" (click)="updatePathAndCurrentPage('protectedfile')">
+                        <mat-icon><i class="material-icons">lock</i></mat-icon>
+                        <span>{{ dictProtectedFiles }}</span>
+                    </a>
+                </mat-list-item>
+                <ng-container *ngIf="globalsVar.enableVpec">
+                    <mat-list-item  [ngClass]="{'selected': currentpage=='attachmentsvpec'}" *ngIf="isVpecInstalled">
+                        <a routerLink="attachmentsvpec" routerLinkActive="active" (click)="updatePathAndCurrentPage('attachmentsvpec')">
+                            <mat-icon><i class="material-icons">attachment</i></mat-icon>
+                            <span *ngIf="notCustom">{{ dictMail }}</span>
+                            <span *ngIf="!notCustom">{{ dictPEC }}</span>
+                        </a>
+                    </mat-list-item>
+                </ng-container>
+
+                <mat-list-item *ngIf="globalsVar.enableVFlow && !notCustom" [ngClass]="{'selected': currentpage=='vflow'}">
+                    <a routerLink="vflow" routerLinkActive="active" (click)="updatePathAndCurrentPage('vflow')">
+                        <mat-icon><i class="material-icons">forward</i></mat-icon>
+                        <span>vFlow</span>
+                    </a>
+                </mat-list-item>
+
+                <mat-list-item *ngIf="((globalsVar.enableVdpa && notCustom && notShare) || (globalsVar.enableVdpa && !notCustom))" [ngClass]="{'selected': currentpage=='signed-documents-folder'}">
+                    <a routerLink="signed-documents-folder" routerLinkActive="active" (click)="updatePathAndCurrentPage('signed-documents-folder')">
+                        <mat-icon><i class="material-icons">gesture</i></mat-icon>
+                        <span>{{ dictSignature }}</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item [ngClass]="{'selected': currentpage=='group-folder'}">
+                    <a routerLink="group-folder" routerLinkActive="active" (click)="updatePathAndCurrentPage('group-folder')">
+                        <mat-icon><i class="material-icons">folder_shared</i></mat-icon>
+                        <span>{{ dictGroupFolder }}</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item *ngIf="!notCustom" [ngClass]="{'selected': currentpage=='externalarchives'}">
+                    <a routerLink="externalarchives" routerLinkActive="active" (click)="updatePathAndCurrentPage('externalarchives')">
+                        <mat-icon><i class="material-icons">dns</i></mat-icon>
+                        <span>{{ dictExternalArchives }}</span>
+                    </a>
+                </mat-list-item>
+            </mat-list>
+
+            <app-activity-left-sidenav *ngIf="isActivity && !isFilesharing && !isSettings" [currentpage]="currentpage" (newPathEvent)="updatePathAndCurrentPage($event)"></app-activity-left-sidenav>
+            
+            <app-settings-left-sidenav *ngIf="isSettings && !isFilesharing && !isActivity" [currentpage]="currentpage" (newSetPathEvent)="updatePathAndCurrentPage($event)"></app-settings-left-sidenav>
+
+            <div class="send-spinner-wrapper" *ngIf="(isFilesharing || isActivity || isSettings) && isBackgroundSending">
+                <div class="ml-3 mr-2">
+                  <div class="spinner-border" style="width: 1.7rem; height: 1.7rem;" role="status" aria-hidden="true"></div>
+                </div>
+                <div class="mr-3">{{dictSendMailInProgress}}</div>
+            </div>
+
+            <div class="space" *ngIf="iconSpace && usedSpace">
+                <img src={{iconSpace}}>
+                <span> {{ usedSpace }} </span>
+            </div>
+        </div>
+	</div>
+
+    <div id="filesharingMain">
+        <div class="innerHeaderFileSharing">
+            <!--<app-path [movepath]="pathchanged"></app-path>-->
+            <app-path></app-path>
+            <div class="innerHeaderSearch">
+                <mat-icon *ngIf="!isFilesharing" class="innerHeaderSearchIcons" (click)="fileshSelected()"
+                    matTooltip="{{dictVShareFiles}}" matTooltipClass="headericonstooltip">
+                        <i class="material-icons"> insert_drive_file </i>
+                </mat-icon>
+
+                <mat-icon *ngIf="!isActivity" class="innerHeaderSearchIcons" (click)="activitySelected()"
+                    matTooltip="{{dictVShareActivities}}" matTooltipClass="headericonstooltip">
+                        <i class="material-icons"> flash_on </i>
+                </mat-icon>
+
+                <mat-icon *ngIf="(_const.isUserAdmin || globalsVar.enableVdpa) && !isSettings" class="innerHeaderSearchIcons" (click)="settingsSelected()"
+                    matTooltip="{{dictVShareSettings}}" matTooltipClass="headericonstooltip">
+                        <i class="material-icons"> settings </i>
+                </mat-icon>
+            </div>
+        </div>
+
+        <router-outlet></router-outlet>
+	</div>
+
+</div>
+
+
+<div id="fileSharing" class="screen" *ngIf="!screen">
+    <div id="fsHeaderSecondLevel">
+        <div class="openSideButton">
+            <mat-icon (click)="toggleClickScreen(drawer)">
+                <i *ngIf="!controltrick" class="material-icons"> dehaze </i>
+                <i *ngIf="controltrick" class="material-icons"> close </i>
+            </mat-icon>
+        </div> 
+        <!--<app-path [movepath]="pathchanged"></app-path>-->       
+        <app-path></app-path>
+        <div class="innerHeaderSearch">
+            <mat-icon *ngIf="!isFilesharing" class="innerHeaderSearchIcons" (click)="fileshSelected()"
+                matTooltip="{{dictVShareFiles}}" matTooltipClass="headericonstooltip">
+                    <i class="material-icons"> insert_drive_file </i>
+            </mat-icon>
+            <mat-icon *ngIf="isFilesharing" class="innerHeaderSearchIcons active" matTooltip="{{dictVShareFiles}}" matTooltipClass="headericonstooltip">
+                <i class="material-icons">insert_drive_file</i>
+            </mat-icon>
+
+            <mat-icon *ngIf="!isActivity" class="innerHeaderSearchIcons" (click)="activitySelected()"
+                matTooltip="{{dictVShareActivities}}" matTooltipClass="headericonstooltip">
+                    <i class="material-icons"> flash_on </i>
+            </mat-icon>
+            <mat-icon *ngIf="isActivity" class="innerHeaderSearchIcons active" matTooltip="{{dictVShareActivities}}" matTooltipClass="headericonstooltip">
+                <i class="material-icons">flash_on</i>
+            </mat-icon>
+
+            <!--<mat-icon *ngIf="!isSettings" class="innerHeaderSearchIcons" (click)="settingsSelected()"
+                matTooltip="{{dictVShareSettings}}" matTooltipClass="headericonstooltip">
+                    <i class="material-icons"> settings </i>
+            </mat-icon>
+            <mat-icon *ngIf="isSettings" class="innerHeaderSearchIcons active" matTooltip="{{dictVShareSettings}}" matTooltipClass="headericonstooltip">
+                <i class="material-icons">settings</i>
+            </mat-icon>-->
+        </div>
+    </div>
+
+    <mat-drawer-container autosize id="fsMainBody">
+        <mat-drawer #drawer class="filesharingSide" mode="over">
+            <mat-list class="fssList" *ngIf="isFilesharing && !isActivity && !isSettings">
+                <mat-list-item class="buttoncreate">
+                    <button class="buttoncreateboth" (click)="openDialogCreate()" [disabled]="!editmode">
+                        <span> {{ dictCreate }} </span>    
+                    </button>
+                </mat-list-item>
+                <mat-list-item [ngClass]="{'selected': currentpage=='all-files'}">
+                    <a routerLink="all-files" routerLinkActive="active" (click)="updatePathAndCurrentPage('all-files')">
+                        <mat-icon><i class="material-icons">folder</i></mat-icon>
+                        <span>{{ dictAllFiles }}</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item [ngClass]="{'selected': currentpage=='recents'}">
+                    <a routerLink="recents" routerLinkActive="active" (click)="updatePathAndCurrentPage('recents')">
+                        <mat-icon><i class="material-icons">access_time</i></mat-icon>
+                        <span>{{ dictRecent }}</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item [ngClass]="{'selected': currentpage=='favorites'}">
+                    <a routerLink="favorites" routerLinkActive="active" (click)="updatePathAndCurrentPage('favorites')">
+                        <mat-icon><i class="material-icons">star</i></mat-icon>
+                        <span>{{ dictFavorites }}</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item [ngClass]="{'selected': currentpage=='shares'}">
+                    <a routerLink="shares" routerLinkActive="active" (click)="updatePathAndCurrentPage('shares')">
+                        <mat-icon><i class="material-icons">share</i></mat-icon>
+                        <span>{{ dictShares }}</span>
+                    </a>
+                    <mat-icon *ngIf="panelOpenState" (click)="listShareToggle()"><i class="material-icons">arrow_drop_up</i></mat-icon>
+                    <mat-icon *ngIf="!panelOpenState" (click)="listShareToggle()"><i class="material-icons">arrow_drop_down</i></mat-icon>
+                </mat-list-item>    
+    
+                <!-- share dropdown list -->
+                <div class="listShareDropdown" [ngClass]="{'open': isSharedOpen}">
+                    <div [ngClass]="{'selected': currentpage=='shared-by-you'}">
+                        <a routerLink="shared-by-you" routerLinkActive="active" (click)="updatePathAndCurrentPage('shared-by-you')">
+                            <span> {{ dictSharedYou }} </span>
+                        </a>
+                    </div>
+                    <div [ngClass]="{'selected': currentpage=='shared-by-others'}">
+                        <a routerLink="shared-by-others" routerLinkActive="active" (click)="updatePathAndCurrentPage('shared-by-others')">
+                            <span> {{ dictSharedOthers }} </span>
+                        </a>
+                    </div>
+                    <div [ngClass]="{'selected': currentpage=='shared-by-link'}" *ngIf="!this.isTim">
+                        <a routerLink="shared-by-link" routerLinkActive="active" (click)="updatePathAndCurrentPage('shared-by-link')">
+                            <span> {{ dictSharedLink }} </span>
+                        </a>
+                    </div>
+                </div>
+                <!-- -->
+                 <!--<mat-list-item [ngClass]="{'selected': currentpage=='setting-report'}">
+                    <a (click)="downloadReport()" id="downloadreport">
+                        <mat-icon><i class="material-icons">download</i></mat-icon>
+                        <span>Download report</span>
+                    </a>
+                </mat-list-item> -->
+    
+                <mat-list-item [ngClass]="{'selected': currentpage=='labels'}">
+                    <a routerLink="labels" routerLinkActive="active" (click)="updatePathAndCurrentPage('labels')">
+                        <mat-icon><i class="material-icons">label</i></mat-icon>
+                        <span>{{ dictLabels }}</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item class="delete" [ngClass]="{'selected': currentpage=='deleted'}">
+                    <a routerLink="deleted" routerLinkActive="active" (click)="updatePathAndCurrentPage('deleted')">
+                        <mat-icon><i class="material-icons">delete</i></mat-icon>
+                        <span>{{ dictDeletedFiles }}</span>
+                    </a>
+                </mat-list-item>
+                <hr class="hrdelete">
+                <mat-list-item [ngClass]="{'selected': currentpage=='protectedfile'}">
+                    <a routerLink="protectedfile" routerLinkActive="active" (click)="updatePathAndCurrentPage('protectedfile')">
+                        <mat-icon><i class="material-icons">lock</i></mat-icon>
+                        <span>{{ dictProtectedFiles }}</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item [ngClass]="{'selected': currentpage=='attachmentsvpec'}" *ngIf="globalsVar.enableVpec && isVpecInstalled">
+                    <a routerLink="attachmentsvpec" routerLinkActive="active" (click)="updatePathAndCurrentPage('attachmentsvpec')">
+                        <mat-icon><i class="material-icons">attachment</i></mat-icon>
+                        <span>{{ dictPEC }}</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item *ngIf="globalsVar.enableVflow" [ngClass]="{'selected': currentpage=='vflow'}">
+                    <a routerLink="vflow" routerLinkActive="active" (click)="updatePathAndCurrentPage('vflow')">
+                        <mat-icon><i class="material-icons">forward</i></mat-icon>
+                        <span>vFlow</span>
+                    </a>
+                </mat-list-item>
+
+                <mat-list-item *ngIf="((globalsVar.enableVdpa && notCustom && notShare) || (globalsVar.enableVdpa && !notCustom))" [ngClass]="{'selected': currentpage=='signed-documents-folder'}">
+                    <a routerLink="signed-documents-folder" routerLinkActive="active" (click)="updatePathAndCurrentPage('signed-documents-folder')">
+                        <mat-icon><i class="material-icons">gesture</i></mat-icon>
+                        <span>{{ dictSignature }}</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item [ngClass]="{'selected': currentpage=='group-folder'}">
+                    <a routerLink="group-folder" routerLinkActive="active" (click)="updatePathAndCurrentPage('group-folder')">
+                        <mat-icon><i class="material-icons">folder_shared</i></mat-icon>
+                        <span>{{ dictGroupFolder }}</span>
+                    </a>
+                </mat-list-item>
+                <mat-list-item [ngClass]="{'selected': currentpage=='externalarchives'}">
+                    <a routerLink="externalarchives" routerLinkActive="active" (click)="updatePathAndCurrentPage('externalarchives')">
+                        <mat-icon><i class="material-icons">dns</i></mat-icon>
+                        <span>{{ dictExternalArchives }}</span>
+                    </a>
+                </mat-list-item>
+            </mat-list>
+
+            <app-activity-left-sidenav *ngIf="isActivity && !isFilesharing && !isSettings" [currentpage]="currentpage" (newPathEvent)="updatePathAndCurrentPage($event)"></app-activity-left-sidenav>
+
+            <app-settings-left-sidenav *ngIf="isSettings && !isFilesharing && !isActivity" [currentpage]="currentpage" (newSetPathEvent)="updatePathAndCurrentPage($event)"></app-settings-left-sidenav>
+
+            <div class="send-spinner-wrapper" *ngIf="(isFilesharing || isActivity || isSettings) && isBackgroundSending">
+                <div class="ml-3 mr-2">
+                  <div class="spinner-border" style="width: 1.7rem; height: 1.7rem;" role="status" aria-hidden="true"></div>
+                </div>
+                <div class="mr-3">{{dictSendMailInProgress}}</div>
+            </div>
+            
+            <div class="space" *ngIf="iconSpace && usedSpace">
+                <img src={{iconSpace}}>
+                <span> {{ usedSpace }} </span>
+            </div>
+        </mat-drawer>
+      
+        <div class="filesharingMain">
+            <router-outlet></router-outlet>
+        </div>
+      
+    </mat-drawer-container>
+</div>

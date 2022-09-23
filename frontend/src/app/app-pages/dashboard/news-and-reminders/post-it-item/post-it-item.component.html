@@ -1,0 +1,20 @@
+<div id="postItItem" class="post-it-item container-fluid">
+    <div class="row">
+        <div class="col-md-6 ">
+            <img *ngIf="avatarUrl" class="post-it-image" src="{{avatarUrl}}">
+            <span *ngIf="data.userId !== currentUserId || data.shares && data.shares.length > 0" matTooltip="{{postItTooltip(data)}}" class="material-icons share-icon">share</span>
+        </div>
+        <div class="col-md-6 post-it-date">{{postItDateAndTime}}</div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 post-it-title">{{data.title}}</div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 post-it-descr">{{data.body}}</div>
+    </div>
+    <div class="row done-btn-row">
+        <div *ngIf="!isRemindersPage && (!data.shares || (data.shares && data.shares.length < 1))" class="col-md-12 post-it-done-btn" (click)="clickDonePostIt(data)">{{langService.dictionary.donePostIt}}</div>
+        <div *ngIf="isRemindersPage && data.completed" class="col-md-12 post-it-completed-btn"><div class="material-icons check-icon">check</div><div>{{langService.dictionary.completePostIt}}</div></div>
+        <!-- <span class="material-icons" style="cursor: pointer;" (click)="deletePostIt(data)">clear</span> -->
+    </div>
+</div>

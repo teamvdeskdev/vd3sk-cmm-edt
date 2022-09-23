@@ -1,0 +1,13 @@
+<div id="dialogDeleteFileFolder">
+    <div class="text">
+        <span>{{ message }}</span>
+    </div>
+    <div class="inputs" *ngIf="!this.SecondDialog">        
+        <button class="deny" (click)="onNoClick()"> {{ deny }} </button>
+        <button class="confirm" (click)="onConfirmClick()"> {{ confirm }} </button>
+    </div>
+    <div class="inputs" *ngIf="this.SecondDialog"> 
+        <button class="second_confirm" (click)="onConfirmClick()"> {{ confirm }} </button>       
+        <button class="second_deny" (click)="onNoClick()"> {{ deny }} </button>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+#folder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+
+    #foldermain{
+        width: 80%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        -webkit-box-pack: center;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap;
+
+        app-table,
+        app-allfiles-table,
+        app-groupfolder-table,
+        app-shares-table,
+        app-delete-table,
+        app-archives-table,
+        app-vpec-table{
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        #storageUnauthorized{
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            
+            mat-icon{
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding-bottom: 30px;
+        
+                i{
+                    font-size: 54px;
+                    color: #BBBBBB;
+                }
+            }
+        
+            .span{
+                color: #444444;
+                font-family: Roboto;
+                font-size: 14px;
+                letter-spacing: -0.03px;
+                line-height: 16px;
+                text-align: center;
+            }
+        }
+    }
+
+    app-sidebar,
+    app-allfiles-sidebar,
+    app-groupfolder-sidebar{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 20%;
+        background-color: #f0f0f0;
+    }
+    
+    app-no-data{
+        width: 80%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }    
+}

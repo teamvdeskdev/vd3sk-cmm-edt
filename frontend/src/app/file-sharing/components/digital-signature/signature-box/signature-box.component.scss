@@ -1,0 +1,90 @@
+div[id^="signatureBoxId-"] {
+    // width: 166px;
+    // height: 102px;
+    position: absolute;
+}
+  
+.signature-box {
+    border: 1px solid #145AFE !important;
+}
+
+.ng-draggable {
+    cursor: grab;
+}
+  
+.ng-dragging {
+    cursor: grabbing;
+}
+
+.ng-resizable-diagonal {
+    border-bottom: 0 !important;
+    border-left: 0 !important;
+}
+
+/*CSS resizer signature*/
+.signature-box .resizer {
+    width: 5px;
+    height: 5px;
+    background: #145AFE;
+    border: 3px solid #145AFE;
+    position: absolute;
+}
+  
+.signature-box .resizer.top-left {
+    left: 0px;
+    top: 0px;
+    cursor: nwse-resize;
+}
+  
+.signature-box .resizer.top-right {
+    right: 0px;
+    top: 0px;
+    cursor: nesw-resize;
+}
+  
+  .signature-box .resizer.bottom-left {
+    left: 0px;
+    bottom: 0px;
+    cursor: nesw-resize;
+  }
+  
+  .signature-box .resizer.bottom-right {
+    right: 0px;
+    bottom: 0px;
+    cursor: nwse-resize;
+  }
+  
+  .signature-box .resizer.top-middle {
+    left: 48%;
+    top: 0px;
+    cursor: n-resize;
+  }
+  
+  .signature-box .resizer.left-middle {
+    left: 0px;
+    top: 48%;
+    cursor: w-resize;
+  }
+  
+  .signature-box .resizer.right-middle {
+    right: 0px;
+    top: 48%;
+    cursor: e-resize;
+  }
+  
+  .signature-box .resizer.bottom-middle {
+    left: 48%;
+    bottom: 0px;
+    cursor: s-resize;
+  }
+  
+  .signature-box .resizer.delete-button {
+    right: 8px;
+    top: 8px;
+    width: 16px;
+    height: 16px;
+    color: white;
+    text-align: center;
+    font-size: 11px;
+    cursor: pointer !important;
+  }

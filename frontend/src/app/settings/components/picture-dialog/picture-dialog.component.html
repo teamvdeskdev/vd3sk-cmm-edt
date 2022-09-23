@@ -1,0 +1,20 @@
+<div mat-dialog-content>
+  <div class="cropper-container">
+    <image-cropper *ngIf="loadedIMG"
+      [imageChangedEvent]="imageChangedEvent" 
+      [maintainAspectRatio]="true" 
+      [aspectRatio]="4 / 4"
+      format="png" 
+      (imageCropped)="imageCropped($event)" 
+      (imageLoaded)="imageLoaded()"
+      (cropperReady)="cropperReady()" 
+      (loadImageFailed)="loadImageFailed()">
+    </image-cropper>
+    <div *ngIf="!loadedIMG">{{bigImageError}}</div>
+  </div>
+  <img [src]="croppedImage" class="hidden"/>
+</div>
+<div mat-dialog-actions>
+  <div class="secondary-btn" mat-dialog-close>{{langService.dictionary.cancel}}</div>
+  <div class="primary-btn" (click)="save()">{{langService.dictionary.choose}}</div>
+</div>

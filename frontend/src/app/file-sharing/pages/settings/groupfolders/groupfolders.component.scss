@@ -1,0 +1,328 @@
+#settingsvshareGF{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    -ms-overflow-style: none; /* IE 11 */
+    scrollbar-width: none; /* Firefox */
+
+    .header{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 12%;
+        border-bottom: 2px solid #bfbfbf;
+        
+        .title{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            height: 50%;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #383838;
+        }
+
+        .body{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 50%;
+
+            span{
+                font-size: 14px;
+                font-weight: normal;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                color: #808080;
+            }
+
+            button{
+                margin-right: 20px;
+                outline: none;
+                background-color: #00899e;
+                color: white;
+                font-size: 14px;
+                font-weight: bold;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: normal;
+                letter-spacing: 0.58px;
+                height: 32px;
+            }
+
+            .createGroup{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                border-bottom: 2px solid #007789;
+
+                mat-icon{
+                    display: flex;
+                    width: 15%;
+                    align-items: center;
+                    position: relative;
+            
+                    i.material-icons{
+                        cursor: pointer;
+                        font-size: 20px;
+                        color: #007789;
+                    }
+                }
+            }
+        }
+    }
+
+    .noFolderFound{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 82%;
+
+        .header{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 10%;
+            align-items: center;
+            justify-content: flex-start;
+            border-bottom: none;
+
+            div{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start;
+                width: 100%;
+                height: 50%;
+                font-weight: normal;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: normal;
+                letter-spacing: normal;
+            }
+
+            .title{
+                font-size: 18px;
+                color: #383838;
+            }
+
+            .subtitle{
+                font-size: 14px;
+                color: #808080;
+            }
+        }
+
+        .body{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 75%;
+            align-items: center;
+            justify-content: center;
+
+            mat-icon{
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 20%;
+        
+                i{
+                    font-size: 130px;
+                    color: #BBBBBB;
+                }
+            }
+
+            span{
+                font-size: 11px;
+                font-weight: normal;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                text-align: center;
+                color: #808080;
+            }
+        }
+    }
+
+    .svshareUpperbody{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 82%;
+
+        table {
+            padding-top: 1%;
+            padding-bottom: 1%;
+
+            td.mat-cell,
+            td.mat-footer-cell {
+                border-bottom-color: white;
+            }
+            td.mat-cell {
+                color: #2B2B2B;
+                font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                font-size: 13px;
+                letter-spacing: 0;
+
+                mat-icon.delete{
+                    i{
+                        color: #00396A;
+                    }
+                }                
+            }
+
+            .name{
+                width: 25%;
+                div{
+                    display: flex;
+                    flex-direction: row;
+                    width: 100%;
+                    align-items: flex-end;
+                }
+            }
+
+            .group{
+                width: 35%;
+                position: relative;
+
+                .listgroup{
+                    display: flex;
+                    flex-direction: row;
+                    width: 100%;
+                    align-items: flex-end;
+                }
+
+                .innertable{
+                    position: absolute;
+                    width: 300px;
+                    display: flex;
+                    flex-direction: column;
+                    margin: 0px;
+                    top: 10px;
+                    border: 1px solid #CCC;
+
+                    .tableInnertable{
+                        display: flex;
+                        flex-direction: column;
+
+                        thead{
+                            width: 100%;
+                            tr{
+                                width: 100%;
+                                display: flex;
+                                flex-direction: row;
+                                .headinnerGroup{
+                                    width: 40%;
+                                }
+                                .headinnerWrite{
+                                    width: 15%;
+                                }
+                                .headinnerShare{
+                                    width: 15%;
+                                }
+                                .headinnerDelete{
+                                    width: 15%;
+                                }
+                                .headinnerRemove{
+                                    width: 15%;
+                                }
+                            }
+                        }
+                        tbody{
+                            tr.had{
+                                width: 100%;
+                                display: flex;
+                                flex-direction: row;
+                                .headinnerGroup{
+                                    width: 40%;
+                                }
+                                .headinnerWrite{
+                                    width: 15%;
+                                }
+                                .headinnerShare{
+                                    width: 15%;
+                                }
+                                .headinnerDelete{
+                                    width: 15%;
+                                }
+                                .headinnerRemove{
+                                    width: 15%;
+                                }
+                            }
+
+                            tr.create{
+                                display: flex;
+                                flex-direction: column;
+
+                                div.input{
+                                    display: flex;
+                                    flex-direction: row;
+
+                                    input{
+                                        border: 1px solid #CCC;
+                                        border-radius: 4px;
+                                    }
+                                }
+                                div.select{
+                                    display: flex;
+                                    height: 100px;
+                                    flex-direction: column;
+                                    overflow-y: scroll;
+
+                                    span{
+                                        margin: 2px;
+
+                                        &:hover{
+                                            background-color: #CCC;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .quota{
+                width: 20%;
+            }
+
+            .delete{
+                width: 10%;
+            }
+
+            .hidden {
+                display: none;
+            }
+            .head {
+                color: #848484;
+                font-size: 11px;
+            }
+            .footer {
+                padding-top: 1%;
+
+                .btCreate {
+                    margin-left: 1%;
+                }
+            }
+        }
+    }
+}
+
+#settingsvshareGF::-webkit-scrollbar { /* Chrome, opera,safari */
+    display: none;
+}

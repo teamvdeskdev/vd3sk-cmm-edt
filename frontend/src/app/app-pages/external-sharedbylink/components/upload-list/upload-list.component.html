@@ -1,0 +1,86 @@
+<div id="listUploadNew">
+    <span class="arrow"></span>
+    <div id="listUploadNewInner">
+      <mat-list>
+
+        <!-- CREATE NEW FOLDER -->
+        <mat-list-item>
+          <div *ngIf="!checkNameFolder" class="newfolderclose" (click)="toggleNewFolder()">
+            <mat-icon><i class="material-icons">folder</i></mat-icon>
+            <span class="spanInnerList">{{ langService.dictionary.folder }}</span>
+          </div>
+          
+          <div *ngIf="checkNameFolder" class="newfolderopen">
+            <mat-icon (click)="toggleNewFolder()"><i class="material-icons">folder</i></mat-icon>
+            <input #newname placeholder="{{langService.dictionary.folder_name}}">
+            <mat-icon (click)="createNewFolder(newname.value)"><i class="material-icons"> arrow_forward </i></mat-icon>
+          </div>
+        </mat-list-item>
+
+        <!-- CREATE NEW DOCUMENT -->
+        <mat-list-item>
+          <div *ngIf="!checkNameDocument" class="newdocumentclose" (click)="toggleNewDocument()">
+            <mat-icon><i class="material-icons">format_align_left</i></mat-icon>
+            <span class="spanInnerList">{{ langService.dictionary.new_text_doc }}</span>
+          </div>
+
+          <div *ngIf="checkNameDocument" class="newdocumentopen">
+            <mat-icon (click)="toggleNewDocument()"><i class="material-icons">format_align_left</i></mat-icon>
+            <input #newdocument placeholder="{{langService.dictionary.document_name}}">
+            <mat-icon (click)="createNewDocument(newdocument.value)"><i class="material-icons"> arrow_forward </i></mat-icon>
+          </div>
+        </mat-list-item>
+
+        <!-- CREATE NEW EXEL -->
+        <mat-list-item>
+          <div *ngIf="!checkNameExel" class="newexelclose" (click)="toggleNewExel()">
+            <mat-icon><i class="material-icons">border_all</i></mat-icon>
+            <span class="spanInnerList">{{ langService.dictionary.new_exel_doc }}</span>
+          </div>
+
+          <div *ngIf="checkNameExel" class="newexelopen">
+            <mat-icon (click)="toggleNewExel()"><i class="material-icons">border_all</i></mat-icon>
+            <input #newexel placeholder="{{langService.dictionary.exel_name}}">
+            <mat-icon (click)="createNewExel(newexel.value)"><i class="material-icons"> arrow_forward </i></mat-icon>
+          </div>
+        </mat-list-item>
+
+        <!-- CREATE NEW POWERPOINT -->
+        <mat-list-item>
+          <div *ngIf="!checkNamePower" class="newpowerclose" (click)="toggleNewPower()">
+            <mat-icon><i class="material-icons">desktop_windows</i></mat-icon>
+            <span class="spanInnerList">{{ langService.dictionary.new_power_doc }}</span>
+          </div>
+
+          <div *ngIf="checkNamePower" class="newpoweropen">
+            <mat-icon (click)="toggleNewPower()"><i class="material-icons">desktop_windows</i></mat-icon>
+            <input #newpower placeholder="{{langService.dictionary.powerpoint_name}}">
+            <mat-icon (click)="createNewPower(newpower.value)"><i class="material-icons"> arrow_forward </i></mat-icon>
+          </div>
+        </mat-list-item>
+
+        <!-- CREATE NEW NOTE -->
+        <mat-list-item>
+          <div *ngIf="!checkNameFile" class="newfileclose" (click)="toggleNewFile()">
+            <mat-icon><i class="material-icons">short_text</i></mat-icon>
+            <span class="spanInnerList">{{ langService.dictionary.new_doc }}</span>
+          </div>
+
+          <div *ngIf="checkNameFile" class="newfileopen">
+            <mat-icon (click)="toggleNewFile()"><i class="material-icons">short_text</i></mat-icon>
+            <input #newfile placeholder="{{langService.dictionary.file_name}}">
+            <mat-icon (click)="createNewFile(newfile.value)"><i class="material-icons"> arrow_forward </i></mat-icon>
+          </div>
+        </mat-list-item>
+
+        <!-- UPLOAD FROM PC -->
+        <mat-list-item (click)="uploader.click()">
+          <mat-icon><i class="material-icons"> arrow_upward </i></mat-icon>
+          <span class="spanInnerList">{{ langService.dictionary.upload_file }}</span>
+          <input #uploader hidden multiple type="file" (change)="uploadFile($event)"/>
+        </mat-list-item>
+  
+      </mat-list>
+  
+    </div>
+  </div>

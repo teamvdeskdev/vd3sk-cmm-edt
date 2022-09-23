@@ -1,0 +1,101 @@
+<div class="v2FlowPage">
+    <!-- Flow Start Phase -->
+    <div *ngIf="!openLogin && !openLoginTotp && phase1 && tokenVerified" class="flowPageContainer">
+        <img class="logo" src="/assets/loghi_apps_main/vdesk-principale.svg">
+        
+        <div class="text">
+            <div class="title">{{langService.dictionary.connect_account}}</div>
+            <div class="content">{{langService.dictionary.login_before}}</div>
+            <div class="content-bold">{{client}}</div>
+            <div class="content">{{langService.dictionary.access}}</div>
+            <div class="content2">{{langService.dictionary.alert}}</div>
+        </div>
+        <button (click)="login()" class="save primary-btn">Login</button>
+
+        <div class="bottomLogo">
+            <img class="smallLogo" src="/assets/loghi_apps_main/vdesk-principale.svg"/>
+            <span class="smallText"> Your digital workplace</span>
+        </div>
+    </div>
+
+    <!-- Flow Start Error -->
+    <div *ngIf="error" class="flowPageContainer">
+        <img class="logo" src="/assets/loghi_apps_main/vdesk-principale.svg">
+        
+        <div class="text">
+            <div class="title">
+                <mat-icon inline=true class="negative-result-icon">close</mat-icon> 
+                <span class="iconTitle">{{langService.dictionary.error_connection}} </span>
+            </div>
+            <div class="content-bold">{{errorMessage}}</div>
+        </div>
+        <span></span>
+
+        <div class="bottomLogo">
+            <img class="smallLogo" src="/assets/loghi_apps_main/vdesk-principale.svg"/>
+            <span class="smallText"> Your digital workplace</span>
+        </div>
+    </div>
+
+    <!-- Post Login, Grant access Phase -->
+    <div *ngIf="loginDone && phase2" class="flowPageContainer">
+        <img class="logo" src="/assets/loghi_apps_main/vdesk-principale.svg">
+        
+        <div class="text">
+            <div class="title">{{langService.dictionary.access_account}}</div>
+            <div class="content">{{langService.dictionary.access_to}}</div>
+            <div class="content-bold">{{client}}</div>
+            <div class="content">{{langService.dictionary.access}}</div>
+        </div>
+        <button (click)="grantAccess()" class="save primary-btn"> {{langService.dictionary.grant_access}} </button>
+
+        <div class="bottomLogo">
+            <img class="smallLogo" src="/assets/loghi_apps_main/vdesk-principale.svg"/>
+            <span class="smallText"> Your digital workplace</span>
+        </div>
+    </div>
+
+    <!-- Post access granted,  positive result phase -->
+    <div *ngIf="clientAuthorized && phase3" class="flowPageContainer">
+        <img class="logo" src="/assets/loghi_apps_main/vdesk-principale.svg">
+        
+        <div class="text">
+            <div class="title">
+                <mat-icon inline=true class="positive-result-icon">done</mat-icon> 
+                <span class="iconTitle">{{langService.dictionary.connected_account}} </span>
+            </div>
+            <div class="content">{{langService.dictionary.connected_client}}</div>
+            <div class="content-bold">{{langService.dictionary.close_window}}</div>
+        </div>
+
+        <span></span>
+
+        <div class="bottomLogo">
+            <img class="smallLogo" src="/assets/loghi_apps_main/vdesk-principale.svg"/>
+            <span class="smallText"> Your digital workplace</span>
+        </div>
+    </div>
+
+    <!-- Post access granted,  negative result phase -->
+    <div *ngIf="!clientAuthorized && phase3" class="flowPageContainer">
+        <img class="logo" src="/assets/loghi_apps_main/vdesk-principale.svg">
+        
+        <div class="text">
+            <div class="title">
+                <mat-icon inline=true class="negative-result-icon">close</mat-icon> 
+                <span class="iconTitle">{{langService.dictionary.not_connected_account}} </span>
+            </div>
+            <div class="content">{{errorMessage}}</div>
+        </div>
+
+        <span></span>
+
+        <div class="bottomLogo">
+            <img class="smallLogo" src="/assets/loghi_apps_main/vdesk-principale.svg"/>
+            <span class="smallText"> Your digital workplace</span>
+        </div>
+    </div>
+
+    <app-login *ngIf="openLogin" [isV2Login]=true (logged)="loggedIn($event)" (loggedTotp)="loggedTotp($event)"></app-login>
+    <app-login-totp *ngIf="openLoginTotp" [isV2Login]=true (logged)="loggedIn($event)"></app-login-totp>
+</div>

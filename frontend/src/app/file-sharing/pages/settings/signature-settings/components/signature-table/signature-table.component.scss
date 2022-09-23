@@ -1,0 +1,69 @@
+.tableDiv {
+    max-height: 100%;
+    min-height: 100%;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      box-shadow: none !important;
+
+      tbody tr{
+        td.senddetails i{
+          display: inline-block;
+          cursor: pointer;
+        }
+        &.mat-row:hover {
+            background-color: #007CB826;
+        }
+        &.mat-row.selectedrow{
+          background-color: #007CB826;
+        }
+      }
+
+      .signature-table-Id{
+        display: none;
+      }
+
+      .signature-table-others{
+        .divmenu{
+          i{
+            cursor: pointer;
+          }
+        }
+      }
+
+      img.profile_pic {
+        border-radius: 50%;
+      }
+
+      .input, select{
+        display: flex;
+        background-color: white;
+
+      }
+
+      td.mat-cell{
+        position: relative;
+      }
+
+      td.senddetails{
+        width: 6%;
+        i{
+          display: none;
+        }
+      }
+
+      mat-icon.mat-icon{
+        vertical-align: middle;
+
+        &.tableimage{
+          display: flex;
+        }
+      }
+      mat-checkbox {
+        label {
+          margin: 0px;
+        }
+      }
+    }
+}

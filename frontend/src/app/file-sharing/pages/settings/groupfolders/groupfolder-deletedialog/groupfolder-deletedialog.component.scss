@@ -1,0 +1,89 @@
+.title{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 20%;
+    align-items: center;
+    justify-content: space-between;
+
+    span{
+        font-family: Roboto;
+        font-size: 18px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #383838;
+    }
+
+    i{
+        cursor: pointer;
+    }
+}
+
+.body{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 60%;
+    padding-top: 2%;
+
+    span{
+        font-family: Roboto;
+        font-size: 14px;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        font-weight: normal;
+        color: #808080;
+    }
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 20%;
+    align-items: center;
+    justify-content: flex-end;
+
+    button{
+        text-transform: uppercase;
+        font-family: Roboto;
+        font-size: 14px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        letter-spacing: 0.58px;
+        text-align: center;
+        width: 16%;
+        border-radius: 3px;
+        outline: none;
+
+        &.remove{
+            margin-right: 3%;
+            border: 1px solid #00a59f;
+            color: #00a59f;
+            background-color: white;
+        }
+
+        &.save{
+            background-image: linear-gradient(to right, #00a59f 0%, #007cb9 100%);
+            color: white;
+        }
+
+        &.removeSecond{
+            border: 1px solid #a34100;
+            color: #a34100;
+            background-color: white;
+        }
+
+        &.saveSecond{
+            margin-right: 3%;
+            background-image: linear-gradient(to right, #a34100 0%, #b94f09 100%);
+            color: white;
+        }
+    }
+}

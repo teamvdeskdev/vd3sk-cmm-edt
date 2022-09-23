@@ -1,0 +1,168 @@
+<div class="card-selector-container" [ngClass]="{'container-padding': isFirstCol || isLastCol || (cardName == 'VFlow' && isTar)}">
+    <!-- VMEET CARD -->
+    <div *ngIf="globalsVar.enableVmeet && cardName == 'VMeet' && displayCard" class="card-col vmeet-card col-12">
+        <mat-card class="app-card mb-4">
+            <mat-card-header>
+                <mat-card-title class="card-title valign-icon-text flex-container">
+                    <i class="material-icons card-title-icon">videocam</i>
+                    <span>{{langService.dictionary.plan_your_meetings}}</span>
+                    <img *ngIf="globalsVar.custom_FE !== 'WHITELABEL'" class="card-logo-img" src="assets/loghi_apps_main/png/vmeet-principale.png">
+                    <img *ngIf="globalsVar.custom_FE === 'WHITELABEL'" class="card-logo-img" src="assets/loghi_apps_main/neg/loghi_whitelabel/loghi_blue/vmeet-negativo.svg">
+                </mat-card-title>
+                <mat-card-subtitle *ngIf="meetingDataVmeet && meetingDataVmeet.length > 0 || dataModel.noVmeetData">{{langService.dictionary.vmeet_card_subtitle}}</mat-card-subtitle>
+                <mat-card-subtitle *ngIf="meetingDataVmeet && meetingDataVmeet.length === 0 && roomDataVmeet && roomDataVmeet.length > 0">{{langService.dictionary.plan_your_rooms}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <app-vconnect-table *ngIf="!dataModel.noVmeetData && dataModel.vmeetCardData && dataModel.vmeetCardData.length > 0" [dataValue]="meetingDataVmeet"></app-vconnect-table>
+                <span class="subtitle" *ngIf="meetingDataVmeet && meetingDataVmeet.length > 0 && roomDataVmeet && roomDataVmeet.length > 0">{{langService.dictionary.plan_your_rooms}}</span>
+                <app-vconnect-table *ngIf="!dataModel.noVmeetData && dataModel.vmeetCardData && dataModel.vmeetCardData.length > 0 && roomDataVmeet.length > 0" [dataValue]="roomDataVmeet"></app-vconnect-table>
+                <app-no-card-data *ngIf="dataModel.noVmeetData" [app]="'vmeet'"></app-no-card-data>
+            </mat-card-content>
+            <mat-card-footer [ngClass]="{'mat-card-footer-hover': isTar}">
+                <div class="footer-row">
+                    <div class="footer-bt">
+                        <a href="{{globalsVar.vMeetLink}}" target="_blank">{{globalsVar.custom_FE !== 'WHITELABEL' ?  langService.dictionary.create_meeting : langService.dictionary.open_meet}}</a>
+                    </div>
+                </div>
+            </mat-card-footer>
+        </mat-card>
+    </div>
+
+    <!-- VPEC CARD -->
+    <div *ngIf="((globalsVar.enableVpec && cardName == 'VPec' && displayCard) && (!notCustom || (notCustom && notPec)))" class="card-col col-12">
+        <mat-card class="app-card mb-4">
+            <mat-card-header>
+                <mat-card-title class="card-title valign-icon-text">
+                    <i class="material-icons card-title-icon">email</i>
+                    <span>{{langService.dictionary.who_waiting_answer}}</span>
+                    <img *ngIf="globalsVar.custom_FE !== 'WHITELABEL'" class="card-logo-img" src="assets/loghi_apps_main/png/vpec-principale.png">
+                    <img *ngIf="globalsVar.custom_FE === 'WHITELABEL'" class="card-logo-img" src="assets/loghi_apps_main/neg/loghi_whitelabel/loghi_blue/vpec-principale-blu.svg">
+                </mat-card-title>
+                <mat-card-subtitle>{{langService.dictionary.vpec_card_subtitle}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <app-vpec-table *ngIf="!dataModel.noVpecData && dataModel.vpecCardData"
+                    [dataValue]="dataModel.vpecCardData"></app-vpec-table>
+                <app-no-card-data *ngIf="dataModel.noVpecData" [app]="'vpec'"></app-no-card-data>
+            </mat-card-content>
+            <mat-card-footer [ngClass]="{'mat-card-footer-hover': isTar}">
+                <div class="footer-row">
+                    <div class="footer-bt" (click)="goToApp('vPEC')">
+                        {{globalsVar.custom_FE !== 'WHITELABEL' ?  langService.dictionary.write_email : langService.dictionary.open_pec}}
+                    </div>
+                </div>
+            </mat-card-footer>
+        </mat-card>
+    </div>
+
+    <!-- VCAL CARD -->
+    <div *ngIf="globalsVar.enableVcal && cardName == 'VCal' && displayCard" class="card-col col-12">
+        <mat-card class="app-card mb-4">
+            <mat-card-header>
+                <mat-card-title class="card-title valign-icon-text">
+                    <i class="material-icons card-title-icon">calendar_today</i>
+                    <span>{{langService.dictionary.next_appointments}}</span>
+                    <img *ngIf="globalsVar.custom_FE !== 'WHITELABEL'" class="card-logo-img" src="assets/loghi_apps_main/png/vcal-principale.png">
+                    <img *ngIf="globalsVar.custom_FE === 'WHITELABEL'" class="card-logo-img" src="assets/loghi_apps_main/neg/loghi_whitelabel/loghi_blue/vcal-principale-blu.svg">
+                </mat-card-title>
+                <mat-card-subtitle>{{langService.dictionary.vcal_card_subtitle}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <app-vcal-table *ngIf="!dataModel.noVcalData && dataModel.vCalCardData && dataModel.vCalCardData.length > 0"
+                    [dataValue]="dataModel.vCalCardData" [currentUser]="currentUser"></app-vcal-table>
+                <app-no-card-data *ngIf="dataModel.noVcalData" [app]="'vcal'"></app-no-card-data>
+            </mat-card-content>
+            <mat-card-footer [ngClass]="{'mat-card-footer-hover': isTar}">
+                <div class="footer-row">
+                    <div class="footer-bt" (click)="goToApp('vCal')">
+                        {{globalsVar.custom_FE !== 'WHITELABEL' ?  langService.dictionary.create_event : langService.dictionary.open_cal}}
+                    </div>
+                </div>
+            </mat-card-footer>
+        </mat-card>
+    </div>
+
+    <!-- VSHARE FAVORITES CARD -->
+    <div *ngIf="globalsVar.enableVshare && cardName == 'VShare' && displayCard" class="card-col col-12">
+        <mat-card class="app-card mb-4">
+            <mat-card-header>
+                <mat-card-title class="card-title valign-icon-text">
+                    <i class="material-icons card-title-icon">star_rate</i>
+                    <span>{{langService.dictionary.work_your_favorites}}</span> 
+                    <img *ngIf="globalsVar.custom_FE !== 'WHITELABEL'" class="card-logo-img" src="assets/loghi_apps_main/png/vshare-principale.png">
+                    <img *ngIf="globalsVar.custom_FE === 'WHITELABEL'" class="card-logo-img" src="assets/loghi_apps_main/neg/loghi_whitelabel/loghi_blue/vshare-principale-blu.svg">
+                </mat-card-title>
+                <mat-card-subtitle>{{langService.dictionary.vshare_card_subtitle}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="content" *ngIf="!dataModel.noVshareData && dataModel.vshareCardData && dataModel.vshareCardData.length > 0">
+                    <app-vshare-favorites-table *ngIf="!dataModel.noVshareData && dataModel.vshareCardData.length > 0"
+                        [dataValue]="dataModel.vshareCardData"></app-vshare-favorites-table>
+                </div>
+                <app-no-card-data *ngIf="dataModel.noVshareData" [app]="'vshare/favorites'"></app-no-card-data>
+            </mat-card-content>
+            <mat-card-footer [ngClass]="{'mat-card-footer-hover': isTar}">
+                <div class="footer-row">
+                    <div class="footer-bt" (click)="goToApp('vShare')">
+                        {{globalsVar.custom_FE !== 'WHITELABEL' ?  langService.dictionary.open_vshare : langService.dictionary.open_share}}
+                    </div>
+                </div>
+            </mat-card-footer>
+        </mat-card>
+    </div>
+
+    <!-- VCANVAS CARD: SCREEN -->
+    <div *ngIf="globalsVar.enableVcanvas && cardName == 'VCanvas' && displayCard" class="card-col col-12">
+        <mat-card class="app-card mb-4">
+            <mat-card-header>
+                <mat-card-title class="card-title valign-icon-text">
+                    <i class="material-icons card-title-icon">view_module</i>
+                    <span>{{langService.dictionary.access_apps}}</span>
+                    <img *ngIf="globalsVar.custom_FE !== 'WHITELABEL'" class="card-logo-img" src="assets/loghi_apps_main/png/vcanvas-principale.png">
+                    <img *ngIf="globalsVar.custom_FE === 'WHITELABEL'" class="card-logo-img" src="assets/loghi_apps_main/neg/loghi_whitelabel/loghi_blue/vcanvas-principale-blu.svg">
+                </mat-card-title>
+                <mat-card-subtitle>{{langService.dictionary.vcanvas_card_subtitle}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <app-vcanvas-table *ngIf="!dataModel.noVcanvasData && dataModel.vcanvasCardData && dataModel.vcanvasCardData.length > 0"
+                    [dataValue]="dataModel.vcanvasCardData" [spinner]='spinner'>
+                </app-vcanvas-table>
+                <app-no-card-data *ngIf="dataModel.noVcanvasData" [app]="'vcanvas'"></app-no-card-data>
+            </mat-card-content>
+            <mat-card-footer [ngClass]="{'mat-card-footer-hover': isTar}">
+                <div class="footer-row">
+                    <div class="footer-bt" (click)="goToApp('vCanvas')">
+                        {{globalsVar.custom_FE !== 'WHITELABEL' ?  langService.dictionary.open_vcanvas : langService.dictionary.open_canvas}}
+                    </div>
+                </div>
+            </mat-card-footer>
+        </mat-card>
+    </div>
+
+    <!-- VFLOW CARD -->
+    <div *ngIf="globalsVar.enableVFlow && cardName == 'VFlow' && displayCard" class="card-col col-12">
+        <mat-card class="app-card mb-4">
+            <mat-card-header>
+                <mat-card-title class="card-title valign-icon-text">
+                    <i class="material-icons card-title-icon">connect_without_contact</i>
+                    <span>{{langService.dictionary.request_hr}}</span>
+                    <img *ngIf="globalsVar.custom_FE !== 'WHITELABEL'" class="card-logo-img" src="assets/loghi_apps_main/png/vflow-principale.png">
+                    <img *ngIf="globalsVar.custom_FE === 'WHITELABEL'" class="card-logo-img" src="assets/loghi_apps_main/neg/loghi_whitelabel/loghi_blue/vflow-principale-blu.svg">
+                </mat-card-title>
+                <mat-card-subtitle>{{langService.dictionary.vflow_card_subtitle}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <app-vflow-table *ngIf="!dataModel.noVflowData && dataModel.vflowCardData && dataModel.vflowCardData.length > 0"
+                    [dataValue]="dataModel.vflowCardData"></app-vflow-table>
+                <app-no-card-data *ngIf="dataModel.noVflowData" [app]="'vflow'"></app-no-card-data>
+            </mat-card-content>
+            <mat-card-footer [ngClass]="{'mat-card-footer-hover': isTar}">
+                <div class="footer-row">
+                    <div class="footer-bt" (click)="goToApp('vFlow')">
+                        {{globalsVar.custom_FE !== 'WHITELABEL' ?  langService.dictionary.open_vflow : langService.dictionary.open_flow}}
+                    </div>
+                </div>
+            </mat-card-footer>
+        </mat-card>
+    </div>
+</div>

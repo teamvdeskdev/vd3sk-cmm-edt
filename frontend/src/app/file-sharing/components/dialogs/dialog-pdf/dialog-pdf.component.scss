@@ -1,0 +1,30 @@
+.closedialog{
+  height: 6%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  .namedialog{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.pdfcontainer {
+  width: 100%;
+  height: 94%;
+  overflow-x: hidden;
+}
+
+.file-name {
+  text-align: center;
+  margin-top: -25px;
+  padding-bottom: 20px;
+  font-weight: bold;
+}
+
+.fileIcon {
+  color: #00396A;
+}

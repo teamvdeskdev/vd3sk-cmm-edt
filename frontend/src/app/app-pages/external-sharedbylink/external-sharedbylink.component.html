@@ -1,0 +1,135 @@
+<!-- DIV WITHOUT PASSWORD -->
+<div id="linknoPassword" *ngIf="!hasPassword">
+    <div class="header" *ngIf="data" [ngClass]="{'cobranding': globalsVar.custom_FE === 'WHITELABEL'}">
+
+        <div class="left">
+            <div class="logo" *ngIf="globalsVar.custom_FE === 'WHITELABEL' && !globalsVar.custom_fontColor">
+                <img src="{{globalsVar.custom_logo}}">
+            </div>
+            <div class="logo" *ngIf="globalsVar.custom_FE === 'NONE'">
+                <img src="assets/loghi_apps_main/png/vshare-principale.png">
+            </div>
+            <div class="item" *ngIf="isdata && (isFile && data)">
+                <div class="first"><span>{{data.completeName}}</span></div>
+                <div class="second"><span>{{data.humanWeight}}</span></div>
+            </div>
+            <app-path-link *ngIf="completename && !isFile"
+                [class]="false"
+                [completename]="completename"
+                [arrayPath]="arrayPath"
+                (change)="navigatePath($event)">
+            </app-path-link>
+        </div>
+
+        <div class="right">
+            <div class="upright">
+                <div class="people">
+                    <mat-icon><i class="material-icons">link</i></mat-icon>
+                    <div class="sharedby">
+                        <span class="first">{{dataowner}}</span>
+                        <span class="second">{{owner}}</span>
+                    </div>
+                </div>
+                <div class="loginimg">
+                    <img src='assets/img/login-24px.svg' class="login">
+                </div>
+            </div>
+            <div class="downright" *ngIf="!isFile && allPermission.isCrearable">
+                <div class="createbutton" (click)="toggleLoadNew()"><span> {{ langService.dictionary.creates }} </span></div>
+            </div>
+            <app-upload-list *ngIf="openLoadList" 
+                (isClosingOut)="toggleLoadNew()"
+                (newcreateOffice)="createOnlyOffice($event)"
+                (openTxtEditor)="onNewTxt($event)"
+                [authorization]="authorization"
+                [data]="data">
+            </app-upload-list>        
+        </div>
+
+    </div>
+
+    <div class="mainbody">
+
+        <div class="singleFileBody" *ngIf="isdata && (isFile && data)">
+            <div class="preview">
+                <mat-icon><i class="material-icons" [ngClass]="[data.classimage]">{{data.image}}</i></mat-icon>
+            </div>
+            <div class="download">
+                <span class="first">{{data.completeName}}</span>
+                <span class="second">{{data.humanWeight}}</span>        
+            </div>
+        </div>
+        
+        <div class="tableMultiBody" *ngIf="isdata && (!isFile && data)">
+            <app-table-link *ngIf="data"
+                [dataValue]="data"
+                [token]="token"
+                [authorization]="authorization"
+                [allPermission]="allPermission"
+                [noData]="noData"
+                (change)="navigateFolder($event)"
+                (reload)="reload($event)">
+            </app-table-link>
+        </div>
+
+        <app-sidebar-link *ngIf="data"
+            [data]="data"
+            [token]="token"
+            [isSoloFile]="isSoloFile"
+            [authorization]="authorization" 
+            [allPermission]="allPermission"
+            [completename]="completename"
+            [hidedownload]="hidedownload"
+            [password]="inputvalue">
+        </app-sidebar-link>
+
+    </div>
+</div>
+
+<!-- DIV WITH PASSWORD -->
+<div id="linkPassword" *ngIf="hasPassword" [ngClass]="{'cobranding': globalsVar.custom_FE === 'WHITELABEL'}">
+
+    <ngx-spinner *ngIf="done"
+        bdColor = "rgba(0,0,0,0)"
+        size = "default"
+        color = "#00B9B3"
+        type = "triangle-skew-spin"
+        [fullScreen] = "false" >
+    </ngx-spinner>
+
+    <div class="divPass">
+        <div class="title">
+            <div class="logo" *ngIf="globalsVar.custom_FE === 'WHITELABEL' && !globalsVar.custom_fontColor">
+                <img src="{{globalsVar.custom_logo}}">
+            </div>
+            <div class="logo" *ngIf="globalsVar.custom_FE === 'NONE'">
+                <img src="assets/loghi_apps_main/png/vshare-principale.png">
+            </div>
+            <div class="text">
+                <span> {{ langService.dictionary.suite_vdesk }} </span>
+            </div>
+        </div>
+
+        <div class="text">
+            <div class="title">
+                <span> {{ langService.dictionary.insert_password }} </span>
+            </div>
+            <div class="subtitle">
+                <span> {{ langService.dictionary.link_pass }} </span>
+            </div>
+        </div>
+        
+        <div class="input">
+            <mat-form-field class="example-form-field">
+                <mat-label>{{langService.dictionary.password}}</mat-label>
+                <input matInput type="password" [(ngModel)]=inputvalue>
+            </mat-form-field>
+        </div>
+        
+        <div class="button">
+            <div class="buttondiv" (click)="checkPassword()">
+                <span> {{ langService.dictionary.enter }} </span>
+            </div>
+        </div>
+    </div>
+</div>

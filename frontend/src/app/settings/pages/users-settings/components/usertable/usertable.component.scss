@@ -1,0 +1,387 @@
+.PageUserList{
+
+  .tableDiv {
+    width: 95%;
+    margin-left: 30px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    margin-bottom: 20%;
+
+    tr.mat-header-row {
+      height: 16px;
+    }
+    tr.mat-footer-row {
+      height: 18px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      box-shadow: none !important;
+      //column start
+      .usertableId{
+        display: none;
+      }
+
+      .usertableImage{
+        // width: 5%;
+        padding-left: 25px;
+        padding-bottom: 25px;
+        padding-right: 10px;
+
+        img{
+          margin-top: 30px;
+        }
+      }
+
+        .usertableUsername{
+          width: 240px;
+          padding-right: 15px;
+
+          .TextUser{
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 16px;
+
+            .accountName{
+              margin-top: 6px;
+              height: 38px;
+        
+              input{
+                height: 14px;
+                font-family: Roboto;
+                font-size: 14px;
+                font-weight: normal;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                color: #808080;
+                display: inline;
+              }
+            }
+
+            .userName{
+              height: 14px;
+              font-family: Roboto;
+              font-size: 12px;
+              font-weight: bold;
+              font-stretch: normal;
+              font-style: normal;
+              line-height: normal;
+              letter-spacing: normal;
+              color: #808080;
+              display: inline;
+
+              mat-form-field{
+                display: inline;
+              }
+
+              span{
+                font-weight: normal;
+              }
+
+              input{
+                height: 14px;
+                font-family: Roboto;
+                font-size: 12px;
+                font-weight: bold;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                color: #808080;
+                display: inline;
+              }
+            }
+          }
+
+          .NewUser{
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 16px;
+            height: 14px;
+            font-family: Roboto;
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #808080;
+
+            .accountName{
+              height: 36px;
+              margin-top: -20px;
+              display: ruby;
+
+              mat-form-field{
+                display: inline;
+              }
+
+              .input{
+                display: inline;
+              }
+        
+              input{
+                height: 14px;
+                font-family: Roboto;
+                font-size: 14px;
+                font-weight: bold;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                color: #808080;
+                display: inline;
+              }
+            }
+    
+            .userName{
+              height: 14px;
+              font-family: Roboto;
+              font-size: 12px;
+              font-weight: normal;
+              font-stretch: normal;
+              font-style: normal;
+              line-height: normal;
+              letter-spacing: normal;
+              color: #808080;
+              display: ruby;
+              margin-top: -8px;
+
+              mat-form-field{
+                display: inline;
+              }
+
+              input{
+                height: 14px;
+                font-family: Roboto;
+                font-size: 12px;
+                font-weight: bold;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                color: #808080;
+                display: inline;
+              }
+            }
+          }   
+        }
+
+          .usertablePassword{
+            width: 13%;
+
+              mat-form-field {
+                width: 40px;
+                height: 12px;
+                margin-top: 35px;
+              }
+              mat-select{
+                width: 40px;
+                background-color: #808080;
+              }
+              
+              .input input{
+                font-size: 12px;
+              }
+              .inputBlock{
+                ​cursor: 'not-allowed';
+                height: 14px;
+                font-family: Roboto;
+                font-weight: bold;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                color: #808080; 
+              }
+          }
+
+        .usertableEmail{
+          padding-right: 15px;
+
+          mat-form-field {
+            height: 12px;
+            margin-top: 35px;
+          }
+          .input input{
+            font-size: 12px;
+          }       
+        }
+
+        .usertableRole{
+          padding-right: 15px;
+            mat-form-field {
+              width: 90px;
+              height: 12px;
+              margin-top: 28px;
+            }
+            mat-select{
+              width: 90px;
+            }
+            input{
+              font-size: 12px;
+            } 
+            .guest-role {
+              font-family: Roboto;
+              font-weight: bold;
+              font-stretch: normal;
+              font-style: normal;
+              line-height: normal;
+              letter-spacing: normal;
+              color: #808080;
+            }
+        }
+
+        .usertableGroups{
+          padding-right: 15px;
+          mat-form-field {
+            height: 12px;
+            width: 120px;
+            margin-top: 28px;
+          }
+          mat-select{
+            width: 120px; 
+          }
+        }
+
+
+        .usertableModules{
+          display: none;
+        }
+
+        .usertableQuota{
+          padding-right: 15px;
+            mat-form-field {
+              width: 90px;
+              height: 12px;
+              margin-top: 28px;
+            }
+            mat-select{
+              width: 90px;
+            }
+        }
+
+        .usertableOthers{
+          .divmenu{
+            i{
+              cursor: pointer;
+              padding-left: 10px;
+              color: #007cb8;
+            }
+            button{
+              outline: none;
+              i{
+                cursor: pointer;
+                color: #007cb8;
+              }
+            }
+            button.buttons:focus{
+              outline: none;
+            }
+          }
+        }
+
+        //column end
+
+        img.profile_pic {
+          border-radius: 50%;
+          width: 37px;
+          height: 37px;
+        }
+
+        td.usertableGroups{
+          mat-form-field.mat-form-field{
+              .mat-form-field-flex{
+                background-color: white !important;
+              } 
+          }
+        }
+
+        td.mat-cell{
+          position: relative;
+        }
+
+        td.senddetails{
+          width: 6%;
+          i{
+            display: none;
+          }
+        }
+
+        mat-icon.mat-icon{
+          vertical-align: middle;
+
+          &.tableimage{
+            display: flex;
+          }
+        }
+        mat-checkbox {
+          label {
+            margin: 0px;
+          }
+        }
+    }
+  }
+
+  td {
+    .Text{
+      margin-bottom: 16px;
+      span{
+        height: 14px;
+        font-family: Roboto;
+        font-size: 12px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #808080;
+
+      }
+
+      .input input{
+        cursor: pointer;
+        height: 14px;
+        font-family: Roboto;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #808080;
+      }
+
+      .inputBLock{
+        cursor: not-allowed;
+        height: 14px;
+        font-family: Roboto;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #808080;
+      }
+
+      mat-select{
+        height: 14px;
+        font-family: Roboto;
+        font-size: 12px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #808080 !important;
+      }
+    }
+  }
+
+  ::ng-deep .mat-select-value{    
+    color: #808080 !important;
+  }
+}

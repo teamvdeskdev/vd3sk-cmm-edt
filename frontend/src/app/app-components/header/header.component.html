@@ -1,0 +1,707 @@
+<div id="header" class="header-container containers-sup d-block d-md-flex">
+    <div class="container-fluid my-auto">
+        <div class="row">
+            
+            <!-- vDesk Default Header -->
+            <div *ngIf="globalsVar.custom_FE === 'NONE'" class="pl-0 col-6 col-md-2 sx d-flex">
+                <div *ngIf="!isADP" class="logo-containerDefault my-auto">
+                    <img *ngIf="impostazioni.isDashboard" class="logoDefault img-fluid ml-4"
+                            src="assets/loghi_apps_main/neg/vdesk-principale.svg">
+                    <img *ngIf="impostazioni.isDownload" class="logoDefault img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/vdesk-principale.svg">
+                    <img *ngIf="impostazioni.isFileSharing" class="logoDefault img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/vshare-principale.svg" (click)="returnDashboard()">
+                    <img *ngIf="impostazioni.isMail" class="logoDefault img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/vpec-principale.svg" (click)="returnDashboard()">
+                    <img *ngIf="impostazioni.isCalendar" class="logoDefault img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/vcal-principale.svg" (click)="returnDashboard()">
+                    <img *ngIf="impostazioni.isCanvas" class="logoDefault img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/vcanvas-principale.svg" (click)="returnDashboard()">
+                    <img *ngIf="impostazioni.isFlow" class="logoDefault img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/vflow-principale.svg" (click)="returnDashboard()">
+                </div>
+
+                <!-- vDesk ADP -->
+                <div *ngIf="isADP" class="logo-container my-auto">
+                    <img *ngIf="!impostazioni.isDashboard && !impostazioni.isDownload" 
+                        class="logo adplogo img-fluid ml-4"
+                        src="assets/img/icons/vdesk-logo.svg"
+                        (click)="returnDashboard()">
+                    
+                    <div *ngIf="!impostazioni.isDashboard && !impostazioni.isDownload" class="separatoradp"> </div>
+
+                    <img *ngIf="impostazioni.isDashboard" class="logoDefault img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/vdesk-principale.svg">
+                    <img *ngIf="impostazioni.isDownload" class="logo adp img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/vdesk-principale.svg">
+                    <img *ngIf="impostazioni.isFileSharing" class="logo adp img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/vshare-principale.svg">
+                    <img *ngIf="impostazioni.isMail" class="logo adp img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/vpec-principale.svg">
+                    <img *ngIf="impostazioni.isCalendar" class="logo adp img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/vcal-principale.svg">
+                    <img *ngIf="impostazioni.isCanvas" class="logo adp img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/vcanvas-principale.svg">
+                    <img *ngIf="impostazioni.isFlow" class="logo adp img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/vflow-principale.svg">
+                </div>
+            </div>
+            <div *ngIf="globalsVar.custom_FE !== 'NONE'" class="pl-0 col sx d-flex">
+
+                <!-- vDesk Cobranding Header White -->
+                <div class="logo-container my-auto" *ngIf="globalsVar.custom_FE === 'COBRANDING' && !globalsVar.custom_fontColor">
+                    <img *ngIf="impostazioni.isDashboard" class="logo img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/vdesk-principale.svg">
+                    <img *ngIf="impostazioni.isDownload" class="logo img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/vdesk-principale.svg">
+                    <img *ngIf="impostazioni.isFileSharing" class="logo img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/vshare-principale.svg">
+                    <img *ngIf="impostazioni.isMail" class="logo img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/vpec-principale.svg">
+                    <img *ngIf="impostazioni.isCalendar" class="logo img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/vcal-principale.svg">
+                    <img *ngIf="impostazioni.isCanvas" class="logo img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/vcanvas-principale.svg">
+                    <img *ngIf="impostazioni.isFlow" class="logo img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/vflow-principale.svg">
+
+                    <div class="separator"> </div>
+
+                    <img class="logo img-fluid ml-4"
+                        src="{{globalsVar.custom_logo}}">
+                </div>
+
+                <!-- vDesk Cobranding Header Blue -->
+                <div class="logo-container my-auto" *ngIf="globalsVar.custom_FE === 'COBRANDING' && globalsVar.custom_fontColor">
+                    <img *ngIf="impostazioni.isDashboard" class="logo img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/blue/vdesk-principale.svg">
+                    <img *ngIf="impostazioni.isDownload" class="logo img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/blue/vdesk-principale.svg">
+                    <img *ngIf="impostazioni.isFileSharing" class="logo img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/blue/vshare-principale.svg">
+                    <img *ngIf="impostazioni.isMail" class="logo img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/blue/vpec-principale.svg">
+                    <img *ngIf="impostazioni.isCalendar" class="logo img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/blue/vcal-principale.svg">
+                    <img *ngIf="impostazioni.isCanvas" class="logo img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/blue/vcanvas-principale.svg">
+                    <img *ngIf="impostazioni.isFlow" class="logo img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/blue/vflow-principale.svg">
+
+                    <div class="separator"> </div>
+
+                    <img class="logo img-fluid ml-4"
+                        src="{{globalsVar.custom_logo}}">
+                </div>
+
+                <!-- vDesk WhiteLabel Header White -->
+                <div class="logo-container my-auto" *ngIf="globalsVar.custom_FE === 'WHITELABEL' && !globalsVar.custom_fontColor">
+                    <img class="logo img-fluid ml-4"
+                        src="{{globalsVar.custom_logo}}">
+                    
+                    <div class="separator"> </div>
+
+                    <!-- Icon Whitelabel -->
+                    <img *ngIf="impostazioni.isFileSharing && !notCustom" class="icon-whitelabel img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/loghi_whitelabel/icon_whitelabel_white/logo-launcher-vshare.svg">
+                    <img *ngIf="impostazioni.isFileSharing && notCustom" class="icon-whitelabel img-fluid ml-4"
+                        src="assets/img/client/logo_share.svg">
+                    
+                    <img *ngIf="impostazioni.isMail && !notCustom" class="icon-whitelabel img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/loghi_whitelabel/icon_whitelabel_white/logo-launcher-vpec.svg">
+                    <img *ngIf="impostazioni.isMail && notCustom" class="icon-whitelabel img-fluid ml-4"
+                        src="assets/img/client/logo_pec.svg">
+
+                    <img *ngIf="impostazioni.isCalendar" class="icon-whitelabel img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/loghi_whitelabel/icon_whitelabel_white/logo-launcher-vcal.svg">
+                    <img *ngIf="impostazioni.isCanvas" class="icon-whitelabel img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/loghi_whitelabel/icon_whitelabel_white/logo-launcher-vcanvas.svg">
+                    <img *ngIf="impostazioni.isFlow" class="icon-whitelabel img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/loghi_whitelabel/icon_whitelabel_white/logo-launcher-vflow.svg">
+
+                    <!-- Text Whitelabel -->
+                    <img *ngIf="impostazioni.isDashboard && notCustom" class="logo-whitelabel-middle img-fluid ml-4"
+                        src="assets/img/client/notboxlabel.svg">
+                    <img *ngIf="impostazioni.isDownload" class="logo-whitelabel-middle img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/loghi_whitelabel/vdesk-principale-negativo.svg">
+
+                    <img *ngIf="impostazioni.isFileSharing && !notCustom" class="logo-whitelabel-middle img-fluid ml-2"
+                        src="assets/loghi_apps_main/neg/loghi_whitelabel/vshare-principale-negativo.svg">
+                    <img *ngIf="impostazioni.isFileSharing && notCustom" class="logo-whitelabel-middle img-fluid ml-2"
+                        src="assets/img/client/share_label.svg">
+
+                    <img *ngIf="impostazioni.isMail && !notCustom" class="logo-whitelabel-small img-fluid ml-2"
+                        src="assets/loghi_apps_main/neg/loghi_whitelabel/vpec-principale-negativo.svg">
+                    <img *ngIf="impostazioni.isMail && notCustom" class="logo-whitelabel-middle img-fluid ml-2"
+                        src="assets/img/client/label_pec.svg">
+
+                    <img *ngIf="impostazioni.isCalendar" class="logo-whitelabel-small img-fluid ml-2"
+                        src="assets/loghi_apps_main/neg/loghi_whitelabel/vcal-principale-negativo.svg">
+                    <img *ngIf="impostazioni.isCanvas" class="logo-whitelabel-big img-fluid ml-2"
+                        src="assets/loghi_apps_main/neg/loghi_whitelabel/vcanvas-principale-negativo.svg">
+                    <img *ngIf="impostazioni.isFlow" class="logo-whitelabel-middle img-fluid ml-2"
+                        src="assets/loghi_apps_main/neg/loghi_whitelabel/vflow-principale-negativo.svg">                   
+                    
+                </div>
+
+                <!-- vDesk WhiteLabel Header Blue -->
+                <div class="logo-container my-auto" *ngIf="globalsVar.custom_FE === 'WHITELABEL' && globalsVar.custom_fontColor">
+                    <img class="logo img-fluid ml-4"
+                        src="{{globalsVar.custom_logo}}">
+                    
+                    <div class="separator"> </div>
+
+                    <!-- Icon Whitelabel -->
+                    <img *ngIf="impostazioni.isFileSharing" class="icon-whitelabel img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/loghi_whitelabel/icon_whitelabel/logo-launcher-vshare.svg">
+                    <img *ngIf="impostazioni.isMail" class="icon-whitelabel img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/loghi_whitelabel/icon_whitelabel/logo-launcher-vpec.svg">
+                    <img *ngIf="impostazioni.isCalendar" class="icon-whitelabel img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/loghi_whitelabel/icon_whitelabel/logo-launcher-vcal.svg">
+                    <img *ngIf="impostazioni.isCanvas" class="icon-whitelabel img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/loghi_whitelabel/icon_whitelabel/logo-launcher-vcanvas.svg">
+                    <img *ngIf="impostazioni.isFlow" class="icon-whitelabel img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/loghi_whitelabel/icon_whitelabel/logo-launcher-vflow.svg">
+
+                    <!-- Text Whitelabel -->
+                    <img *ngIf="impostazioni.isDashboard" class="logo-whitelabel-middle img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/loghi_whitelabel/loghi_blu/vdesk-principale-negativo.svg">
+                    <img *ngIf="impostazioni.isDownload" class="logo-whitelabel-middle img-fluid ml-4"
+                        src="assets/loghi_apps_main/neg/loghi_whitelabel/loghi_blu/vdesk-principale-negativo.svg">
+                    <img *ngIf="impostazioni.isFileSharing" class="logo-whitelabel-middle img-fluid ml-2"
+                        src="assets/loghi_apps_main/neg/loghi_whitelabel/loghi_blu/vshare-principale-negativo.svg">
+                    <img *ngIf="impostazioni.isMail" class="logo-whitelabel-middle img-fluid ml-2"
+                        src="assets/img/client/label_pec.svg">
+                    <img *ngIf="impostazioni.isCalendar" class="logo-whitelabel-small img-fluid ml-2"
+                        src="assets/loghi_apps_main/neg/loghi_whitelabel/loghi_blu/vcal-principale-negativo.svg">
+                    <img *ngIf="impostazioni.isCanvas" class="logo-whitelabel-big img-fluid ml-2"
+                        src="assets/loghi_apps_main/neg/loghi_whitelabel/loghi_blu/vcanvas-principale-negativo.svg">
+                    <img *ngIf="impostazioni.isFlow" class="logo-whitelabel-middle img-fluid ml-2"
+                        src="assets/loghi_apps_main/neg/loghi_whitelabel/loghi_blu/vflow-principale-negativo.svg">
+                    
+                </div>
+
+
+            </div>
+
+            
+            <!-- vDesk Searchbar Cobranding or whitelabel Column -->
+            <div *ngIf="globalsVar.custom_FE !== 'NONE'" class="search-container-parent col-6 hidden-sm-down d-none d-md-flex align-items-center my-auto">
+                <!-- Claim Dashboard -->
+                <div *ngIf="showClaim || impostazioni.isTask || impostazioni.isFlow" class="dashboard-claim" [innerHTML]="getHtmlHeader">
+                </div>
+
+                <form
+                    *ngIf="impostazioni.isMail || impostazioni.isFileSharing || isUsersSettings|| isCanvasUsersSettings"
+                    id="searchForm" [formGroup]="searchForm" class="container-fluid">
+                    <div class="row full-width">
+                        <div id="searchbar" class="d-none d-sm-block col-sm-12 col-md-12">
+                            <!-- IN CASE OF SIMPLE SEARCH -->
+                            <mat-form-field *ngIf="!isLabelSearch && !isUsersSettings && !isCanvasUsersSettings" class="full-width mat-search">
+                                <mat-icon class="mat-search-icon pointer" (click)="searchFormSubmit()">
+                                    search
+                                </mat-icon>
+                                <input matInput type="text" formControlName="search" name="search"
+                                    placeholder="{{searchPlaceHolder}}" (focus)="checkSearchPlaceHolder()"
+                                    (blur)="checkSearchPlaceHolder()" (keyup.enter)="searchFormSubmit()">
+                            </mat-form-field>
+
+                            <!-- IN CASE OF USER SEARCH ON SETTINGS -->
+                            <mat-form-field *ngIf="isUsersSettings && !isLabelSearch" class="full-width mat-search">
+                                <mat-icon class="mat-search-icon pointer" (click)="searchUser()">
+                                    search
+                                </mat-icon>
+                                <input matInput type="text" formControlName="search" name="search"
+                                    placeholder="{{langService.dictionary.search_in}} {{app.value}}"
+                                    (keyup.enter)="searchUser()">
+                            </mat-form-field>
+
+                            <!-- IN CASE OF CANVAS USER SEARCH ON SETTINGS -->
+                            <mat-form-field *ngIf="isCanvasUsersSettings && !isLabelSearch" class="full-width mat-search">
+                                <mat-icon class="mat-search-icon pointer" (click)="searchCanvasUser()">
+                                    search
+                                </mat-icon>
+                                <input matInput type="text" formControlName="search" name="search"
+                                    placeholder="{{langService.dictionary.search_in}} {{app.value}}"
+                                    (keyup.enter)="searchCanvasUser()">
+                            </mat-form-field>
+
+                            <!-- IN CASE OF LABELS SEARCH -->
+                            <mat-form-field *ngIf="isLabelSearch && !isUsersSettings" class="full-width mat-search">
+                                <mat-icon class="mat-search-icon"> search </mat-icon>
+                                <mat-chip-list #chipList>
+                                    <mat-chip *ngFor="let label of selectedLabels" [selectable]="selectable"
+                                        [removable]="removable" (removed)="removeLabel(label)">
+                                        {{label.name}}
+                                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                    </mat-chip>
+                                    <input #labelInput name="search" formControlName="search"
+                                        [matAutocomplete]="labelAuto" [matChipInputFor]="chipList"
+                                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                        (matChipInputTokenEnd)="addLabel($event)">
+                                </mat-chip-list>
+                                <mat-autocomplete #labelAuto="matAutocomplete" class="my-chip-auto-panel"
+                                    (optionSelected)="labelSelected($event)">
+                                    <div class="description"> {{langService.dictionary.desc_label_in_sys}} </div>
+                                    <mat-option *ngFor="let label of filteredLabels | async" [value]="label.id">
+                                        <span class="auto-option">
+                                            {{label.name}}
+                                            <mat-icon class="add-icon">add</mat-icon>
+                                        </span>
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                        </div>
+                        <div id="search-filter" class="d-none d-sm-block col-sm-3 col-md-3">
+                            <mat-form-field class="full-width my-mat-select">
+                                <mat-select [disableOptionCentering]="true" panelClass="my-mat-select-panel"
+                                    class="mat-search-select" formControlName="app" name="app">
+                                    <mat-option *ngFor="let app of this.impostazioni.apps" [value]="app.value">
+                                        Cerca solo in "{{app.value}}"
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- vDesk Default Searchbar Column -->
+            <div *ngIf="globalsVar.custom_FE === 'NONE'" class="search-container-parent col-md-8 hidden-sm-down d-none d-md-flex align-items-center my-auto">
+                <!-- Claim Dashboard -->
+                <div *ngIf="showClaim || impostazioni.isTask || impostazioni.isFlow" class="dashboard-claim" [innerHTML]="langService.dictionary.header_claim_msg">
+                </div>
+
+                <form
+                    *ngIf="impostazioni.isMail || impostazioni.isFileSharing || isUsersSettings|| isCanvasUsersSettings"
+                    id="searchForm" [formGroup]="searchForm" class="container-fluid">
+                    <div class="row full-width">
+                        <div id="searchbar" class="d-none d-sm-block col-sm-12 col-md-12">
+                            <!-- IN CASE OF SIMPLE SEARCH NO SHARE -->
+                            <mat-form-field *ngIf="!isLabelSearch && !isUsersSettings && !isCanvasUsersSettings && !impostazioni.isFileSharing" class="full-width mat-search">
+                                <mat-icon class="mat-search-icon pointer" (click)="searchFormSubmit()">
+                                    search
+                                </mat-icon>
+                                <input matInput type="text" formControlName="search" name="search"
+                                    placeholder="{{searchPlaceHolder}}" (focus)="checkSearchPlaceHolder()"
+                                    (blur)="checkSearchPlaceHolder()" (keyup.enter)="searchFormSubmit()">
+                            </mat-form-field>
+
+                            <!-- IN CASE OF SIMPLE SEARCH SHARE -->
+                            <mat-form-field *ngIf="!isLabelSearch && !isUsersSettings && !isCanvasUsersSettings && impostazioni.isFileSharing" class="full-width mat-search">
+                                <mat-icon class="mat-search-icon pointer">
+                                    search
+                                </mat-icon>
+                                <input matInput type="text" formControlName="search" name="search"
+                                    placeholder="{{searchPlaceHolder}}" (focus)="checkSearchPlaceHolder()"
+                                    (blur)="checkSearchPlaceHolder()" (keyup)="searchFormSubmitShare()">
+                            </mat-form-field>
+
+                            <!-- IN CASE OF USER SEARCH ON SETTINGS 
+                            <mat-form-field *ngIf="isUsersSettings && !isLabelSearch" class="full-width mat-search">
+                                <mat-icon class="mat-search-icon pointer" (click)="searchUser()">
+                                    search
+                                </mat-icon>
+                                <input matInput type="text" formControlName="search" name="search"
+                                    placeholder="{{langService.dictionary.search_in}} {{app.value}}"
+                                    (keyup.enter)="searchUser()">
+                            </mat-form-field> -->
+
+                            <!-- IN CASE OF CANVAS USER SEARCH ON SETTINGS -->
+                            <mat-form-field *ngIf="isCanvasUsersSettings && !isLabelSearch" class="full-width mat-search">
+                                <mat-icon class="mat-search-icon pointer" (click)="searchCanvasUser()">
+                                    search
+                                </mat-icon>
+                                <input matInput type="text" formControlName="search" name="search"
+                                    placeholder="{{langService.dictionary.search_in}} {{app.value}}"
+                                    (keyup.enter)="searchCanvasUser()">
+                            </mat-form-field>
+
+                            <!-- IN CASE OF LABELS SEARCH -->
+                            <mat-form-field *ngIf="isLabelSearch && !isUsersSettings" class="full-width mat-search">
+                                <mat-icon class="mat-search-icon"> search </mat-icon>
+                                <mat-chip-list #chipList>
+                                    <mat-chip *ngFor="let label of selectedLabels" [selectable]="selectable"
+                                        [removable]="removable" (removed)="removeLabel(label)">
+                                        {{label.name}}
+                                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                    </mat-chip>
+                                    <input #labelInput name="search" formControlName="search"
+                                        [matAutocomplete]="labelAuto" [matChipInputFor]="chipList"
+                                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                        (matChipInputTokenEnd)="addLabel($event)">
+                                </mat-chip-list>
+                                <mat-autocomplete #labelAuto="matAutocomplete" class="my-chip-auto-panel"
+                                    (optionSelected)="labelSelected($event)">
+                                    <div class="description"> {{langService.dictionary.desc_label_in_sys}} </div>
+                                    <mat-option *ngFor="let label of filteredLabels | async" [value]="label.id">
+                                        <span class="auto-option">
+                                            {{label.name}}
+                                            <mat-icon class="add-icon">add</mat-icon>
+                                        </span>
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                        </div>
+                        <div id="search-filter" class="d-none d-sm-block col-sm-3 col-md-3">
+                            <mat-form-field class="full-width my-mat-select">
+                                <mat-select [disableOptionCentering]="true" panelClass="my-mat-select-panel"
+                                    class="mat-search-select" formControlName="app" name="app">
+                                    <mat-option *ngFor="let app of this.impostazioni.apps" [value]="app.value">
+                                        Cerca solo in "{{app.value}}"
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- vDesk GridButton and Avatar Cobranding or whitelabel Column -->
+            <div *ngIf="globalsVar.custom_FE !== 'NONE' || isADP" class="col dx text-right pr-0 d-flex justify-content-end">
+                <ul class="list-inline menu mb-0 my-auto">
+                    <li class="list-inline-item">
+                        <div class="header-bt" [matMenuTriggerFor]="appsMenu">
+                            <mat-icon><i class="material-icons menu-icon"> apps </i></mat-icon>
+                        </div>
+                        <mat-menu #appsMenu="matMenu" class="launcher-menu-panel">
+                            <div class="custom-row">
+                                <div class="custom-col" *ngIf="!UserManager">
+                                    <div class="bt-launcher" (click)="goToApp('vDesk')">
+                                        <ng-container *ngIf="!notCustom">
+                                            <img class="app-type" alt="" src="assets/loghi_apps_launch/logo-launcher-vdesk_dashboard.svg">
+                                            <div class="label"> Dashboard </div>
+                                        </ng-container>
+                                        <ng-container *ngIf="notCustom">
+                                            <img class="app-type" alt="" src="{{globalsVar.custom_logo}}">
+                                            <div class="label"> Home </div>
+                                        </ng-container>                                        
+                                    </div>
+                                </div>
+                                <div *ngIf="globalsVar.enableVshare && !UserManager" class="custom-col">
+                                    <div class="bt-launcher" (click)="goToApp('vShare')">
+                                        <img *ngIf="globalsVar.custom_FE !== 'WHITELABEL'" class="app-type" alt=""
+                                            src="assets/loghi_apps_launch/logo-launcher-vshare.svg">
+                                        <img *ngIf="globalsVar.custom_FE === 'WHITELABEL'" class="app-type" alt=""
+                                            src="assets/loghi_apps_main/neg/loghi_whitelabel/icon_whitelabel/logo-launcher-vshare.svg">
+                                        <div class="label"> {{globalsVar.custom_FE !== 'WHITELABEL' ? 'vShare' : 'Share' }} </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-row" *ngIf="globalsVar.customCustomer !== 'TIM'">
+                                <button (click)="goToDownload()" class="text-button">
+                                    {{langService.dictionary.download_apps}}
+                                </button>
+                            </div>
+
+                        </mat-menu>
+                    </li>
+                    <li class="list-inline-item">
+                        <!-- NOTIFICATIONS DROPDOWN -->
+                        <div #toggleButtonNotif class="header-bt" (click)="toggleNotificationList()">
+                            <mat-icon>
+                                <i class="material-icons menu-icon" matBadge="{{notificationsBadge}}"
+                                    matBadgeColor="warn">notifications</i>
+                            </mat-icon>
+                        </div>
+                        
+                        <div #dropdownNotif class="dropdown">
+                            <div class="dropdown-content" *ngIf="openNotif" style="z-index: 1000;">
+                                <div class="scrollable-notif-cont">
+                                    <div *ngFor="let notification of notificationsList; let isLast = last;"
+                                        class="container">
+                                        <div class="notif-item-list">
+                                            <div class="row">
+                                                <div *ngIf="!notification.link"
+                                                    class="col-1 col-sm-1 col-md-1 text-left notification-icon">
+                                                    <img width="20" height="20" src="{{notification.iconSrc}}" />
+                                                </div>
+                                                <div *ngIf="notification.link"
+                                                    class="col-1 col-sm-1 col-md-1 text-left notification-icon link"
+                                                    (click)="goToLink(notification.link)">
+                                                    <img width="20" height="20" src="{{notification.iconSrc}}" />
+                                                </div>
+                                                <div class="col-7 col-sm-7 col-md-7 text-left pt-1">
+                                                    <!-- nowrap-div -->
+                                                    <div *ngIf="!notification.link" class="notif-text notif-subject"
+                                                        matTooltip="{{notification.subject}}">
+                                                        {{truncateText(notification.subject, 32)}}
+                                                    </div>
+                                                    <div *ngIf="notification.link"
+                                                        class="notif-text notif-subject notif-link"
+                                                        matTooltip="{{notification.subject}}"
+                                                        (click)="goToLink(notification.link)">
+                                                        {{truncateText(notification.subject, 32)}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-3 col-sm-3 col-md-3 text-right pt-1 pr-3">
+                                                    <div class="notif-time text-right">
+                                                        {{getDateNotification(notification.datetime)}}</div>
+                                                </div>
+                                                <div class="col-1 col-sm-1 col-md-1 text-left">
+                                                    <span (click)="deleteNotification(notification.notification_id)"
+                                                        class="notif-delete"><i id="delete-single-notification"
+                                                            class="material-icons">close</i></span>
+                                                </div>
+                                            </div>
+                                            <div class="row text-left">
+                                                <div *ngIf="!notification.link"
+                                                    class="col-md-9 notif-text notif-message" matTooltip="{{notification.message}}">
+                                                    <span>{{truncateText(notification.message, 82)}}</span>
+                                                </div>
+                                                <div *ngIf="notification.link"
+                                                    class="col-md-9 notif-text notif-message link"
+                                                    (click)="goToLink(notification.link)" matTooltip="{{notification.message}}">
+                                                    <span>{{truncateText(notification.message, 82)}}</span>
+                                                </div>
+                                                <div class="col-md-2 notif-time-col pr-3">
+                                                    <span
+                                                        class="notif-time text-right">{{getTimeNotification(notification.datetime)}}</span>
+                                                </div>
+                                                <div class="col-md-1"></div>
+                                            </div>
+                                        </div>
+                                        <hr class="notif-separator" *ngIf="!isLast">
+                                        <div class="last-margin" *ngIf="isLast"></div>
+                                    </div>
+                                    <div *ngIf="!notificationsList || notificationsList.length === 0"
+                                        class="notif-item-list text-center no-notif-text no-notif-wrapper">
+                                        <img src="assets/img/icons/no_notifications.png">
+                                        <p class="text-center notif-text pt-4 no-notif-text">
+                                            {{langService.dictionary.no_notification}}</p>
+                                    </div>
+                                </div>
+                                <div *ngIf="notificationsList && notificationsList.length !== 0"
+                                    class="row div-read-all">
+                                    <div class="col-12 text-center">
+                                        <div id="read-all-notif" class="read-all-notif" (click)="markAllNotifAsRead()">
+                                            {{langService.dictionary.read_all_notif}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--</div>-->
+                    </li>
+                    <!-- Chat Sidebar -->
+                    <div *ngIf="globalsVar.enableChat && globalsVar.enableVmeet" class="header-bt" (click)="openCloseChat()">
+                        <mat-icon>
+                            <i id="chatIcon" class="mat-badge material-icons menu-icon mat-badge-warn mat-badge-overlap mat-badge-above mat-badge-after mat-badge-medium"
+                                matBadgeColor="warn" matBadge="{{chatService.chatBadge}}" [matBadgeHidden]="chatService.chatBadge <= 0">chat</i>
+                        </mat-icon>
+                    </div>
+                    <li class="list-inline-item">
+                        <div class="header-bt" [matMenuTriggerFor]="userMenu">
+                            <img *ngIf="!pictureLoading" src="{{profilePicUrl}}" class="profile_pic" />
+                        </div>
+                        <mat-menu #userMenu="matMenu">
+                            <!-- <div class="user-menu-bt" mat-menu-item (click)="('profile')">
+                                <mat-icon> person </mat-icon> 
+                                &nbsp;{{langService.dictionary.label_profile}}
+                            </div> -->
+                            <div class="user-menu-bt" mat-menu-item (click)="goToSettings('')">
+                                <mat-icon> settings </mat-icon>
+                                &nbsp;{{langService.dictionary.label_settings}}
+                            </div>
+                            <div class="user-menu-bt" mat-menu-item (click)="logout()">
+                                <mat-icon> power_settings_new </mat-icon>
+                                &nbsp;{{langService.dictionary.label_logout}}
+                            </div>
+                        </mat-menu>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- vDesk Default GridButton and Avatar Column -->
+            <div *ngIf="globalsVar.custom_FE === 'NONE' && !isADP" class="col-6 col-md-2 dx text-right pr-0 d-flex justify-content-end">
+                <ul class="list-inline menu mb-0 my-auto">
+                    <li class="list-inline-item">
+                        <div class="header-bt" [matMenuTriggerFor]="appsMenu">
+                            <mat-icon><i class="material-icons menu-icon"> apps </i></mat-icon>
+                        </div>
+                        <mat-menu #appsMenu="matMenu" class="launcher-menu-panel">
+                            <div class="custom-row">
+                                <div class="custom-col" *ngIf="!UserManager">
+                                    <div class="bt-launcher" (click)="goToApp('vDesk')">
+                                        <img class="app-type" alt=""
+                                            src="assets/loghi_apps_launch/logo-launcher-vdesk_dashboard.svg">
+                                        <div class="label"> Dashboard </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="globalsVar.enableVshare && guestShare && !UserManager" class="custom-col">
+                                    <div class="bt-launcher" (click)="goToApp('vShare')">
+                                        <img class="app-type" alt=""
+                                            src="assets/loghi_apps_launch/logo-launcher-vshare.svg">
+                                        <div class="label">vShare </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-row" *ngIf="guestShare && globalsVar.customCustomer !== 'TIM'">
+                                <button (click)="goToDownload()" class="text-button">
+                                    {{langService.dictionary.download_apps}}
+                                </button>
+                            </div>
+
+                        </mat-menu>
+                    </li>
+                    <li class="list-inline-item">
+                        <!-- NOTIFICATIONS DROPDOWN -->
+                        <div #toggleButtonNotif class="header-bt" (click)="toggleNotificationList()">
+                            <mat-icon>
+                                <i class="material-icons menu-icon" matBadge="{{notificationsBadge}}"
+                                    matBadgeColor="warn">notifications</i>
+                            </mat-icon>
+                        </div>
+                        
+                        <div #dropdownNotif class="dropdown">
+                            <div class="dropdown-content" *ngIf="openNotif" style="z-index: 1000;">
+                                <div class="scrollable-notif-cont">
+                                    <div *ngFor="let notification of notificationsList; let isLast = last;"
+                                        class="container">
+                                        <div class="notif-item-list">
+                                            <div class="row">
+                                                <div *ngIf="!notification.link"
+                                                    class="col-1 col-sm-1 col-md-1 text-left notification-icon">
+                                                    <img width="20" height="20" src="{{notification.iconSrc}}" />
+                                                </div>
+                                                <div *ngIf="notification.link"
+                                                    class="col-1 col-sm-1 col-md-1 text-left notification-icon link"
+                                                    (click)="goToLink(notification.link)">
+                                                    <img width="20" height="20" src="{{notification.iconSrc}}" />
+                                                </div>
+                                                <div class="col-7 col-sm-7 col-md-7 text-left pt-1">
+                                                    <!-- nowrap-div -->
+                                                    <div *ngIf="!notification.link" class="notif-text notif-subject"
+                                                        matTooltip="{{notification.subject}}">
+                                                        {{truncateText(notification.subject, 32)}}
+                                                    </div>
+                                                    <div *ngIf="notification.link"
+                                                        class="notif-text notif-subject notif-link"
+                                                        matTooltip="{{notification.subject}}"
+                                                        (click)="goToLink(notification.link)">
+                                                        {{truncateText(notification.subject, 32)}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-3 col-sm-3 col-md-3 text-right pt-1 pr-3">
+                                                    <div class="notif-time text-right">
+                                                        {{getDateNotification(notification.datetime)}}</div>
+                                                </div>
+                                                <div class="col-1 col-sm-1 col-md-1 text-left">
+                                                    <span (click)="deleteNotification(notification.notification_id)"
+                                                        class="notif-delete"><i id="delete-single-notification"
+                                                            class="material-icons">close</i></span>
+                                                </div>
+                                            </div>
+                                            <div class="row text-left">
+                                                <div *ngIf="!notification.link"
+                                                    class="col-md-9 notif-text notif-message" matTooltip="{{notification.message}}">
+                                                    <span>{{truncateText(notification.message, 82)}}</span>
+                                                </div>
+                                                <div *ngIf="notification.link"
+                                                    class="col-md-9 notif-text notif-message link"
+                                                    (click)="goToLink(notification.link)" matTooltip="{{notification.message}}">
+                                                    <span>{{truncateText(notification.message, 82)}}</span>
+                                                </div>
+                                                <div class="col-md-2 notif-time-col pr-3">
+                                                    <span
+                                                        class="notif-time text-right">{{getTimeNotification(notification.datetime)}}</span>
+                                                </div>
+                                                <div class="col-md-1"></div>
+                                            </div>
+                                        </div>
+                                        <hr class="notif-separator" *ngIf="!isLast">
+                                        <div class="last-margin" *ngIf="isLast"></div>
+                                    </div>
+                                    <div *ngIf="!notificationsList || notificationsList.length === 0"
+                                        class="notif-item-list text-center no-notif-text no-notif-wrapper">
+                                        <img src="assets/img/icons/no_notifications.png">
+                                        <p class="text-center notif-text pt-4 no-notif-text">
+                                            {{langService.dictionary.no_notification}}</p>
+                                    </div>
+                                </div>
+                                <div *ngIf="notificationsList && notificationsList.length !== 0"
+                                    class="row div-read-all">
+                                    <div class="col-12 text-center">
+                                        <div id="read-all-notif" class="read-all-notif" (click)="markAllNotifAsRead()">
+                                            {{langService.dictionary.read_all_notif}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--</div>-->
+                    </li>
+                    <!-- Chat Sidebar -->
+                    <div *ngIf="globalsVar.enableChat && globalsVar.enableVmeet" class="header-bt" (click)="openCloseChat()">
+                        <mat-icon>
+                            <i id="chatIcon" class="mat-badge material-icons menu-icon mat-badge-warn mat-badge-overlap mat-badge-above mat-badge-after mat-badge-medium"
+                                matBadgeColor="warn" matBadge="{{chatService.chatBadge}}" [matBadgeHidden]="chatService.chatBadge <= 0">chat</i>
+                        </mat-icon>
+                    </div>
+                    <li class="list-inline-item">
+                        <div class="header-bt" [matMenuTriggerFor]="userMenu">
+                            <img *ngIf="!pictureLoading" src="{{profilePicUrl}}" class="profile_pic" />
+                        </div>
+                        <mat-menu #userMenu="matMenu">
+                            <!-- <div class="user-menu-bt" mat-menu-item (click)="('profile')">
+                                <mat-icon> person </mat-icon> 
+                                &nbsp;{{langService.dictionary.label_profile}}
+                            </div> -->
+                            <div class="user-menu-bt" mat-menu-item (click)="goToSettings('')">
+                                <mat-icon> settings </mat-icon>
+                                &nbsp;{{langService.dictionary.label_settings}}
+                            </div>
+                            <div id="logoutButton" class="user-menu-bt" mat-menu-item (click)="logout()">
+                                <mat-icon> power_settings_new </mat-icon>
+                                &nbsp;{{langService.dictionary.label_logout}}
+                            </div>
+                        </mat-menu>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row d-md-none">
+            <div class="col-12 search-container-col-xs d-flex d-sm-block">
+
+                <!--
+                <div class="search-container-parent my-auto">
+                    <div class="search-container form-control form-control-lg py-0 border-0">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-1 col-sm-1 pl-lg-2 d-flex search-icon-container"><i
+                                        class="material-icons search-icon float-left ml-n1 my-auto">
+                                        search
+                                    </i></div>
+                                <div class="col-6 col-sm-9 pr-0 pl-0"> <input placeholder="Cerca solo in"
+                                        class="search form-control form-control-md float-left w-100 border-0 mt-1 pr-1"
+                                        type="text">
+                                </div>
+                                <div class="col-4 col-sm-2 py-2 px-0">
+                                    <div class="container application-select-container">
+                                        <div class="row">
+                                            <div class="col-12 px-0">
+                                                <div class="form-group">
+                                                    <!- <i class="material-icons arrow position-absolute">
+                                                        arrow_drop_down
+                                                    </i> ->
+                                                    <select class="form-control application-select border-0 pt-0 form-control application-select border-0 pt-0 my-auto"
+                                                        id="application-select">
+                                                        <option *ngFor="let app of this.impostazioni.apps" [attr.selected]="app.selected">{{app.value}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                -->
+
+            </div>
+        </div>
+    </div>
+</div>

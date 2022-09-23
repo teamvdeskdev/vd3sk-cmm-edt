@@ -1,0 +1,90 @@
+<div id="newsAndReminders" class="container-fluid news-and-reminders-container">
+    <div class="row">
+        <div [style.order]="newsOrderIndex" class="col-md-6 ">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="valign-icon-text">
+                        <i class="material-icons">local_fire_department</i><div class="section-title">{{langService.dictionary.newsTitle}}</div>
+                    </div>
+                </div>
+                <div class="col-md-2 text-right">
+                    <div><i class="material-icons more-btn-feed" [matMenuTriggerFor]="newsMenu">more_vert</i></div>
+                    <mat-menu #newsMenu="matMenu" class="news-section-more-menu">
+                        <button mat-menu-item (click)="openAddFeedUrlDialog()">{{langService.dictionary.setSourcesFeed}}</button>
+                        <button mat-menu-item [disabled]="true" (click)="hideNewsAndRemindersArea()">{{langService.dictionary.hideNewsAndReminders}}</button>
+                    </mat-menu>
+                </div>
+            </div>            
+        </div>
+        <div [style.order]="remindersOrderIndex" class="col-md-6">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="valign-icon-text">
+                        <i class="material-icons">post_add</i><div class="section-title">{{langService.dictionary.remindersTitle}}</div>
+                    </div>
+                </div>
+                <div class="col-md-2 text-right">
+                    <!-- <div><i class="material-icons">more_vert</i></div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div [style.order]="newsOrderIndex" class="col-md-6" [ngClass]="{'border-right padding-right': newsOrderIndex === 0, 'padding-left': newsOrderIndex !== 0}">
+            <div class="section-description">{{langService.dictionary.newsSubtitle}}</div>
+            <ng-container *ngIf="feeds">
+                <ng-container *ngFor="let feed of feeds">
+                    <app-feed-item *ngIf="feed" [data]="feed"></app-feed-item>
+                </ng-container>
+            </ng-container>
+            <!-- Empty feeds -->
+            <div *ngIf="!feeds" class="no-feeds-container">
+                <div class="container">
+                    <div class="row set-feed-source-row">
+                        <div class="col-md-8 set-feed-source-flex-column">
+                            <div class="set-feed-source-title">{{langService.dictionary.noFeedsTitle}}</div>
+                            <div class="set-feed-source-subtitle">{{langService.dictionary.noFeedsSubtitle}}</div>
+                        </div>
+                        <div class="col-md-4 set-feed-source-flex-column">
+                            <div class="set-feed-source-btn text-right mr-3" (click)="openAddFeedUrlDialog()">{{langService.dictionary.setFeedsBtn}}</div>
+                        </div>
+                    </div>
+                </div>
+                <ng-container *ngFor="let emptyFeed of [1,2]">
+                    <app-empty-feed-item></app-empty-feed-item>
+                </ng-container>
+            </div>
+        </div>
+        <div [style.order]="remindersOrderIndex" class="col-md-6 post-it-area" [ngClass]="{'border-right': remindersOrderIndex === 0, 'padding-left': remindersOrderIndex !== 0}">
+            <div class="section-description">{{langService.dictionary.remindersSubtitles}}</div>
+            <ul class="ul-post-it-container">
+                <!-- Post-it list -->
+                <ng-container *ngIf="postIts">
+                    <ng-container *ngFor="let postIt of postIts">
+                        <li class="li-post-it-item">
+                            <app-post-it-item *ngIf="postIt" [data]="postIt"></app-post-it-item>
+                        </li>
+                    </ng-container>
+                </ng-container>
+                <!-- Add post-it button -->
+                <li class="li-post-it-item">
+                    <div class="add-post-it-item" (click)="openAddPostItDialog()">
+                        <div *ngIf="postIts && postIts.length === 0 || !postIts" class="text-center label-add-post-it">{{langService.dictionary.noPostItMsg}}</div>
+                        <div class="material-icons-outlined add-post-it-icon">add_circle</div>
+                        <div class="add-post-it-text">{{langService.dictionary.addNewPostIt}}</div>
+                    </div>
+                </li>
+                <!-- Empty post-it component -->
+                <ng-container *ngFor="let empty of emptyPostIt">
+                    <li class="li-post-it-item">
+                        <app-empty-post-it-item></app-empty-post-it-item>
+                    </li>
+                </ng-container>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<ngx-spinner [name]="spinnerName" bdColor="rgba(0,0,0,0)" size="default" color="#00B9B3"
+    type="triangle-skew-spin" [fullScreen]="false">
+</ngx-spinner>

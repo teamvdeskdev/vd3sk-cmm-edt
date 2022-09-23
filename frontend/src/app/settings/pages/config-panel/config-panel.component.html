@@ -1,0 +1,27 @@
+<div id="configPanel">
+    <div class="configPanel-header">
+        <div class="configPanel-header-title">
+            {{langService.dictionary.onlyoffice_title}}
+        </div>
+        <div class="configPanel-header-subtitle">
+            {{langService.dictionary.onlyoffice_subtitle}}
+        </div>
+    </div>
+
+    <div class="configPanel-body">
+        <form [formGroup]="onlyofficeForm">
+            <mat-form-field class="input-field url-input-field" color="accent">
+                <input matInput formControlName="onlyofficeUrl" name="onlyofficeUrl" type="text" required>
+            </mat-form-field>
+            <div type="submit" class="primary-btn button-save" (click)="onSubmit()">{{langService.dictionary.save_btn}}</div>
+        </form>
+
+        <ngx-spinner
+            bdColor="rgba(0,0,0,0)" 
+            size="default" 
+            color="#00B9B3" 
+            type="triangle-skew-spin"
+            [fullScreen]="false">
+        </ngx-spinner>
+    </div>
+</div>

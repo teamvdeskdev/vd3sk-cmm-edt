@@ -1,0 +1,157 @@
+.title {
+    margin: 0 99px 5px;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #808080;
+}
+
+.subtitle {
+    margin: 5px 0 32px;
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-align: center;
+    color: #808080;
+}
+
+.message {
+    margin: 5px 10px 0;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #808080;
+}
+
+.module-icon {
+    color: #808080;
+}
+
+.drag-card.icon {
+    color: #00396a;
+}
+
+.col-2 {
+    flex: 0 0 10%;
+    max-width: 10%;
+    padding: 0;
+}
+
+.col-8 {
+    flex: 0 0 80%;
+    max-width: 80%;
+}
+
+.drag-card-logo-img {
+    height: 12px;
+}
+
+#newsAndRemindersDragContainer {
+    margin-bottom: 10px;
+}
+
+.news-module, .reminders-module {
+    width: 100%;
+    height: 97px;
+    max-height: 97px;
+    max-width: 300px;
+    border-radius: 10px;
+    justify-content: center;
+    border: solid 1px #00b9b3;
+}
+
+.news-and-reminders-icon {
+    color: #00396a;
+}
+
+.more-btn {
+    margin-left: 10px;
+    color: #00396a;
+}
+
+.module-title {
+    margin: 3px 10px 2px 0;
+    font-family: 'Roboto';
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #808080;
+}
+
+.module-text {
+    margin: 6px 0 4px 10px;
+    font-family: 'Roboto';
+    font-size: 14px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 0.86;
+    letter-spacing: normal;
+    color: #2b2b2b;
+}
+
+.swap-button {
+    width: 48px;
+    height: 48px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 12px;
+    border-radius: 10px;
+    background-color: #00396a;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.swap-button-text {
+    margin-top: 10px;
+    font-family: 'Roboto';
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-align: center;
+    color: #2b2b2b;
+    cursor: pointer;
+}
+
+.vertical-align-col {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+:host ::ng-deep {
+    .mat-checkbox {
+        margin-right: 12px;
+        font-family: 'Roboto';
+        font-size: 12px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1;
+        letter-spacing: normal;
+        color: #2b2b2b;
+    }
+    .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+        background-color: #00396a !important;
+    }
+}
