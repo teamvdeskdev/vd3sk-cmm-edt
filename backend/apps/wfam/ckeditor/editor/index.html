@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script src="../ckeditor.js"></script>
+    <script src="js/editor.js"></script>
+    <link rel="stylesheet" href="css/editor.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+
+<body id="main">
+    <main>
+        <div class="adjoined-bottom">
+            <div class="grid-container">
+                <div class="grid-width-100">
+                    <div id="editor1">
+                        <p>&nbsp;</p>
+                        <div id="dynamicContent" style="background:#eeeeee; border:1px solid #cccccc; padding:5px 10px">
+                            <p>Contenitore Contenuto dinamico <span style="color:#ff0000">NON RIMUOVERE O
+									MODIFICARE</span></p>
+                        </div>
+                        <p>&nbsp;</p>
+                        <div id="dynamicFooter" style="background:#eeeeee; bottom:0; left:0; padding:0 10px; position:fixed; width:100%">
+                            <p>Inserisci qui il contentuto del footer o rimuovilo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+<script>
+    var getUrl = window.location;
+    var baseUrl = getUrl.pathname.split('/')[1];
+    if (!baseUrl.includes("apps")) baseUrl += "/apps";
+    let url = new URL(window.location.href);
+    var requestUrl = url.searchParams.get("baseurl");
+    var filemanagerUrl = "/" + baseUrl + "/wfam/templates/content/filemanager/filemanagerindex.html?baseurl=" + requestUrl;
+
+    CKEDITOR.replace('editor1', {
+        removeDialogTabs: 'link:upload;image:upload;image:advanced;image:linkTab,image:infoTab',
+        //filebrowserImageBrowseUrl: filemanager + '?type=image'
+        filebrowserImageUploadUrl: filemanagerUrl
+    });
+    CKEDITOR.on('instanceReady',
+        function(evt) {
+            var editor = evt.editor;
+            WFAModel = new ModelWfa(editor);
+            WFAModel.Read();
+            editor.on('fileUploadRequest', function(evt) {
+
+                var xhr = evt.data.fileLoader.xhr;
+                var file = evt.data.fileLoader.file;
+                var filemanager = new FileManager();
+                UploadFile(file, evt.data.fileLoader.data, filemanager, url);
+
+
+                // xhr.setRequestHeader('Cache-Control', 'no-cache');
+                // xhr.setRequestHeader('X-File-Name', file.name);
+                // xhr.setRequestHeader('X-File-Size', file.size);
+                // xhr.send(this.file);
+
+                // Prevented the default behavior.
+                evt.stop();
+            });
+
+            // editor.on('fileUploadResponse', function(evt) {
+            //     // Prevent the default response handler.
+            //     evt.stop();
+
+            //     // Get XHR and response.
+            //     var data = evt.data,
+            //         xhr = data.fileLoader.xhr,
+            //         response = xhr.responseText.split('|');
+
+            //     if (response[1]) {
+            //         // An error occurred during upload.
+            //         data.message = response[1];
+            //         evt.cancel();
+            //     } else {
+            //         data.url = response[0];
+            //     }
+            // });
+        });
+    CKEDITOR.on('dialogDefinition', function(ev) {
+        var dialogName = ev.data.name;
+        var dialogDefinition = ev.data.definition;
+
+        switch (dialogName) {
+            case 'image': //Image Properties dialog      
+                dialogDefinition.removeContents('Link');
+                dialogDefinition.removeContents('advanced');
+                break;
+        }
+    });
+</script>
+
+</html>

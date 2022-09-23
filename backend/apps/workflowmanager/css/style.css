@@ -1,0 +1,376 @@
+.app-workflowmanager #app-content-wrapper {
+    width: 99.5%;
+    height: 100%;
+}
+
+#paper {
+    flex-grow: 1;
+    min-height: calc(100vh - 50px);
+    width: 85% !important;
+    border: solid 1px #cccccc;
+    border-radius: 5px
+}
+
+.workflow-container #stencil {
+    min-width: 110px;
+    min-height: calc(100vh - 50px);
+    margin-right: 2px;
+    border: none;
+    border-radius: 5px;
+}
+
+#fileInput,
+#visioInput {
+    max-width: 250px;
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.cbutton {
+    height: 40px !important;
+    width: 250px;
+    margin-left: 10px;
+}
+
+#paper-html-elements {
+    position: relative;
+    border: 1px solid gray;
+    display: inline-block;
+    background: transparent;
+    overflow: hidden;
+}
+
+#paper-html-elements svg {
+    background: transparent;
+}
+
+#paper-html-elements svg .link {
+    z-index: 2;
+}
+
+.html-element {
+    position: absolute;
+    background: #3498DB;
+    /* Make sure events are propagated to the JointJS element so, e.g. dragging works.*/
+    pointer-events: none;
+    -webkit-user-select: none;
+    border-radius: 4px;
+    border: 2px solid #2980B9;
+    box-shadow: inset 0 0 5px black, 2px 2px 1px gray;
+    padding: 5px;
+    box-sizing: border-box;
+    z-index: 2;
+}
+
+.html-element select,
+.html-element input,
+.html-element button {
+    /* Enable interacting with inputs only. */
+    pointer-events: auto;
+}
+
+.html-element button.delete {
+    color: white;
+    border: none;
+    background-color: #C0392B;
+    border-radius: 20px;
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    text-align: middle;
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.html-element button.delete:hover {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+}
+
+.html-element select {
+    position: absolute;
+    right: 2px;
+    bottom: 28px;
+}
+
+.html-element input {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: none;
+    color: #333;
+    padding: 5px;
+    height: 16px;
+}
+
+.html-element label {
+    color: #333;
+    text-shadow: 1px 0 0 lightgray;
+    font-weight: bold;
+}
+
+.html-element span {
+    position: absolute;
+    top: 2px;
+    right: 9px;
+    color: white;
+    font-size: 10px;
+}
+
+.hideElement {
+    display: none;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+}
+
+.app-workflowmanager .workflow-container {
+    margin-left: 20px;
+    margin-top: 5px;
+    width: 100%;
+    height: 80% !important;
+}
+
+.app-workflowmanager hr {
+    border-top: 1px solid #CCC;
+}
+
+.app-workflowmanager ul>li>a>b {
+    color: rgb(95, 113, 218);
+}
+
+.app-workflowmanager .wfElementPortTop:hover {
+    fill: #CCC;
+    stroke: #FFF;
+    stroke-width: 1;
+    /* y:13; */
+}
+
+.app-workflowmanager .wfElementPortBottom:hover {
+    fill: #CCC;
+    stroke: #FFF;
+    stroke-width: 1;
+    /* y:-22; */
+}
+
+.app-workflowmanager .wfConditionPort:hover {
+    fill: #CCC;
+    stroke: #FFF;
+    stroke-width: 1;
+}
+
+#app-navigation>ul {
+    padding-top: 20px !important;
+    margin-left: 0px;
+}
+
+#app-navigation>ul .menuItem {
+    padding-left: 70px;
+}
+
+#app-navigation>ul>li>a>i {
+    padding-right: 35px;
+}
+
+#app-navigation .link-disabled {
+    cursor: not-allowed !important;
+    color: darkgray !important;
+}
+
+.rotateElement {
+    /* width: 30px ;
+    height: 30px ; */
+    /* transform: scale(1.4) translate(90px,-5px) ; */
+    /* transform-origin: 8px 8px; */
+    animation: spin 5s infinite linear;
+    /* -webkit-animation: spin 2s infinite linear;
+    -moz-animation: spin 2s infinite linear;
+    -o-animation: spin 2s infinite linear;
+    -ms-animation: spin 2s infinite linear;
+    animation: spin 2s infinite linear; */
+}
+
+@keyframes spin {
+    0% {
+        transform: scale(1.4) translate(93px, -5px) rotate(0deg);
+        transform-origin: 8px 8px;
+    }
+    100% {
+        transform: scale(1.4) translate(93px, -5px) rotate(360deg);
+        transform-origin: 8px 8px;
+    }
+}
+
+@-webkit-keyframes spin {
+    0% {
+        transform: scale(1.4) translate(93px, -5px) rotate(0deg);
+        transform-origin: 8px 8px;
+    }
+    100% {
+        transform: scale(1.4) translate(93px, -5px) rotate(360deg);
+        transform-origin: 8px 8px;
+    }
+}
+
+
+/*UI Settings*/
+
+.app-workflowmanager #app-settings {
+    width: 300px;
+    left: 0;
+    z-index: 501;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: var(--color-main-background);
+    -webkit-user-select: none;
+    border-right: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.app-workflowmanager #app-settings #app-settings-content>ul {
+    padding-top: 5px !important;
+    margin-left: 0px;
+    width: 300px;
+    left: 0;
+    z-index: 501;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: var(--color-main-background);
+    -webkit-user-select: none;
+    border-right: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.app-workflowmanager #app-settings #app-settings-content>ul>li {
+    height: 35px;
+}
+
+.app-workflowmanager #app-settings #app-settings-content .settingsItem {
+    padding-left: 30px !important;
+    color: grey;
+}
+
+.app-workflowmanager #app-settings .settingsItem:hover,
+.settingsItem:focus {
+    background-color: var(--color-main-background);
+    opacity: 1;
+    /* box-shadow: inset 4px 0 var(--color-primary) ;   */
+    color: black !important;
+}
+
+.app-workflowmanager table tbody tr:hover,
+.app-workflowmanager table tr:hover {
+    background-color: transparent !important;
+}
+
+.app-workflowmanager .autocomplete {
+    /*the container must be positioned relative:*/
+    position: relative;
+    display: inline-block;
+}
+
+.app-workflowmanager .autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    /*top: 67%;*/
+    left: 0;
+    right: 0;
+    transform: translateY(0) scale(1);
+}
+
+.app-workflowmanager .autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.app-workflowmanager .autocomplete-items div:hover {
+    /*when hovering an item:*/
+    background-color: #e9e9e9;
+}
+
+.app-workflowmanager .autocomplete-active {
+    /*when navigating through the items using the arrow keys:*/
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+}
+
+.app-workflowmanager .oc-dialog-buttonrow {
+    text-align-last: right !important;
+    display: inline-block;
+}
+
+.app-workflowmanager .oc-dialog-buttonrow .align-left {
+    float: left;
+}
+
+.app-workflowmanager .disable-menu-item {
+    pointer-events: none !important;
+    cursor: not-allowed !important;
+    opacity: 0.2 !important;
+}
+
+.app-workflowmanager .bubble.menu-left,
+.app-workflowmanager .app-navigation-entry-menu.menu-left,
+.app-workflowmanager .popovermenu.menu-left {
+    right: auto;
+    left: 70px;
+    margin-right: 0;
+    top: 42px;
+}
+
+.app-workflowmanager .btnUpload {
+    border-radius: 5px 0px 0px 5px;
+    margin: 0;
+    margin-top: 5px;
+    margin-left: -3px;
+    padding: 6px 12px;
+    width: auto;
+    min-height: 34px;
+    cursor: pointer;
+    box-sizing: border-box;
+    background-color: var(--color-background-dark);
+    font-size: 13px;
+    color: var(--color-text-lighter);
+    border: 1px solid var(--color-border-dark);
+    outline: none;
+    font-weight: bold;
+}
+
+.app-workflowmanager .containerFileName {
+    display: inline;
+}
+
+.app-workflowmanager .containerFileName input[type=text] {
+    display: inline-flex;
+    width: 82%;
+    height: 32px;
+    margin-left: -3px;
+    padding: 0;
+    top: 0;
+    position: relative;
+}

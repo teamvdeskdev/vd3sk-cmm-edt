@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+    <id>wfam</id>
+    <name>Wfa</name>
+    <summary>wfam</summary>
+    <description><![CDATA[Wfa]]></description>
+    <version>1.0.12</version>
+    <licence>agpl</licence>
+    <author mail="team@eway-solutions.it" >Eway Enterprise Business Solutions</author>
+    <namespace>Wfam</namespace>
+    <category>office</category>
+    <bugs>http://localhost</bugs>
+    <dependencies>
+        <nextcloud min-version="15" max-version="17"/>
+    </dependencies>
+    <navigations>
+        <navigation>
+            <name>wfam</name>
+            <route>wfam.page.index</route>
+        </navigation>
+    </navigations>
+    
+</info>

@@ -1,0 +1,74 @@
+.actions
+{
+  height: 50px;
+  width: 100%;
+  padding: 10px;
+  position: relative;
+  top: 0;
+  overflow: hidden;
+}
+
+.button { 
+  color: gray;
+  display: inline-block;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 3px;
+  margin: 5px;
+  border: 1px solid lightgrey;
+  border-bottom-width: 3px;
+  transition: text-shadow 0.3s ea
+}
+
+.button:active {
+  position: relative;
+  top: 1px;
+  border-bottom-width: 2px;
+}
+
+.button:hover {
+  text-shadow: 2px 2px 0px rgba(0,0,0,.3)
+}
+
+li {
+  width:100px;
+  height: 100px;
+  overflow: hidden;
+}
+
+li:hover {
+  width:100px;
+  height: 100px;
+  overflow: hidden;
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+.unselected{
+  border: 1px solid lightgrey;padding: 5px;
+  float: left;
+  margin: 10px;
+}
+.selected{
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+  padding: 5px;
+  float: left;
+  margin: 10px;
+}
+#pnlEmptyDir
+{
+  display:none ;
+  height: 50px;
+  width: 100%;
+  padding: 10px;
+  position: fixed;
+  text-align: center;
+}
+
+#loading{
+   display: none; 
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+   position: fixed;
+}

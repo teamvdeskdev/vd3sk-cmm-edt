@@ -1,0 +1,29 @@
+{
+  "shippedApps": [
+    "accessibility",
+    "activity",
+    "comments",
+    "files_downloadactivity",
+    "files_pdfviewer",
+    "files_rightclick",
+    "files_videoplayer",
+    "mail",
+    "logreader",
+    "oauth2",
+    "password_policy",
+    "user_ldap",
+    "viewer",
+    "workflowengine"
+  ],
+  "alwaysEnabled": [
+    "files",
+    "cloud_federation_api",
+    "dav",
+    "federatedfilesharing",
+    "lookup_server_connector",
+    "provisioning_api",
+    "oauth2",
+    "twofactor_backupcodes",
+    "workflowengine"
+  ]
+}

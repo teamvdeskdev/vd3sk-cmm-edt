@@ -1,0 +1,79 @@
+# This repository adheres to the publiccode.yml standard by including this 
+# metadata file that makes public software easily discoverable.
+# More info at https://github.com/italia/publiccode.yml
+
+publiccodeYmlVersion: '0.2'
+categories:
+  - document-management
+  - it-development
+  - office
+  - collaboration
+description:
+  it:
+    features:
+      - Piattaforma sicura e cifrata
+      - Unica dashboard
+      - Filesharing avanzato
+      - Gestione ruoli e profili
+    genericName: vDesk Community Edition
+    longDescription: |
+      vDesk è una piattaforma componibile, sicura, crittografata e facilmente
+      integrabile con altri sistemi IT aziendali e completamente
+      personalizzabile sia per processo che per funzione.
+
+
+      Principalmente rivolta alle funzioni apicali, permette di collaborare
+      facilmente, condividere le informazioni in sicurezza, inviare file e
+      firmarli digitalmente senza mai uscire da un ecosistema totalmente
+      protetto.
+
+
+      Cosa fa vDesk?
+
+
+      - Profilare gli utenti in modo semplice e intuitivo
+
+      - Utilizzare una serie di Applicazioni Integrate
+
+      -  Tracciare la Documentazione Sensibile
+
+      - Condividere e Collaborare in maniere sicura 
+    shortDescription: |-
+      vDesk - Your Digital Workspace - La piattaforma di collaborazione sicura e
+      cifrata
+developmentStatus: stable
+it:
+  conforme:
+    gdpr: false
+    lineeGuidaDesign: false
+    misureMinimeSicurezza: false
+    modelloInteroperabilita: false
+  countryExtensionVersion: '0.2'
+  piattaforme:
+    anpr: false
+    cie: false
+    pagopa: false
+    spid: false
+legal:
+  license: AGPL-3.0-or-later
+localisation:
+  availableLanguages:
+    - it
+    - en
+  localisationReady: true
+maintenance:
+  contractors:
+    - name: Livebox S.r.l.
+      until: '2099-12-31'
+      website: 'https://www.liveboxcloud.com/'
+  type: contract
+name: vDesk Community Edition
+platforms:
+  - windows
+  - linux
+  - mac
+releaseDate: '2022-09-23'
+softwareType: standalone/web
+url: 'https://github.com/teamvdeskdev/vd3sk-cmm-edt'
+logo: |-
+  https://raw.githubusercontent.com/teamvdeskdev/vd3sk-cmm-edt/master/livebox-vdesk-fullhd.png

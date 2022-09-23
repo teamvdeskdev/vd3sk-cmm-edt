@@ -1,0 +1,60 @@
+[submodule "apps/drivedigitalsignature"]
+	path = apps/drivedigitalsignature
+	url = https://raffaele.ruffolo:RafRuf%402020@castore.liveboxcloud.com/majordomo/drive-digital-signature.git
+	branch = master
+[submodule "apps/drivemailcore"]
+	path = apps/drivemailcore
+	url = https://raffaele.ruffolo:RafRuf%402020@castore.liveboxcloud.com/majordomo/vpec-drive-mail-be.git
+	branch = master
+[submodule "apps/drivepimcore"]
+	path = apps/drivepimcore
+	url = https://raffaele.ruffolo:RafRuf%402020@castore.liveboxcloud.com/majordomo/drive-pim-core.git
+	branch = master
+[submodule "apps/registration"]
+	path = apps/registration
+	url = https://raffaele.ruffolo:RafRuf%402020@castore.liveboxcloud.com/raffaele.ruffolo/registration.git
+	branch = master
+[submodule "apps/vdesk_saml"]
+	path = apps/vdesk_saml
+	url =  https://raffaele.ruffolo:RafRuf%402020@castore.liveboxcloud.com/majordomo/vdesk-saml.git
+	branch = master
+[submodule "apps/vdesk_tim"]
+	path = apps/vdesk_tim
+	url =  https://raffaele.ruffolo:RafRuf%402020@castore.liveboxcloud.com/majordomo/vdesk-tim.git
+	branch = master
+[submodule "apps/vdeskintegration"]
+	path = apps/vdeskintegration
+	url = https://raffaele.ruffolo:RafRuf%402020@castore.liveboxcloud.com/majordomo/vdesk-integrations.git
+	branch = master
+[submodule "apps/vdoc"]
+	path = apps/vdoc
+	url = https://raffaele.ruffolo:RafRuf%402020@castore.liveboxcloud.com/majordomo/vflow-documentale.git
+	branch = master
+[submodule "apps/vtask"]
+	path = apps/vtask
+	url = https://raffaele.ruffolo:RafRuf%402020@castore.liveboxcloud.com/majordomo/vtask-be.git
+	branch = master
+[submodule "apps/vcanvas"]
+	path = apps/vcanvas
+	url = https://raffaele.ruffolo:RafRuf%402020@castore.liveboxcloud.com/majordomo/vcanvas.git
+	branch = master
+[submodule "apps/vencrypt"]
+	path = apps/vencrypt
+	url = https://raffaele.ruffolo:RafRuf%402020@castore.liveboxcloud.com/majordomo/vencrypt.git
+	branch = master
+[submodule "apps/wfam"]
+	path = apps/wfam
+	url = https://raffaele.ruffolo:RafRuf%402020@castore.liveboxcloud.com/majordomo/livebox-drive-wfam.git
+	branch = master
+[submodule "apps/workflowmanager"]
+	path = apps/workflowmanager
+	url = https://raffaele.ruffolo:RafRuf%402020@castore.liveboxcloud.com/majordomo/drive/livebox-drive-workflow.git
+	branch = master
+[submodule "apps/files_sharing"]
+	path = apps/files_sharing
+	url = https://raffaele.ruffolo:RafRuf%402020@castore.liveboxcloud.com/majordomo/app-file-sharing-no-inheritance.git
+	branch = master
+[submodule "apps/onlyoffice"]
+	path = apps/onlyoffice
+	url = https://github.com/ONLYOFFICE/onlyoffice-nextcloud.git
+	branch = master

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+    <id>workflowmanager</id>
+    <name>Workflow Manager</name>
+    <summary>eLegal WorkflowManager</summary>
+    <description><![CDATA[eLegal WorkflowManager]]></description>
+    <version>1.0.12</version>
+    <licence>agpl</licence>
+    <author mail="support@eway-solutions.it">eWay Solutions</author>
+    <namespace>WorkflowManager</namespace>
+    <category>tools</category>
+    <bugs>http://localhost</bugs>
+    <dependencies>
+        <nextcloud min-version="15" max-version="17"/>
+        <SaintSystems>SaintSystems\OData\ODataClient</SaintSystems>
+    </dependencies>
+
+    <background-jobs>
+        <job>OCA\WorkflowManager\Cron\NotificaRitardi</job>
+    </background-jobs>
+
+    <!-- Hide icon from nextcloud navigation bar -->
+    <!-- <navigations>
+        <navigation>
+            <name>Workflow Manager</name>
+            <route>workflowmanager.page.index</route>
+        </navigation>
+    </navigations> -->
+    <settings>
+        <admin>OCA\WorkflowManager\Settings\WorkflowSettings</admin>
+        <admin-section>OCA\WorkflowManager\Settings\WorkflowSettingsSection</admin-section> 
+    </settings>
+</info>

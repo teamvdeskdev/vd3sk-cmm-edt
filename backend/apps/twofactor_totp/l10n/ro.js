@@ -1,0 +1,14 @@
+OC.L10N.register(
+    "twofactor_totp",
+    {
+    "You enabled TOTP two-factor authentication for your account" : "Ai activat autentificarea în doi pași TOTP pentru contul tău",
+    "You disabled TOTP two-factor authentication for your account" : "Ai dezactivat autentificarea în doi pași TOTP pentru contul tău",
+    "TOTP (Authenticator app)" : "TOTP (Authenticator app)",
+    "Authenticate with a TOTP app" : "Autentifică-te cu o aplicație TOTP",
+    "Enable TOTP" : "Activează TOTP",
+    "Authentication code" : "Cod autentificare",
+    "Verify" : "Verifică",
+    "Get the authentication code from the two-factor authentication app on your device." : "Obțineți codul de autentificare din aplicația de autentificare two-factor de pe dispozitiv.",
+    "Submit" : "Trimite"
+},
+"nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));");

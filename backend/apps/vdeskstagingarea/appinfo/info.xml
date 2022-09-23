@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+    <id>vdeskstagingarea</id>
+    <name>V Desk Staging Area</name>
+    <summary>Integrazione secondo DB esterno</summary>
+    <description><![CDATA[Integrazione interfacciamento con secondo DB esterno per area staging vFlow]]></description>
+    <version>0.0.1</version>
+    <licence>agpl</licence>
+    <author mail="simonetenisci10@gmail.com" >Simone Tenisci</author>
+    <namespace>VDeskStagingArea</namespace>
+    <category>tools</category>
+    <category>workflow</category>
+    <bugs>https://www.google.com</bugs>
+    <dependencies>
+        <nextcloud min-version="15" max-version="15"/>
+    </dependencies>
+    <!-- <navigations>
+        <navigation>
+            <name>V Desk Staging Area</name>
+            <route>vdeskstagingarea.page.index</route>
+        </navigation>
+    </navigations> -->
+</info>

@@ -1,0 +1,67 @@
+<div id="{dialog_name}" title="{title}" style="display: none;">
+    <hr style="color:lightgray">
+    <table width="100%">
+        <tr>
+            <td>
+                <p>Etichetta</p>
+                <div style="width:100%;">
+
+                    <input id="stepLabel" type="text" name="stepLabel" value="{stepLabel}" style="width:100%" autocomplete="off">
+                    <br>
+                </div>
+            </td>
+        </tr>
+        <!-- <tr>
+            <td>
+                <p>Seleziona utente</p>
+                <div style="width:100%;">
+
+                    <div class="autocomplete" style="width:100%;">
+                        <input id="tbUtenteAutocomplete" type="text" name="tbUtente" placeholder="Cerca utente" style="width:100%;" autocomplete="off" value="{utente}">
+                        <span id="autocompleteLoading" class="icon-loading-small-dark" style="display:none;float: right;top: -28px;left: -6px;"></span>
+                        <div id="autocomplete-list" class="autocomplete-items"></div>
+                        <input id="UtenteSelected" type="hidden" data-name="{utenteNome}" data-email="{utenteEmail}" data-account="{utenteAccount}">
+                    </div>
+                    <br>
+                </div>
+            </td>
+        </tr>
+        <tr id="rowWfFirmaDigitale" style="display: none;">
+            <td>
+                <div id='wfFirmaDigitale-pupupMenu' class="newFileMenu popovermenu bubble menu open menu-left" style="display: none;top: calc(100% - 150px); left: 8px">
+                    <ul>
+                        <li>
+                            <label id='wf-lnkCloudFD' class="menuitem" data-action="upload" title="" tabindex="0"><span class="svg icon icon-upload"></span><span class="displayname">Carica file dal cloud</span></label>
+                        </li>
+                        <li>
+                            <label id='wf-lnkLocalFD' for="fileInputFirmaDigitale" class="menuitem" data-action="upload" title="" tabindex="0"><span class="svg icon icon-upload"></span><span class="displayname">Carica file locale</span></label>
+                            <input type="file" id="fileInputFirmaDigitale" name="fileFirmaDigitale" accept="application/pdf" style="display: none;" data-bind="">
+                        </li>
+                    </ul>
+                </div>
+                <label style="margin-top: 5px;">Seleziona il file da firmare digitalmente:</label><br>
+                <label class="btnUpload" id="btnFileFirmaDigitale">Carica file</label>
+                <div class="containerFileName">
+                    <input type="text" id="lblFileName" name="lblFileName" value="" readonly/></div>
+
+            </td>
+        </tr> -->
+        <tr id="chkNotifyRitardo">
+            <td>
+                <div style="position: relative;top:5px;">
+                    <input {enablenotifica} type="checkbox" id="enableNotificaRitardo" class="checkbox">
+                    <label id="enableNotificaRitardoLabel" for="enableNotificaRitardo">Attiva notifica ritardo
+                        esecuzione flusso</label>
+                </div>
+            </td>
+        </tr>
+        <tr id="notifyDaysTr" style="display: none;">
+            <td>
+                <div style="margin-left:15px;margin-top: 10px;margin-bottom: 10px;">
+                    <input style="width: 100px;" name="notifyDaysValue" type="number" placeholder="Giorni" id="notifyDaysValue" value="{notifyDaysValue}" autocomplete="off" autocapitalize="none" autocorrect="off">
+                    <label for="notifyDaysValue">Giorni alla notifica di ritardo esecuzione</label>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

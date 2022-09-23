@@ -1,0 +1,60 @@
+<div id="{dialog_name}" title="{title}" style="display: none;">
+    <p id="dlgAnteprimaSubTitle" style="
+    margin-left: 94px;
+    margin-bottom: 10px;
+"></p>
+    <nav>
+        <ul style="position: fixed;transform: scale(0.8);transform-origin: top left; ">
+            <li style="text-align: center;border: 2px outset black;padding: 10px;margin-bottom: 5px;">
+                <a id="bnlhr-printpdfApprova" class="button-link" style="padding-left:10px;">
+                    <img src="/apps/wfam/img/preview.png" style="width:60px; left:5px;" class="bnlhr-cursor-pointer"><br>
+                    <span style="position:relative; top:-5px;text-align: center;">Stampa</span> </a>
+            </li>
+            <li style="text-align: center;border: 2px outset black;padding: 10px;margin-bottom: 5px;">
+                <a id="bnlhr-publishpdfApprova" class="button-link">
+                    <img src="/apps/wfam/img/cloud.png" style="width:60px; left:5px;" class="bnlhr-cursor-pointer">
+                    <br> <span style="position:relative; top:-5px;text-align: center;">Genera<br> documento </span> </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="bnlhr-preview" id="bnlhr-print">
+        <div id="bnlhr-templatepdf">
+            <table class="bnlhr-simple-table" id="bnlhr-praticaWfaFormPreview" style="width: 863px;">
+                <thead>
+                    <tr>
+                        <td>
+                            <h1 id="bnlhr-PrintTitoloDocumento" style="font-size: 20px;color:var(--color-primary);">ANTEPRIMA DI STAMPA</h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-top: 20px;font-size: 20px"><span style="padding-left:0 !important;">Oggetto:</span> <span id="oggettoPreview" style="font-size: 20px"></span></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-top: 20px;">
+                            <span style="padding-left: 0">Richiesta per</span><br />
+                            <table class="bnlhr-table" id="bnlhr-listDipendentiPreview" style="margin-top:5px;">
+                                <thead style="background-color:black;color:white;">
+                                    <tr>
+                                        <td width="500px" style="padding-left:10px;vertical-align: middle;height: 30px">Nome dipendente</td>
+                                        <td width="500px" style="padding-left:10px;vertical-align: middle;">Inquadramento</td>
+                                        <td width="300px" style="padding-left:10px;vertical-align: middle;">UO</td>
+                                        <td width="300px" style="padding-left:10px;vertical-align: middle;">Sede</td>
+                                        <td width="300px" style="padding-left:10px;vertical-align: middle;">Mansione</td>
+                                        <td width="300px" style="padding-left:10px;vertical-align: middle;">Contratto
+                                </thead>
+                                <tbody id="rowDipendentePreview">
+
+                                </tbody>
+                            </table>
+                            </td>
+                            </tr>
+                </thead>
+                <tbody id="rowsElementiWFAPreview">
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</div>
